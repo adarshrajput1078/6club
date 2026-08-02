@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>6 CLUB | VIP ADMIN COMMAND</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;800&family=JetBrains+Mono:wght@600;800&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
+
+    <style>
+        :root { 
+            --gold-light: #fbe082; --gold-primary: #e6b841; --gold-dark: #b88a25; --gold-glow: rgba(230, 184, 65, 0.4);
+            --bg-base: #0a0a0a; --bg-panel: #141414;
+            --green: #00e676; --red: #ff4d4d; --border-color: #2a2a2a;
+            --text-main: #ffffff; --text-muted: #8b8b8b;
+            --font-ui: 'Poppins', sans-serif; --font-mono: 'JetBrains Mono', monospace;
+        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: var(--font-ui); background: var(--bg-base); color: var(--text-main); height: 100dvh; overflow: hidden; display: flex; flex-direction: column; }
+        
+        .mobile-header { display: none; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--bg-panel); border-bottom: 1px solid var(--border-color); box-shadow: 0 4px 20px rgba(0,0,0,0.5); z-index: 100;}
+        .mobile-header h2 { font-family: var(--font-ui); font-size: 22px; color: var(--text-main); margin: 0; font-weight: 800; letter-spacing: 1px;}
+        .mobile-header h2 span { color: var(--gold-primary); }
+        .menu-btn { background: rgba(230, 184, 65, 0.1); border: 1px solid var(--gold-primary); color: var(--gold-primary); padding: 8px 12px; border-radius: 6px; font-size: 18px; cursor: pointer; font-family: var(--font-mono);}
+        
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative;}
+        
+        .sidebar { width: 260px; background: var(--bg-panel); border-right: 1px solid var(--border-color); padding: 20px 0; display: flex; flex-direction: column; z-index: 999; transition: transform 0.3s ease; box-shadow: inset -5px 0 20px rgba(0,0,0,0.5);}
+        .brand { font-family: var(--font-ui); font-size: 26px; font-weight: 900; color: #fff; text-align: center; margin-bottom: 25px; letter-spacing: 1px; text-shadow: 0 0 10px rgba(0,0,0,0.5);}
+        .brand span.win { color: var(--gold-primary); }
+        .brand span.core { color: var(--text-muted); font-size: 11px; display: block; letter-spacing: 4px; font-weight: bold; margin-top: 2px;}
+        
+        .nav-item { padding: 14px 20px; margin: 4px 15px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; color: var(--text-muted); display: flex; align-items: center; gap: 10px; transition: 0.2s; text-transform: uppercase; letter-spacing: 1px;}
+        .nav-item.active, .nav-item:hover { background: rgba(230, 184, 65, 0.1); color: var(--gold-primary); border-left: 3px solid var(--gold-primary); box-shadow: inset 0 0 10px var(--gold-glow);}
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 998; display: none; backdrop-filter: blur(5px);}
+
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; position: relative;}
+        .view-section { padding: 20px; display: none; overflow-y: auto; height: 100%; -webkit-overflow-scrolling: touch;}
+        .view-section.active { display: block; animation: fadeIn 0.3s forwards;}
+        @keyframes fadeIn { from { opacity:0; transform:translateY(10px); } to {opacity:1; transform:translateY(0);} }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 15px; margin-bottom: 25px;}
+        .stat-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; border-left: 4px solid var(--gold-primary); box-shadow: inset 0 0 15px rgba(0,0,0,0.5);}
+        
+        .table-wrapper { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: #1a1a1a; box-shadow: 0 10px 30px rgba(0,0,0,0.8); -webkit-overflow-scrolling: touch;}
+        table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; min-width: 800px; font-family: var(--font-mono);}
+        th { background: rgba(255,255,255,0.03); padding: 15px; color: var(--gold-primary); border-bottom: 1px solid var(--border-color); white-space: nowrap; font-family: var(--font-ui); font-size: 14px; letter-spacing: 1px; text-transform: uppercase;}
+        td { padding: 15px; border-bottom: 1px dashed #2a2a2a; vertical-align: middle; color: #e2e8f0;}
+        
+        button { font-family: var(--font-ui); cursor: pointer; border: none; padding: 12px 16px; border-radius: 8px; font-weight: 800; color: #fff; font-size: 12px; transition: 0.2s; white-space: nowrap; letter-spacing: 1px; text-transform: uppercase;}
+        button:active { transform: scale(0.95); }
+        .btn-primary { background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); color: #000; box-shadow: 0 4px 15px var(--gold-glow); border: 1px solid var(--gold-primary);} 
+        .btn-warning { background: linear-gradient(135deg, #ff8c00, #b35900); color: #fff; box-shadow: 0 4px 15px rgba(255, 140, 0, 0.4); border: 1px solid #ff8c00;}
+        .btn-success { background: linear-gradient(135deg, #00e676, #00994d); color: #000; box-shadow: 0 4px 15px rgba(0,230,118,0.4); border: 1px solid #00e676;} 
+        .btn-danger { background: linear-gradient(135deg, #ff4d4d, #b30000); box-shadow: 0 4px 15px rgba(255,77,77,0.4); border: 1px solid #ff4d4d;}
+        .btn-dark { background: rgba(0,0,0,0.8); color: var(--gold-primary); border: 1px solid var(--gold-primary);}
+        .action-group { display: flex; gap: 8px; flex-wrap: wrap; }
+        
+        input, select { padding: 14px; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: var(--gold-primary); border-radius: 8px; outline: none; width: 100%; font-family: var(--font-mono); transition: 0.3s; margin-bottom: 10px; font-weight: bold;}
+        input:focus, select:focus { border-color: var(--gold-primary); box-shadow: 0 0 15px var(--gold-glow); }
+        select option { background: #121212; color: #fff; }
+        textarea { width: 100%; height: 120px; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: var(--gold-primary); border-radius: 8px; padding: 15px; font-family: var(--font-mono); font-size: 12px; margin-bottom: 20px; outline: none; resize: vertical; }
+        
+        .msg-box { background: rgba(255,255,255,0.02); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 20px; box-shadow: inset 0 0 20px rgba(0,0,0,0.8);}
+        .flex-wrap-gap { display: flex; gap: 10px; flex-wrap: wrap; align-items: center; margin-top: 10px;}
+        .flex-wrap-gap > * { flex: 1 1 100%; }
+        
+        .tag { padding: 4px 10px; border-radius: 6px; font-size: 10px; font-weight: 800; display: inline-block; font-family: var(--font-ui);}
+        .tag-vip { background: rgba(230, 184, 65, 0.1); color: var(--gold-primary); border: 1px solid rgba(230, 184, 65, 0.5);}
+        .tag-trial { background: rgba(255, 255, 255, 0.1); color: #fff; border: 1px solid rgba(255, 255, 255, 0.5);}
+        .tag-expired { background: rgba(255, 77, 77, 0.1); color: var(--red); border: 1px solid rgba(255, 77, 77, 0.5);}
+
+        .auto-detect-box { background: rgba(230, 184, 65, 0.05); border: 1px solid rgba(230, 184, 65, 0.2); border-radius: 14px; padding: 20px; margin-bottom: 16px; text-align: center; position: relative; overflow: hidden; }
+        .auto-number { font-size: 50px; font-weight: 900; background: linear-gradient(180deg, var(--gold-light) 0%, var(--gold-dark) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 20px rgba(230, 184, 65, 0.4)); line-height: 1.1; font-family: var(--font-ui);}
+        .live-indicator { display: inline-block; width: 8px; height: 8px; background: var(--green); border-radius: 50%; margin-right: 6px; animation: livePulse 1.5s infinite; }
+        @keyframes livePulse { 0%, 100% { box-shadow: 0 0 5px var(--green); } 50% { box-shadow: 0 0 20px var(--green); } }
+        .terminal { background: #000; border: 1px solid var(--border-color); border-radius: 10px; height: 180px; padding: 14px; overflow-y: auto; font-size: 11px; line-height: 1.9; color: var(--text-muted); margin-top: 16px; display: none; box-shadow: inset 0 0 30px rgba(0,0,0,0.9); font-family: var(--font-mono); }
+        .t-sys { color: var(--text-main); } .t-warn { color: var(--gold-primary); } .t-ok { color: var(--green); } .t-err { color: var(--red); }
+        .progress-bar { width: 100%; height: 3px; background: var(--border-color); border-radius: 2px; margin-top: 12px; overflow: hidden; display: none;}
+        .progress-fill { height: 100%; background: var(--gold-primary); width: 0%; transition: width 0.3s ease; }
+
+        .login-wrapper { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-base); display: flex; justify-content: center; align-items: center; z-index: 9999; padding: 20px; }
+        .login-card { background: var(--bg-panel); border: 1px solid var(--border-color); padding: 40px 30px; border-radius: 16px; text-align: center; width: 100%; max-width: 380px; box-shadow: 0 0 50px rgba(0,0,0,0.9), inset 0 0 20px rgba(230, 184, 65, 0.05);}
+        
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 99999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;}
+        .modal-box { background: var(--bg-panel); border: 1px solid var(--border-color); padding: 25px; border-radius: 16px; width: 100%; max-width: 380px; box-shadow: 0 0 40px rgba(0,0,0,0.9); animation: popIn 0.3s forwards;}
+        @keyframes popIn { 0% { transform: scale(0.9); opacity: 0;} 100% { transform: scale(1); opacity: 1;} }
+
+        .hidden { display: none !important; }
+        #toast { position:fixed; bottom:25px; left:50%; transform:translateX(-50%) translateY(150%); background:var(--green); color:#000; padding:12px 25px; border-radius:30px; font-weight:800; font-size:13px; z-index:99999; transition:0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow:0 10px 30px rgba(0,230,118,0.4); white-space:nowrap; font-family:var(--font-ui); border: 1px solid #00e676;}
+        #toast.show { transform:translateX(-50%) translateY(0); }
+
+        @media (min-width: 768px) {
+            .mobile-header { display: none; }
+            .sidebar { transform: translateX(0) !important; position: relative;}
+            .flex-wrap-gap > input, .flex-wrap-gap > select { flex: 1 1 auto; margin-bottom: 0;}
+            .flex-wrap-gap > button { flex: 0 0 auto; }
+        }
+        @media (max-width: 767px) {
+            .mobile-header { display: flex; }
+            .sidebar { position: absolute; height: 100%; transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+            .view-section { padding: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="toast">Action Successful!</div>
+
+    <!-- TIME & ACCESS MODAL -->
+    <div id="timeModal" class="modal-overlay">
+        <div class="modal-box">
+            <h3 style="color: var(--gold-primary); margin-bottom: 5px; font-size: 20px;">MODIFY ACCESS</h3>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 15px;">TARGET UID: <span id="timeTargetUid" style="color:#fff;"></span></p>
+            
+            <select id="editAccessType" style="margin-bottom: 10px;">
+                <option value="both">Access: BOTH (1M + 30S)</option>
+                <option value="1m">Access: ONLY 1 MINUTE</option>
+                <option value="30s">Access: ONLY 30 SECONDS</option>
+            </select>
+
+            <select id="editTimeDuration" style="margin-bottom: 15px;">
+                <option value="0">Keep Current Time</option>
+                <option value="1">+ Add 1 Day</option><option value="3">+ Add 3 Days</option><option value="7">+ Add 7 Days</option><option value="30">+ Add 30 Days</option>
+                <option value="999">Grant LIFETIME</option><option value="-1" style="color:var(--red);">☠️ TERMINATE</option>
+            </select>
+            <div style="display: flex; gap: 10px;">
+                <button class="btn-primary" style="flex: 1;" onclick="confirmTimeUpdate()">UPDATE</button>
+                <button class="btn-dark" style="flex: 1;" onclick="document.getElementById('timeModal').style.display='none'">CANCEL</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 🔐 LOGIN PANEL -->
+    <div class="login-wrapper" id="loginBox">
+        <div class="login-card">
+            <div style="font-size: 40px; margin-bottom: 10px; background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); -webkit-background-clip: text; color: transparent;">6️⃣</div>
+            <h2 style="font-size: 28px; margin-bottom: 5px; color: #fff; letter-spacing: 1px;">6 <span style="color:var(--gold-primary);">CLUB</span></h2>
+            <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 25px; letter-spacing: 2px; font-weight:bold;">SECURE ADMIN COMMAND</p>
+            <input type="password" id="pass" placeholder="ENTER MASTER PIN" style="text-align:center; letter-spacing:3px;">
+            <button class="btn-primary" id="loginBtn" style="width: 100%; padding: 16px; font-size: 14px;" onclick="login()">ESTABLISH CONNECTION</button>
+        </div>
+    </div>
+
+    <div class="mobile-header">
+        <h2>6 <span>CLUB</span></h2>
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    </div>
+
+    <div class="app-container">
+        <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+        <div class="sidebar" id="sidebar">
+            <div class="brand">6 <span class="win">CLUB</span><span class="core">VIP COMMAND</span></div>
+            <div class="nav-item active" onclick="switchView('v-dashboard', this); closeMobileSidebar();">📊 Network Status</div>
+            <div class="nav-item" onclick="switchView('v-req', this); closeMobileSidebar();">⚡ Auth Queue</div>
+            <div class="nav-item" onclick="switchView('v-usr', this); closeMobileSidebar();">🛡️ Node Manager</div>
+            <div class="nav-item" style="color:var(--gold-primary);" onclick="switchView('v-neural', this); closeMobileSidebar();">🧬 Dual Engine</div>
+            <div class="nav-item" onclick="switchView('v-mat', this); closeMobileSidebar();">📝 Matrix Editor</div>
+            <div class="nav-item" style="color:var(--red);" onclick="switchView('v-pdf', this); closeMobileSidebar();">📄 PDF Studio</div>
+            <div class="nav-item" onclick="switchView('v-settings', this); closeMobileSidebar();">⚙️ Core Settings</div>
+        </div>
+
+        <div class="main-content hidden" id="mainContent">
+            
+            <!-- DASHBOARD -->
+            <div id="v-dashboard" class="view-section active">
+                <h2 style="margin-bottom: 20px; color:var(--text-main);">NETWORK OVERVIEW</h2>
+                <div class="stats-grid">
+                    <div class="stat-card" style="border-left-color: #fff;"><div style="font-size:11px; color:var(--text-muted);">ACTIVE NODES</div><div id="statTotal" style="font-size:26px; font-weight:bold; color:#fff;">0</div></div>
+                    <div class="stat-card" style="border-left-color: var(--gold-primary);"><div style="font-size:11px; color:var(--text-muted);">VIP PROTOCOL</div><div id="statVip" style="font-size:26px; font-weight:bold; color:var(--gold-primary);">0</div></div>
+                    <div class="stat-card" style="border-left-color: var(--red);"><div style="font-size:11px; color:var(--text-muted);">TERMINATED</div><div id="statExpired" style="font-size:26px; font-weight:bold; color:var(--red);">0</div></div>
+                </div>
+                <div class="msg-box" style="border-top: 3px solid #fff;">
+                    <h3 style="color:#fff; margin-bottom:8px; font-size:18px;">⚡ MANUAL INJECTION (ROLE BASED)</h3>
+                    <div class="flex-wrap-gap">
+                        <input type="number" id="manualUid" placeholder="Target UID">
+                        <select id="manualVipDuration"><option value="1">1 Day</option><option value="7">7 Days</option><option value="30">30 Days</option><option value="999" selected>Lifetime</option></select>
+                        <select id="manualAccess"><option value="both">BOTH MODES</option><option value="1m">ONLY 1 MIN</option><option value="30s">ONLY 30 SEC</option></select>
+                        <button class="btn-dark" style="color:#fff; border-color:#fff;" onclick="addManualUser(false)">GRANT TRIAL</button>
+                        <button class="btn-primary" onclick="addManualUser(true)">AUTHORIZE VIP</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- QUEUE -->
+            <div id="v-req" class="view-section">
+                <h2 style="margin-bottom: 20px; color:var(--text-main);">AUTHORIZATION QUEUE</h2>
+                <div class="table-wrapper"><table><thead><tr><th>UID IDENTIFIER</th><th>HARDWARE FINGERPRINT</th><th>COMMANDS</th></tr></thead><tbody id="req-list"></tbody></table></div>
+            </div>
+
+            <!-- USER DATA -->
+            <div id="v-usr" class="view-section">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap:wrap; gap:10px;">
+                    <h2 style="color:var(--text-main); margin:0;">NODE DATABASE</h2>
+                    <button class="btn-danger" style="padding: 10px 15px; font-size: 11px;" onclick="purgeDeadNodes()">🧹 PURGE DEAD NODES</button>
+                </div>
+                <div class="table-wrapper"><table><thead><tr><th>UID & MODE</th><th>CLASS</th><th>VALIDITY</th><th>USAGE</th><th>ACTIONS</th></tr></thead><tbody id="usr-list"></tbody></table></div>
+            </div>
+
+            <!-- 🧬 DUAL NEURAL ENGINE -->
+            <div id="v-neural" class="view-section">
+                <h2 style="margin-bottom: 20px; color:var(--gold-primary);">DUAL NEURAL ENGINE</h2>
+                <div class="msg-box" style="border-top: 3px solid var(--text-main); margin-bottom: 15px;">
+                    <h3 style="color:var(--text-main); margin-bottom:10px; font-size:16px;">⏱️ SELECT TARGET TIMEFRAME</h3>
+                    <select id="neuralTimeframe" onchange="fetchLatestNumber()" style="margin-bottom:0;">
+                        <option value="1m">Wingo 1 Minute (1Min)</option>
+                        <option value="30s">Wingo 30 Seconds (30Sec)</option>
+                    </select>
+                </div>
+
+                <div class="msg-box" style="border-top: 3px solid var(--gold-primary);">
+                    <div class="auto-detect-box">
+                        <div style="font-size:10px; color:var(--text-muted); letter-spacing:2px;">🎯 LATEST ANCHOR NUMBER</div>
+                        <div class="auto-number" id="autoNumber">--</div>
+                        <div id="autoIssue" style="font-size:10px; color:var(--text-muted); margin-top:5px;">Issue: --</div>
+                        <div id="autoStatus" style="font-size:11px; margin-top:5px; font-weight:bold;"><span class="live-indicator"></span> STANDBY</div>
+                    </div>
+                    
+                    <button class="btn-dark" id="btnRefresh" style="width:100%; margin-bottom:15px;" onclick="fetchLatestNumber()">🔄 SYNC LIVE DATA</button>
+                    
+                    <select id="scanDepth" style="margin-bottom:15px;">
+                        <option value="20">⚡ QUICK SCAN (2000 ROUNDS)</option>
+                        <option value="30" selected>🔥 DEEP NEURAL (3000 ROUNDS)</option>
+                    </select>
+
+                    <button class="btn-primary" id="btnScan" style="width:100%; padding:16px;" onclick="startNeuralScan()">🧬 ACTIVATE NEURAL ENGINE</button>
+                    
+                    <div class="progress-bar" id="progressBar"><div class="progress-fill" id="progressFill"></div></div>
+                    <div class="terminal" id="termBox"></div>
+                </div>
+
+                <div class="msg-box" id="step3Card" style="display:none; border-top: 3px solid var(--green);">
+                    <h3 style="color:var(--green); text-align:center; font-size:18px; margin-bottom:15px;">NEURAL MATRIX READY</h3>
+                    <div style="display:flex; gap:10px; flex-direction:column;">
+                        <button class="btn-success" style="padding:16px;" onclick="uploadNeuralToDB()">☁️ UPLOAD DIRECTLY TO DATABASE</button>
+                        <button class="btn-warning" onclick="copyCode()">📋 COPY HASH CODE</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- MATRIX EDITOR (MANUAL) -->
+            <div id="v-mat" class="view-section">
+                <div class="msg-box" style="border-top: 3px solid var(--gold-primary); margin-bottom: 15px; padding: 15px;">
+                    <h3 style="color:var(--gold-primary); margin-bottom:10px; font-size:16px;">⏱️ EDIT TIMEFRAME MATRIX</h3>
+                    <select id="matTimeframe" onchange="loadMatrixData()" style="margin-bottom:0;">
+                        <option value="1m">Wingo 1 Minute Database</option>
+                        <option value="30s">Wingo 30 Seconds Database</option>
+                    </select>
+                </div>
+
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap:wrap; gap:10px;">
+                    <h2 style="color:var(--text-main); margin:0;">MATRIX EDITOR</h2>
+                    <div style="display: flex; gap: 8px;">
+                        <button class="btn-primary" style="padding: 10px 15px; font-size: 11px;" onclick="saveAllMatrix()">💾 SET ALL</button>
+                        <button class="btn-success" style="padding: 10px 15px; font-size: 11px;" onclick="pasteMatrix()">📥 PASTE HASH</button>
+                    </div>
+                </div>
+                <div class="table-wrapper"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME PARAMETER</th><th>ACTION</th></tr></thead><tbody id="mat-list"></tbody></table></div>
+            </div>
+
+            <!-- 📄 PDF STUDIO -->
+            <div id="v-pdf" class="view-section">
+                <h2 style="margin-bottom: 20px; color:var(--red);">PDF STUDIO PRO</h2>
+                <div class="msg-box" style="border-top: 3px solid var(--red);">
+                    <h3 style="color:var(--red); margin-bottom:8px; font-size:18px;">🔒 GENERATE PROTECTED PDF</h3>
+                    <textarea id="pdfHashInput" placeholder="Paste Base64 Matrix Hash here..."></textarea>
+                    <input type="text" id="pdfPassword" placeholder="Set PDF Password (Optional)" style="border-color:var(--red); color:var(--red);">
+                    <button class="btn-danger" style="width:100%; padding:16px;" onclick="generateProtectedPDF()">📄 DOWNLOAD ENCRYPTED PDF</button>
+                </div>
+            </div>
+
+            <!-- ⚙️ SETTINGS -->
+            <div id="v-settings" class="view-section">
+                <h2 style="margin-bottom: 20px; color:var(--text-main);">SYSTEM CONFIGURATION</h2>
+                <div class="msg-box" style="border-top: 3px solid #fff;">
+                    <h3 style="color:#fff; margin-bottom:5px; font-size:18px;">🔗 TARGET GAME URL</h3>
+                    <input type="text" id="adminGameLink" placeholder="e.g. https://6clubm.com/#/">
+                    <button class="btn-primary" style="width:100%; padding:14px;" onclick="updateGameLink()">⚡ OVERRIDE LIVE LINK</button>
+                </div>
+                <div class="msg-box" style="border-top: 3px solid var(--red);">
+                    <h3 style="color:var(--red); margin-bottom:5px; font-size:18px;">🔑 MASTER AUTH KEY (PIN)</h3>
+                    <input type="text" id="adminNewPin" placeholder="Enter New Secure PIN">
+                    <button class="btn-danger" style="width:100%; padding:14px;" onclick="updateAdminPin()">🔐 UPDATE AUTH KEY</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, get, set, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+        const firebaseConfig = { apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", authDomain: "sikkimaitool.firebaseapp.com", databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "sikkimaitool", storageBucket: "sikkimaitool.firebasestorage.app", messagingSenderId: "897487739765", appId: "1:897487739765:web:34f9df57ee8372aa6b913c" };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
+
+        let currentTimeUID = ""; let expiredUsersList = [];
+
+        window.showToast = (msg) => { let t = document.getElementById('toast'); t.innerText = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); };
+        window.switchView = (id, el) => { document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active')); document.querySelectorAll('.nav-item').forEach(v => v.classList.remove('active')); document.getElementById(id).classList.add('active'); el.classList.add('active'); };
+        window.toggleSidebar = () => { document.getElementById('sidebar').classList.toggle('open'); let overlay = document.getElementById('sidebarOverlay'); overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'; };
+        window.closeMobileSidebar = () => { if(window.innerWidth < 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').style.display='none'; }};
+
+        window.login = async () => { 
+            let pinInput = document.getElementById('pass').value; let btn = document.getElementById('loginBtn');
+            btn.innerText = "AUTHENTICATING..."; btn.disabled = true;
+            try {
+                let snap = await get(ref(db, 'settings/admin_pin'));
+                let realPin = snap.exists() ? snap.val() : "6CLUBADMIN";
+                if(pinInput === realPin) { document.getElementById('loginBox').style.display='none'; document.getElementById('mainContent').classList.remove('hidden'); initSystem(); } 
+                else { alert("❌ AUTH FAILED: Invalid PIN"); btn.innerText = "ESTABLISH CONNECTION"; btn.disabled = false; }
+            } catch(e) { alert("Network Error. Check connection."); btn.innerText = "ESTABLISH CONNECTION"; btn.disabled = false; }
+        };
+
+        function initSystem() {
+            onValue(ref(db, 'settings/force_link'), s => { if(s.exists()) document.getElementById('adminGameLink').value = s.val(); });
+            onValue(ref(db, 'uid_requests'), s => {
+                let html = ""; if(s.exists()) { s.forEach(c => { html += `<tr><td style="color:var(--gold-primary); font-weight:bold;">${c.key}</td><td>${c.val().deviceId || "Unknown"}</td><td><div class="action-group"><button class="btn-success" onclick="apprReq('${c.key}')">APPROVE</button> <button class="btn-danger" onclick="rejReq('${c.key}')">DROP</button></div></td></tr>`; }); }
+                document.getElementById('req-list').innerHTML = html || `<tr><td colspan="3" style="text-align:center; padding:30px;">Queue Empty.</td></tr>`;
+            });
+            onValue(ref(db, 'approved_uids'), s => {
+                let html = ""; let tot = 0; let vip = 0; let expCount = 0; let now = Date.now(); expiredUsersList = [];
+                if(s.exists()) {
+                    s.forEach(c => { 
+                        tot++; let d = c.val(); let uid = c.key; if(d.is_premium) vip++;
+                        let daysLeft = d.expireAt ? Math.ceil((d.expireAt - now) / 86400000) : "LIFETIME";
+                        let expiryText = daysLeft > 900 ? `<span style="color:var(--gold-primary);">LIFETIME</span>` : (daysLeft <= 0 ? `<span style="color:var(--red);">TERMINATED</span>` : `<span style="color:var(--green);">${daysLeft} DAYS LEFT</span>`);
+                        if(daysLeft <= 0) { expCount++; if(!d.is_premium) expiredUsersList.push(uid); }
+                        let badge = (daysLeft <= 0) ? (d.is_premium ? `<span class="tag tag-whitelist">VIP (EXPIRED)</span>` : `<span class="tag tag-expired">EXPIRED</span>`) : (d.is_premium ? `<span class="tag tag-vip">VIP</span>` : `<span class="tag tag-trial">TRIAL</span>`);
+                        let usage = d.is_premium ? `<span style="color:var(--gold-primary);">UNLIMITED</span>` : `<span style="color:#fff;">${d.predictions_used||0} / 5</span>`;
+                        
+                        // Access Mode Badge
+                        let accMode = d.access_type === '1m' ? '1 MIN' : (d.access_type === '30s' ? '30 SEC' : 'BOTH');
+                        let accBadge = `<span class="tag" style="background:rgba(255,255,255,0.1); border:1px solid rgba(255,255,255,0.3); color:#fff; margin-top:4px;">${accMode}</span>`;
+
+                        let actions = `<div class="action-group"><button class="btn-primary" onclick="openTimeModal('${uid}')">TIME/MODE</button>`;
+                        if(!d.is_premium) actions += `<button class="btn-dark" style="color:#fff; border-color:#fff;" onclick="resetPlays('${uid}')">0/5</button>`;
+                        actions += `<button class="btn-warning" onclick="unlinkDevice('${uid}')">UNLINK</button><button class="btn-danger" onclick="banUser('${uid}')">PURGE</button></div>`;
+                        html += `<tr><td style="color:#fff; font-weight:bold;">${uid}<br>${accBadge}</td><td>${badge}</td><td>${expiryText}</td><td>${usage}</td><td>${actions}</td></tr>`; 
+                    });
+                }
+                document.getElementById('usr-list').innerHTML = html || `<tr><td colspan="5" style="text-align:center; padding:30px;">Database Empty.</td></tr>`;
+                document.getElementById('statTotal').innerText = tot; document.getElementById('statVip').innerText = vip; document.getElementById('statExpired').innerText = expCount;
+            });
+            buildMatrix(); loadMatrixData();
+        }
+
+        window.updateGameLink = async () => { let link = document.getElementById('adminGameLink').value.trim(); if(!link) return; if(!link.startsWith('http')) link = 'https://' + link; await update(ref(db, 'settings'), { force_link: link, force_link_active: true }); showToast("🔗 Live Link Enforced!"); };
+        window.updateAdminPin = async () => { let newPin = document.getElementById('adminNewPin').value.trim(); if(!newPin || newPin.length < 4) return; await set(ref(db, 'settings/admin_pin'), newPin); document.getElementById('adminNewPin').value = ""; showToast("🔐 Master Auth Key Updated!"); };
+        
+        window.addManualUser = async (isVip) => { 
+            let uid = document.getElementById('manualUid').value.trim(); if(!uid) return; 
+            let days = parseInt(document.getElementById('manualVipDuration').value); 
+            let acc = document.getElementById('manualAccess').value; 
+            let expireAt = Date.now() + (days * 86400000); 
+            await set(ref(db, 'approved_uids/'+uid), { active:true, predictions_used:0, is_premium:isVip, expireAt: expireAt, access_type: acc }); 
+            document.getElementById('manualUid').value = ""; showToast(`Injected UID ${uid}`); 
+        };
+
+        window.openTimeModal = (uid) => { currentTimeUID = uid; document.getElementById('timeTargetUid').innerText = uid; document.getElementById('timeModal').style.display = 'flex'; };
+        
+        window.confirmTimeUpdate = async () => { 
+            let val = parseInt(document.getElementById('editTimeDuration').value); 
+            let acc = document.getElementById('editAccessType').value;
+            let updates = { access_type: acc };
+            if(val !== 0) {
+                if(val === -1) updates.expireAt = Date.now() - 10000; 
+                else if(val === 999) updates.expireAt = Date.now() + (999 * 86400000); 
+                else updates.expireAt = Date.now() + (val * 86400000); 
+            }
+            await update(ref(db, 'approved_uids/'+currentTimeUID), updates); 
+            document.getElementById('timeModal').style.display = 'none'; showToast(`Access Modified.`); 
+        };
+
+        window.purgeDeadNodes = async () => { if(expiredUsersList.length === 0) return alert("No dead nodes found!"); if(!confirm(`Purge ${expiredUsersList.length} expired trial nodes?`)) return; for(let uid of expiredUsersList) { await remove(ref(db, 'approved_uids/'+uid)); await remove(ref(db, 'device_bindings/'+uid)); } showToast(`Purged successfully.`); };
+        window.apprReq = async (uid) => { await set(ref(db, 'approved_uids/'+uid), {active:true, predictions_used:0, is_premium:false, expireAt: Date.now() + (30*86400000), access_type:'both'}); await remove(ref(db, 'uid_requests/'+uid)); showToast("Authorized"); };
+        window.rejReq = async (uid) => { await remove(ref(db, 'uid_requests/'+uid)); showToast("Dropped"); };
+        window.resetPlays = async (uid) => { await update(ref(db, 'approved_uids/'+uid), { predictions_used: 0 }); showToast("Plays Reset"); };
+        window.unlinkDevice = async (uid) => { await remove(ref(db, 'device_bindings/'+uid)); showToast("Unlinked HWID"); };
+        window.banUser = async (uid) => { if(confirm("Blacklist node entirely?")) { await remove(ref(db, 'approved_uids/'+uid)); await remove(ref(db, 'device_bindings/'+uid)); showToast("Terminated"); } };
+
+        const API_URLS = { '1m': 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json', '30s': 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json' };
+        const DB_PATHS = { '1m': 'patterns', '30s': 'patterns_30s' };
+        let compiledMatrix = {}; let masterList = []; let scanInProgress = false; let latestDetectedNumber = null;
+
+        function logTerm(msg, type = "sys") { const term = document.getElementById('termBox'); if(!term) return; term.style.display = "block"; const cMap = { sys: "t-sys", warn: "t-warn", ok: "t-ok", err: "t-err", purple: "t-sys" }; term.innerHTML += `<div class="${cMap[type]||'t-sys'}">> ${msg}</div>`; term.scrollTop = term.scrollHeight; }
+        function clearTerm() { const term = document.getElementById('termBox'); if (term) term.innerHTML = ""; const pb = document.getElementById('progressBar'), pf = document.getElementById('progressFill'); if (pb) pb.style.display = 'none'; if (pf) pf.style.width = '0%'; }
+        function updateProgress(percent) { const pb = document.getElementById('progressBar'), pf = document.getElementById('progressFill'); if (pb) pb.style.display = 'block'; if (pf) pf.style.width = percent + '%'; }
+
+        async function fetchSecureApiData(targetUrl) {
+            const urlsToTry = [ targetUrl + "?t=" + Date.now(), "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl + "?t=" + Date.now()), "https://corsproxy.io/?" + encodeURIComponent(targetUrl + "?t=" + Date.now()) ];
+            for (let url of urlsToTry) {
+                try { let res = await fetch(url, { cache: "no-store", headers: { 'Accept': 'application/json' }}); let text = await res.text(); try { let data = JSON.parse(text); if (data && (Array.isArray(data) || data.data || data.list || data.results)) return data; } catch (parseErr) { continue; } } catch(e) { }
+            } throw new Error("All endpoints failed");
+        }
+
+        async function fetchFromAPI() {
+            let tf = document.getElementById('neuralTimeframe').value; let targetUrl = API_URLS[tf]; const data = await fetchSecureApiData(targetUrl);
+            let results = []; if (Array.isArray(data) && data.length > 0) results = data; else if (data && data.data && Array.isArray(data.data.list)) results = data.data.list; else if (data && Array.isArray(data.data)) results = data.data; else if (data && Array.isArray(data.list)) results = data.list;
+            if (results.length === 0) throw new Error("Empty dataset");
+            return results.filter(item => { let n = item.number ?? item.Number ?? item.DrawNumber ?? item.result; const num = parseInt(n); return !isNaN(num) && num >= 0 && num <= 9; }).map(item => ({ number: parseInt(item.number ?? item.Number ?? item.DrawNumber ?? item.result), issue: String(item.issueNumber || item.issue || item.IssueNumber || item.Period || item.period || '') }));
+        }
+
+        window.fetchLatestNumber = async function() {
+            const btn = document.getElementById('btnRefresh'); btn.disabled = true; btn.innerText = '⏳ SYNCING...'; document.getElementById('autoNumber').innerText = '...'; document.getElementById('autoStatus').innerHTML = '🔄 FETCHING...';
+            try {
+                const data = await fetchFromAPI(); masterList = data; latestDetectedNumber = data[0].number;
+                document.getElementById('autoNumber').innerText = latestDetectedNumber; document.getElementById('autoIssue').innerText = `Issue: ${data[0].issue}`; document.getElementById('autoStatus').innerHTML = '<span class="live-indicator"></span> ✅ LIVE · SYNCED'; document.getElementById('autoStatus').style.color = 'var(--green)';
+            } catch (error) { document.getElementById('autoNumber').innerText = 'ERR'; document.getElementById('autoStatus').innerHTML = '❌ SYNC FAILED'; document.getElementById('autoStatus').style.color = 'var(--red)'; } 
+            finally { btn.disabled = false; btn.innerText = '🔄 SYNC LIVE DATA'; }
+        };
+
+        window.startNeuralScan = async function() {
+            if (scanInProgress) return; if (latestDetectedNumber === null) { await fetchLatestNumber(); if (latestDetectedNumber === null) return alert("SYNC FAILED!"); }
+            const depthValue = parseInt(document.getElementById('scanDepth').value); const btn = document.getElementById('btnScan');
+            btn.disabled = true; btn.innerText = "🧬 PROCESSING..."; scanInProgress = true; clearTerm(); document.getElementById('step3Card').style.display = "none"; updateProgress(5);
+            try {
+                updateProgress(15); const freshData = await fetchFromAPI(); masterList = freshData.slice(0, depthValue * 100);
+                updateProgress(40); await new Promise(r => setTimeout(r, 500)); compiledMatrix = {};
+                for (let i = 0; i <= 9; i++) { for (let j = 0; j <= 9; j++) { let isBig = Math.random() > 0.5; let bestNum = isBig ? Math.floor(Math.random() * 5) + 5 : Math.floor(Math.random() * 5); compiledMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${bestNum}]`; } }
+                updateProgress(100); setTimeout(() => { document.getElementById('progressBar').style.display = 'none'; document.getElementById('progressFill').style.width = '0%'; }, 500);
+                btn.innerText = "🧬 RE-RUN NEURAL ENGINE"; btn.disabled = false; scanInProgress = false; document.getElementById('step3Card').style.display = "block";
+            } catch (error) { btn.innerText = "🔄 RETRY"; btn.disabled = false; scanInProgress = false; }
+        };
+
+        window.copyCode = function() { if (Object.keys(compiledMatrix).length === 0) return alert("Run Neural Engine First!"); let tf = document.getElementById('neuralTimeframe').options[document.getElementById('neuralTimeframe').selectedIndex].text; const exportData = { version: "V9.0_NEURAL", timeframe: tf, anchor: latestDetectedNumber, matrix: compiledMatrix }; const encoded = btoa(JSON.stringify(exportData)); navigator.clipboard.writeText(encoded).then(() => { showToast('✅ NEURAL HASH COPIED!'); }).catch(() => { prompt("Manual Copy:", encoded); }); };
+        window.uploadNeuralToDB = async function() { if (Object.keys(compiledMatrix).length === 0) return alert("Run Neural Engine First!"); let tf = document.getElementById('neuralTimeframe').value; let pathBase = DB_PATHS[tf]; if(!confirm(`Upload Matrix to [${tf.toUpperCase()}] Database?`)) return; let updates = {}; for(let key in compiledMatrix) { updates[`${pathBase}/${key}`] = compiledMatrix[key]; } try { await update(ref(db), updates); showToast(`✅ Live Matrix Updated Successfully!`); } catch(e) { alert("Failed."); } };
+
+        function buildMatrix() { let html = ""; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { let k = `${i}-${j}`; html += `<tr><td style="color:var(--gold-primary); font-weight:bold;">${k}</td><td><input type="number" id="m-${k}" style="min-width:60px; margin:0; text-align:center;" min="0" max="9" placeholder="#"></td><td><button class="btn-primary" style="padding: 10px;" onclick="saveM('${k}')">SET</button></td></tr>`; }} document.getElementById('mat-list').innerHTML = html; }
+        window.loadMatrixData = async function() { let tf = document.getElementById('matTimeframe').value; let pathBase = DB_PATHS[tf]; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { if(document.getElementById(`m-${i}-${j}`)) document.getElementById(`m-${i}-${j}`).value = ""; } } try { let snap = await get(ref(db, pathBase)); if(snap.exists()){ let data = snap.val(); for(let key in data) { let valMatch = data[key].match(/\[(\d+)\]/); if(valMatch && document.getElementById(`m-${key}`)) { document.getElementById(`m-${key}`).value = valMatch[1]; } } } } catch(e) {} };
+        window.saveM = async (k) => { let v = document.getElementById(`m-${k}`).value; let tf = document.getElementById('matTimeframe').value; let pathBase = DB_PATHS[tf]; if(v!=="") await set(ref(db, `${pathBase}/${k}`), `${parseInt(v)>=5?"BIG":"SMALL"} [${v}]`); showToast("Saved!"); };
+        window.saveAllMatrix = async () => { let tf = document.getElementById('matTimeframe').value; let pathBase = DB_PATHS[tf]; if(!confirm(`Upload entire Matrix to [${tf.toUpperCase()}] Database?`)) return; let updates = {}; let count = 0; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { let k = `${i}-${j}`; let v = document.getElementById(`m-${k}`).value; if(v !== "") { let size = parseInt(v) >= 5 ? "BIG" : "SMALL"; updates[`${pathBase}/${k}`] = `${size} [${v}]`; count++; } } } if(count > 0) { try { await update(ref(db), updates); showToast(`✅ ${count} patterns uploaded!`); } catch(e) { alert("Failed."); } } else { alert("Matrix is empty."); } };
+        window.pasteMatrix = async () => { let code = prompt("📥 PASTE MATRIX HASH CODE HERE:"); if(!code) return; let tf = document.getElementById('matTimeframe').value; let pathBase = DB_PATHS[tf]; try { let decodedStr = atob(code.trim()); let matrixData = JSON.parse(decodedStr); let actualMatrix = matrixData.matrix ? matrixData.matrix : matrixData; let updates = {}; let count = 0; for(let k in actualMatrix) { let v = actualMatrix[k].match(/\[(\d+)\]/)[1]; if(document.getElementById(`m-${k}`)) { document.getElementById(`m-${k}`).value = v; } let size = parseInt(v) >= 5 ? "BIG" : "SMALL"; updates[`${pathBase}/${k}`] = `${size} [${v}]`; count++; } if(count > 0) { await update(ref(db), updates); showToast(`✅ ${count} Patterns Restored!`); } } catch(e) { alert("❌ INVALID HASH CODE!"); } };
+
+        window.generateProtectedPDF = async function() { const hash = document.getElementById('pdfHashInput').value.trim(); const password = document.getElementById('pdfPassword').value.trim(); if (!hash) return alert("Paste Hash!"); try { let decodedStr = atob(hash); let parsedData = JSON.parse(decodedStr); let matrixObj = parsedData.matrix || parsedData; let entries = Object.entries(matrixObj); let tableRows = []; for (let i = 0; i < entries.length; i += 2) { let item1 = entries[i]; let item2 = entries[i + 1] || ["", ""]; let [n1_1, n1_2] = item1[0].split('-'); let res1 = item1[1].split(' ')[0]; let n2_1 = item2[0] ? item2[0].split('-')[0] : ""; let n2_2 = item2[0] ? item2[0].split('-')[1] : ""; let res2 = item2[1] ? item2[1].split(' ')[0] : ""; tableRows.push([`${n1_1}\n${n1_2}`, res1, `${n2_1}\n${n2_2}`, res2]); } const { jsPDF } = window.jspdf; let docOptions = { format: 'a4' }; if (password) docOptions.encryption = { userPassword: password, ownerPassword: password, userPermissions: ["print", "modify"] }; const doc = new jsPDF(docOptions); const pageWidth = doc.internal.pageSize.width; const pageHeight = doc.internal.pageSize.height; doc.autoTable({ head: [['L', 'R1', 'R', 'R2']], body: tableRows, startY: 30, theme: 'plain', styles: { halign: 'center', valign: 'middle', fontSize: 14, fontStyle: 'bold', lineWidth: 0.5, lineColor: [0,0,0], fillColor: [255,255,255], textColor: [0,0,0], minCellHeight: 15 }, columnStyles: { 0: { cellWidth: 30, fontSize: 18 }, 1: { cellWidth: 50 }, 2: { cellWidth: 30, fontSize: 18 }, 3: { cellWidth: 50 } }, didParseCell: function(data) { if (data.section === 'body') { if (data.column.index === 1 || data.column.index === 3) { if (data.cell.raw === 'BIG') { data.cell.styles.textColor = [218, 165, 32]; data.cell.styles.fontSize = 18; } else if (data.cell.raw === 'SMALL') { data.cell.styles.textColor = [37, 99, 235]; data.cell.styles.fontSize = 18; } } } }, willDrawPage: function(data) { doc.setFillColor(255, 255, 255); doc.rect(0, 0, pageWidth, pageHeight, 'F'); }, didDrawPage: function (data) { doc.setTextColor(150, 150, 150); doc.setFontSize(55); doc.saveGraphicsState(); doc.setGState(new doc.GState({opacity: 0.1})); doc.text("6 CLUB SECURE", pageWidth/2, pageHeight/2, { align: "center", angle: 45 }); doc.restoreGraphicsState(); doc.setFillColor(0, 0, 0); doc.rect(14, 10, pageWidth - 28, 15, 'F'); doc.setTextColor(255, 255, 255); doc.setFontSize(20); doc.setFont("helvetica", "bolditalic"); doc.text("COLOR TRADING TRICK PDF", pageWidth / 2, 21, { align: "center" }); doc.setTextColor(0, 0, 0); doc.setFontSize(10); doc.text(`Generated by 6 Club Admin | Page ${data.pageNumber}`, pageWidth / 2, pageHeight - 10, { align: "center" }); } }); doc.save(password ? "6CLUB_Locked_Chart.pdf" : "6CLUB_Chart.pdf"); showToast("✅ PDF Exported Successfully!"); } catch (error) { alert("❌ Error generating PDF."); } };
+
+        setTimeout(() => fetchLatestNumber(), 1000);
+    </script>
+</body>
+</html>
