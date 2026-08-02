@@ -1,0 +1,951 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="theme-color" content="#050505">
+    <title>6 CLUB BY DEV | VIP ENGINE</title>
+    
+    <!-- Google Fonts Integration -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&family=Rajdhani:wght@700;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ==========================================
+           1. ROOT VARIABLES & THEME CONFIGURATION
+           ========================================== */
+        :root {
+            /* Luxury Gold Color Palette */
+            --gold-light: #fbe082;
+            --gold-primary: #e6b841;
+            --gold-dark: #b88a25;
+            --gold-glow: rgba(230, 184, 65, 0.5);
+            
+            /* Backgrounds & Glassmorphism */
+            --bg-void: #050505; 
+            --glass-bg: rgba(15, 15, 15, 0.95);
+            --border-color: #2a2a2a;
+            
+            /* Status Colors */
+            --red: #ff4d4d; 
+            --green: #00e676; 
+            --icy-blue: #e0f7fa;
+            
+            /* Typography */
+            --font-main: 'Rajdhani', sans-serif; 
+            --font-ui: 'Outfit', sans-serif; 
+            --font-mono: 'JetBrains Mono', monospace;
+        }
+
+        /* ==========================================
+           2. GLOBAL RESET & BASE STYLES
+           ========================================== */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            user-select: none; 
+            -webkit-tap-highlight-color: transparent; 
+        }
+
+        body, html { 
+            width: 100%; 
+            height: 100%; 
+            background: var(--bg-void); 
+            overflow: hidden; 
+            font-family: var(--font-ui); 
+            color: #fff; 
+        }
+
+        /* ==========================================
+           3. BACKGROUND GAME LAYER (IFRAME)
+           ========================================== */
+        #game-layer { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            z-index: 1; 
+            background: #000; 
+        }
+
+        #game-layer iframe { 
+            width: 100%; 
+            height: 100%; 
+            border: none; 
+        }
+
+        /* ==========================================
+           4. FLOATING TRIGGER BUTTON
+           ========================================== */
+        #trigger-btn {
+            position: absolute; 
+            top: 50%; 
+            right: 0; 
+            transform: translateY(-50%); 
+            z-index: 99990;
+            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), #000);
+            backdrop-filter: blur(10px); 
+            border: 1px solid var(--gold-primary); 
+            border-right: none;
+            padding: 12px 16px; 
+            border-radius: 14px 0 0 14px; 
+            display: flex; 
+            align-items: center; 
+            gap: 8px;
+            cursor: pointer; 
+            box-shadow: -5px 0 25px var(--gold-glow); 
+            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        #trigger-btn:active { 
+            transform: translateY(-50%) scale(0.95); 
+        }
+
+        #trigger-btn.hidden { 
+            transform: translate(100%, -50%); 
+            opacity: 0; 
+            pointer-events: none; 
+        }
+        
+        .beacon { 
+            width: 8px; 
+            height: 8px; 
+            border-radius: 50%; 
+            background: var(--gold-primary); 
+            box-shadow: 0 0 10px var(--gold-primary); 
+            animation: pulse 1s infinite alternate; 
+        }
+
+        @keyframes pulse { 
+            to { 
+                transform: scale(1.5); 
+                box-shadow: 0 0 20px var(--gold-light); 
+                background: var(--gold-light); 
+            } 
+        }
+
+        .trigger-text { 
+            font-size: 13px; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            font-family: var(--font-main); 
+            color: #fff; 
+            text-shadow: 0 0 5px var(--gold-primary); 
+        }
+
+        /* ==========================================
+           5. MAIN DRAGGABLE HUD MENU (COMPACT)
+           ========================================== */
+        #core-hud {
+            position: absolute; 
+            top: 10%; 
+            left: 5%; 
+            width: 200px; /* Reduced by 25% for compactness */
+            background: var(--glass-bg); 
+            backdrop-filter: blur(25px);
+            border: 1px solid rgba(230, 184, 65, 0.2); 
+            border-top: 3px solid var(--gold-primary);
+            border-radius: 16px; 
+            box-shadow: 0 25px 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(230, 184, 65, 0.05);
+            display: none; 
+            flex-direction: column; 
+            z-index: 99999;
+            transform-origin: top left;
+            animation: popOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        #core-hud.active { 
+            display: flex; 
+        }
+
+        @keyframes popOpen { 
+            0% { transform: scale(0.8) translateY(-20px); opacity: 0; } 
+            100% { transform: scale(1) translateY(0); opacity: 1; } 
+        }
+
+        /* ==========================================
+           6. HUD HEADER & DRAG ZONE
+           ========================================== */
+        .hud-header {
+            padding: 12px 15px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 6px;
+            background: linear-gradient(180deg, rgba(230, 184, 65, 0.08), transparent);
+            cursor: move; /* Indicates draggability */
+            touch-action: none; 
+            border-radius: 16px 16px 0 0;
+            border-bottom: 1px solid rgba(230, 184, 65, 0.1);
+        }
+
+        .hud-header:active { 
+            cursor: grabbing; 
+        }
+
+        .drag-bar { 
+            width: 35px; 
+            height: 4px; 
+            background: rgba(230, 184, 65, 0.5); 
+            border-radius: 10px; 
+            align-self: center; 
+            box-shadow: 0 0 10px var(--gold-primary); 
+        }
+
+        .brand { 
+            font-family: var(--font-main); 
+            font-size: 22px; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            line-height: 1; 
+            color: #fff; 
+            text-align: center; 
+            margin-top: 4px;
+        }
+
+        .brand span { 
+            color: var(--gold-primary); 
+            text-shadow: 0 0 15px var(--gold-glow); 
+        }
+
+        .hud-body { 
+            padding: 15px; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+        }
+
+        /* ==========================================
+           7. TIMEFRAME TABS
+           ========================================== */
+        .tabs { 
+            display: flex; 
+            background: #000; 
+            border-radius: 30px; 
+            padding: 4px; 
+            border: 1px solid var(--border-color); 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
+        }
+
+        .tab-btn { 
+            flex: 1; 
+            text-align: center; 
+            padding: 8px 0; 
+            font-family: var(--font-main); 
+            font-size: 13px; 
+            font-weight: 900; 
+            color: #64748b; 
+            cursor: pointer; 
+            border-radius: 26px; 
+            transition: 0.3s; 
+            letter-spacing: 1px; 
+        }
+
+        .tab-btn.active { 
+            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); 
+            color: #000; 
+            box-shadow: 0 0 15px var(--gold-glow); 
+        }
+
+        /* ==========================================
+           8. TIMER & PERIOD DISPLAY
+           ========================================== */
+        .timer-box { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            background: rgba(230, 184, 65, 0.03); 
+            padding: 8px 12px; 
+            border-radius: 10px; 
+            border: 1px solid rgba(230, 184, 65, 0.15); 
+        }
+
+        .period { 
+            font-family: var(--font-mono); 
+            font-size: 10px; 
+            color: #cbd5e1; 
+            font-weight: bold; 
+        }
+
+        .time { 
+            font-family: var(--font-main); 
+            font-size: 20px; 
+            font-weight: 900; 
+            color: var(--gold-primary); 
+            text-shadow: 0 0 10px var(--gold-glow); 
+            letter-spacing: 1px;
+        }
+
+        /* ==========================================
+           9. INPUT FIELDS (SPINNERS REMOVED)
+           ========================================== */
+        input[type=number]::-webkit-inner-spin-button, 
+        input[type=number]::-webkit-outer-spin-button { 
+            -webkit-appearance: none; 
+            margin: 0; 
+        }
+        input[type=number] { 
+            -moz-appearance: textfield; 
+        }
+
+        .io-wrapper { 
+            position: relative; 
+            width: 100%; 
+            height: 45px; 
+        }
+        
+        .input-group { 
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            display: flex; 
+            gap: 8px; 
+            transition: opacity 0.3s; 
+        }
+
+        .target-input {
+            flex: 1; 
+            min-width: 0; /* Prevents overflow */
+            height: 100%; 
+            background: #000;
+            border: 1px solid var(--border-color); 
+            border-radius: 8px;
+            color: #fff; 
+            text-align: center; 
+            font-family: var(--font-main); 
+            font-size: 20px; 
+            font-weight: 900;
+            outline: none; 
+            box-shadow: inset 0 2px 5px rgba(0,0,0,0.9); 
+            transition: 0.3s;
+        }
+
+        .target-input:focus { 
+            box-shadow: 0 0 12px var(--gold-glow), inset 0 2px 3px rgba(0,0,0,0.9); 
+            border-color: var(--gold-primary);
+        }
+
+        .target-input::placeholder { 
+            color: #475569; 
+            font-size: 14px; 
+            letter-spacing: 2px; 
+        }
+
+        /* ==========================================
+           10. MASSIVE RESULT DISPLAY
+           ========================================== */
+        .mega-result {
+            position: absolute; 
+            top: 0; 
+            left: 0; 
+            width: 100%; 
+            height: 100%; 
+            display: none; 
+            font-family: var(--font-main); 
+            font-size: 28px; 
+            font-weight: 900; 
+            letter-spacing: 5px;
+            border-radius: 8px; 
+            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); 
+            text-transform: uppercase;
+            text-align: center; 
+            line-height: 43px; 
+            box-shadow: inset 0 2px 10px rgba(255,255,255,0.05), 0 5px 15px rgba(0,0,0,0.8);
+            animation: bounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+
+        .mega-result.show { 
+            display: block; 
+        }
+
+        @keyframes bounceIn { 
+            0% { transform: scale(0.5); opacity: 0; } 
+            80% { transform: scale(1.05); opacity: 1; } 
+            100% { transform: scale(1); opacity: 1; } 
+        }
+        
+        .res-big { 
+            color: var(--gold-primary); 
+            text-shadow: 0 0 25px var(--gold-primary), 0 3px 5px #000; 
+            border: 1px solid rgba(230, 184, 65, 0.5); 
+        }
+
+        .res-small { 
+            color: #fff; 
+            text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px var(--icy-blue), 0 3px 5px #000; 
+            border: 1px solid rgba(255,255,255,0.5); 
+        }
+
+        /* ==========================================
+           11. PREMIUM BUTTONS
+           ========================================== */
+        .btn {
+            width: 100%; 
+            padding: 12px 0; 
+            border-radius: 8px; 
+            border: none; 
+            font-family: var(--font-main);
+            font-size: 16px; 
+            font-weight: 900; 
+            letter-spacing: 2px; 
+            cursor: pointer; 
+            transition: 0.2s; 
+            text-transform: uppercase;
+            position: relative; 
+            overflow: hidden;
+        }
+
+        .btn:active { 
+            transform: scale(0.95); 
+        }
+
+        .btn-primary { 
+            background: linear-gradient(180deg, var(--gold-light), var(--gold-dark)); 
+            color: #000; 
+            box-shadow: 0 4px 20px var(--gold-glow); 
+            border: 1px solid var(--gold-light); 
+        }
+
+        .btn-hide { 
+            background: rgba(255,255,255,0.05); 
+            border: 1px solid rgba(255,255,255,0.1); 
+            color: #cbd5e1; 
+            font-size: 11px; 
+            padding: 8px 0; 
+            margin-top: -2px; 
+            border-radius: 20px;
+        }
+        
+        /* SPINNER ANIMATION FOR AUTH */
+        .spinner {
+            display: inline-block; 
+            width: 14px; 
+            height: 14px;
+            border: 2px solid rgba(0,0,0,0.3); 
+            border-top-color: #000;
+            border-radius: 50%; 
+            animation: spin 1s linear infinite;
+            vertical-align: middle; 
+            margin-right: 6px; 
+            margin-top: -2px;
+        }
+
+        @keyframes spin { 
+            100% { transform: rotate(360deg); } 
+        }
+
+        /* ==========================================
+           12. AUTHENTICATION & VIEWS
+           ========================================== */
+        .auth-view { 
+            display: flex; 
+            flex-direction: column; 
+            gap: 12px; 
+            animation: fadeIn 0.4s ease; 
+        }
+
+        .engine-view { 
+            display: none; 
+            flex-direction: column; 
+            gap: 12px; 
+            animation: fadeIn 0.4s ease; 
+        }
+
+        @keyframes fadeIn { 
+            from { opacity: 0; } 
+            to { opacity: 1; } 
+        }
+
+        .auth-pending { 
+            display: none; 
+            text-align: center; 
+            background: rgba(0,0,0,0.8); 
+            padding: 12px; 
+            border-radius: 8px; 
+            border: 1px dashed var(--gold-primary); 
+            box-shadow: inset 0 0 10px rgba(230,184,65,0.1); 
+        }
+
+        .auth-pending h3 { 
+            font-size: 13px; 
+            color: var(--gold-primary); 
+            margin-bottom: 4px; 
+            font-family: var(--font-main); 
+            font-weight: 900; 
+            letter-spacing: 1px;
+        }
+
+        .auth-pending p { 
+            font-size: 10px; 
+            color: #94a3b8; 
+            font-family: var(--font-ui);
+        }
+
+        /* ==========================================
+           13. TOAST NOTIFICATIONS
+           ========================================== */
+        #toast { 
+            position: fixed; 
+            bottom: 30px; 
+            left: 50%; 
+            transform: translateX(-50%) translateY(100px); 
+            background: var(--glass-bg); 
+            color: var(--gold-primary); 
+            padding: 12px 22px; 
+            border-radius: 30px; 
+            font-family: var(--font-mono); 
+            font-weight: 900; 
+            font-size: 11px; 
+            border: 1px solid var(--gold-primary); 
+            z-index: 999999; 
+            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: 0 5px 25px var(--gold-glow); 
+            white-space: nowrap; 
+        }
+
+        #toast.show { 
+            transform: translateX(-50%) translateY(0); 
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 🎮 BACKGROUND GAME IFRAME -->
+    <div id="game-layer">
+        <iframe id="main-frame" src="https://6clubm.com/#/"></iframe>
+    </div>
+
+    <!-- 🔘 FLOATING TRIGGER BUTTON -->
+    <div id="trigger-btn" onclick="UIManager.showHUD()">
+        <div class="beacon"></div>
+        <span class="trigger-text">6 CLUB VIP</span>
+    </div>
+
+    <!-- 🎛️ DRAGGABLE HUD MENU -->
+    <div id="core-hud">
+        <!-- DRAG ZONE -->
+        <div class="hud-header" id="drag-zone">
+            <div class="drag-bar"></div>
+            <div class="brand">6 CLUB BY <span>DEV</span></div>
+        </div>
+
+        <div class="hud-body">
+            
+            <!-- 🔐 AUTHENTICATION VIEW -->
+            <div class="auth-view" id="auth-view">
+                <input type="text" id="uidInput" class="target-input" placeholder="ENTER UID KEY" style="font-size: 14px; padding: 12px 0;">
+                
+                <button class="btn btn-primary" id="btnAuth" onclick="Auth.verify()">CONNECT</button>
+                
+                <div class="auth-pending" id="auth-pending">
+                    <h3>WAITING APPROVAL</h3>
+                    <p>Check again later.</p>
+                    <button class="btn btn-hide" style="margin-top:8px; color:#fff;" onclick="location.reload()">REFRESH</button>
+                </div>
+                
+                <button class="btn btn-hide" onclick="UIManager.hideHUD()">HIDE MENU</button>
+            </div>
+
+            <!-- 🧬 PREDICTION ENGINE VIEW -->
+            <div class="engine-view" id="engine-view">
+                
+                <!-- ⏱️ TIMEFRAME TOGGLE (HIDDEN IF ROLE-BASED ACCESS APPLIES) -->
+                <div class="tabs" id="timeframeTabs">
+                    <div class="tab-btn" id="tab-30s" onclick="Engine.switchTimeframe('30s')">30 SEC</div>
+                    <div class="tab-btn active" id="tab-1m" onclick="Engine.switchTimeframe('1m')">1 MIN</div>
+                </div>
+
+                <!-- TIMER DISPLAY -->
+                <div class="timer-box">
+                    <div class="period" id="periodDisplay">SYNCING...</div>
+                    <div class="time" id="timerDisplay">00:00</div>
+                </div>
+
+                <!-- 🔥 DYNAMIC INPUT & RESULT AREA 🔥 -->
+                <div class="io-wrapper">
+                    <!-- N1 & N2 Inputs -->
+                    <div class="input-group" id="input-group">
+                        <input type="number" id="in-n1" class="target-input" placeholder="N-1" oninput="Util.limit(this)">
+                        <input type="number" id="in-n2" class="target-input" placeholder="N-2" oninput="Util.limit(this)">
+                    </div>
+                    <!-- Mega Result (Overlaps Inputs when active) -->
+                    <div id="out-size" class="mega-result">--</div>
+                </div>
+
+                <!-- ACTION BUTTONS -->
+                <button class="btn btn-primary" id="btnAnalyze" onclick="Engine.analyze()">EXTRACT</button>
+                <button class="btn btn-hide" onclick="UIManager.hideHUD()">HIDE MENU</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- TOAST NOTIFICATION SYSTEM -->
+    <div id="toast">Message</div>
+
+<!-- ==========================================
+     JAVASCRIPT LOGIC
+     ========================================== -->
+<script type="module">
+    // 1. FIREBASE INITIALIZATION
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+    import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+
+    // User's Provided Firebase Config
+    const firebaseConfig = {
+        apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
+        authDomain: "sikkimaitool.firebaseapp.com",
+        databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app",
+        projectId: "sikkimaitool",
+        storageBucket: "sikkimaitool.firebasestorage.app",
+        messagingSenderId: "897487739765",
+        appId: "1:897487739765:web:34f9df57ee8372aa6b913c"
+    };
+    const app = initializeApp(firebaseConfig);
+    const db = getDatabase(app);
+
+    // Database paths for Dual Timers
+    const DB_PATHS = { 
+        '30s': 'patterns_30s', 
+        '1m': 'patterns' 
+    };
+
+    // 2. UTILITY FUNCTIONS
+    window.Util = class {
+        static limit(el) { 
+            // Limits input to 1 digit between 0 and 9
+            if(el.value.length > 1) el.value = el.value.slice(0,1); 
+            if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; 
+        }
+        
+        static toast(msg) {
+            // Displays a popup notification at the bottom
+            const t = document.getElementById("toast"); 
+            t.innerText = msg; 
+            t.classList.add("show");
+            setTimeout(() => {
+                t.classList.remove("show");
+            }, 2500);
+        }
+    };
+
+    // Device Fingerprinting for Auth tracking
+    function getDeviceID() { 
+        let d = localStorage.getItem('dev_did'); 
+        if(!d) { 
+            d = 'DEV-' + Math.random().toString(36).substr(2, 9); 
+            localStorage.setItem('dev_did', d); 
+        } 
+        return d; 
+    }
+
+    // 3. DRAG & DROP LOGIC (HUD MOVEMENT)
+    class Dragger {
+        constructor() {
+            this.hud = document.getElementById('core-hud'); 
+            this.dragZone = document.getElementById('drag-zone');
+            this.isDragging = false; 
+            
+            // Default Starting Position
+            this.currentX = 15; 
+            this.currentY = 50; 
+            
+            this.initialX = 0; 
+            this.initialY = 0;
+            
+            // Event Listeners for Pointer (Works on both Touch and Mouse)
+            this.dragZone.addEventListener("pointerdown", this.startDrag.bind(this));
+            window.addEventListener("pointermove", this.moveDrag.bind(this));
+            window.addEventListener("pointerup", this.endDrag.bind(this));
+            
+            this.updatePosition();
+        }
+        
+        startDrag(e) { 
+            this.isDragging = true; 
+            // Calculate offset between pointer and top-left of hud
+            this.initialX = e.clientX - this.currentX; 
+            this.initialY = e.clientY - this.currentY; 
+            // Capture pointer so it doesn't lose focus if moved fast
+            this.dragZone.setPointerCapture(e.pointerId); 
+        }
+        
+        moveDrag(e) { 
+            if(!this.isDragging) return; 
+            e.preventDefault(); 
+            // Calculate new position and restrict within screen bounds
+            this.currentX = Math.max(0, Math.min(e.clientX - this.initialX, window.innerWidth - this.hud.offsetWidth)); 
+            this.currentY = Math.max(0, Math.min(e.clientY - this.initialY, window.innerHeight - this.hud.offsetHeight)); 
+            this.updatePosition(); 
+        }
+        
+        endDrag(e) { 
+            if(!this.isDragging) return; 
+            this.isDragging = false; 
+            this.dragZone.releasePointerCapture(e.pointerId); 
+        }
+        
+        updatePosition() { 
+            this.hud.style.transform = `translate3d(${this.currentX}px, ${this.currentY}px, 0)`; 
+        }
+    }
+
+    // 4. UI MANAGER (SHOW/HIDE HUD)
+    window.UIManager = class {
+        static showHUD() { 
+            document.getElementById('trigger-btn').classList.add('hidden'); 
+            document.getElementById('core-hud').classList.add('active'); 
+        }
+        
+        static hideHUD() { 
+            document.getElementById('core-hud').classList.remove('active'); 
+            setTimeout(() => { 
+                document.getElementById('trigger-btn').classList.remove('hidden'); 
+            }, 300); // Wait for CSS animation to finish
+        }
+    };
+
+    // 5. AUTHENTICATION & ROLE-BASED ACCESS CONTROL
+    window.Auth = class {
+        static async verify() {
+            const uidKey = document.getElementById('uidInput').value.trim(); 
+            const btnAuth = document.getElementById('btnAuth');
+            
+            if(!uidKey) return Util.toast("ENTER UID FIRST"); 
+            
+            // Show Spinner Animation
+            btnAuth.innerHTML = '<span class="spinner"></span> VERIFYING...'; 
+            btnAuth.disabled = true;
+
+            try { 
+                // Check if UID is approved in Firebase
+                const snapshot = await get(ref(db, 'approved_uids/' + uidKey)); 
+                
+                if(snapshot.exists()) {
+                    let userData = snapshot.val();
+                    
+                    // Validate ban status and expiration date
+                    if(!userData.is_banned && (!userData.expireAt || userData.expireAt > Date.now())) {
+                        setTimeout(() => {
+                            // Pass access_type to grant function
+                            this.grant(userData.access_type || 'both'); 
+                        }, 500); // Artificial delay for smooth UX
+                        return;
+                    } else { 
+                        btnAuth.innerText = "CONNECT"; 
+                        btnAuth.disabled = false; 
+                        return Util.toast("ACCESS EXPIRED"); 
+                    }
+                } 
+                
+                // If not approved, add to pending requests queue
+                const reqSnap = await get(ref(db, 'uid_requests/' + uidKey));
+                let requestCount = 1; 
+                if(reqSnap.exists()) requestCount = (reqSnap.val().count || 0) + 1;
+                
+                await set(ref(db, 'uid_requests/' + uidKey), { 
+                    uid: uidKey, 
+                    deviceId: getDeviceID(), 
+                    status: "pending", 
+                    timestamp: Date.now(), 
+                    count: requestCount 
+                });
+                
+                // Show Pending UI
+                setTimeout(() => {
+                    document.getElementById('uidInput').style.display = 'none'; 
+                    document.getElementById('btnAuth').style.display = 'none'; 
+                    document.getElementById('auth-pending').style.display = 'block';
+                }, 500);
+
+            } catch(error) { 
+                btnAuth.innerText = "CONNECT"; 
+                btnAuth.disabled = false; 
+                Util.toast("NETWORK ERROR"); 
+            }
+        }
+
+        static grant(accessType) { 
+            // Switch views
+            document.getElementById('auth-view').style.display = 'none'; 
+            document.getElementById('engine-view').style.display = 'flex'; 
+            
+            // ROLE-BASED ACCESS CONTROL (Hide/Show Tabs based on admin settings)
+            const tabsContainer = document.getElementById('timeframeTabs');
+            if (accessType === '1m') {
+                tabsContainer.style.display = 'none';
+                Engine.switchTimeframe('1m');
+            } else if (accessType === '30s') {
+                tabsContainer.style.display = 'none';
+                Engine.switchTimeframe('30s');
+            } else {
+                tabsContainer.style.display = 'flex';
+                Engine.switchTimeframe('1m'); // Default selection
+            }
+
+            Util.toast("6 CLUB BY DEV SECURED"); 
+        }
+    };
+
+    // 6. DUAL ENGINE LOGIC (TIMER & RESULT EXTRACTION)
+    window.Engine = class {
+        static activeTF = '1m';
+        static state = "IDLE"; // IDLE or NEXT
+
+        static switchTimeframe(tf) {
+            this.activeTF = tf;
+            document.getElementById('tab-30s').classList.remove('active');
+            document.getElementById('tab-1m').classList.remove('active');
+            document.getElementById(`tab-${tf}`).classList.add('active');
+            this.resetUI();
+            Util.toast(`SWITCHED TO ${tf.toUpperCase()}`);
+            this.updateTimer();
+        }
+
+        static updateTimer() {
+            const d = new Date(); 
+            const h = d.getUTCHours(); 
+            const m = d.getUTCMinutes(); 
+            const s = d.getUTCSeconds();
+            
+            let period = "";
+            let displaySec = 0;
+
+            if (this.activeTF === '1m') {
+                // Calculation for 1 Minute
+                let totalMin = (h * 60) + m + 1; // +1 Lag Fix
+                period = `10001${String(totalMin).padStart(4, '0')}`;
+                
+                displaySec = 60 - s; 
+                if(displaySec === 60) displaySec = 0;
+            } else {
+                // Calculation for 30 Seconds
+                let totalMin = (h * 60) + m;
+                let halfMinBlock = s >= 30 ? 2 : 1;
+                let periodIndex = (totalMin * 2) + halfMinBlock + 1; // +1 Lag Fix
+                period = `30001${String(periodIndex).padStart(4, '0')}`;
+                
+                displaySec = s >= 30 ? 60 - s : 30 - s;
+            }
+
+            // Update UI
+            document.getElementById('periodDisplay').innerText = period;
+            const timerEl = document.getElementById('timerDisplay');
+            timerEl.innerText = `00:${String(displaySec).padStart(2,'0')}`;
+            
+            // Color changing logic
+            if(displaySec <= 5) {
+                timerEl.style.color = "var(--red)"; 
+            } else {
+                timerEl.style.color = "var(--gold-primary)";
+            }
+        }
+
+        static async analyze() {
+            const n1 = document.getElementById('in-n1');
+            const n2 = document.getElementById('in-n2');
+            const btn = document.getElementById('btnAnalyze');
+            const szPill = document.getElementById('out-size');
+            const inputGroup = document.getElementById('input-group');
+
+            if(this.state === "IDLE") {
+                const v1 = n1.value;
+                const v2 = n2.value; 
+                
+                if(!v1 || !v2) return Util.toast("ENTER N-1 & N-2");
+                
+                btn.disabled = true; 
+                btn.innerHTML = '<span class="spinner"></span> SCANNING...';
+                n1.readOnly = true; 
+                n2.readOnly = true; 
+                szPill.classList.remove('show');
+
+                let targetPath = `${DB_PATHS[this.activeTF]}/${v1}-${v2}`;
+
+                try {
+                    // Fetch pattern from Firebase
+                    const snap = await get(ref(db, targetPath));
+                    
+                    setTimeout(() => {
+                        if(snap.exists() && snap.val()) {
+                            let dataStr = String(snap.val()).toUpperCase();
+                            let isBig = dataStr.includes("BIG");
+                            
+                            // Smooth Transition: Hide Inputs -> Show Result
+                            inputGroup.style.opacity = '0';
+                            
+                            setTimeout(() => {
+                                inputGroup.style.display = 'none';
+                                szPill.innerHTML = isBig ? 'BIG' : 'SMALL';
+                                szPill.className = `mega-result show ${isBig ? 'res-big' : 'res-small'}`;
+                            }, 150);
+                            
+                            this.state = "NEXT";
+                            btn.disabled = false; 
+                            btn.innerText = "NEXT ROUND";
+                        } else {
+                            Util.toast("PATTERN NOT FOUND");
+                            this.resetUI();
+                        }
+                    }, 800); // Artificial delay for hack feel
+
+                } catch(error) { 
+                    Util.toast("SERVER TIMEOUT"); 
+                    this.resetUI(); 
+                }
+            } else {
+                // If state is NEXT, reset UI for the next round
+                this.resetUI();
+            }
+        }
+        
+        static resetUI() {
+            const btn = document.getElementById('btnAnalyze');
+            const n1 = document.getElementById('in-n1');
+            const n2 = document.getElementById('in-n2');
+            const inputGroup = document.getElementById('input-group');
+            const szPill = document.getElementById('out-size');
+
+            // Restore Inputs & Hide Result
+            szPill.classList.remove('show'); 
+            inputGroup.style.display = 'flex';
+            setTimeout(() => {
+                inputGroup.style.opacity = '1';
+            }, 50);
+            
+            btn.disabled = false; 
+            btn.innerText = "EXTRACT";
+            n1.value = ""; 
+            n2.value = ""; 
+            n1.readOnly = false; 
+            n2.readOnly = false;
+            this.state = "IDLE";
+        }
+    };
+
+    // 7. EVENT LISTENERS & INITIALIZATION
+    document.addEventListener("DOMContentLoaded", () => {
+        // Initialize Drag functionality
+        new Dragger();
+        
+        // Listen for forced game link updates from Admin Panel
+        onValue(ref(db, 'settings/force_link'), snapshot => { 
+            if(snapshot.exists()) {
+                document.getElementById('main-frame').src = snapshot.val(); 
+            }
+        });
+        
+        // Start Timer loop
+        setInterval(() => Engine.updateTimer(), 1000);
+        
+        // Automatically pop open HUD after a slight delay
+        setTimeout(() => UIManager.showHUD(), 500); 
+    });
+
+</script>
+</body>
+</html>
