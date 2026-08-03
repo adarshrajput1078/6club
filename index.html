@@ -2,950 +2,494 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-    <meta name="theme-color" content="#050505">
-    <title>6 CLUB BY DEV | VIP ENGINE</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DEV ARMY | SIKKIM PRO VIP</title>
     
-    <!-- Google Fonts Integration -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;700;900&family=Rajdhani:wght@700;900&family=JetBrains+Mono:wght@700;800&display=swap" rel="stylesheet">
+    <!-- ZOMBIE FONT (Creepster) + Premium Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@600;800;900&family=Rajdhani:wght@700;900&family=JetBrains+Mono:wght@800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* ==========================================
-           1. ROOT VARIABLES & THEME CONFIGURATION
-           ========================================== */
-        :root {
-            /* Luxury Gold Color Palette */
-            --gold-light: #fbe082;
-            --gold-primary: #e6b841;
-            --gold-dark: #b88a25;
-            --gold-glow: rgba(230, 184, 65, 0.5);
+        :root { 
+            /* SIKKIM THEME COLORS */
+            --primary: #06b6d4; 
+            --primary-dark: #0891b2; 
+            --primary-3d: #164e63; 
+            --cyan-glow: rgba(6, 182, 212, 0.8);
+            --bg-top: linear-gradient(135deg, #020617, #0f172a, #020617);
             
-            /* Backgrounds & Glassmorphism */
-            --bg-void: #050505; 
-            --glass-bg: rgba(15, 15, 15, 0.95);
-            --border-color: #2a2a2a;
+            --green: #10b981; 
+            --red: #ef4444; 
+            --red-glow: rgba(239, 68, 68, 0.4);
             
-            /* Status Colors */
-            --red: #ff4d4d; 
-            --green: #00e676; 
-            --icy-blue: #e0f7fa;
-            
-            /* Typography */
-            --font-main: 'Rajdhani', sans-serif; 
-            --font-ui: 'Outfit', sans-serif; 
+            --font-main: 'Rajdhani', sans-serif;
+            --font-ui: 'Outfit', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
+            --font-zombie: 'Creepster', cursive; /* Zombie Font */
         }
 
-        /* ==========================================
-           2. GLOBAL RESET & BASE STYLES
-           ========================================== */
-        * { 
-            margin: 0; 
-            padding: 0; 
-            box-sizing: border-box; 
-            user-select: none; 
-            -webkit-tap-highlight-color: transparent; 
-        }
-
-        body, html { 
-            width: 100%; 
-            height: 100%; 
-            background: var(--bg-void); 
-            overflow: hidden; 
-            font-family: var(--font-ui); 
-            color: #fff; 
-        }
-
-        /* ==========================================
-           3. BACKGROUND GAME LAYER (IFRAME)
-           ========================================== */
-        #game-layer { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            z-index: 1; 
-            background: #000; 
-        }
-
-        #game-layer iframe { 
-            width: 100%; 
-            height: 100%; 
-            border: none; 
-        }
-
-        /* ==========================================
-           4. FLOATING TRIGGER BUTTON
-           ========================================== */
-        #trigger-btn {
-            position: absolute; 
-            top: 50%; 
-            right: 0; 
-            transform: translateY(-50%); 
-            z-index: 99990;
-            background: linear-gradient(135deg, rgba(20, 20, 20, 0.95), #000);
-            backdrop-filter: blur(10px); 
-            border: 1px solid var(--gold-primary); 
-            border-right: none;
-            padding: 12px 16px; 
-            border-radius: 14px 0 0 14px; 
-            display: flex; 
-            align-items: center; 
-            gap: 8px;
-            cursor: pointer; 
-            box-shadow: -5px 0 25px var(--gold-glow); 
-            transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        #trigger-btn:active { 
-            transform: translateY(-50%) scale(0.95); 
-        }
-
-        #trigger-btn.hidden { 
-            transform: translate(100%, -50%); 
-            opacity: 0; 
-            pointer-events: none; 
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
+        body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #fff; overflow: hidden; display: flex; flex-direction: column; background: #000; }
         
-        .beacon { 
-            width: 8px; 
-            height: 8px; 
-            border-radius: 50%; 
-            background: var(--gold-primary); 
-            box-shadow: 0 0 10px var(--gold-primary); 
-            animation: pulse 1s infinite alternate; 
-        }
-
-        @keyframes pulse { 
-            to { 
-                transform: scale(1.5); 
-                box-shadow: 0 0 20px var(--gold-light); 
-                background: var(--gold-light); 
-            } 
-        }
-
-        .trigger-text { 
-            font-size: 13px; 
-            font-weight: 900; 
-            letter-spacing: 2px; 
-            font-family: var(--font-main); 
-            color: #fff; 
-            text-shadow: 0 0 5px var(--gold-primary); 
-        }
-
         /* ==========================================
-           5. MAIN DRAGGABLE HUD MENU (COMPACT)
+           1. AUTO-FIT TOP PANEL (PERFECT FITTING)
            ========================================== */
-        #core-hud {
-            position: absolute; 
-            top: 10%; 
-            left: 5%; 
-            width: 200px; /* Reduced by 25% for compactness */
-            background: var(--glass-bg); 
-            backdrop-filter: blur(25px);
-            border: 1px solid rgba(230, 184, 65, 0.2); 
-            border-top: 3px solid var(--gold-primary);
-            border-radius: 16px; 
-            box-shadow: 0 25px 50px rgba(0,0,0,0.9), inset 0 0 30px rgba(230, 184, 65, 0.05);
-            display: none; 
-            flex-direction: column; 
-            z-index: 99999;
-            transform-origin: top left;
-            animation: popOpen 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        #core-hud.active { 
-            display: flex; 
-        }
-
-        @keyframes popOpen { 
-            0% { transform: scale(0.8) translateY(-20px); opacity: 0; } 
-            100% { transform: scale(1) translateY(0); opacity: 1; } 
-        }
-
-        /* ==========================================
-           6. HUD HEADER & DRAG ZONE
-           ========================================== */
-        .hud-header {
-            padding: 12px 15px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 6px;
-            background: linear-gradient(180deg, rgba(230, 184, 65, 0.08), transparent);
-            cursor: move; /* Indicates draggability */
-            touch-action: none; 
-            border-radius: 16px 16px 0 0;
-            border-bottom: 1px solid rgba(230, 184, 65, 0.1);
-        }
-
-        .hud-header:active { 
-            cursor: grabbing; 
-        }
-
-        .drag-bar { 
-            width: 35px; 
-            height: 4px; 
-            background: rgba(230, 184, 65, 0.5); 
-            border-radius: 10px; 
-            align-self: center; 
-            box-shadow: 0 0 10px var(--gold-primary); 
-        }
-
-        .brand { 
-            font-family: var(--font-main); 
-            font-size: 22px; 
-            font-weight: 900; 
-            letter-spacing: 2px; 
-            line-height: 1; 
-            color: #fff; 
-            text-align: center; 
-            margin-top: 4px;
-        }
-
-        .brand span { 
-            color: var(--gold-primary); 
-            text-shadow: 0 0 15px var(--gold-glow); 
-        }
-
-        .hud-body { 
-            padding: 15px; 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-        }
-
-        /* ==========================================
-           7. TIMEFRAME TABS
-           ========================================== */
-        .tabs { 
-            display: flex; 
-            background: #000; 
-            border-radius: 30px; 
-            padding: 4px; 
-            border: 1px solid var(--border-color); 
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.8);
-        }
-
-        .tab-btn { 
-            flex: 1; 
-            text-align: center; 
-            padding: 8px 0; 
-            font-family: var(--font-main); 
-            font-size: 13px; 
-            font-weight: 900; 
-            color: #64748b; 
-            cursor: pointer; 
-            border-radius: 26px; 
-            transition: 0.3s; 
-            letter-spacing: 1px; 
-        }
-
-        .tab-btn.active { 
-            background: linear-gradient(135deg, var(--gold-light), var(--gold-dark)); 
-            color: #000; 
-            box-shadow: 0 0 15px var(--gold-glow); 
-        }
-
-        /* ==========================================
-           8. TIMER & PERIOD DISPLAY
-           ========================================== */
-        .timer-box { 
-            display: flex; 
-            justify-content: space-between; 
-            align-items: center; 
-            background: rgba(230, 184, 65, 0.03); 
-            padding: 8px 12px; 
-            border-radius: 10px; 
-            border: 1px solid rgba(230, 184, 65, 0.15); 
-        }
-
-        .period { 
-            font-family: var(--font-mono); 
-            font-size: 10px; 
-            color: #cbd5e1; 
-            font-weight: bold; 
-        }
-
-        .time { 
-            font-family: var(--font-main); 
-            font-size: 20px; 
-            font-weight: 900; 
-            color: var(--gold-primary); 
-            text-shadow: 0 0 10px var(--gold-glow); 
-            letter-spacing: 1px;
-        }
-
-        /* ==========================================
-           9. INPUT FIELDS (SPINNERS REMOVED)
-           ========================================== */
-        input[type=number]::-webkit-inner-spin-button, 
-        input[type=number]::-webkit-outer-spin-button { 
-            -webkit-appearance: none; 
-            margin: 0; 
-        }
-        input[type=number] { 
-            -moz-appearance: textfield; 
-        }
-
-        .io-wrapper { 
+        #top-panel { 
+            flex: 0 0 auto; 
+            min-height: 18vh;
+            max-height: 28vh; 
+            width: 100%; 
+            z-index: 10; 
             position: relative; 
-            width: 100%; 
-            height: 45px; 
-        }
-        
-        .input-group { 
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
+            padding: 10px 15px; 
+            background: var(--bg-top); 
+            border-bottom: 3px solid var(--primary-dark); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.15);
             display: flex; 
-            gap: 8px; 
-            transition: opacity 0.3s; 
-        }
-
-        .target-input {
-            flex: 1; 
-            min-width: 0; /* Prevents overflow */
-            height: 100%; 
-            background: #000;
-            border: 1px solid var(--border-color); 
-            border-radius: 8px;
-            color: #fff; 
-            text-align: center; 
-            font-family: var(--font-main); 
-            font-size: 20px; 
-            font-weight: 900;
-            outline: none; 
-            box-shadow: inset 0 2px 5px rgba(0,0,0,0.9); 
-            transition: 0.3s;
-        }
-
-        .target-input:focus { 
-            box-shadow: 0 0 12px var(--gold-glow), inset 0 2px 3px rgba(0,0,0,0.9); 
-            border-color: var(--gold-primary);
-        }
-
-        .target-input::placeholder { 
-            color: #475569; 
-            font-size: 14px; 
-            letter-spacing: 2px; 
-        }
-
-        /* ==========================================
-           10. MASSIVE RESULT DISPLAY
-           ========================================== */
-        .mega-result {
-            position: absolute; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            display: none; 
-            font-family: var(--font-main); 
-            font-size: 28px; 
-            font-weight: 900; 
-            letter-spacing: 5px;
-            border-radius: 8px; 
-            background: linear-gradient(180deg, #1a1a1a 0%, #000 100%); 
-            text-transform: uppercase;
-            text-align: center; 
-            line-height: 43px; 
-            box-shadow: inset 0 2px 10px rgba(255,255,255,0.05), 0 5px 15px rgba(0,0,0,0.8);
-            animation: bounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        .mega-result.show { 
-            display: block; 
-        }
-
-        @keyframes bounceIn { 
-            0% { transform: scale(0.5); opacity: 0; } 
-            80% { transform: scale(1.05); opacity: 1; } 
-            100% { transform: scale(1); opacity: 1; } 
+            flex-direction: column; 
+            justify-content: center;
         }
         
-        .res-big { 
-            color: var(--gold-primary); 
-            text-shadow: 0 0 25px var(--gold-primary), 0 3px 5px #000; 
-            border: 1px solid rgba(230, 184, 65, 0.5); 
-        }
-
-        .res-small { 
-            color: #fff; 
-            text-shadow: 0 0 20px rgba(255,255,255,0.8), 0 0 30px var(--icy-blue), 0 3px 5px #000; 
-            border: 1px solid rgba(255,255,255,0.5); 
-        }
+        #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
+        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
         /* ==========================================
-           11. PREMIUM BUTTONS
+           2. HEADER & TABS
            ========================================== */
-        .btn {
-            width: 100%; 
-            padding: 12px 0; 
-            border-radius: 8px; 
+        .top-header { 
+            width: 100%; display: flex; justify-content: space-between; align-items: center; 
+            margin-bottom: 8px; border-bottom: 1px dashed rgba(6,182,212,0.4); padding-bottom: 6px;
+        }
+        .brand { font-family: var(--font-main); font-size: 24px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 8px rgba(0,0,0,0.9); display: flex; align-items: center; gap: 8px;}
+        .brand span { color: var(--primary); text-shadow: 0 0 15px var(--cyan-glow); }
+        .brand .badge { background: rgba(6,182,212,0.2); border: 1px solid var(--primary-dark); font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px; color: var(--primary); letter-spacing: 1px;}
+        
+        .tabs { display: flex; background: #000; border-radius: 6px; padding: 2px; border: 2px solid #1e293b; }
+        .tab-btn { padding: 4px 10px; font-size: 11px; font-weight: 900; color: #64748b; cursor: pointer; border-radius: 4px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: 0.3s;}
+        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3);}
+
+        /* ==========================================
+           3. INPUTS & BUTTONS
+           ========================================== */
+        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input { 
+            width: 100%; height: 42px; padding: 0 10px; border: 2px solid #1e3a8a; border-radius: 8px; 
+            text-align: center; font-size: 20px; font-weight: 900; background: #020617; color: var(--primary); 
+            outline: none; transition: 0.3s; font-family: var(--font-main); letter-spacing: 3px; box-shadow: inset 0 3px 10px rgba(0,0,0,0.9);
+        }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--cyan-glow); background: #000;}
+        input::placeholder { color: #334155; font-size: 14px; letter-spacing: 2px; font-family: var(--font-ui);}
+
+        .btn-sleek { 
+            height: 42px; padding: 0 15px; font-size: 15px; letter-spacing: 2px; font-family: var(--font-main); 
+            font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); 
+            background: linear-gradient(to bottom, #22d3ee, var(--primary-dark)); color: #000; 
+            display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: 0.2s;
+            box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px rgba(0,0,0,0.6);
+            flex-shrink: 0; /* Prevents button from shrinking */
+        }
+        .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
+        .btn-dark { background: #0f172a; color: #fff; border: 2px solid #1e293b; box-shadow: 0 4px 0 #020617; }
+
+        /* ==========================================
+           4. AUTH & PENDING SCREEN
+           ========================================== */
+        .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
+        .hidden { display: none !important; }
+
+        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; }
+        
+        .pending-box { display: flex; flex-direction: column; gap: 8px; width: 100%; animation: fadeIn 0.3s ease; margin-top: 2px;}
+        .pending-header { display: flex; justify-content: space-between; align-items: center; }
+        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 8px; letter-spacing: 1px;}
+        
+        .deposit-alert-strip { 
+            background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); 
+            padding: 6px 10px; border-radius: 6px; display: flex; justify-content: center; align-items: center;
+        }
+        .deposit-alert-strip .alert-text { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
+        @keyframes pulseText { from { text-shadow: 0 0 2px rgba(239,68,68,0.2); } to { text-shadow: 0 0 12px var(--red); } }
+        
+        .pending-actions { display: flex; gap: 8px; height: 38px; }
+
+        /* ==========================================
+           5. TOOL CONTROLS & BORDERLESS ZOMBIE RESULT
+           ========================================== */
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: var(--font-mono); font-size: 12px; color: #94a3b8; font-weight: 900; background: #020617; padding: 6px 10px; border-radius: 6px; border: 2px solid #1e293b;}
+        .tool-info-row span { color: var(--primary); font-size: 16px; font-weight: 900; text-shadow: 0 0 8px var(--cyan-glow);}
+
+        .action-row { display: flex; gap: 8px; height: 42px; width: 100%; align-items: center; justify-content: space-between;}
+        .input-group { display: flex; gap: 8px; flex: 1; transition: opacity 0.3s; height: 100%; }
+        
+        /* 🔥 FIX: PERFECTLY CENTERED, NON-OVERLAPPING RESULT 🔥 */
+        .result-display {
+            flex: 1; /* Takes exact space of inputs */
+            height: 100%; 
+            display: none; align-items: center; justify-content: center;
+            background: transparent; 
             border: none; 
-            font-family: var(--font-main);
-            font-size: 16px; 
-            font-weight: 900; 
-            letter-spacing: 2px; 
-            cursor: pointer; 
-            transition: 0.2s; 
+            box-shadow: none; 
+            animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+        }
+        .result-display.show { display: flex; }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        /* Perfectly Centered White Zombie Text */
+        .zombie-text {
+            font-family: var(--font-zombie);
+            font-size: clamp(30px, 9vw, 42px); /* Smart scaling prevents overflow */
+            letter-spacing: 4px;
+            line-height: 1;
             text-transform: uppercase;
-            position: relative; 
-            overflow: hidden;
+            text-align: center;
+            width: 100%;
         }
+        /* WHITE TEXT + CYAN/BLUE GLOW */
+        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 30px var(--primary); }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 30px #4da6ff; }
 
-        .btn:active { 
-            transform: scale(0.95); 
-        }
-
-        .btn-primary { 
-            background: linear-gradient(180deg, var(--gold-light), var(--gold-dark)); 
-            color: #000; 
-            box-shadow: 0 4px 20px var(--gold-glow); 
-            border: 1px solid var(--gold-light); 
-        }
-
-        .btn-hide { 
-            background: rgba(255,255,255,0.05); 
-            border: 1px solid rgba(255,255,255,0.1); 
-            color: #cbd5e1; 
-            font-size: 11px; 
-            padding: 8px 0; 
-            margin-top: -2px; 
-            border-radius: 20px;
-        }
+        /* ==========================================
+           6. WIN / LOSS / JACKPOT ANIMATION MODALS
+           ========================================== */
+        #miniAnimScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.95); z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;}
+        .mini-title { font-family: var(--font-main); font-size: 50px; font-weight: 900; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 5px 15px rgba(0,0,0,0.8);}
         
-        /* SPINNER ANIMATION FOR AUTH */
-        .spinner {
-            display: inline-block; 
-            width: 14px; 
-            height: 14px;
-            border: 2px solid rgba(0,0,0,0.3); 
-            border-top-color: #000;
-            border-radius: 50%; 
-            animation: spin 1s linear infinite;
-            vertical-align: middle; 
-            margin-right: 6px; 
-            margin-top: -2px;
-        }
+        .real-result-card { background: linear-gradient(145deg, #0f172a, #020617); border-radius: 16px; padding: 20px; width: 100%; max-width: 350px; border: 3px solid #1e3a8a; opacity: 0; position: relative;}
+        .theme-win { animation: epic3DWin 0.6s forwards; border-color: #10b981; }
+        .theme-jackpot { animation: epic3DWin 0.6s forwards; border-color: var(--primary); }
+        @keyframes epic3DWin { 0% { transform: scale(0.5) rotateX(20deg); opacity: 0;} 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1) rotateX(0); opacity: 1; box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4); } }
+        .theme-loss { animation: lossShake 0.6s forwards; border-color: var(--red); }
+        @keyframes lossShake { 0% { transform: translateX(0) scale(0.8); opacity: 0;} 20% { transform: translateX(-15px) scale(1); opacity: 1;} 40% { transform: translateX(15px); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } 100% { transform: translateX(0) scale(1); opacity: 1; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);} }
+        
+        .res-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); }
+        .res-row:last-child { border-bottom: none; }
+        .res-label { font-size: 13px; color: #94a3b8; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;}
+        .res-val { font-size: 16px; font-weight: 900; font-family: var(--font-main); display: flex; align-items: center; gap: 8px;}
+        
+        .mini-close { font-size: 13px; color: #cbd5e1; margin-top: 25px; cursor: pointer; border: 2px solid rgba(255,255,255,0.2); padding: 12px 30px; border-radius: 20px; background: rgba(0,0,0,0.8); font-weight: 900; font-family: var(--font-main); letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
 
-        @keyframes spin { 
-            100% { transform: rotate(360deg); } 
-        }
+        .color-ball { width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; font-size: 16px; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.5), 0 5px 10px rgba(0,0,0,0.8); border: 2px solid rgba(0,0,0,0.8); }
+        .bg-green { background: radial-gradient(circle at 30% 30%, #34d399, #10b981); }
+        .bg-red { background: radial-gradient(circle at 30% 30%, #f87171, #ef4444); }
+        .bg-red-violet { background: linear-gradient(135deg, #ef4444 50%, #8b5cf6 50%); }
+        .bg-green-violet { background: linear-gradient(135deg, #10b981 50%, #8b5cf6 50%); }
+        
+        .size-badge { padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.6); border: 2px solid rgba(0,0,0,0.4); font-family: var(--font-ui);}
+        .size-big { background: linear-gradient(180deg, #f59e0b, #b45309); color: #fff; }
+        .size-small { background: linear-gradient(180deg, #06b6d4, #0891b2); color: #fff; }
 
-        /* ==========================================
-           12. AUTHENTICATION & VIEWS
-           ========================================== */
-        .auth-view { 
-            display: flex; 
-            flex-direction: column; 
-            gap: 12px; 
-            animation: fadeIn 0.4s ease; 
-        }
+        /* Jackpot Screen */
+        #jackpotScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 99999999; display: none; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;}
+        .jackpot-bg { position: absolute; width: 200vw; height: 200vw; background: conic-gradient(from 0deg, transparent, var(--primary), var(--primary-dark), transparent 30%); animation: radarSpin 1.5s linear infinite; z-index: -1; }
+        .jackpot-title { font-family: var(--font-main); font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--cyan-glow), 0 0 50px var(--primary); text-align: center; line-height: 1.1; animation: epic3DWin 0.5s forwards;}
+        @keyframes radarSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        .engine-view { 
-            display: none; 
-            flex-direction: column; 
-            gap: 12px; 
-            animation: fadeIn 0.4s ease; 
-        }
+        /* Spinners */
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 5px; }
+        .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        @keyframes fadeIn { 
-            from { opacity: 0; } 
-            to { opacity: 1; } 
-        }
-
-        .auth-pending { 
-            display: none; 
-            text-align: center; 
-            background: rgba(0,0,0,0.8); 
-            padding: 12px; 
-            border-radius: 8px; 
-            border: 1px dashed var(--gold-primary); 
-            box-shadow: inset 0 0 10px rgba(230,184,65,0.1); 
-        }
-
-        .auth-pending h3 { 
-            font-size: 13px; 
-            color: var(--gold-primary); 
-            margin-bottom: 4px; 
-            font-family: var(--font-main); 
-            font-weight: 900; 
-            letter-spacing: 1px;
-        }
-
-        .auth-pending p { 
-            font-size: 10px; 
-            color: #94a3b8; 
-            font-family: var(--font-ui);
-        }
-
-        /* ==========================================
-           13. TOAST NOTIFICATIONS
-           ========================================== */
-        #toast { 
-            position: fixed; 
-            bottom: 30px; 
-            left: 50%; 
-            transform: translateX(-50%) translateY(100px); 
-            background: var(--glass-bg); 
-            color: var(--gold-primary); 
-            padding: 12px 22px; 
-            border-radius: 30px; 
-            font-family: var(--font-mono); 
-            font-weight: 900; 
-            font-size: 11px; 
-            border: 1px solid var(--gold-primary); 
-            z-index: 999999; 
-            transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: 0 5px 25px var(--gold-glow); 
-            white-space: nowrap; 
-        }
-
-        #toast.show { 
-            transform: translateX(-50%) translateY(0); 
-        }
+        /* Toast */
+        #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px); background: #0f172a; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid var(--primary-dark); z-index: 999999; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-ui); box-shadow: 0 10px 25px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 1px;}
+        #toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
-    <!-- 🎮 BACKGROUND GAME IFRAME -->
-    <div id="game-layer">
-        <iframe id="main-frame" src="https://6clubm.com/#/"></iframe>
+    <!-- 🌟 WIN/LOSS POPUP ANIMATION SCREEN 🌟 -->
+    <div id="miniAnimScreen">
+        <h1 id="miniTitle" class="mini-title">🏆 WIN 🏆</h1>
+        <div id="realCard" class="real-result-card">
+            <div class="res-row"><span class="res-label">PERIOD NO.</span><span class="res-val" id="resPeriod" style="color: #cbd5e1; font-family: var(--font-mono);">----</span></div>
+            <div class="res-row" style="background: rgba(6,182,212,0.1); padding: 12px; border-radius: 8px; margin-top: 5px;"><span class="res-label" style="color:var(--primary);">AI PREDICTION</span><span class="res-val" id="resPred">--</span></div>
+            <div class="res-row" style="background: rgba(0,0,0,0.8); padding: 12px; border-radius: 8px; margin-top: 5px; border: 1px solid rgba(255,255,255,0.05);"><span class="res-label">ACTUAL OUTCOME</span><span class="res-val" id="resActual"><span id="resBalls"></span><span id="resSize"></span></span></div>
+        </div>
+        <div class="mini-close" onclick="document.getElementById('miniAnimScreen').style.display='none'">TAP TO DISMISS</div>
     </div>
 
-    <!-- 🔘 FLOATING TRIGGER BUTTON -->
-    <div id="trigger-btn" onclick="UIManager.showHUD()">
-        <div class="beacon"></div>
-        <span class="trigger-text">6 CLUB VIP</span>
+    <!-- 💎 JACKPOT SCREEN -->
+    <div id="jackpotScreen">
+        <div class="jackpot-bg"></div>
+        <h1 class="jackpot-title">💎 MEGA JACKPOT 💎<br><span style="font-size:24px; color:var(--primary); text-shadow: 0 0 15px var(--cyan-glow); letter-spacing:4px; font-family:var(--font-ui);">VIOLET SECURED</span></h1>
     </div>
 
-    <!-- 🎛️ DRAGGABLE HUD MENU -->
-    <div id="core-hud">
-        <!-- DRAG ZONE -->
-        <div class="hud-header" id="drag-zone">
-            <div class="drag-bar"></div>
-            <div class="brand">6 CLUB BY <span>DEV</span></div>
+    <!-- 🎛️ TOP PANEL (AUTO-FIT HACK TOOL) -->
+    <div id="top-panel">
+        
+        <div class="top-header">
+            <div class="brand">DEV ARMY <span class="badge">PRO</span></div>
+            <div class="tabs" id="timeframeTabs">
+                <button class="tab-btn" id="btn-30s" onclick="Engine.switchMode('30s')">30 SEC</button>
+                <button class="tab-btn active" id="btn-1m" onclick="Engine.switchMode('1m')">1 MIN</button>
+            </div>
         </div>
 
-        <div class="hud-body">
+        <!-- 1. AUTHENTICATION VIEW -->
+        <div id="authScreen" class="auth-container">
+            <div class="auth-row" id="auth-input-area">
+                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER SIKKIM UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <button id="authBtn" class="btn-sleek" style="width: 100px;" onclick="Auth.verify()">CONNECT</button>
+            </div>
             
-            <!-- 🔐 AUTHENTICATION VIEW -->
-            <div class="auth-view" id="auth-view">
-                <input type="text" id="uidInput" class="target-input" placeholder="ENTER UID KEY" style="font-size: 14px; padding: 12px 0;">
-                
-                <button class="btn btn-primary" id="btnAuth" onclick="Auth.verify()">CONNECT</button>
-                
-                <div class="auth-pending" id="auth-pending">
-                    <h3>WAITING APPROVAL</h3>
-                    <p>Check again later.</p>
-                    <button class="btn btn-hide" style="margin-top:8px; color:#fff;" onclick="location.reload()">REFRESH</button>
+            <!-- PENDING UI WITH ALERT -->
+            <div id="auth-pending" class="pending-box hidden">
+                <div class="pending-header">
+                    <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING</span>
+                    <span style="font-size: 10px; color: #64748b; font-family:var(--font-mono); font-weight:bold;">Awaiting Admin</span>
                 </div>
-                
-                <button class="btn btn-hide" onclick="UIManager.hideHUD()">HIDE MENU</button>
+                <div class="deposit-alert-strip">
+                    <span class="alert-text">⚠️ ₹200 DEPOSIT REQUIRED FOR ACTIVATION</span>
+                </div>
+                <div class="pending-actions">
+                    <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px;">✈️ MSG ADMIN</a>
+                    <button class="btn-sleek" style="flex:1; font-size:12px;" onclick="location.reload()">🔄 REFRESH</button>
+                </div>
             </div>
-
-            <!-- 🧬 PREDICTION ENGINE VIEW -->
-            <div class="engine-view" id="engine-view">
-                
-                <!-- ⏱️ TIMEFRAME TOGGLE (HIDDEN IF ROLE-BASED ACCESS APPLIES) -->
-                <div class="tabs" id="timeframeTabs">
-                    <div class="tab-btn" id="tab-30s" onclick="Engine.switchTimeframe('30s')">30 SEC</div>
-                    <div class="tab-btn active" id="tab-1m" onclick="Engine.switchTimeframe('1m')">1 MIN</div>
-                </div>
-
-                <!-- TIMER DISPLAY -->
-                <div class="timer-box">
-                    <div class="period" id="periodDisplay">SYNCING...</div>
-                    <div class="time" id="timerDisplay">00:00</div>
-                </div>
-
-                <!-- 🔥 DYNAMIC INPUT & RESULT AREA 🔥 -->
-                <div class="io-wrapper">
-                    <!-- N1 & N2 Inputs -->
-                    <div class="input-group" id="input-group">
-                        <input type="number" id="in-n1" class="target-input" placeholder="N-1" oninput="Util.limit(this)">
-                        <input type="number" id="in-n2" class="target-input" placeholder="N-2" oninput="Util.limit(this)">
-                    </div>
-                    <!-- Mega Result (Overlaps Inputs when active) -->
-                    <div id="out-size" class="mega-result">--</div>
-                </div>
-
-                <!-- ACTION BUTTONS -->
-                <button class="btn btn-primary" id="btnAnalyze" onclick="Engine.analyze()">EXTRACT</button>
-                <button class="btn btn-hide" onclick="UIManager.hideHUD()">HIDE MENU</button>
+        </div>
+        
+        <!-- 2. MAIN TOOL CONTAINER -->
+        <div id="toolScreen" class="tool-container hidden">
+            <div class="tool-info-row">
+                <div>NODE: <span id="displayPeriod">SYNCING...</span></div>
+                <div>TIMER: <span id="displayTimer">00:00</span></div>
             </div>
+            
+            <div class="action-row">
+                <div class="input-group" id="input-group">
+                    <input type="number" id="in-n1" placeholder="N1" oninput="Util.limit(this)">
+                    <input type="number" id="in-n2" placeholder="N2" oninput="Util.limit(this)">
+                </div>
+                
+                <!-- 🔥 BORDERLESS CENTERED ZOMBIE WHITE RESULT DISPLAY 🔥 -->
+                <div id="out-size" class="result-display">--</div>
 
+                <button class="btn-sleek" id="btnAnalyze" style="width: 100px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
+            </div>
         </div>
     </div>
 
-    <!-- TOAST NOTIFICATION SYSTEM -->
+    <!-- 🎮 BOTTOM PANEL (GAME SECTION) -->
+    <div id="bottom-panel">
+        <iframe id="main-frame" src="https://6clubm.com/#/" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
+    </div>
+
     <div id="toast">Message</div>
 
-<!-- ==========================================
-     JAVASCRIPT LOGIC
-     ========================================== -->
-<script type="module">
-    // 1. FIREBASE INITIALIZATION
-    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-    import { getDatabase, ref, get, set, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+    <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ -->
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
+        import { getDatabase, ref, get, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
 
-    // User's Provided Firebase Config
-    const firebaseConfig = {
-        apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
-        authDomain: "sikkimaitool.firebaseapp.com",
-        databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app",
-        projectId: "sikkimaitool",
-        storageBucket: "sikkimaitool.firebasestorage.app",
-        messagingSenderId: "897487739765",
-        appId: "1:897487739765:web:34f9df57ee8372aa6b913c"
-    };
-    const app = initializeApp(firebaseConfig);
-    const db = getDatabase(app);
+        // 🔥 DATABASE CONFIG
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
+            authDomain: "sikkimaitool.firebaseapp.com",
+            databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sikkimaitool",
+            storageBucket: "sikkimaitool.firebasestorage.app",
+            messagingSenderId: "897487739765",
+            appId: "1:889152992462:web:34f9df57ee8372aa6b913c"
+        };
+        const app = initializeApp(firebaseConfig); 
+        const db = getDatabase(app);
+        const DB_PATHS = { '30s': 'patterns_30s', '1m': 'patterns' };
 
-    // Database paths for Dual Timers
-    const DB_PATHS = { 
-        '30s': 'patterns_30s', 
-        '1m': 'patterns' 
-    };
+        let currentUid = ""; let currentPrediction = ""; let currentPeriod = ""; let isWaitingAPI = false;
 
-    // 2. UTILITY FUNCTIONS
-    window.Util = class {
-        static limit(el) { 
-            // Limits input to 1 digit between 0 and 9
-            if(el.value.length > 1) el.value = el.value.slice(0,1); 
-            if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; 
-        }
-        
-        static toast(msg) {
-            // Displays a popup notification at the bottom
-            const t = document.getElementById("toast"); 
-            t.innerText = msg; 
-            t.classList.add("show");
-            setTimeout(() => {
-                t.classList.remove("show");
-            }, 2500);
-        }
-    };
-
-    // Device Fingerprinting for Auth tracking
-    function getDeviceID() { 
-        let d = localStorage.getItem('dev_did'); 
-        if(!d) { 
-            d = 'DEV-' + Math.random().toString(36).substr(2, 9); 
-            localStorage.setItem('dev_did', d); 
-        } 
-        return d; 
-    }
-
-    // 3. DRAG & DROP LOGIC (HUD MOVEMENT)
-    class Dragger {
-        constructor() {
-            this.hud = document.getElementById('core-hud'); 
-            this.dragZone = document.getElementById('drag-zone');
-            this.isDragging = false; 
-            
-            // Default Starting Position
-            this.currentX = 15; 
-            this.currentY = 50; 
-            
-            this.initialX = 0; 
-            this.initialY = 0;
-            
-            // Event Listeners for Pointer (Works on both Touch and Mouse)
-            this.dragZone.addEventListener("pointerdown", this.startDrag.bind(this));
-            window.addEventListener("pointermove", this.moveDrag.bind(this));
-            window.addEventListener("pointerup", this.endDrag.bind(this));
-            
-            this.updatePosition();
-        }
-        
-        startDrag(e) { 
-            this.isDragging = true; 
-            // Calculate offset between pointer and top-left of hud
-            this.initialX = e.clientX - this.currentX; 
-            this.initialY = e.clientY - this.currentY; 
-            // Capture pointer so it doesn't lose focus if moved fast
-            this.dragZone.setPointerCapture(e.pointerId); 
-        }
-        
-        moveDrag(e) { 
-            if(!this.isDragging) return; 
-            e.preventDefault(); 
-            // Calculate new position and restrict within screen bounds
-            this.currentX = Math.max(0, Math.min(e.clientX - this.initialX, window.innerWidth - this.hud.offsetWidth)); 
-            this.currentY = Math.max(0, Math.min(e.clientY - this.initialY, window.innerHeight - this.hud.offsetHeight)); 
-            this.updatePosition(); 
-        }
-        
-        endDrag(e) { 
-            if(!this.isDragging) return; 
-            this.isDragging = false; 
-            this.dragZone.releasePointerCapture(e.pointerId); 
-        }
-        
-        updatePosition() { 
-            this.hud.style.transform = `translate3d(${this.currentX}px, ${this.currentY}px, 0)`; 
-        }
-    }
-
-    // 4. UI MANAGER (SHOW/HIDE HUD)
-    window.UIManager = class {
-        static showHUD() { 
-            document.getElementById('trigger-btn').classList.add('hidden'); 
-            document.getElementById('core-hud').classList.add('active'); 
-        }
-        
-        static hideHUD() { 
-            document.getElementById('core-hud').classList.remove('active'); 
-            setTimeout(() => { 
-                document.getElementById('trigger-btn').classList.remove('hidden'); 
-            }, 300); // Wait for CSS animation to finish
-        }
-    };
-
-    // 5. AUTHENTICATION & ROLE-BASED ACCESS CONTROL
-    window.Auth = class {
-        static async verify() {
-            const uidKey = document.getElementById('uidInput').value.trim(); 
-            const btnAuth = document.getElementById('btnAuth');
-            
-            if(!uidKey) return Util.toast("ENTER UID FIRST"); 
-            
-            // Show Spinner Animation
-            btnAuth.innerHTML = '<span class="spinner"></span> VERIFYING...'; 
-            btnAuth.disabled = true;
-
-            try { 
-                // Check if UID is approved in Firebase
-                const snapshot = await get(ref(db, 'approved_uids/' + uidKey)); 
-                
-                if(snapshot.exists()) {
-                    let userData = snapshot.val();
-                    
-                    // Validate ban status and expiration date
-                    if(!userData.is_banned && (!userData.expireAt || userData.expireAt > Date.now())) {
-                        setTimeout(() => {
-                            // Pass access_type to grant function
-                            this.grant(userData.access_type || 'both'); 
-                        }, 500); // Artificial delay for smooth UX
-                        return;
-                    } else { 
-                        btnAuth.innerText = "CONNECT"; 
-                        btnAuth.disabled = false; 
-                        return Util.toast("ACCESS EXPIRED"); 
-                    }
-                } 
-                
-                // If not approved, add to pending requests queue
-                const reqSnap = await get(ref(db, 'uid_requests/' + uidKey));
-                let requestCount = 1; 
-                if(reqSnap.exists()) requestCount = (reqSnap.val().count || 0) + 1;
-                
-                await set(ref(db, 'uid_requests/' + uidKey), { 
-                    uid: uidKey, 
-                    deviceId: getDeviceID(), 
-                    status: "pending", 
-                    timestamp: Date.now(), 
-                    count: requestCount 
-                });
-                
-                // Show Pending UI
-                setTimeout(() => {
-                    document.getElementById('uidInput').style.display = 'none'; 
-                    document.getElementById('btnAuth').style.display = 'none'; 
-                    document.getElementById('auth-pending').style.display = 'block';
-                }, 500);
-
-            } catch(error) { 
-                btnAuth.innerText = "CONNECT"; 
-                btnAuth.disabled = false; 
-                Util.toast("NETWORK ERROR"); 
-            }
-        }
-
-        static grant(accessType) { 
-            // Switch views
-            document.getElementById('auth-view').style.display = 'none'; 
-            document.getElementById('engine-view').style.display = 'flex'; 
-            
-            // ROLE-BASED ACCESS CONTROL (Hide/Show Tabs based on admin settings)
-            const tabsContainer = document.getElementById('timeframeTabs');
-            if (accessType === '1m') {
-                tabsContainer.style.display = 'none';
-                Engine.switchTimeframe('1m');
-            } else if (accessType === '30s') {
-                tabsContainer.style.display = 'none';
-                Engine.switchTimeframe('30s');
-            } else {
-                tabsContainer.style.display = 'flex';
-                Engine.switchTimeframe('1m'); // Default selection
-            }
-
-            Util.toast("6 CLUB BY DEV SECURED"); 
-        }
-    };
-
-    // 6. DUAL ENGINE LOGIC (TIMER & RESULT EXTRACTION)
-    window.Engine = class {
-        static activeTF = '1m';
-        static state = "IDLE"; // IDLE or NEXT
-
-        static switchTimeframe(tf) {
-            this.activeTF = tf;
-            document.getElementById('tab-30s').classList.remove('active');
-            document.getElementById('tab-1m').classList.remove('active');
-            document.getElementById(`tab-${tf}`).classList.add('active');
-            this.resetUI();
-            Util.toast(`SWITCHED TO ${tf.toUpperCase()}`);
-            this.updateTimer();
-        }
-
-        static updateTimer() {
-            const d = new Date(); 
-            const h = d.getUTCHours(); 
-            const m = d.getUTCMinutes(); 
-            const s = d.getUTCSeconds();
-            
-            let period = "";
-            let displaySec = 0;
-
-            if (this.activeTF === '1m') {
-                // Calculation for 1 Minute
-                let totalMin = (h * 60) + m + 1; // +1 Lag Fix
-                period = `10001${String(totalMin).padStart(4, '0')}`;
-                
-                displaySec = 60 - s; 
-                if(displaySec === 60) displaySec = 0;
-            } else {
-                // Calculation for 30 Seconds
-                let totalMin = (h * 60) + m;
-                let halfMinBlock = s >= 30 ? 2 : 1;
-                let periodIndex = (totalMin * 2) + halfMinBlock + 1; // +1 Lag Fix
-                period = `30001${String(periodIndex).padStart(4, '0')}`;
-                
-                displaySec = s >= 30 ? 60 - s : 30 - s;
-            }
-
-            // Update UI
-            document.getElementById('periodDisplay').innerText = period;
-            const timerEl = document.getElementById('timerDisplay');
-            timerEl.innerText = `00:${String(displaySec).padStart(2,'0')}`;
-            
-            // Color changing logic
-            if(displaySec <= 5) {
-                timerEl.style.color = "var(--red)"; 
-            } else {
-                timerEl.style.color = "var(--gold-primary)";
-            }
-        }
-
-        static async analyze() {
-            const n1 = document.getElementById('in-n1');
-            const n2 = document.getElementById('in-n2');
-            const btn = document.getElementById('btnAnalyze');
-            const szPill = document.getElementById('out-size');
-            const inputGroup = document.getElementById('input-group');
-
-            if(this.state === "IDLE") {
-                const v1 = n1.value;
-                const v2 = n2.value; 
-                
-                if(!v1 || !v2) return Util.toast("ENTER N-1 & N-2");
-                
-                btn.disabled = true; 
-                btn.innerHTML = '<span class="spinner"></span> SCANNING...';
-                n1.readOnly = true; 
-                n2.readOnly = true; 
-                szPill.classList.remove('show');
-
-                let targetPath = `${DB_PATHS[this.activeTF]}/${v1}-${v2}`;
-
-                try {
-                    // Fetch pattern from Firebase
-                    const snap = await get(ref(db, targetPath));
-                    
-                    setTimeout(() => {
-                        if(snap.exists() && snap.val()) {
-                            let dataStr = String(snap.val()).toUpperCase();
-                            let isBig = dataStr.includes("BIG");
-                            
-                            // Smooth Transition: Hide Inputs -> Show Result
-                            inputGroup.style.opacity = '0';
-                            
-                            setTimeout(() => {
-                                inputGroup.style.display = 'none';
-                                szPill.innerHTML = isBig ? 'BIG' : 'SMALL';
-                                szPill.className = `mega-result show ${isBig ? 'res-big' : 'res-small'}`;
-                            }, 150);
-                            
-                            this.state = "NEXT";
-                            btn.disabled = false; 
-                            btn.innerText = "NEXT ROUND";
-                        } else {
-                            Util.toast("PATTERN NOT FOUND");
-                            this.resetUI();
-                        }
-                    }, 800); // Artificial delay for hack feel
-
-                } catch(error) { 
-                    Util.toast("SERVER TIMEOUT"); 
-                    this.resetUI(); 
+        window.Util = class {
+            static limit(el) { if(el.value.length > 1) el.value = el.value.slice(0,1); if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; }
+            static toast(msg) { 
+                const t = document.getElementById("toast"); 
+                t.innerText = msg; 
+                if(msg.includes("NOT SIKKIM") || msg.includes("ERROR") || msg.includes("REQUIRED")) {
+                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)";
+                    t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
+                } else {
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff";
+                    t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(6, 182, 212, 0.3)";
                 }
-            } else {
-                // If state is NEXT, reset UI for the next round
-                this.resetUI();
+                t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
             }
-        }
-        
-        static resetUI() {
-            const btn = document.getElementById('btnAnalyze');
-            const n1 = document.getElementById('in-n1');
-            const n2 = document.getElementById('in-n2');
-            const inputGroup = document.getElementById('input-group');
-            const szPill = document.getElementById('out-size');
+        };
 
-            // Restore Inputs & Hide Result
-            szPill.classList.remove('show'); 
-            inputGroup.style.display = 'flex';
-            setTimeout(() => {
-                inputGroup.style.opacity = '1';
-            }, 50);
+        function getDeviceID() { let d = localStorage.getItem('dev_did'); if(!d) { d = 'DEV-' + Math.random().toString(36).substr(2, 9); localStorage.setItem('dev_did', d); } return d; }
+
+        window.getRealBallHtml = (n) => { if(n == 0) return `<div class="color-ball bg-red-violet">0</div>`; if(n == 5) return `<div class="color-ball bg-green-violet">5</div>`; if(n % 2 == 0) return `<div class="color-ball bg-red">${n}</div>`; return `<div class="color-ball bg-green">${n}</div>`; };
+        window.getSizeBadge = (size) => size.includes("BIG") ? `<span class="size-badge size-big">BIG</span>` : `<span class="size-badge size-small">SMALL</span>`;
+
+        // 🔐 STRICT SIKKIM UID AUTHENTICATION
+        window.Auth = class {
+            static async verify() {
+                let uid = document.getElementById('uidInput').value.trim(); 
+                
+                // Secret Rules: Must start with 68, exact 7 digits
+                if(!/^68\d{5}$/.test(uid)) {
+                    Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID");
+                    return;
+                }
+                
+                let btn = document.getElementById('authBtn'); 
+                btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
+                
+                try {
+                    let snapshot = await get(ref(db, 'approved_uids/' + uid));
+                    if(snapshot.exists()) {
+                        let data = snapshot.val();
+                        if(!data.is_banned && (!data.expireAt || data.expireAt > Date.now())) {
+                            this.grant(data.access_type || 'both'); return;
+                        } else { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("ACCESS EXPIRED"); }
+                    }
+                    
+                    await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: getDeviceID(), status: "pending", timestamp: Date.now() });
+                    document.getElementById('auth-input-area').style.display = 'none';
+                    document.getElementById('auth-pending').classList.remove('hidden');
+                    
+                } catch (error) { btn.innerText = "CONNECT"; btn.disabled = false; Util.toast("NETWORK ERROR"); }
+            }
+
+            static grant(accessType) { 
+                document.getElementById('authScreen').classList.add('hidden');
+                document.getElementById('toolScreen').classList.remove('hidden');
+                
+                const tabsContainer = document.getElementById('timeframeTabs');
+                if (accessType === '1m') { tabsContainer.classList.add('hidden'); Engine.switchMode('1m'); } 
+                else if (accessType === '30s') { tabsContainer.classList.add('hidden'); Engine.switchMode('30s'); } 
+                else { tabsContainer.classList.remove('hidden'); Engine.switchMode('1m'); }
+
+                Engine.startTimer();
+                Util.toast("SYSTEM ONLINE"); 
+            }
+        };
+
+        // ⚙️ ENGINE
+        window.Engine = class {
+            static activeMode = '1m';
+            static state = "IDLE";
             
-            btn.disabled = false; 
-            btn.innerText = "EXTRACT";
-            n1.value = ""; 
-            n2.value = ""; 
-            n1.readOnly = false; 
-            n2.readOnly = false;
-            this.state = "IDLE";
-        }
-    };
-
-    // 7. EVENT LISTENERS & INITIALIZATION
-    document.addEventListener("DOMContentLoaded", () => {
-        // Initialize Drag functionality
-        new Dragger();
-        
-        // Listen for forced game link updates from Admin Panel
-        onValue(ref(db, 'settings/force_link'), snapshot => { 
-            if(snapshot.exists()) {
-                document.getElementById('main-frame').src = snapshot.val(); 
+            static switchMode(m) {
+                this.activeMode = m;
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.getElementById('btn-'+m).classList.add('active');
+                this.updateTimerUI();
             }
-        });
-        
-        // Start Timer loop
-        setInterval(() => Engine.updateTimer(), 1000);
-        
-        // Automatically pop open HUD after a slight delay
-        setTimeout(() => UIManager.showHUD(), 500); 
-    });
 
-</script>
+            static startTimer() { setInterval(() => this.updateTimerUI(), 1000); }
+
+            static updateTimerUI() {
+                let now = new Date(); let totalMins = (now.getUTCHours() * 60) + now.getUTCMinutes();
+                let year = now.getUTCFullYear(); let month = String(now.getUTCMonth() + 1).padStart(2, '0'); let day = String(now.getUTCDate()).padStart(2, '0');
+                
+                let remSec = 0;
+                if(this.activeMode === '1m') {
+                    currentPeriod = `${year}${month}${day}1000${10001 + totalMins + 1}`;
+                    remSec = 60 - now.getUTCSeconds(); if(remSec === 60) remSec = 0;
+                } else {
+                    let halfMinBlock = now.getUTCSeconds() >= 30 ? 2 : 1;
+                    currentPeriod = `30001${String((totalMins * 2) + halfMinBlock + 1).padStart(4, '0')}`;
+                    remSec = now.getUTCSeconds() >= 30 ? 60 - now.getUTCSeconds() : 30 - now.getUTCSeconds();
+                }
+                
+                document.getElementById('displayPeriod').innerText = currentPeriod; 
+                let tDisplay = document.getElementById('displayTimer');
+                tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`;
+                tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
+
+                if(remSec === 3) isWaitingAPI = false;
+                if(remSec <= 2 && currentPrediction !== "" && !isWaitingAPI) {
+                    isWaitingAPI = true;
+                    this.triggerWinLossAnimation(currentPeriod, currentPrediction);
+                }
+            }
+
+            static async analyze() {
+                let n1 = document.getElementById('in-n1'); let n2 = document.getElementById('in-n2');
+                let btn = document.getElementById('btnAnalyze'); let resultBox = document.getElementById('out-size'); let inputGroup = document.getElementById('input-group');
+
+                if(this.state === "IDLE") {
+                    if(!n1.value || !n2.value) return Util.toast("INPUT N1 AND N2 REQUIRED");
+                    btn.disabled = true; btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span>';
+                    n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
+
+                    try {
+                        let snap = await get(ref(db, `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`));
+                        setTimeout(() => {
+                            if(snap.exists() && !snap.val().includes("UNSET")) {
+                                currentPrediction = snap.val();
+                                let isBig = currentPrediction.toUpperCase().includes("BIG");
+                                
+                                inputGroup.style.opacity = '0';
+                                setTimeout(() => {
+                                    inputGroup.style.display = 'none';
+                                    
+                                    // 🔥 PERFECTLY CENTERED PURE WHITE ZOMBIE RESULT 🔥
+                                    resultBox.innerHTML = `<span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}">${isBig ? 'BIG' : 'SMALL'}</span>`;
+                                    resultBox.classList.add('show');
+                                }, 150);
+                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "Result ";
+                            } else { Util.toast("NO DATA FOR PATTERN"); this.resetUI(); }
+                        }, 500);
+                    } catch(e) { Util.toast("SERVER ERROR"); this.resetUI(); }
+                } else { this.resetUI(); }
+            }
+            
+            static resetUI() {
+                const btn = document.getElementById('btnAnalyze'), n1 = document.getElementById('in-n1'), n2 = document.getElementById('in-n2');
+                const inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
+                resultBox.classList.remove('show'); inputGroup.style.display = 'flex'; setTimeout(() => { inputGroup.style.opacity = '1'; }, 50);
+                btn.disabled = false; btn.innerText = "EXECUTE"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
+            }
+
+            static async triggerWinLossAnimation(pVerify, pValue) {
+                let attempts = 0; const targetPeriod = String(pVerify);
+                const apiUrl = this.activeMode === '1m' ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
+                
+                const fetchRealResult = async () => {
+                    try {
+                        let rawData = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(apiUrl + "?t=" + Date.now())).then(r=>r.json());
+                        let list = rawData.data?.list || rawData.data || rawData.list || rawData;
+                        if (!list || list.length === 0) throw new Error("No Data");
+                        
+                        let latestItem = list[0]; let apiPeriod = String(latestItem.issueNumber || latestItem.period);
+                        if(apiPeriod.slice(-4) !== targetPeriod.slice(-4)) { attempts++; if(attempts < 15) { setTimeout(fetchRealResult, 500); return; } }
+                        
+                        let num = latestItem.number !== undefined ? parseInt(latestItem.number) : 0;
+                        let actual = latestItem.size ? latestItem.size.toUpperCase() : (num >= 5 ? "BIG" : "SMALL");
+                        let cleanPred = pValue.toUpperCase().includes("BIG") ? "BIG" : "SMALL";
+                        
+                        if(cleanPred === actual) { if(num === 0 || num === 5) this.showPopup('JACKPOT', pVerify, pValue, actual, num); else this.showPopup('WIN', pVerify, pValue, actual, num); } 
+                        else this.showPopup('LOSS', pVerify, pValue, actual, num); 
+                    } catch(e) { attempts++; if(attempts < 15) { setTimeout(fetchRealResult, 500); } else { this.showPopup('WIN', pVerify, pValue, pValue.toUpperCase().includes("BIG")?"BIG":"SMALL", 8); } }
+                }
+                fetchRealResult(); currentPrediction = ""; 
+            }
+
+            static showPopup(type, period, prediction, actualResult, number) {
+                const miniScreen = document.getElementById('miniAnimScreen'); const mTitle = document.getElementById('miniTitle'); const card = document.getElementById('realCard');
+                
+                document.getElementById('resPeriod').innerText = period; 
+                document.getElementById('resBalls').innerHTML = window.getRealBallHtml(number); 
+                document.getElementById('resSize').innerHTML = window.getSizeBadge(actualResult);
+                
+                let predSz = prediction.split(' ')[0]; let predNum = (prediction.match(/\[(\d+)\]/) || [])[1] || (predSz === "BIG" ? 8 : 2);
+                document.getElementById('resPred').innerHTML = `${window.getRealBallHtml(predNum)} ${window.getSizeBadge(predSz)}`;
+                card.className = "real-result-card"; void card.offsetWidth; 
+                
+                if(type === 'JACKPOT') {
+                    const jpScreen = document.getElementById('jackpotScreen'); jpScreen.style.display = 'flex'; 
+                    setTimeout(() => { jpScreen.style.display = 'none'; mTitle.innerText = "💎 MEGA JACKPOT 💎"; mTitle.style.color = "var(--primary)"; card.classList.add('theme-jackpot'); miniScreen.style.display = 'flex'; }, 3000);
+                } else if(type === 'WIN') { mTitle.innerText = "🏆 EPIC WIN 🏆"; mTitle.style.color = "var(--green)"; card.classList.add('theme-win'); miniScreen.style.display = 'flex'; 
+                } else { mTitle.innerText = "❌ FAILED ❌"; mTitle.style.color = "var(--red)"; card.classList.add('theme-loss'); miniScreen.style.display = 'flex'; }
+            }
+        };
+
+        // Initialize Live Link Sync
+        document.addEventListener("DOMContentLoaded", () => {
+            onValue(ref(db, 'settings/force_link'), snap => { 
+                if(snap.exists() && snap.val()) document.getElementById('main-frame').src = snap.val().trim().startsWith('http') ? snap.val().trim() : 'https://' + snap.val().trim(); 
+            });
+        });
+    </script>
 </body>
 </html>
