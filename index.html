@@ -7,7 +7,7 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <!-- ZOMBIE FONT (Creepster) + Premium Fonts -->
+    <!-- ZOMBIE FONT (Creepster) + Premium UI Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@600;800;900&family=Rajdhani:wght@700;900&family=JetBrains+Mono:wght@800;900&display=swap" rel="stylesheet">
     
     <style>
@@ -22,33 +22,27 @@
             --green: #10b981; 
             --red: #ef4444; 
             --red-glow: rgba(239, 68, 68, 0.4);
+            --gold: #f59e0b;
             
             --font-main: 'Rajdhani', sans-serif;
             --font-ui: 'Outfit', sans-serif;
             --font-mono: 'JetBrains Mono', monospace;
-            --font-zombie: 'Creepster', cursive; /* Zombie Font */
+            --font-zombie: 'Creepster', cursive; /* Hacker/Zombie Font */
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
         body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #fff; overflow: hidden; display: flex; flex-direction: column; background: #000; }
         
         /* ==========================================
-           1. AUTO-FIT TOP PANEL (PERFECT FITTING)
+           1. STRICT AUTO-FIT PANEL
            ========================================== */
         #top-panel { 
             flex: 0 0 auto; 
-            min-height: 18vh;
-            max-height: 28vh; 
-            width: 100%; 
-            z-index: 10; 
-            position: relative; 
-            padding: 10px 15px; 
-            background: var(--bg-top); 
-            border-bottom: 3px solid var(--primary-dark); 
+            min-height: 18vh; max-height: 28vh; 
+            width: 100%; z-index: 10; position: relative; padding: 10px 15px; 
+            background: var(--bg-top); border-bottom: 3px solid var(--primary-dark); 
             box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.15);
-            display: flex; 
-            flex-direction: column; 
-            justify-content: center;
+            display: flex; flex-direction: column; justify-content: center;
         }
         
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
@@ -74,7 +68,7 @@
            ========================================== */
         input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
         input { 
-            width: 100%; height: 42px; padding: 0 10px; border: 2px solid #1e3a8a; border-radius: 8px; 
+            width: 100%; height: 100%; padding: 0 10px; border: 2px solid #1e3a8a; border-radius: 8px; 
             text-align: center; font-size: 20px; font-weight: 900; background: #020617; color: var(--primary); 
             outline: none; transition: 0.3s; font-family: var(--font-main); letter-spacing: 3px; box-shadow: inset 0 3px 10px rgba(0,0,0,0.9);
         }
@@ -82,15 +76,15 @@
         input::placeholder { color: #334155; font-size: 14px; letter-spacing: 2px; font-family: var(--font-ui);}
 
         .btn-sleek { 
-            height: 42px; padding: 0 15px; font-size: 15px; letter-spacing: 2px; font-family: var(--font-main); 
+            height: 50px; 
+            padding: 0 15px; font-size: 15px; letter-spacing: 2px; font-family: var(--font-main); 
             font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); 
             background: linear-gradient(to bottom, #22d3ee, var(--primary-dark)); color: #000; 
             display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: 0.2s;
-            box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px rgba(0,0,0,0.6);
-            flex-shrink: 0; /* Prevents button from shrinking */
+            box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px rgba(0,0,0,0.6); flex-shrink: 0;
         }
         .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
-        .btn-dark { background: #0f172a; color: #fff; border: 2px solid #1e293b; box-shadow: 0 4px 0 #020617; }
+        .btn-dark { background: #0f172a; color: #fff; border: 2px solid #1e293b; box-shadow: 0 4px 0 #020617; height: 38px;}
 
         /* ==========================================
            4. AUTH & PENDING SCREEN
@@ -98,7 +92,7 @@
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
 
-        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; }
+        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; height: 50px; }
         
         .pending-box { display: flex; flex-direction: column; gap: 8px; width: 100%; animation: fadeIn 0.3s ease; margin-top: 2px;}
         .pending-header { display: flex; justify-content: space-between; align-items: center; }
@@ -114,89 +108,113 @@
         .pending-actions { display: flex; gap: 8px; height: 38px; }
 
         /* ==========================================
-           5. TOOL CONTROLS & BORDERLESS ZOMBIE RESULT
+           5. TOOL CONTROLS & BORDERLESS ZOMBIE TEXT
            ========================================== */
+        /* Fixed Info Row: 3 Equal Columns to prevent wrapping */
         .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: var(--font-mono); font-size: 12px; color: #94a3b8; font-weight: 900; background: #020617; padding: 6px 10px; border-radius: 6px; border: 2px solid #1e293b;}
+        .info-col { flex: 1; }
         .tool-info-row span { color: var(--primary); font-size: 16px; font-weight: 900; text-shadow: 0 0 8px var(--cyan-glow);}
 
-        .action-row { display: flex; gap: 8px; height: 42px; width: 100%; align-items: center; justify-content: space-between;}
+        .action-row { display: flex; gap: 8px; height: 50px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
         .input-group { display: flex; gap: 8px; flex: 1; transition: opacity 0.3s; height: 100%; }
         
-        /* 🔥 FIX: PERFECTLY CENTERED, NON-OVERLAPPING RESULT 🔥 */
+        /* 🔥 FIX: FLEX INSTEAD OF ABSOLUTE POSITIONING TO PREVENT OVERLAP 🔥 */
         .result-display {
-            flex: 1; /* Takes exact space of inputs */
+            flex: 1; 
             height: 100%; 
             display: none; align-items: center; justify-content: center;
-            background: transparent; 
-            border: none; 
-            box-shadow: none; 
+            background: transparent; border: none; box-shadow: none; z-index: 5;
             animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
         }
         .result-display.show { display: flex; }
         @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
-        /* Perfectly Centered White Zombie Text */
+        /* Pure White Zombie Text */
         .zombie-text {
-            font-family: var(--font-zombie);
-            font-size: clamp(30px, 9vw, 42px); /* Smart scaling prevents overflow */
-            letter-spacing: 4px;
-            line-height: 1;
-            text-transform: uppercase;
-            text-align: center;
-            width: 100%;
+            font-family: var(--font-zombie); font-size: clamp(38px, 10vw, 48px); 
+            letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: 100%;
         }
-        /* WHITE TEXT + CYAN/BLUE GLOW */
-        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 30px var(--primary); }
-        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 30px #4da6ff; }
+        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 40px var(--primary); }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 40px #4da6ff; }
 
         /* ==========================================
-           6. WIN / LOSS / JACKPOT ANIMATION MODALS
+           6. BANNED & EXPIRED HARD SCREEN
+           ========================================== */
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(15px);}
+        .ban-icon { font-size: 60px; margin-bottom: 10px; animation: popIn 0.5s ease;}
+        .ban-title { color: var(--red); font-size: 38px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 20px var(--red-glow);}
+        
+        .ban-box { background: rgba(239, 68, 68, 0.05); border: 2px solid rgba(239, 68, 68, 0.3); padding: 20px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 350px; margin-bottom: 20px;}
+        
+        .dynamic-deposit { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
+        .dynamic-deposit .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-mono); font-weight: bold;}
+        .dynamic-deposit .amount { font-size: 38px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px rgba(245,158,11,0.4);}
+        
+        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 350px; color: #fff; text-decoration: none; padding: 14px; border-radius: 12px; font-weight: 900; font-family: var(--font-main); font-size: 18px; text-transform: uppercase; background: linear-gradient(135deg, #0088cc, #005f8f); border: 1px solid #003f5e; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer;}
+        .contact-btn:active { transform: scale(0.95); }
+        .btn-deposit { background: linear-gradient(135deg, #10b981, #059669); border: 2px solid #047857; margin-bottom: 12px;}
+
+        /* ==========================================
+           7. WIN / LOSS ANIMATION MODALS
            ========================================== */
         #miniAnimScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.95); z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;}
         .mini-title { font-family: var(--font-main); font-size: 50px; font-weight: 900; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 5px 15px rgba(0,0,0,0.8);}
-        
         .real-result-card { background: linear-gradient(145deg, #0f172a, #020617); border-radius: 16px; padding: 20px; width: 100%; max-width: 350px; border: 3px solid #1e3a8a; opacity: 0; position: relative;}
         .theme-win { animation: epic3DWin 0.6s forwards; border-color: #10b981; }
         .theme-jackpot { animation: epic3DWin 0.6s forwards; border-color: var(--primary); }
-        @keyframes epic3DWin { 0% { transform: scale(0.5) rotateX(20deg); opacity: 0;} 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1) rotateX(0); opacity: 1; box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4); } }
         .theme-loss { animation: lossShake 0.6s forwards; border-color: var(--red); }
-        @keyframes lossShake { 0% { transform: translateX(0) scale(0.8); opacity: 0;} 20% { transform: translateX(-15px) scale(1); opacity: 1;} 40% { transform: translateX(15px); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } 100% { transform: translateX(0) scale(1); opacity: 1; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);} }
+        @keyframes epic3DWin { 0% { transform: scale(0.5) rotateX(20deg); opacity: 0;} 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1) rotateX(0); opacity: 1; box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4); } }
+        @keyframes lossShake { 0% { transform: translateX(0) scale(0.8); opacity: 0;} 20% { transform: translateX(-15px); opacity: 1;} 40% { transform: translateX(15px); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } 100% { transform: translateX(0) scale(1); opacity: 1; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);} }
         
         .res-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); }
         .res-row:last-child { border-bottom: none; }
         .res-label { font-size: 13px; color: #94a3b8; font-weight: 900; letter-spacing: 1px; text-transform: uppercase;}
         .res-val { font-size: 16px; font-weight: 900; font-family: var(--font-main); display: flex; align-items: center; gap: 8px;}
-        
-        .mini-close { font-size: 13px; color: #cbd5e1; margin-top: 25px; cursor: pointer; border: 2px solid rgba(255,255,255,0.2); padding: 12px 30px; border-radius: 20px; background: rgba(0,0,0,0.8); font-weight: 900; font-family: var(--font-main); letter-spacing: 2px; text-transform: uppercase; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
+        .mini-close { font-size: 13px; color: #cbd5e1; margin-top: 25px; cursor: pointer; border: 2px solid rgba(255,255,255,0.2); padding: 12px 30px; border-radius: 20px; background: rgba(0,0,0,0.8); font-weight: 900; font-family: var(--font-main); letter-spacing: 2px; text-transform: uppercase;}
 
         .color-ball { width: 32px; height: 32px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; font-size: 16px; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.5), 0 5px 10px rgba(0,0,0,0.8); border: 2px solid rgba(0,0,0,0.8); }
         .bg-green { background: radial-gradient(circle at 30% 30%, #34d399, #10b981); }
         .bg-red { background: radial-gradient(circle at 30% 30%, #f87171, #ef4444); }
         .bg-red-violet { background: linear-gradient(135deg, #ef4444 50%, #8b5cf6 50%); }
         .bg-green-violet { background: linear-gradient(135deg, #10b981 50%, #8b5cf6 50%); }
-        
         .size-badge { padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 900; box-shadow: 0 4px 10px rgba(0,0,0,0.6); border: 2px solid rgba(0,0,0,0.4); font-family: var(--font-ui);}
         .size-big { background: linear-gradient(180deg, #f59e0b, #b45309); color: #fff; }
         .size-small { background: linear-gradient(180deg, #06b6d4, #0891b2); color: #fff; }
 
-        /* Jackpot Screen */
         #jackpotScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 99999999; display: none; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;}
         .jackpot-bg { position: absolute; width: 200vw; height: 200vw; background: conic-gradient(from 0deg, transparent, var(--primary), var(--primary-dark), transparent 30%); animation: radarSpin 1.5s linear infinite; z-index: -1; }
         .jackpot-title { font-family: var(--font-main); font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--cyan-glow), 0 0 50px var(--primary); text-align: center; line-height: 1.1; animation: epic3DWin 0.5s forwards;}
         @keyframes radarSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
-        /* Spinners */
         .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 5px; }
         .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Toast */
         #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px); background: #0f172a; color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid var(--primary-dark); z-index: 999999; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-ui); box-shadow: 0 10px 25px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 1px;}
         #toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
+
+    <!-- 🛑 EXPIRED / BANNED / TRIALS EXHAUSTED SCREEN -->
+    <div id="bannedScreen" class="hard-screen">
+        <div class="ban-icon">🛑</div>
+        <h1 class="ban-title">ACCESS REVOKED</h1>
+        
+        <div class="ban-box">
+            <span style="color:var(--red); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 1px;">SYSTEM ALERT</span><br>
+            <span id="banReasonText" style="color:#fff; font-size: 16px; font-weight:600; display:block; margin-top:10px;">Your 5 Free Trials are exhausted.</span>
+            
+            <div id="dynamicDepositBox" class="dynamic-deposit">
+                <div class="label">VIP ACTIVATION FEE</div>
+                <div id="depositAmountDisplay" class="amount">₹---</div>
+            </div>
+        </div>
+
+        <button id="depositDoneBtn" class="contact-btn btn-deposit" onclick="Auth.submitDeposit()">✅ DEPOSIT DONE</button>
+        <a href="https://t.me/Nse_Dev" class="contact-btn">✈️ MESSAGE ADMIN</a>
+    </div>
 
     <!-- 🌟 WIN/LOSS POPUP ANIMATION SCREEN 🌟 -->
     <div id="miniAnimScreen">
@@ -209,7 +227,6 @@
         <div class="mini-close" onclick="document.getElementById('miniAnimScreen').style.display='none'">TAP TO DISMISS</div>
     </div>
 
-    <!-- 💎 JACKPOT SCREEN -->
     <div id="jackpotScreen">
         <div class="jackpot-bg"></div>
         <h1 class="jackpot-title">💎 MEGA JACKPOT 💎<br><span style="font-size:24px; color:var(--primary); text-shadow: 0 0 15px var(--cyan-glow); letter-spacing:4px; font-family:var(--font-ui);">VIOLET SECURED</span></h1>
@@ -217,7 +234,6 @@
 
     <!-- 🎛️ TOP PANEL (AUTO-FIT HACK TOOL) -->
     <div id="top-panel">
-        
         <div class="top-header">
             <div class="brand">DEV ARMY <span class="badge">PRO</span></div>
             <div class="tabs" id="timeframeTabs">
@@ -230,10 +246,9 @@
         <div id="authScreen" class="auth-container">
             <div class="auth-row" id="auth-input-area">
                 <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER SIKKIM UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                <button id="authBtn" class="btn-sleek" style="width: 100px;" onclick="Auth.verify()">CONNECT</button>
+                <button id="authBtn" class="btn-sleek" style="width: 105px; height: 50px;" onclick="Auth.verify()">CONNECT</button>
             </div>
             
-            <!-- PENDING UI WITH ALERT -->
             <div id="auth-pending" class="pending-box hidden">
                 <div class="pending-header">
                     <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING</span>
@@ -243,17 +258,19 @@
                     <span class="alert-text">⚠️ ₹200 DEPOSIT REQUIRED FOR ACTIVATION</span>
                 </div>
                 <div class="pending-actions">
-                    <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px;">✈️ MSG ADMIN</a>
-                    <button class="btn-sleek" style="flex:1; font-size:12px;" onclick="location.reload()">🔄 REFRESH</button>
+                    <a href="https://t.me/Nse_Rocky" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
+                    <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
                 </div>
             </div>
         </div>
         
         <!-- 2. MAIN TOOL CONTAINER -->
         <div id="toolScreen" class="tool-container hidden">
+            <!-- 3 Columns Info Row: ID | PLAYS | TIMER -->
             <div class="tool-info-row">
-                <div>NODE: <span id="displayPeriod">SYNCING...</span></div>
-                <div>TIMER: <span id="displayTimer">00:00</span></div>
+                <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--gold); display:none; font-weight:900;">PLAYS: 0/5</span></div>
+                <div class="info-col" style="text-align: right;">TIMER: <span id="displayTimer">00:00</span></div>
             </div>
             
             <div class="action-row">
@@ -279,10 +296,10 @@
 
     <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ -->
     <script type="module">
-        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js";
-        import { getDatabase, ref, get, set, update, onValue } from "https://www.gstatic.com/firebasejs/10.8.0/firebase-database.js";
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
+        import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        // 🔥 DATABASE CONFIG
+        // 🔥 SIKKIMAITOOL DATABASE CONFIG (CORRECTED)
         const firebaseConfig = {
             apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
             authDomain: "sikkimaitool.firebaseapp.com",
@@ -296,6 +313,8 @@
         const db = getDatabase(app);
         const DB_PATHS = { '30s': 'patterns_30s', '1m': 'patterns' };
 
+        window.AdminSettings = { prefixes: ["68", "67"], baselineUid: 0, freeTrials: 5 };
+
         let currentUid = ""; let currentPrediction = ""; let currentPeriod = ""; let isWaitingAPI = false;
 
         window.Util = class {
@@ -303,7 +322,7 @@
             static toast(msg) { 
                 const t = document.getElementById("toast"); 
                 t.innerText = msg; 
-                if(msg.includes("NOT SIKKIM") || msg.includes("ERROR") || msg.includes("REQUIRED")) {
+                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "var(--red)";
                     t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
                 } else {
@@ -319,37 +338,77 @@
         window.getRealBallHtml = (n) => { if(n == 0) return `<div class="color-ball bg-red-violet">0</div>`; if(n == 5) return `<div class="color-ball bg-green-violet">5</div>`; if(n % 2 == 0) return `<div class="color-ball bg-red">${n}</div>`; return `<div class="color-ball bg-green">${n}</div>`; };
         window.getSizeBadge = (size) => size.includes("BIG") ? `<span class="size-badge size-big">BIG</span>` : `<span class="size-badge size-small">SMALL</span>`;
 
-        // 🔐 STRICT SIKKIM UID AUTHENTICATION
         window.Auth = class {
             static async verify() {
                 let uid = document.getElementById('uidInput').value.trim(); 
-                
-                // Secret Rules: Must start with 68, exact 7 digits
-                if(!/^68\d{5}$/.test(uid)) {
-                    Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID");
-                    return;
-                }
-                
                 let btn = document.getElementById('authBtn'); 
+                
+                if(!uid) return Util.toast("ENTER UID FIRST");
+                if(!/^\d{7}$/.test(uid)) { return Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID"); }
+
                 btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
                 try {
                     let snapshot = await get(ref(db, 'approved_uids/' + uid));
                     if(snapshot.exists()) {
                         let data = snapshot.val();
-                        if(!data.is_banned && (!data.expireAt || data.expireAt > Date.now())) {
-                            this.grant(data.access_type || 'both'); return;
-                        } else { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("ACCESS EXPIRED"); }
+                        currentUid = uid;
+                        
+                        if(data.is_banned) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS UID IS BANNED."); }
+                        
+                        if(data.expireAt && data.expireAt < Date.now()) {
+                            btn.innerText = "CONNECT"; btn.disabled = false; 
+                            this.showDepositScreen(uid, "Your VIP Subscription has expired. Please renew."); return; 
+                        }
+
+                        if(!data.is_premium && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) {
+                            btn.innerText = "CONNECT"; btn.disabled = false; 
+                            this.showDepositScreen(uid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return;
+                        }
+
+                        let devID = getDeviceID(); 
+                        let bindSnap = await get(ref(db, 'device_bindings/' + uid));
+                        if(!bindSnap.exists()) await set(ref(db, 'device_bindings/' + uid), devID); 
+                        else if (bindSnap.val() !== devID) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("UID BOUND TO ANOTHER DEVICE."); }
+
+                        this.grant(data.access_type || 'both', data); return;
                     }
                     
+                    let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
+                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID"); }
+
+                    if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. PLEASE CREATE NEW ID FOR TRIAL."); }
+
                     await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: getDeviceID(), status: "pending", timestamp: Date.now() });
-                    document.getElementById('auth-input-area').style.display = 'none';
+                    document.getElementById('auth-input-area').classList.add('hidden');
                     document.getElementById('auth-pending').classList.remove('hidden');
                     
                 } catch (error) { btn.innerText = "CONNECT"; btn.disabled = false; Util.toast("NETWORK ERROR"); }
             }
 
-            static grant(accessType) { 
+            static showDepositScreen(uid, msg) {
+                document.getElementById('banReasonText').innerText = msg;
+                document.getElementById('banReasonText').style.color = "var(--red)";
+                const amounts = [200, 300, 500, 1000]; let hash = 0;
+                for (let i = 0; i < uid.length; i++) { hash = uid.charCodeAt(i) + ((hash << 5) - hash); }
+                window.currentDepositAmount = amounts[Math.abs(hash) % amounts.length];
+                
+                document.getElementById('depositAmountDisplay').innerText = "₹" + window.currentDepositAmount;
+                document.getElementById('dynamicDepositBox').style.display = "block";
+                document.getElementById('bannedScreen').style.display = 'flex';
+            }
+
+            static async submitDeposit() {
+                if(!currentUid) return Util.toast("UID ERROR");
+                const btn = document.getElementById('depositDoneBtn');
+                btn.innerText = "SUBMITTING..."; btn.disabled = true;
+                try {
+                    await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: window.currentDepositAmount || 0, status: "pending", timestamp: Date.now() });
+                    Util.toast("DEPOSIT REQUEST SENT TO ADMIN"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "#0f172a"; btn.style.borderColor = "#1e293b";
+                } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
+            }
+
+            static grant(accessType, userData) { 
                 document.getElementById('authScreen').classList.add('hidden');
                 document.getElementById('toolScreen').classList.remove('hidden');
                 
@@ -358,12 +417,20 @@
                 else if (accessType === '30s') { tabsContainer.classList.add('hidden'); Engine.switchMode('30s'); } 
                 else { tabsContainer.classList.remove('hidden'); Engine.switchMode('1m'); }
 
+                const trialDisp = document.getElementById('trialsDisplay');
+                if(!userData.is_premium) {
+                    trialDisp.style.display = 'inline-block';
+                    trialDisp.innerText = `PLAYS: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`;
+                } else {
+                    trialDisp.style.display = 'inline-block';
+                    trialDisp.innerText = `👑 VIP ACTIVE`; trialDisp.style.color = "var(--primary)";
+                }
+
                 Engine.startTimer();
                 Util.toast("SYSTEM ONLINE"); 
             }
         };
 
-        // ⚙️ ENGINE
         window.Engine = class {
             static activeMode = '1m';
             static state = "IDLE";
@@ -391,7 +458,8 @@
                     remSec = now.getUTCSeconds() >= 30 ? 60 - now.getUTCSeconds() : 30 - now.getUTCSeconds();
                 }
                 
-                document.getElementById('displayPeriod').innerText = currentPeriod; 
+                // 🔥 SLICING TO LAST 6 DIGITS ONLY 🔥
+                document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
                 let tDisplay = document.getElementById('displayTimer');
                 tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`;
                 tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
@@ -409,25 +477,33 @@
 
                 if(this.state === "IDLE") {
                     if(!n1.value || !n2.value) return Util.toast("INPUT N1 AND N2 REQUIRED");
+                    
+                    let userSnap = await get(ref(db, 'approved_uids/' + currentUid));
+                    let uData = userSnap.val();
+                    if(!uData.is_premium && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) {
+                        Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return;
+                    }
+
                     btn.disabled = true; btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span>';
                     n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
 
                     try {
                         let snap = await get(ref(db, `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`));
-                        setTimeout(() => {
+                        setTimeout(async () => {
                             if(snap.exists() && !snap.val().includes("UNSET")) {
                                 currentPrediction = snap.val();
                                 let isBig = currentPrediction.toUpperCase().includes("BIG");
                                 
-                                inputGroup.style.opacity = '0';
-                                setTimeout(() => {
-                                    inputGroup.style.display = 'none';
-                                    
-                                    // 🔥 PERFECTLY CENTERED PURE WHITE ZOMBIE RESULT 🔥
-                                    resultBox.innerHTML = `<span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}">${isBig ? 'BIG' : 'SMALL'}</span>`;
-                                    resultBox.classList.add('show');
-                                }, 150);
-                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "Result ";
+                                if(!uData.is_premium) {
+                                    await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) });
+                                    document.getElementById('trialsDisplay').innerText = `PLAYS: ${(uData.predictions_used || 0) + 1}/${window.AdminSettings.freeTrials}`;
+                                }
+
+                                inputGroup.style.display = 'none';
+                                resultBox.innerHTML = `<span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}">${isBig ? 'BIG' : 'SMALL'}</span>`;
+                                resultBox.classList.add('show');
+                                
+                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "RESET";
                             } else { Util.toast("NO DATA FOR PATTERN"); this.resetUI(); }
                         }, 500);
                     } catch(e) { Util.toast("SERVER ERROR"); this.resetUI(); }
@@ -484,10 +560,19 @@
             }
         };
 
-        // Initialize Live Link Sync
+        // Initialize Live Link Sync & Settings
         document.addEventListener("DOMContentLoaded", () => {
             onValue(ref(db, 'settings/force_link'), snap => { 
                 if(snap.exists() && snap.val()) document.getElementById('main-frame').src = snap.val().trim().startsWith('http') ? snap.val().trim() : 'https://' + snap.val().trim(); 
+            });
+
+            onValue(ref(db, 'settings/auth_rules'), snap => {
+                if(snap.exists()) {
+                    let rules = snap.val();
+                    if(rules.prefixes) window.AdminSettings.prefixes = rules.prefixes.split(',').map(p => p.trim());
+                    if(rules.baselineUid) window.AdminSettings.baselineUid = parseInt(rules.baselineUid);
+                    if(rules.freeTrials !== undefined) window.AdminSettings.freeTrials = parseInt(rules.freeTrials);
+                }
             });
         });
     </script>
