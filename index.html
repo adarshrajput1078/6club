@@ -245,14 +245,15 @@
         <!-- 1. AUTHENTICATION VIEW -->
         <div id="authScreen" class="auth-container">
             <div class="auth-row" id="auth-input-area">
-                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER SIKKIM UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <!-- 🔥 Removed the numeric restriction here so user can type any characters if needed, changed placeholder 🔥 -->
+                <input type="text" id="uidInput" placeholder="ENTER UID" oninput="this.value = this.value.replace(/[^0-9a-zA-Z]/g, '');">
                 <button id="authBtn" class="btn-sleek" style="width: 105px; height: 50px;" onclick="Auth.verify()">CONNECT</button>
             </div>
             
             <div id="auth-pending" class="pending-box hidden">
                 <div class="pending-header">
                     <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING</span>
-                    <span style="font-size: 10px; color: #64748b; font-family:var(--font-mono); font-weight:bold;">Awaiting Admin</span>
+                    <span style="font-size: 10px; color: #a1a1a1; font-family:var(--font-mono); font-weight:bold;">Awaiting Admin</span>
                 </div>
                 <div class="deposit-alert-strip">
                     <span class="alert-text">⚠️ ₹200 DEPOSIT REQUIRED FOR ACTIVATION</span>
@@ -266,7 +267,6 @@
         
         <!-- 2. MAIN TOOL CONTAINER -->
         <div id="toolScreen" class="tool-container hidden">
-            <!-- 3 Columns Info Row: ID | PLAYS | TIMER -->
             <div class="tool-info-row">
                 <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
                 <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--gold); display:none; font-weight:900;">PLAYS: 0/5</span></div>
@@ -279,7 +279,6 @@
                     <input type="number" id="in-n2" placeholder="N2" oninput="Util.limit(this)">
                 </div>
                 
-                <!-- 🔥 BORDERLESS CENTERED ZOMBIE WHITE RESULT DISPLAY 🔥 -->
                 <div id="out-size" class="result-display">--</div>
 
                 <button class="btn-sleek" id="btnAnalyze" style="width: 100px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
@@ -299,21 +298,22 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        // 🔥 SIKKIMAITOOL DATABASE CONFIG (CORRECTED)
+        // 🔥 FIREBASE CONFIGURATIONS UPDATED EXACTLY AS REQUESTED 🔥
         const firebaseConfig = {
-            apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
-            authDomain: "sikkimaitool.firebaseapp.com",
-            databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "sikkimaitool",
-            storageBucket: "sikkimaitool.firebasestorage.app",
-            messagingSenderId: "897487739765",
-            appId: "1:889152992462:web:34f9df57ee8372aa6b913c"
+            apiKey: "AIzaSyBEFijISin_7JLM7yyb0rs-Nk-O-vDAr3k",
+            authDomain: "teamdev-f50e6.firebaseapp.com",
+            databaseURL: "https://teamdev-f50e6-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "teamdev-f50e6",
+            storageBucket: "teamdev-f50e6.firebasestorage.app",
+            messagingSenderId: "215636530446",
+            appId: "1:215636530446:web:1f9ad68d45eb5c5200735f",
+            measurementId: "G-RZTWSGEP3Y"
         };
         const app = initializeApp(firebaseConfig); 
         const db = getDatabase(app);
         const DB_PATHS = { '30s': 'patterns_30s', '1m': 'patterns' };
 
-        window.AdminSettings = { prefixes: ["68", "67"], baselineUid: 0, freeTrials: 5 };
+        window.AdminSettings = { freeTrials: 5 };
 
         let currentUid = ""; let currentPrediction = ""; let currentPeriod = ""; let isWaitingAPI = false;
 
@@ -322,12 +322,12 @@
             static toast(msg) { 
                 const t = document.getElementById("toast"); 
                 t.innerText = msg; 
-                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
+                if(msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "var(--red)";
                     t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
                 } else {
                     t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff";
-                    t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(6, 182, 212, 0.3)";
+                    t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(230, 40, 40, 0.3)";
                 }
                 t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
             }
@@ -344,7 +344,8 @@
                 let btn = document.getElementById('authBtn'); 
                 
                 if(!uid) return Util.toast("ENTER UID FIRST");
-                if(!/^\d{7}$/.test(uid)) { return Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID"); }
+                
+                // 🔥 REMOVED THE 7 DIGIT & PREFIX RESTRICTIONS HERE 🔥
 
                 btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
@@ -374,10 +375,7 @@
                         this.grant(data.access_type || 'both', data); return;
                     }
                     
-                    let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
-                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID"); }
-
-                    if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. PLEASE CREATE NEW ID FOR TRIAL."); }
+                    // 🔥 REMOVED THE INVALID PREFIX CHECKS AND BASELINE REJECTIONS HERE 🔥
 
                     await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: getDeviceID(), status: "pending", timestamp: Date.now() });
                     document.getElementById('auth-input-area').classList.add('hidden');
@@ -404,7 +402,7 @@
                 btn.innerText = "SUBMITTING..."; btn.disabled = true;
                 try {
                     await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: window.currentDepositAmount || 0, status: "pending", timestamp: Date.now() });
-                    Util.toast("DEPOSIT REQUEST SENT TO ADMIN"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "#0f172a"; btn.style.borderColor = "#1e293b";
+                    Util.toast("DEPOSIT REQUEST SENT TO ADMIN"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "#222"; btn.style.borderColor = "#444";
                 } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
             }
 
@@ -462,7 +460,7 @@
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
                 let tDisplay = document.getElementById('displayTimer');
                 tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`;
-                tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
+                tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--gold)";
 
                 if(remSec === 3) isWaitingAPI = false;
                 if(remSec <= 2 && currentPrediction !== "" && !isWaitingAPI) {
@@ -554,7 +552,7 @@
                 
                 if(type === 'JACKPOT') {
                     const jpScreen = document.getElementById('jackpotScreen'); jpScreen.style.display = 'flex'; 
-                    setTimeout(() => { jpScreen.style.display = 'none'; mTitle.innerText = "💎 MEGA JACKPOT 💎"; mTitle.style.color = "var(--primary)"; card.classList.add('theme-jackpot'); miniScreen.style.display = 'flex'; }, 3000);
+                    setTimeout(() => { jpScreen.style.display = 'none'; mTitle.innerText = "💎 MEGA JACKPOT 💎"; mTitle.style.color = "var(--gold)"; card.classList.add('theme-jackpot'); miniScreen.style.display = 'flex'; }, 3000);
                 } else if(type === 'WIN') { mTitle.innerText = "🏆 EPIC WIN 🏆"; mTitle.style.color = "var(--green)"; card.classList.add('theme-win'); miniScreen.style.display = 'flex'; 
                 } else { mTitle.innerText = "❌ FAILED ❌"; mTitle.style.color = "var(--red)"; card.classList.add('theme-loss'); miniScreen.style.display = 'flex'; }
             }
@@ -569,8 +567,6 @@
             onValue(ref(db, 'settings/auth_rules'), snap => {
                 if(snap.exists()) {
                     let rules = snap.val();
-                    if(rules.prefixes) window.AdminSettings.prefixes = rules.prefixes.split(',').map(p => p.trim());
-                    if(rules.baselineUid) window.AdminSettings.baselineUid = parseInt(rules.baselineUid);
                     if(rules.freeTrials !== undefined) window.AdminSettings.freeTrials = parseInt(rules.freeTrials);
                 }
             });
