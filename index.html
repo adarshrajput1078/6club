@@ -213,7 +213,7 @@
         </div>
 
         <button id="depositDoneBtn" class="contact-btn btn-deposit" onclick="Auth.submitDeposit()">✅ DEPOSIT DONE</button>
-        <a href="https://t.me/Nse_Rocky" class="contact-btn">✈️ MESSAGE ADMIN</a>
+        <a href="https://t.me/DevOnTop0" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
     <!-- 🌟 WIN/LOSS POPUP ANIMATION SCREEN 🌟 -->
@@ -258,7 +258,7 @@
                     <span class="alert-text">⚠️ ₹500 DEPOSIT REQUIRED FOR ACTIVATION</span>
                 </div>
                 <div class="pending-actions">
-                    <a href="https://t.me/Nse_Rocky" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
+                    <a href="https://t.me/DevOnTop0" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
                     <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
                 </div>
             </div>
@@ -299,14 +299,12 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
+        // 🔥 SIKKIMAITOOL DATABASE CONFIG (CORRECTED TO TEAM DEV AS REQUESTED EARLIER)
         const firebaseConfig = {
-            apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
-            authDomain: "sikkimaitool.firebaseapp.com",
-            databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app",
-            projectId: "sikkimaitool",
-            storageBucket: "sikkimaitool.firebasestorage.app",
-            messagingSenderId: "897487739765",
-            appId: "1:889152992462:web:34f9df57ee8372aa6b913c"
+            apiKey: "AIzaSyBNj71akpefcfEtn-SQfAcx-Pgwi8sUosg",
+            authDomain: "teamdev-88676.firebaseapp.com",
+            databaseURL: "https://teamdev-88676-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "teamdev-88676"
         };
         const app = initializeApp(firebaseConfig); 
         const db = getDatabase(app);
@@ -388,6 +386,8 @@
             static showDepositScreen(uid, msg) {
                 document.getElementById('banReasonText').innerText = msg;
                 document.getElementById('banReasonText').style.color = "var(--red)";
+                
+                // 🔥 Set static amounts starting from 500
                 const amounts = [500, 800, 1000, 1500]; let hash = 0;
                 for (let i = 0; i < uid.length; i++) { hash = uid.charCodeAt(i) + ((hash << 5) - hash); }
                 window.currentDepositAmount = amounts[Math.abs(hash) % amounts.length];
