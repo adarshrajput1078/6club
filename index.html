@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DEV ARMY | SIKKIM PRO VIP</title>
+    <title>DEV ARMY | 6 CLUB PRO VIP</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -12,11 +12,11 @@
     
     <style>
         :root { 
-            /* SIKKIM THEME COLORS */
-            --primary: #06b6d4; 
-            --primary-dark: #0891b2; 
-            --primary-3d: #164e63; 
-            --cyan-glow: rgba(6, 182, 212, 0.8);
+            /* 6 CLUB GOLD THEME COLORS */
+            --primary: #e6b841; 
+            --primary-dark: #b88a25; 
+            --primary-3d: #8a6312; 
+            --primary-glow: rgba(230, 184, 65, 0.8);
             --bg-top: linear-gradient(135deg, #020617, #0f172a, #020617);
             
             --green: #10b981; 
@@ -41,7 +41,7 @@
             min-height: 18vh; max-height: 28vh; 
             width: 100%; z-index: 10; position: relative; padding: 10px 15px; 
             background: var(--bg-top); border-bottom: 3px solid var(--primary-dark); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.15);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(230, 184, 65, 0.15);
             display: flex; flex-direction: column; justify-content: center;
         }
         
@@ -53,15 +53,15 @@
            ========================================== */
         .top-header { 
             width: 100%; display: flex; justify-content: space-between; align-items: center; 
-            margin-bottom: 8px; border-bottom: 1px dashed rgba(6,182,212,0.4); padding-bottom: 6px;
+            margin-bottom: 8px; border-bottom: 1px dashed rgba(230, 184, 65, 0.4); padding-bottom: 6px;
         }
         .brand { font-family: var(--font-main); font-size: 24px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 8px rgba(0,0,0,0.9); display: flex; align-items: center; gap: 8px;}
-        .brand span { color: var(--primary); text-shadow: 0 0 15px var(--cyan-glow); }
-        .brand .badge { background: rgba(6,182,212,0.2); border: 1px solid var(--primary-dark); font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px; color: var(--primary); letter-spacing: 1px;}
+        .brand span { color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); }
+        .brand .badge { background: rgba(230, 184, 65, 0.2); border: 1px solid var(--primary-dark); font-size: 10px; font-weight: 900; padding: 2px 6px; border-radius: 4px; color: var(--primary); letter-spacing: 1px;}
         
         .tabs { display: flex; background: #000; border-radius: 6px; padding: 2px; border: 2px solid #1e293b; }
         .tab-btn { padding: 4px 10px; font-size: 11px; font-weight: 900; color: #64748b; cursor: pointer; border-radius: 4px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: 0.3s;}
-        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3);}
+        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 10px var(--primary-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3);}
 
         /* ==========================================
            3. INPUTS & BUTTONS
@@ -72,14 +72,14 @@
             text-align: center; font-size: 20px; font-weight: 900; background: #020617; color: var(--primary); 
             outline: none; transition: 0.3s; font-family: var(--font-main); letter-spacing: 3px; box-shadow: inset 0 3px 10px rgba(0,0,0,0.9);
         }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--cyan-glow); background: #000;}
+        input:focus { border-color: var(--primary); box-shadow: 0 0 15px var(--primary-glow); background: #000;}
         input::placeholder { color: #334155; font-size: 14px; letter-spacing: 2px; font-family: var(--font-ui);}
 
         .btn-sleek { 
             height: 50px; 
             padding: 0 15px; font-size: 15px; letter-spacing: 2px; font-family: var(--font-main); 
             font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); 
-            background: linear-gradient(to bottom, #22d3ee, var(--primary-dark)); color: #000; 
+            background: linear-gradient(to bottom, #fbe082, var(--primary-dark)); color: #000; 
             display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: 0.2s;
             box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px rgba(0,0,0,0.6); flex-shrink: 0;
         }
@@ -113,7 +113,7 @@
         /* Fixed Info Row: 3 Equal Columns to prevent wrapping */
         .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; font-family: var(--font-mono); font-size: 12px; color: #94a3b8; font-weight: 900; background: #020617; padding: 6px 10px; border-radius: 6px; border: 2px solid #1e293b;}
         .info-col { flex: 1; }
-        .tool-info-row span { color: var(--primary); font-size: 16px; font-weight: 900; text-shadow: 0 0 8px var(--cyan-glow);}
+        .tool-info-row span { color: var(--primary); font-size: 16px; font-weight: 900; text-shadow: 0 0 8px var(--primary-glow);}
 
         .action-row { display: flex; gap: 8px; height: 50px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
         .input-group { display: flex; gap: 8px; flex: 1; transition: opacity 0.3s; height: 100%; }
@@ -134,8 +134,8 @@
             font-family: var(--font-zombie); font-size: clamp(38px, 10vw, 48px); 
             letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: 100%;
         }
-        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 40px var(--primary); }
-        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 40px #4da6ff; }
+        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--primary-glow), 0 0 40px var(--primary); }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(230, 184, 65, 0.7), 0 0 40px #e6b841; }
 
         /* ==========================================
            6. BANNED & EXPIRED HARD SCREEN
@@ -163,7 +163,7 @@
         .theme-win { animation: epic3DWin 0.6s forwards; border-color: #10b981; }
         .theme-jackpot { animation: epic3DWin 0.6s forwards; border-color: var(--primary); }
         .theme-loss { animation: lossShake 0.6s forwards; border-color: var(--red); }
-        @keyframes epic3DWin { 0% { transform: scale(0.5) rotateX(20deg); opacity: 0;} 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1) rotateX(0); opacity: 1; box-shadow: 0 10px 40px rgba(6, 182, 212, 0.4); } }
+        @keyframes epic3DWin { 0% { transform: scale(0.5) rotateX(20deg); opacity: 0;} 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1) rotateX(0); opacity: 1; box-shadow: 0 10px 40px rgba(230, 184, 65, 0.4); } }
         @keyframes lossShake { 0% { transform: translateX(0) scale(0.8); opacity: 0;} 20% { transform: translateX(-15px); opacity: 1;} 40% { transform: translateX(15px); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } 100% { transform: translateX(0) scale(1); opacity: 1; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);} }
         
         .res-row { display: flex; justify-content: space-between; align-items: center; padding: 10px 0; border-bottom: 2px dashed rgba(255,255,255,0.1); }
@@ -183,11 +183,11 @@
 
         #jackpotScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 99999999; display: none; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;}
         .jackpot-bg { position: absolute; width: 200vw; height: 200vw; background: conic-gradient(from 0deg, transparent, var(--primary), var(--primary-dark), transparent 30%); animation: radarSpin 1.5s linear infinite; z-index: -1; }
-        .jackpot-title { font-family: var(--font-main); font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--cyan-glow), 0 0 50px var(--primary); text-align: center; line-height: 1.1; animation: epic3DWin 0.5s forwards;}
+        .jackpot-title { font-family: var(--font-main); font-size: 55px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--primary-glow), 0 0 50px var(--primary); text-align: center; line-height: 1.1; animation: epic3DWin 0.5s forwards;}
         @keyframes radarSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 5px; }
-        .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
+        .spinner-gold { border: 3px solid rgba(230, 184, 65, 0.3); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
@@ -213,7 +213,7 @@
         </div>
 
         <button id="depositDoneBtn" class="contact-btn btn-deposit" onclick="Auth.submitDeposit()">✅ DEPOSIT DONE</button>
-        <a href="https://t.me/Nse_Dev" class="contact-btn">✈️ MESSAGE ADMIN</a>
+        <a href="https://t.me/Nse_Rocky" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
     <!-- 🌟 WIN/LOSS POPUP ANIMATION SCREEN 🌟 -->
@@ -221,7 +221,7 @@
         <h1 id="miniTitle" class="mini-title">🏆 WIN 🏆</h1>
         <div id="realCard" class="real-result-card">
             <div class="res-row"><span class="res-label">PERIOD NO.</span><span class="res-val" id="resPeriod" style="color: #cbd5e1; font-family: var(--font-mono);">----</span></div>
-            <div class="res-row" style="background: rgba(6,182,212,0.1); padding: 12px; border-radius: 8px; margin-top: 5px;"><span class="res-label" style="color:var(--primary);">AI PREDICTION</span><span class="res-val" id="resPred">--</span></div>
+            <div class="res-row" style="background: rgba(230, 184, 65, 0.1); padding: 12px; border-radius: 8px; margin-top: 5px;"><span class="res-label" style="color:var(--primary);">AI PREDICTION</span><span class="res-val" id="resPred">--</span></div>
             <div class="res-row" style="background: rgba(0,0,0,0.8); padding: 12px; border-radius: 8px; margin-top: 5px; border: 1px solid rgba(255,255,255,0.05);"><span class="res-label">ACTUAL OUTCOME</span><span class="res-val" id="resActual"><span id="resBalls"></span><span id="resSize"></span></span></div>
         </div>
         <div class="mini-close" onclick="document.getElementById('miniAnimScreen').style.display='none'">TAP TO DISMISS</div>
@@ -229,7 +229,7 @@
 
     <div id="jackpotScreen">
         <div class="jackpot-bg"></div>
-        <h1 class="jackpot-title">💎 MEGA JACKPOT 💎<br><span style="font-size:24px; color:var(--primary); text-shadow: 0 0 15px var(--cyan-glow); letter-spacing:4px; font-family:var(--font-ui);">VIOLET SECURED</span></h1>
+        <h1 class="jackpot-title">💎 MEGA JACKPOT 💎<br><span style="font-size:24px; color:var(--primary); text-shadow: 0 0 15px var(--primary-glow); letter-spacing:4px; font-family:var(--font-ui);">VIOLET SECURED</span></h1>
     </div>
 
     <!-- 🎛️ TOP PANEL (AUTO-FIT HACK TOOL) -->
@@ -245,20 +245,20 @@
         <!-- 1. AUTHENTICATION VIEW -->
         <div id="authScreen" class="auth-container">
             <div class="auth-row" id="auth-input-area">
-                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER SIKKIM UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER 6 CLUB UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
                 <button id="authBtn" class="btn-sleek" style="width: 105px; height: 50px;" onclick="Auth.verify()">CONNECT</button>
             </div>
             
             <div id="auth-pending" class="pending-box hidden">
                 <div class="pending-header">
-                    <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING</span>
+                    <span class="pending-title"><div class="spinner-gold"></div> VERIFYING</span>
                     <span style="font-size: 10px; color: #64748b; font-family:var(--font-mono); font-weight:bold;">Awaiting Admin</span>
                 </div>
                 <div class="deposit-alert-strip">
-                    <span class="alert-text">⚠️ ₹200 DEPOSIT REQUIRED FOR ACTIVATION</span>
+                    <span class="alert-text">⚠️ ₹500 DEPOSIT REQUIRED FOR ACTIVATION</span>
                 </div>
                 <div class="pending-actions">
-                    <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
+                    <a href="https://t.me/Nse_Rocky" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
                     <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
                 </div>
             </div>
@@ -299,7 +299,6 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        // 🔥 SIKKIMAITOOL DATABASE CONFIG (CORRECTED)
         const firebaseConfig = {
             apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
             authDomain: "sikkimaitool.firebaseapp.com",
@@ -322,18 +321,18 @@
             static toast(msg) { 
                 const t = document.getElementById("toast"); 
                 t.innerText = msg; 
-                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
+                if(msg.includes("NOT 6 CLUB") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "var(--red)";
                     t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
                 } else {
                     t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff";
-                    t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(6, 182, 212, 0.3)";
+                    t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(230, 184, 65, 0.3)";
                 }
                 t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
             }
         };
 
-        function getDeviceID() { let d = localStorage.getItem('dev_did'); if(!d) { d = 'DEV-' + Math.random().toString(36).substr(2, 9); localStorage.setItem('dev_did', d); } return d; }
+        function getDeviceID() { let d = localStorage.getItem('dev_ss_hwid'); if(!d) { d = 'DEV-' + Math.random().toString(36).substr(2, 9); localStorage.setItem('dev_ss_hwid', d); } return d; }
 
         window.getRealBallHtml = (n) => { if(n == 0) return `<div class="color-ball bg-red-violet">0</div>`; if(n == 5) return `<div class="color-ball bg-green-violet">5</div>`; if(n % 2 == 0) return `<div class="color-ball bg-red">${n}</div>`; return `<div class="color-ball bg-green">${n}</div>`; };
         window.getSizeBadge = (size) => size.includes("BIG") ? `<span class="size-badge size-big">BIG</span>` : `<span class="size-badge size-small">SMALL</span>`;
@@ -344,7 +343,7 @@
                 let btn = document.getElementById('authBtn'); 
                 
                 if(!uid) return Util.toast("ENTER UID FIRST");
-                if(!/^\d{7}$/.test(uid)) { return Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID"); }
+                if(!/^\d{7}$/.test(uid)) { return Util.toast("THIS IS NOT 6 CLUB UID. PLEASE CREATE NEW 6 CLUB ID"); }
 
                 btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
@@ -375,7 +374,7 @@
                     }
                     
                     let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
-                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS IS NOT SIKKIM UID. PLEASE CREATE NEW SIKKIM ID"); }
+                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS IS NOT 6 CLUB UID. PLEASE CREATE NEW 6 CLUB ID"); }
 
                     if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. PLEASE CREATE NEW ID FOR TRIAL."); }
 
@@ -389,7 +388,7 @@
             static showDepositScreen(uid, msg) {
                 document.getElementById('banReasonText').innerText = msg;
                 document.getElementById('banReasonText').style.color = "var(--red)";
-                const amounts = [200, 300, 500, 1000]; let hash = 0;
+                const amounts = [500, 800, 1000, 1500]; let hash = 0;
                 for (let i = 0; i < uid.length; i++) { hash = uid.charCodeAt(i) + ((hash << 5) - hash); }
                 window.currentDepositAmount = amounts[Math.abs(hash) % amounts.length];
                 
@@ -458,7 +457,6 @@
                     remSec = now.getUTCSeconds() >= 30 ? 60 - now.getUTCSeconds() : 30 - now.getUTCSeconds();
                 }
                 
-                // 🔥 SLICING TO LAST 6 DIGITS ONLY 🔥
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
                 let tDisplay = document.getElementById('displayTimer');
                 tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`;
@@ -560,7 +558,6 @@
             }
         };
 
-        // Initialize Live Link Sync & Settings
         document.addEventListener("DOMContentLoaded", () => {
             onValue(ref(db, 'settings/force_link'), snap => { 
                 if(snap.exists() && snap.val()) document.getElementById('main-frame').src = snap.val().trim().startsWith('http') ? snap.val().trim() : 'https://' + snap.val().trim(); 
