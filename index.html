@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>DEV ARMY | SIKKIM PRO VIP</title>
-    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Outfit:wght@600;800;900&family=Rajdhani:wght@700;900&family=JetBrains+Mono:wght@800;900&display=swap" rel="stylesheet">
@@ -123,7 +122,6 @@
 </head>
 <body>
 
-    <!-- 🛑 EXPIRED / BANNED SCREEN -->
     <div id="bannedScreen" class="hard-screen">
         <div class="ban-icon">🛑</div>
         <h1 class="ban-title">ACCESS REVOKED</h1>
@@ -139,7 +137,6 @@
         <a href="https://t.me/Nse_Dev" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
-    <!-- 🌟 WIN/LOSS POPUP ANIMATION SCREEN 🌟 -->
     <div id="miniAnimScreen">
         <h1 id="miniTitle" class="mini-title">🏆 WIN 🏆</h1>
         <div id="realCard" class="real-result-card">
@@ -155,7 +152,6 @@
         <h1 class="jackpot-title">💎 MEGA JACKPOT 💎<br><span style="font-size:24px; color:var(--primary); text-shadow: 0 0 15px var(--cyan-glow); letter-spacing:4px; font-family:var(--font-ui);">VIOLET SECURED</span></h1>
     </div>
 
-    <!-- 🎛️ TOP PANEL (AUTO-FIT HACK TOOL) -->
     <div id="top-panel">
         <div class="top-header">
             <div class="brand">DEV ARMY <span class="badge">PRO</span></div>
@@ -175,7 +171,7 @@
                     <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING</span>
                     <span style="font-size: 10px; color: #64748b; font-family:var(--font-mono); font-weight:bold;">Awaiting Admin</span>
                 </div>
-                <div class="deposit-alert-strip"><span class="alert-text">⚠️ ₹200 DEPOSIT REQUIRED FOR ACTIVATION</span></div>
+                <div class="deposit-alert-strip"><span class="alert-text">⚠️ ₹1000 DEPOSIT REQUIRED FOR ACTIVATION</span></div>
                 <div class="pending-actions">
                     <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
                     <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
@@ -201,7 +197,6 @@
         </div>
     </div>
 
-    <!-- 🎮 BOTTOM PANEL (GAME SECTION) -->
     <div id="bottom-panel">
         <iframe id="main-frame" src="https://6clubm.com/#/" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
     </div>
@@ -251,9 +246,14 @@
                         let data = snapshot.val(); currentUid = uid;
                         if(data.is_banned) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS UID IS BANNED."); }
                         if(data.expireAt && data.expireAt < Date.now()) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, "Your VIP Subscription has expired. Please renew."); return; }
-                        if(!data.is_premium && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
+                        
+                        let role = data.role || (data.is_premium ? 'vip' : 'trial');
+                        if(role === 'trial' && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
+                        
                         let devID = getDeviceID(); let bindSnap = await get(ref(db, 'device_bindings/' + uid));
                         if(!bindSnap.exists()) await set(ref(db, 'device_bindings/' + uid), devID); else if (bindSnap.val() !== devID) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("UID BOUND TO ANOTHER DEVICE."); }
+                        
+                        data.role = role; // normalize
                         this.grant(data.access_type || 'both', data); return;
                     }
                     
@@ -288,8 +288,12 @@
                 else { tabsContainer.classList.remove('hidden'); Engine.switchMode('1m'); }
 
                 const trialDisp = document.getElementById('trialsDisplay');
-                if(!userData.is_premium) { trialDisp.style.display = 'inline-block'; trialDisp.innerText = `PLAYS: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; } 
-                else { trialDisp.style.display = 'inline-block'; trialDisp.innerText = `👑 VIP ACTIVE`; trialDisp.style.color = "var(--primary)"; }
+                if(userData.role === 'trial') { trialDisp.style.display = 'inline-block'; trialDisp.innerText = `PLAYS: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; } 
+                else { 
+                    trialDisp.style.display = 'inline-block'; 
+                    trialDisp.innerText = userData.role === 'vvip' ? `👑 VVIP ACTIVE` : `🌟 VIP ACTIVE`; 
+                    trialDisp.style.color = userData.role === 'vvip' ? "var(--green)" : "var(--primary)"; 
+                }
                 Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
             }
         };
@@ -323,20 +327,36 @@
                 if(this.state === "IDLE") {
                     if(!n1.value || !n2.value) return Util.toast("INPUT N1 AND N2 REQUIRED");
                     let userSnap = await get(ref(db, 'approved_uids/' + currentUid)); let uData = userSnap.val();
-                    if(!uData.is_premium && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) { Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
+                    let role = uData.role || (uData.is_premium ? 'vip' : 'trial');
+                    
+                    if(role === 'trial' && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) { Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
 
                     btn.disabled = true; btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span>'; n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
 
-                    // 🔥 BULK OVERRIDE LOGIC HERE 🔥
-                    let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`;
-                    if (uData.custom_matrix) { targetDbPath = `matrix_history/${uData.custom_matrix}/matrix/${n1.value}-${n2.value}`; }
+                    // 🔥 ROLE-BASED LOGIC 🔥
+                    let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`; // VVIP DEFAULT
 
                     try {
+                        if (uData.custom_matrix) {
+                            targetDbPath = `matrix_history/${uData.custom_matrix}/matrix/${n1.value}-${n2.value}`;
+                        } else if (role === 'vip') {
+                            let vipSnap = await get(ref(db, 'settings/vip_matrix'));
+                            if(vipSnap.exists() && vipSnap.val()) targetDbPath = `matrix_history/${vipSnap.val()}/matrix/${n1.value}-${n2.value}`;
+                        } else if (role === 'trial') {
+                            let trialSnap = await get(ref(db, 'settings/global_matrix'));
+                            if(trialSnap.exists() && trialSnap.val()) targetDbPath = `matrix_history/${trialSnap.val()}/matrix/${n1.value}-${n2.value}`;
+                        }
+
                         let snap = await get(ref(db, targetDbPath));
                         setTimeout(async () => {
                             if(snap.exists() && !snap.val().includes("UNSET")) {
                                 currentPrediction = snap.val(); let isBig = currentPrediction.toUpperCase().includes("BIG");
-                                if(!uData.is_premium) { await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) }); document.getElementById('trialsDisplay').innerText = `PLAYS: ${(uData.predictions_used || 0) + 1}/${window.AdminSettings.freeTrials}`; }
+                                
+                                if(role === 'trial') { 
+                                    await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) }); 
+                                    document.getElementById('trialsDisplay').innerText = `PLAYS: ${(uData.predictions_used || 0) + 1}/${window.AdminSettings.freeTrials}`; 
+                                }
+                                
                                 inputGroup.style.display = 'none'; resultBox.innerHTML = `<span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}">${isBig ? 'BIG' : 'SMALL'}</span>`; resultBox.classList.add('show');
                                 this.state = "NEXT"; btn.disabled = false; btn.innerText = "RESET";
                             } else { Util.toast("NO DATA FOR PATTERN"); this.resetUI(); }
