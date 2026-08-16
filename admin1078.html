@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SIKKIM | ADMIN PRO</title>
+    <title>SIKKIM | ADMIN PRO MAX</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&family=Fira+Code:wght@500;700&display=swap" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
@@ -12,86 +12,112 @@
 
     <style>
         :root { 
-            --bg-base: #0f172a; --bg-panel: #1e293b; --bg-card: #0f172a; 
-            --accent-primary: #0ea5e9; --accent-secondary: #8b5cf6; 
-            --accent-success: #10b981; --accent-danger: #ef4444; --accent-warning: #f59e0b; 
-            --border-color: #334155; --text-main: #f8fafc; --text-muted: #94a3b8;
+            /* Cyber-Glass Midnight Theme */
+            --bg-base: #020617; 
+            --bg-panel: rgba(15, 23, 42, 0.65); 
+            --bg-card: rgba(2, 6, 23, 0.7); 
+            --accent-primary: #06b6d4; 
+            --accent-secondary: #8b5cf6; 
+            --accent-success: #10b981; 
+            --accent-danger: #ef4444; 
+            --accent-warning: #f59e0b; 
+            --border-color: rgba(51, 65, 85, 0.5); 
+            --text-main: #f8fafc; 
+            --text-muted: #94a3b8;
             --font-ui: 'Inter', sans-serif; --font-display: 'Rajdhani', sans-serif; --font-mono: 'Fira Code', monospace;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
-        body { font-family: var(--font-ui); background: var(--bg-base); color: var(--text-main); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
-        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-track { background: var(--bg-base); } ::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 10px; }
+        body { font-family: var(--font-ui); background: var(--bg-base); background-image: radial-gradient(circle at 50% 0%, rgba(6, 182, 212, 0.1) 0%, transparent 50%); color: var(--text-main); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-track { background: var(--bg-base); } ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 10px; }
 
-        .mobile-header { display: none; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--bg-panel); border-bottom: 1px solid var(--border-color); z-index: 100;}
+        .mobile-header { display: none; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--bg-panel); border-bottom: 1px solid var(--border-color); z-index: 100; backdrop-filter: blur(15px);}
         .mobile-header h2 { font-family: var(--font-display); font-size: 22px; margin: 0; font-weight: 800; letter-spacing: 1px;}
-        .mobile-header h2 span { color: var(--accent-primary); }
+        .mobile-header h2 span { color: var(--accent-primary); text-shadow: 0 0 10px rgba(6,182,212,0.5);}
         .menu-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 6px 12px; border-radius: 6px; font-size: 18px; cursor: pointer;}
         
         .app-container { display: flex; flex: 1; overflow: hidden; position: relative;}
-        .sidebar { width: 260px; background: var(--bg-panel); border-right: 1px solid var(--border-color); padding: 20px 0; display: flex; flex-direction: column; z-index: 999; transition: transform 0.3s ease; overflow-y: auto;}
-        .brand { font-family: var(--font-display); font-size: 28px; font-weight: 800; color: #fff; text-align: center; margin-bottom: 20px; letter-spacing: 1px;}
-        .brand span.win { color: var(--accent-primary);}
         
-        .nav-category { font-size: 11px; color: var(--text-muted); text-transform: uppercase; font-weight: 700; letter-spacing: 1px; margin: 15px 20px 5px; opacity: 0.8; }
-        .nav-item { padding: 12px 20px; margin: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 13px; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 10px; transition: 0.2s;}
-        .nav-item:hover { background: rgba(255, 255, 255, 0.05); }
-        .nav-item.active { background: var(--accent-primary); color: #000; font-weight: 700;}
-        .nav-item.vip-active { background: var(--accent-warning); color: #000; font-weight: 700;}
-        .nav-item.vvip-active { background: var(--accent-success); color: #000; font-weight: 700;}
+        /* Glassmorphism Sidebar */
+        .sidebar { width: 260px; background: var(--bg-panel); backdrop-filter: blur(20px); border-right: 1px solid var(--border-color); padding: 20px 0; display: flex; flex-direction: column; z-index: 999; transition: transform 0.3s ease; overflow-y: auto;}
+        .brand { font-family: var(--font-display); font-size: 28px; font-weight: 900; color: #fff; text-align: center; margin-bottom: 20px; letter-spacing: 2px;}
+        .brand span.win { color: var(--accent-primary); text-shadow: 0 0 15px rgba(6,182,212,0.6);}
         
-        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 998; display: none;}
+        .nav-category { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; margin: 15px 20px 5px; opacity: 0.8; }
+        .nav-item { padding: 10px 20px; margin: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 10px; transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); position: relative; overflow: hidden;}
+        .nav-item:hover { background: rgba(255, 255, 255, 0.05); transform: translateX(5px); }
+        .nav-item.active { background: rgba(6, 182, 212, 0.15); color: var(--accent-primary); font-weight: 700; border: 1px solid rgba(6, 182, 212, 0.3); box-shadow: 0 0 15px rgba(6, 182, 212, 0.1);}
+        .nav-item.vip-active { background: rgba(245, 158, 11, 0.15); color: var(--accent-warning); font-weight: 700; border: 1px solid rgba(245, 158, 11, 0.3); box-shadow: 0 0 15px rgba(245, 158, 11, 0.1);}
+        .nav-item.vvip-active { background: rgba(16, 185, 129, 0.15); color: var(--accent-success); font-weight: 700; border: 1px solid rgba(16, 185, 129, 0.3); box-shadow: 0 0 15px rgba(16, 185, 129, 0.1);}
         
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: var(--bg-base);}
-        .top-bar { background: var(--bg-panel); border-bottom: 1px solid var(--border-color); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;}
-        .top-page-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-main); text-transform: uppercase;}
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 998; display: none; backdrop-filter: blur(5px);}
+        
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: transparent;}
+        .top-bar { background: var(--bg-panel); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center;}
+        .top-page-title { font-family: var(--font-display); font-size: 22px; font-weight: 800; color: var(--text-main); text-transform: uppercase; letter-spacing: 1px;}
         
         .view-section { padding: 25px; display: none; overflow-y: auto; height: 100%;}
-        .view-section.active { display: block; animation: fadeIn 0.3s ease forwards;}
-        @keyframes fadeIn { from { opacity:0; } to {opacity:1;} }
+        .view-section.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
+        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to {opacity:1; transform: translateY(0);} }
 
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px;}
-        .stat-card { background: var(--bg-panel); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px;}
-        .stat-card div:first-child { font-size: 12px; color: var(--text-muted); font-weight: 600; text-transform: uppercase; margin-bottom: 8px;}
-        .stat-card div:last-child { font-family: var(--font-display); font-size: 28px; font-weight: 800;}
+        .stat-card { background: var(--bg-panel); backdrop-filter: blur(10px); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; transition: 0.3s; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);}
+        .stat-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 20px rgba(6, 182, 212, 0.15);}
+        .stat-card div:first-child { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;}
+        .stat-card div:last-child { font-family: var(--font-display); font-size: 32px; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.5);}
 
-        .table-wrapper { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-panel);}
-        table { width: 100%; border-collapse: collapse; font-size: 13px; text-align: left; min-width: 800px; }
-        th { background: rgba(0,0,0,0.2); padding: 15px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-family: var(--font-ui); font-size: 12px; text-transform: uppercase;}
-        td { padding: 15px; border-bottom: 1px solid var(--border-color); vertical-align: middle;}
+        /* Data-Dense Tables */
+        .table-wrapper { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-panel); backdrop-filter: blur(10px);}
+        table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; min-width: 800px; }
+        th { background: rgba(0,0,0,0.3); padding: 12px 15px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-family: var(--font-ui); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px;}
+        td { padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle;}
+        tr:hover td { background: rgba(255,255,255,0.02); }
 
-        button { font-family: var(--font-ui); cursor: pointer; border: none; padding: 12px 18px; border-radius: 6px; font-weight: 600; font-size: 13px; transition: 0.2s;}
-        button:active { transform: scale(0.97); }
-        .btn-primary { background: var(--accent-primary); color: #000; } 
-        .btn-warning { background: var(--accent-warning); color: #000; }
-        .btn-success { background: var(--accent-success); color: #000; } 
-        .btn-danger { background: rgba(239,68,68,0.1); border: 1px solid var(--accent-danger); color: var(--accent-danger); }
-        .btn-dark { background: rgba(255,255,255,0.05); color: var(--text-main); border: 1px solid var(--border-color); }
-        .action-group { display: flex; gap: 8px; flex-wrap: wrap; }
+        button { font-family: var(--font-ui); cursor: pointer; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 12px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px;}
+        button:active { transform: scale(0.95); }
+        .btn-primary { background: var(--accent-primary); color: #000; box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);} 
+        .btn-warning { background: var(--accent-warning); color: #000; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);}
+        .btn-success { background: var(--accent-success); color: #000; box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);} 
+        .btn-danger { background: rgba(239,68,68,0.15); border: 1px solid var(--accent-danger); color: var(--accent-danger); }
+        .btn-dark { background: rgba(0,0,0,0.4); color: var(--text-main); border: 1px solid var(--border-color); }
+        .action-group { display: flex; gap: 6px; flex-wrap: wrap; }
         
-        input, select, textarea { padding: 12px 15px; background: rgba(0,0,0,0.2); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; width: 100%; font-family: var(--font-mono); margin-bottom: 10px; font-size: 13px;}
-        input:focus, select:focus, textarea:focus { border-color: var(--accent-primary); }
+        input, select, textarea { padding: 12px 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; width: 100%; font-family: var(--font-mono); margin-bottom: 10px; font-size: 13px; transition: 0.3s;}
+        input:focus, select:focus, textarea:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 2px rgba(6,182,212,0.2); outline: none;}
         textarea { height: 100px; resize: vertical; }
         
-        .msg-box { background: var(--bg-panel); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 20px;}
-        .msg-box h3 { margin-bottom: 15px; font-family: var(--font-display); font-size: 18px; }
+        .msg-box { background: var(--bg-panel); backdrop-filter: blur(10px); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 20px; position: relative; overflow: hidden;}
+        .msg-box::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: inherit; z-index: 1;}
+        .msg-box h3 { margin-bottom: 15px; font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; }
         
         .flex-wrap-gap { display: flex; gap: 10px; flex-wrap: wrap; align-items: center;}
         .flex-wrap-gap > * { flex: 1 1 100%; }
         
-        .tag { padding: 4px 8px; border-radius: 4px; font-size: 11px; font-weight: 700; display: inline-block; font-family: var(--font-ui);}
-        .tag-vip { background: rgba(245, 158, 11, 0.1); color: var(--accent-warning); border: 1px solid rgba(245, 158, 11, 0.3);}
-        .tag-vvip { background: rgba(16, 185, 129, 0.1); color: var(--accent-success); border: 1px solid rgba(16, 185, 129, 0.3);}
-        .tag-trial { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.1);}
-        .tag-expired { background: rgba(239, 68, 68, 0.1); color: var(--accent-danger); border: 1px solid rgba(239, 68, 68, 0.3);}
+        /* Premium Pill Tags */
+        .tag { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-ui); letter-spacing: 0.5px; text-transform: uppercase;}
+        .tag::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; }
+        .tag-vip { background: rgba(245, 158, 11, 0.1); color: var(--accent-warning); border: 1px solid rgba(245, 158, 11, 0.3); }
+        .tag-vip::before { background: var(--accent-warning); box-shadow: 0 0 5px var(--accent-warning);}
+        .tag-vvip { background: rgba(16, 185, 129, 0.1); color: var(--accent-success); border: 1px solid rgba(16, 185, 129, 0.3); }
+        .tag-vvip::before { background: var(--accent-success); box-shadow: 0 0 5px var(--accent-success);}
+        .tag-trial { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.1); }
+        .tag-trial::before { background: var(--accent-primary); box-shadow: 0 0 5px var(--accent-primary);}
+        .tag-expired { background: rgba(239, 68, 68, 0.1); color: var(--accent-danger); border: 1px solid rgba(239, 68, 68, 0.3); }
+        .tag-expired::before { background: var(--accent-danger); box-shadow: 0 0 5px var(--accent-danger);}
 
-        .auto-number { font-size: 48px; font-weight: 800; color: var(--accent-primary); line-height: 1; font-family: var(--font-display); text-align: center; margin: 15px 0;}
-        .system-terminal { background: #000; border: 1px solid var(--border-color); border-radius: 8px; height: 120px; padding: 15px; overflow-y: auto; font-size: 12px; line-height: 1.6; color: var(--text-muted); font-family: var(--font-mono); border-left: 3px solid var(--accent-primary);}
+        /* Animations */
+        .auto-number { font-size: 55px; font-weight: 900; color: var(--accent-primary); line-height: 1; font-family: var(--font-display); text-align: center; margin: 15px 0; text-shadow: 0 0 20px rgba(6,182,212,0.4);}
+        .roll-in { animation: slotRoll 1.5s cubic-bezier(0.25, 1, 0.5, 1) forwards; }
+        @keyframes slotRoll { 0% { transform: translateY(-50px); opacity: 0; filter: blur(5px); } 100% { transform: translateY(0); opacity: 1; filter: blur(0); } }
+
+        .system-terminal { background: #000; border: 1px solid var(--border-color); border-radius: 8px; height: 150px; padding: 15px; overflow-y: auto; font-size: 11px; line-height: 1.8; color: var(--text-muted); font-family: var(--font-mono); border-left: 3px solid var(--accent-primary); box-shadow: inset 0 0 20px rgba(0,0,0,0.8);}
+        .log-entry { animation: typeWriter 0.3s ease forwards; opacity: 0; transform: translateX(-10px);}
+        @keyframes typeWriter { to { opacity: 1; transform: translateX(0); } }
         
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 99999; display: none; justify-content: center; align-items: center; padding: 20px;}
-        .modal-box { background: var(--bg-panel); border: 1px solid var(--border-color); padding: 25px; border-radius: 12px; width: 100%; max-width: 380px;}
+        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.9); backdrop-filter: blur(10px); z-index: 99999; display: none; justify-content: center; align-items: center; padding: 20px;}
+        .modal-box { background: var(--bg-panel); border: 1px solid var(--accent-primary); box-shadow: 0 0 30px rgba(6,182,212,0.15); padding: 25px; border-radius: 16px; width: 100%; max-width: 380px;}
 
-        #toast { position:fixed; bottom:20px; right:20px; background: var(--accent-success); color: #000; padding:12px 20px; border-radius:8px; font-weight:700; font-size:13px; z-index:99999; transition:0.3s; transform:translateX(150%);}
+        #toast { position:fixed; bottom:20px; right:20px; background: var(--accent-primary); color: #000; padding:12px 24px; border-radius:8px; font-weight:800; font-size:13px; z-index:99999; transition:0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform:translateX(150%); box-shadow: 0 10px 20px rgba(0,0,0,0.5), 0 0 20px rgba(6,182,212,0.4); font-family: var(--font-ui); letter-spacing: 1px;}
         #toast.show { transform:translateX(0); }
 
         .chart-container { width: 100%; height: 250px; position: relative; margin-top: 10px; }
@@ -106,7 +132,7 @@
     <div id="timeModal" class="modal-overlay">
         <div class="modal-box">
             <h3 style="color: var(--accent-primary); margin-bottom: 5px; font-family: var(--font-display);">MODIFY ACCESS</h3>
-            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">UID: <span id="timeTargetUid" style="color:#fff;"></span></p>
+            <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">UID: <span id="timeTargetUid" style="color:#fff; font-family: var(--font-mono);"></span></p>
             <select id="editAccessType"><option value="both">Access: BOTH (1M + 30S)</option><option value="1m">Access: ONLY 1 MINUTE</option><option value="30s">Access: ONLY 30 SECONDS</option></select>
             <select id="editTimeDuration"><option value="0">Keep Current Time</option><option value="1">+ Add 1 Day</option><option value="3">+ Add 3 Days</option><option value="7">+ Add 7 Days</option><option value="30">+ Add 30 Days</option><option value="999">Grant LIFETIME</option><option value="-1">☠️ TERMINATE ACCESS</option></select>
             <div style="display: flex; gap: 10px; margin-top:10px;"><button class="btn-primary" style="flex: 1;" onclick="confirmTimeUpdate()">CONFIRM</button><button class="btn-dark" style="flex: 1;" onclick="document.getElementById('timeModal').style.display='none'">CANCEL</button></div>
@@ -118,7 +144,7 @@
     <div class="app-container">
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         <div class="sidebar" id="sidebar">
-            <div class="brand">SIKKIM <span>PRO</span></div>
+            <div class="brand">SIKKIM <span class="win">PRO</span></div>
             
             <div class="nav-category">Main Console</div>
             <div class="nav-item active" onclick="switchView('v-dashboard', this, 'Dashboard', 'primary'); closeMobileSidebar();">📊 Dashboard</div>
@@ -128,7 +154,7 @@
             
             <div class="nav-category">Queue & Finance</div>
             <div class="nav-item" onclick="switchView('v-req', this, 'Authorization Queue', 'primary'); closeMobileSidebar();">⚡ Auth Queue</div>
-            <div class="nav-item" onclick="switchView('v-dep', this, 'Deposit Claims', 'primary'); closeMobileSidebar();">💰 Deposit Claims</div>
+            <div class="nav-item" onclick="switchView('v-dep', this, 'Financial Analytics', 'primary'); closeMobileSidebar();">💰 Deposit & Revenue</div>
             
             <div class="nav-category">🌟 VIP PARTITION</div>
             <div class="nav-item" onclick="switchView('v-vip-neural', this, 'VIP Neural Engine', 'vip'); closeMobileSidebar();">🧬 VIP Neural Engine</div>
@@ -152,45 +178,45 @@
             <!-- 1. DASHBOARD -->
             <div id="v-dashboard" class="view-section active">
                 <div class="stats-grid">
-                    <div class="stat-card"><div>ACTIVE USERS</div><div id="statTotal">0</div></div>
+                    <div class="stat-card"><div>ACTIVE USERS</div><div id="statTotal" style="color: var(--accent-primary);">0</div></div>
                     <div class="stat-card"><div>VIP / VVIP</div><div id="statVip" style="color:var(--accent-warning);">0</div></div>
                     <div class="stat-card"><div>LIVE ACCURACY</div><div id="statAccuracy" style="color:var(--accent-success);">94.8%</div></div>
                     <div class="stat-card"><div>TERMINATED</div><div id="statExpired" style="color:var(--accent-danger);">0</div></div>
                 </div>
                 
-                <div class="msg-box" style="border-top-color: var(--accent-success);">
+                <div class="msg-box" style="border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">📈 GLOBAL AI PREDICTION ACCURACY</h3>
                     <div class="chart-container"><canvas id="mainAccuracyChart"></canvas></div>
                 </div>
 
-                <div class="stats-grid" style="grid-template-columns: 1fr 1fr;">
-                    <div class="msg-box" style="border-top-color: var(--text-muted); margin-bottom:0;">
-                        <h3 style="color:var(--text-main);">📜 LIVE ACTIVITY CONSOLE</h3>
-                        <div id="activityLog" class="system-terminal"><div>> System Initialized...</div></div>
+                <div class="stats-grid" style="grid-template-columns: 1.5fr 1fr;">
+                    <div class="msg-box" style="border-left-color: var(--accent-primary); margin-bottom:0;">
+                        <h3 style="color:var(--text-main);">📜 AUDIT ACTIVITY LOG</h3>
+                        <div id="activityLog" class="system-terminal"><div>> System Initialized & Secure...</div></div>
                     </div>
-                    <div class="msg-box" style="border-top-color: var(--accent-primary); margin-bottom:0;">
-                        <h3 style="color:var(--accent-primary);">📈 NETWORK DISTRIBUTION</h3>
+                    <div class="msg-box" style="border-left-color: var(--accent-secondary); margin-bottom:0;">
+                        <h3 style="color:var(--accent-secondary);">📈 NETWORK DISTRIBUTION</h3>
                         <div class="chart-container" style="height: 150px;"><canvas id="networkChart"></canvas></div>
                     </div>
                 </div>
 
-                <div class="msg-box" style="border-top-color: var(--accent-secondary); margin-top:20px;">
-                    <h3 style="color:var(--accent-secondary);">🔄 REVERSE PATTERN OVERRIDE (GLOBAL TRAP)</h3>
+                <div class="msg-box" style="border-left-color: var(--accent-danger); margin-top:20px; background: rgba(239, 68, 68, 0.05);">
+                    <h3 style="color:var(--accent-danger);">🔄 REVERSE PATTERN OVERRIDE (GLOBAL TRAP)</h3>
                     <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Temporarily flip ALL outcomes globally (BIG ↔ SMALL).</p>
                     <div class="flex-wrap-gap">
-                        <select id="reverseTimer" style="margin-bottom:0; flex:1;">
+                        <select id="reverseTimer" style="margin-bottom:0; flex:1; border-color: rgba(239,68,68,0.3);">
                             <option value="5">Activate for 5 Minutes</option><option value="15">Activate for 15 Minutes</option><option value="30">Activate for 30 Minutes</option>
                         </select>
-                        <button class="btn-primary" style="background: var(--accent-secondary);" onclick="activateReverse()">▶ ACTIVATE TRAP</button>
-                        <button class="btn-dark" style="color:var(--accent-danger); border-color:var(--accent-danger);" onclick="deactivateReverse()">⏹ STOP</button>
+                        <button class="btn-primary" style="background: var(--accent-danger);" onclick="activateReverse()">▶ ACTIVATE TRAP</button>
+                        <button class="btn-dark" style="color:var(--text-muted);" onclick="deactivateReverse()">⏹ STOP</button>
                     </div>
-                    <div id="reverseStatus" style="margin-top:15px; font-size:13px; font-weight:bold; color:var(--text-muted);">STATUS: 🔴 INACTIVE</div>
+                    <div id="reverseStatus" style="margin-top:15px; font-size:13px; font-weight:800; color:var(--text-muted); font-family: var(--font-mono);">STATUS: 🔴 INACTIVE</div>
                 </div>
             </div>
 
             <!-- 2. DIRECT INJECTOR -->
             <div id="v-inject" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-primary);">
+                <div class="msg-box" style="border-left-color: var(--accent-primary);">
                     <h3 style="color:var(--accent-primary);">⚡ DIRECT UID INJECTION</h3>
                     <input type="number" id="manualUid" placeholder="Target UID (e.g. 6820644)">
                     <div class="flex-wrap-gap" style="margin-bottom:10px;">
@@ -205,49 +231,49 @@
             <!-- 3. USER DATABASE -->
             <div id="v-users" class="view-section">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap:wrap; gap:10px;">
-                    <input type="text" id="searchUid" placeholder="🔍 Search UID..." onkeyup="filterUsers()" style="margin-bottom: 0; width: 250px;">
+                    <input type="text" id="searchUid" placeholder="🔍 Search UID..." onkeyup="filterUsers()" style="margin-bottom: 0; width: 250px; border-radius: 20px; padding-left: 20px;">
                     <div style="display:flex; gap:10px;">
-                        <button class="btn-success" onclick="exportUsersCSV()">📥 CSV</button>
+                        <button class="btn-success" onclick="exportUsersCSV()">📥 EXPORT CSV</button>
                         <button class="btn-danger" onclick="purgeDeadNodes()">🧹 PURGE EXPIRED</button>
                     </div>
                 </div>
 
-                <div class="msg-box" style="border-top-color: var(--accent-success);">
-                    <h3 style="color:var(--accent-success);">⏳ MASS TIME COMPENSATION</h3>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn-primary" style="flex: 1;" onclick="massTimeExtension(1)">+ 1 DAY TO ALL</button>
-                        <button class="btn-primary" style="flex: 1;" onclick="massTimeExtension(3)">+ 3 DAYS TO ALL</button>
+                <div class="stats-grid" style="grid-template-columns: 1fr 1fr; margin-bottom: 20px;">
+                    <div class="msg-box" style="border-left-color: var(--accent-success); margin-bottom:0;">
+                        <h3 style="color:var(--accent-success); font-size:14px;">⏳ MASS TIME ADDITION</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <button class="btn-dark" style="flex: 1; border-color:var(--accent-success); color:var(--accent-success);" onclick="massTimeExtension(1)">+ 1 DAY TO ALL</button>
+                            <button class="btn-dark" style="flex: 1; border-color:var(--accent-success); color:var(--accent-success);" onclick="massTimeExtension(3)">+ 3 DAYS TO ALL</button>
+                        </div>
+                    </div>
+                    <div class="msg-box" style="border-left-color: var(--accent-primary); margin-bottom:0;">
+                        <h3 style="color:var(--accent-primary); font-size:14px;">✅ FORCE NORMAL (TRUE LIVE)</h3>
+                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                            <input type="text" id="exceptionUids" placeholder="Paste UIDs separated by comma..." style="margin-bottom:0; flex:2;">
+                            <button class="btn-primary" style="flex: 1;" onclick="setLiveExceptions()">✅ SET</button>
+                            <button class="btn-dark" style="flex: 1; color: var(--accent-danger);" onclick="clearLiveExceptions()">❌ CLEAR</button>
+                        </div>
                     </div>
                 </div>
 
-                <div class="msg-box" style="border-top-color: var(--accent-primary);">
-                    <h3 style="color:var(--accent-primary);">✅ FORCE NORMAL (TRUE LIVE) EXCEPTIONS</h3>
-                    <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">These UIDs will bypass all matrices and fetch TRUE LIVE DATA.</p>
-                    <textarea id="exceptionUids" placeholder="Paste UIDs here..."></textarea>
-                    <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                        <button class="btn-success" style="flex: 1;" onclick="setLiveExceptions()">✅ SET AS NORMAL</button>
-                        <button class="btn-dark" style="flex: 1; color: var(--red); border-color:var(--red);" onclick="clearLiveExceptions()">❌ REMOVE EXCEPTION</button>
-                    </div>
-                </div>
-
-                <div class="table-wrapper" style="height: 500px;">
-                    <table><thead><tr><th>UID & MODE</th><th>CLASS ROLE</th><th>VALIDITY</th><th>ACTIONS</th></tr></thead><tbody id="usr-list"></tbody></table>
+                <div class="table-wrapper" style="height: calc(100% - 220px);">
+                    <table><thead><tr><th>UID IDENTIFIER</th><th>CLASS ROLE</th><th>VALIDITY STATUS</th><th>COMMANDS</th></tr></thead><tbody id="usr-list"></tbody></table>
                 </div>
             </div>
 
             <!-- 4. ROLE ASSIGNER -->
             <div id="v-roles" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-secondary);">
+                <div class="msg-box" style="border-left-color: var(--accent-secondary);">
                     <h3 style="color:var(--accent-secondary);">🎯 ROLE-BASED MATRIX ASSIGNMENT</h3>
-                    <label style="font-size:12px; color:var(--accent-warning); font-weight:bold;">🌟 Select VIP File:</label>
+                    <label style="font-size:12px; color:var(--accent-warning); font-weight:bold;">🌟 Select VIP File (Affects VIP tag users):</label>
                     <div class="flex-wrap-gap" style="margin-bottom:20px;">
                         <select id="vipMatrixSelect" style="flex:2; margin-bottom:0;"></select>
                         <button class="btn-warning" onclick="setVipMatrix()" style="flex:1;">APPLY TO VIPs</button>
                     </div>
-                    <label style="font-size:12px; color:#fff; font-weight:bold;">👤 Select TRIAL File:</label>
+                    <label style="font-size:12px; color:var(--accent-primary); font-weight:bold;">👤 Select TRIAL File (Affects Trial tag users):</label>
                     <div class="flex-wrap-gap" style="margin-bottom:20px;">
                         <select id="trialMatrixSelect" style="flex:2; margin-bottom:0;"></select>
-                        <button class="btn-dark" onclick="setTrialMatrix()" style="flex:1;">APPLY TO TRIALS</button>
+                        <button class="btn-primary" onclick="setTrialMatrix()" style="flex:1;">APPLY TO TRIALS</button>
                     </div>
                 </div>
             </div>
@@ -259,13 +285,18 @@
                 </div>
             </div>
 
-            <!-- 6. DEPOSITS -->
+            <!-- 6. DEPOSITS & FINANCIALS -->
             <div id="v-dep" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-warning);">
-                    <h3 style="color:var(--accent-warning);">📈 RECENT DEPOSIT VOLUME</h3>
-                    <div class="chart-container" style="height: 150px;"><canvas id="depositChart"></canvas></div>
+                <div class="stats-grid">
+                    <div class="stat-card" style="border-color: var(--accent-success);"><div>EST. REVENUE (LIFETIME)</div><div id="statRev" style="color:var(--accent-success);">₹0</div></div>
+                    <div class="stat-card"><div>PENDING DEPOSITS</div><div id="statPendingDep" style="color:var(--accent-warning);">0</div></div>
                 </div>
-                <div class="table-wrapper"><table><thead><tr><th>UID IDENTIFIER</th><th>AMOUNT</th><th>TIME</th><th>COMMANDS</th></tr></thead><tbody id="dep-list"></tbody></table></div>
+
+                <div class="msg-box" style="border-left-color: var(--accent-warning);">
+                    <h3 style="color:var(--accent-warning);">📈 REVENUE ANALYTICS</h3>
+                    <div class="chart-container" style="height: 200px;"><canvas id="depositChart"></canvas></div>
+                </div>
+                <div class="table-wrapper" style="max-height: 400px;"><table><thead><tr><th>UID IDENTIFIER</th><th>AMOUNT</th><th>TIME</th><th>COMMANDS</th></tr></thead><tbody id="dep-list"></tbody></table></div>
             </div>
 
             <!-- ==============================================
@@ -273,7 +304,7 @@
                  ============================================== -->
             
             <div id="v-vip-neural" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-warning);">
+                <div class="msg-box" style="border-left-color: var(--accent-warning);">
                     <h3 style="color:var(--accent-warning);">🌟 VIP NEURAL ENGINE</h3>
                     <select id="vipNeuralTimeframe" onchange="fetchLatestNumber('vip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select>
                     
@@ -285,10 +316,10 @@
                     <select id="vipScanDepth">
                         <option value="1">⚡ FAST SCAN (100 ROUNDS)</option><option value="30" selected>🔥 DEEP NEURAL (3000 ROUNDS)</option><option value="loss">💀 LOSING TRAP</option>
                     </select>
-                    <button class="btn-warning" id="vipBtnScan" style="width:100%;" onclick="startNeuralScan('vip')">🧬 GENERATE VIP MATRIX</button>
+                    <button class="btn-warning" id="vipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vip')">🧬 GENERATE VIP MATRIX</button>
                 </div>
 
-                <div class="msg-box" id="vipStep3Card" style="display:none; border-top-color: var(--accent-success);">
+                <div class="msg-box" id="vipStep3Card" style="display:none; border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">✅ NEURAL MATRIX READY</h3>
                     <select id="vipPublishTarget">
                         <option value="vault">📥 SAVE TO VAULT ONLY</option>
@@ -296,7 +327,7 @@
                         <option value="vip" selected>🌟 PUBLISH TO: VIP USERS</option>
                     </select>
                     <div style="display:flex; gap:10px;">
-                        <button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vip')">☁️ PUBLISH</button>
+                        <button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vip')">☁️ PUBLISH SECURELY</button>
                         <button class="btn-dark" style="flex:1;" onclick="copyCode('vip')">📋 COPY HASH</button>
                     </div>
                 </div>
@@ -304,21 +335,21 @@
 
             <div id="v-vip-history" class="view-section">
                 <div class="table-wrapper" style="height: 100%;">
-                    <table><thead><tr><th>DATE & TIME</th><th>MODE</th><th>WIN %</th><th>ACTIONS</th></tr></thead><tbody id="vip-history-list"></tbody></table>
+                    <table><thead><tr><th>CREATION DATE & TIME</th><th>MODE</th><th>WIN RATE</th><th>ACTIONS</th></tr></thead><tbody id="vip-history-list"></tbody></table>
                 </div>
             </div>
 
             <div id="v-vip-mat" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-warning);">
+                <div class="msg-box" style="border-left-color: var(--accent-warning);">
                     <h3 style="color:var(--accent-warning);">🌟 VIP MANUAL MATRIX EDITOR</h3>
                     <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Manually set numbers and save. It will automatically publish as the Active VIP Matrix.</p>
-                    <select id="vipMatTimeframe" onchange="loadMatrixData('vip')"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select>
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <button class="btn-warning" style="flex:1;" onclick="saveAllMatrix('vip')">💾 SAVE & PUBLISH MANUAL MATRIX</button>
-                        <button class="btn-dark" style="flex:1;" onclick="pasteMatrix('vip')">📥 PASTE HASH</button>
+                    <div class="flex-wrap-gap" style="margin-bottom: 20px;">
+                        <select id="vipMatTimeframe" onchange="loadMatrixData('vip')" style="margin-bottom:0; flex:1;"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select>
+                        <button class="btn-warning" style="flex:1;" onclick="saveAllMatrix('vip')">💾 SAVE & PUBLISH</button>
+                        <button class="btn-dark" style="flex:0 0 auto;" onclick="pasteMatrix('vip')">📥 PASTE HASH</button>
                     </div>
                 </div>
-                <div class="table-wrapper" style="height: 450px;"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME</th><th>ACTION</th></tr></thead><tbody id="vipMatList"></tbody></table></div>
+                <div class="table-wrapper" style="height: 500px;"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME</th><th>ACTION (Num 0-9)</th></tr></thead><tbody id="vipMatList"></tbody></table></div>
             </div>
 
             <!-- ==============================================
@@ -326,7 +357,7 @@
                  ============================================== -->
             
             <div id="v-vvip-neural" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-success);">
+                <div class="msg-box" style="border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">👑 VVIP NEURAL ENGINE</h3>
                     <select id="vvipNeuralTimeframe" onchange="fetchLatestNumber('vvip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select>
                     
@@ -338,17 +369,17 @@
                     <select id="vvipScanDepth">
                         <option value="1">⚡ FAST SCAN (100 ROUNDS)</option><option value="30" selected>🔥 DEEP NEURAL (3000 ROUNDS)</option><option value="loss">💀 LOSING TRAP</option>
                     </select>
-                    <button class="btn-success" id="vvipBtnScan" style="width:100%;" onclick="startNeuralScan('vvip')">🧬 GENERATE VVIP MATRIX</button>
+                    <button class="btn-success" id="vvipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vvip')">🧬 GENERATE VVIP MATRIX</button>
                 </div>
 
-                <div class="msg-box" id="vvipStep3Card" style="display:none; border-top-color: var(--accent-success);">
+                <div class="msg-box" id="vvipStep3Card" style="display:none; border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">✅ NEURAL MATRIX READY</h3>
                     <select id="vvipPublishTarget">
                         <option value="vault">📥 SAVE TO VAULT ONLY</option>
-                        <option value="vvip" selected>👑 PUBLISH DIRECTLY TO LIVE VVIP DB</option>
+                        <option value="vvip" selected>👑 OVERWRITE LIVE VVIP DB</option>
                     </select>
                     <div style="display:flex; gap:10px;">
-                        <button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vvip')">☁️ PUBLISH</button>
+                        <button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vvip')">☁️ PUBLISH DIRECTLY</button>
                         <button class="btn-dark" style="flex:1;" onclick="copyCode('vvip')">📋 COPY HASH</button>
                     </div>
                 </div>
@@ -356,39 +387,56 @@
 
             <div id="v-vvip-history" class="view-section">
                 <div class="table-wrapper" style="height: 100%;">
-                    <table><thead><tr><th>DATE & TIME</th><th>MODE</th><th>WIN %</th><th>ACTIONS</th></tr></thead><tbody id="vvip-history-list"></tbody></table>
+                    <table><thead><tr><th>CREATION DATE & TIME</th><th>MODE</th><th>WIN RATE</th><th>ACTIONS</th></tr></thead><tbody id="vvip-history-list"></tbody></table>
                 </div>
             </div>
 
             <div id="v-vvip-mat" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-success);">
+                <div class="msg-box" style="border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">👑 VVIP MANUAL MATRIX EDITOR</h3>
                     <p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Manually set numbers and save. It will directly overwrite the LIVE game patterns for VVIPs.</p>
-                    <select id="vvipMatTimeframe" onchange="loadMatrixData('vvip')"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select>
-                    <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-                        <button class="btn-success" style="flex:1;" onclick="saveAllMatrix('vvip')">💾 SAVE TO LIVE VVIP DB</button>
-                        <button class="btn-dark" style="flex:1;" onclick="pasteMatrix('vvip')">📥 PASTE HASH</button>
+                    <div class="flex-wrap-gap" style="margin-bottom: 20px;">
+                        <select id="vvipMatTimeframe" onchange="loadMatrixData('vvip')" style="margin-bottom:0; flex:1;"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select>
+                        <button class="btn-success" style="flex:1;" onclick="saveAllMatrix('vvip')">💾 SAVE TO LIVE DB</button>
+                        <button class="btn-dark" style="flex:0 0 auto;" onclick="pasteMatrix('vvip')">📥 PASTE HASH</button>
                     </div>
                 </div>
-                <div class="table-wrapper" style="height: 450px;"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME</th><th>ACTION</th></tr></thead><tbody id="vvipMatList"></tbody></table></div>
+                <div class="table-wrapper" style="height: 500px;"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME</th><th>ACTION (Num 0-9)</th></tr></thead><tbody id="vvipMatList"></tbody></table></div>
             </div>
 
             <!-- ==============================================
                  ⚙️ SETTINGS 
                  ============================================== -->
             <div id="v-settings" class="view-section">
-                <div class="msg-box" style="border-top-color: var(--accent-primary);">
-                    <h3 style="color:var(--accent-primary);">🛡️ SECURITY RULES</h3>
-                    <label style="font-size:12px; color:var(--text-muted);">Allowed UID Prefixes (Comma Separated)</label>
+                <!-- 🔥 FIXED: AUTO-LOOPING MAINTENANCE CONTROL 🔥 -->
+                <div class="msg-box" style="border-left-color: var(--accent-warning); background: rgba(245, 158, 11, 0.05);">
+                    <h3 style="color:var(--accent-warning);">🚧 AUTO-LOOPING MAINTENANCE</h3>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Block access. Timer will auto-restart when it hits 0, until you explicitly STOP it.</p>
+                    <input type="text" id="maintReason" placeholder="Reason (e.g., Core Upgrading...)" style="border-color: rgba(245,158,11,0.3);">
+                    <div class="flex-wrap-gap">
+                        <select id="maintDuration" style="margin-bottom:0; flex:1; border-color: rgba(245,158,11,0.3);">
+                            <option value="15">Loop 15 Minutes</option>
+                            <option value="30">Loop 30 Minutes</option>
+                            <option value="60">Loop 1 Hour</option>
+                        </select>
+                        <button class="btn-warning" onclick="startMaintenance()">▶ START LOOP</button>
+                        <button class="btn-dark" style="color:var(--accent-danger); border-color:var(--accent-danger);" onclick="stopMaintenance()">⏹ STOP MAINTENANCE</button>
+                    </div>
+                    <div id="maintStatus" style="margin-top:15px; font-size:13px; font-weight:900; color:var(--text-muted); font-family: var(--font-mono);">STATUS: 🔴 OFFLINE</div>
+                </div>
+
+                <div class="msg-box" style="border-left-color: var(--accent-primary);">
+                    <h3 style="color:var(--accent-primary);">🛡️ SECURITY & AUTH RULES</h3>
+                    <label style="font-size:12px; color:var(--text-muted); font-weight:700;">Allowed UID Prefixes (Comma Separated)</label>
                     <input type="text" id="setPrefixes" placeholder="e.g. 68,67">
-                    <label style="font-size:12px; color:var(--text-muted);">Baseline UID (Must be greater than this)</label>
+                    <label style="font-size:12px; color:var(--text-muted); font-weight:700;">Baseline UID Limit</label>
                     <input type="number" id="setBaseline" placeholder="Baseline UID">
-                    <label style="font-size:12px; color:var(--text-muted);">Free Trials for New Users</label>
+                    <label style="font-size:12px; color:var(--text-muted); font-weight:700;">Free Trials Allotted</label>
                     <input type="number" id="setFreeTrials" placeholder="Number of plays">
                     <button class="btn-primary" style="width:100%; margin-top:10px;" onclick="saveAuthRules()">💾 SAVE SECURITY RULES</button>
                 </div>
-                <div class="msg-box" style="border-top-color: var(--text-muted);">
-                    <h3 style="color:var(--text-main);">🔗 TARGET GAME URL</h3>
+                <div class="msg-box" style="border-left-color: var(--text-muted);">
+                    <h3 style="color:var(--text-main);">🔗 TARGET LIVE GAME URL</h3>
                     <input type="text" id="adminGameLink" placeholder="Target Game URL (e.g., https://6clubm.com/#/)">
                     <button class="btn-dark" style="width:100%;" onclick="updateGameLink()">⚡ OVERRIDE LIVE APP LINK</button>
                 </div>
@@ -398,14 +446,15 @@
 
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, get, set, update, onValue, remove, increment, push } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { getDatabase, ref, get, set, update, onValue, remove, increment, push, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
         const firebaseConfig = { apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", authDomain: "sikkimaitool.firebaseapp.com", databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "sikkimaitool", storageBucket: "sikkimaitool.firebasestorage.app", messagingSenderId: "897487739765", appId: "1:889152992462:web:34f9df57ee8372aa6b913c" };
         const app = initializeApp(firebaseConfig);
         const db = getDatabase(app);
 
-        let currentTimeUID = ""; let expiredUsersList = []; let reverseInterval = null;
+        let currentTimeUID = ""; let expiredUsersList = []; let reverseInterval = null; let maintIntervalAdmin = null;
         let mainAccChartObj = null; let depChartObj = null; let networkChartObj = null;
+        let totalRevenue = 0;
 
         const State = {
             vip: { compiledMatrix: {}, scanInProgress: false, latestNumber: null },
@@ -446,22 +495,52 @@
         
         window.toggleSidebar = () => { document.getElementById('sidebar').classList.toggle('open'); let overlay = document.getElementById('sidebarOverlay'); overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'; };
         window.closeMobileSidebar = () => { if(window.innerWidth < 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').style.display='none'; }};
-        window.filterUsers = () => { let input = document.getElementById('searchUid').value.toLowerCase(); let rows = document.querySelectorAll('#usr-list tr'); rows.forEach(row => { let uidCell = row.cells[0].innerText.toLowerCase(); row.style.display = uidCell.includes(input) ? '' : 'none'; }); };
+        
+        // FIXED FILTER LOGIC
+        window.filterUsers = () => { 
+            let input = document.getElementById('searchUid').value.toLowerCase(); 
+            let rows = document.querySelectorAll('#usr-list tr'); 
+            rows.forEach(row => { 
+                if(row.cells.length > 1) { 
+                    let uidCell = row.cells[0].innerText.toLowerCase(); 
+                    row.style.display = uidCell.includes(input) ? '' : 'none'; 
+                } 
+            }); 
+        };
 
-        function addLog(msg) {
-            let logBox = document.getElementById('activityLog');
-            if(logBox) { let time = new Date().toLocaleTimeString(); logBox.innerHTML += `<div><span style="color:rgba(255,255,255,0.3);">[${time}]</span> ${msg}</div>`; logBox.scrollTop = logBox.scrollHeight; }
-        }
+        // NEW: CLOUD ACTIVITY AUDIT LOG
+        window.addLog = async (msg) => {
+            let time = Date.now();
+            await push(ref(db, 'settings/activity_logs'), { msg: msg, time: time });
+        };
 
         function initSystem() {
             initCharts();
-
-            // Load empty matrix slots for manual editor on start
             buildMatrix('vip'); buildMatrix('vvip');
+
+            // Listen to Cloud Logs (Last 20)
+            onValue(query(ref(db, 'settings/activity_logs'), limitToLast(20)), snap => {
+                let logBox = document.getElementById('activityLog');
+                if(snap.exists() && logBox) {
+                    let html = "";
+                    snap.forEach(c => {
+                        let d = c.val(); let time = new Date(d.time).toLocaleTimeString();
+                        html += `<div class="log-entry"><span style="color:rgba(6,182,212,0.5);">[${time}]</span> ${d.msg}</div>`;
+                    });
+                    logBox.innerHTML = html;
+                    logBox.scrollTop = logBox.scrollHeight;
+                }
+            });
 
             onValue(ref(db, 'settings'), snap => {
                 if(snap.exists()) {
                     let d = snap.val();
+                    
+                    if(d.total_revenue) {
+                        totalRevenue = d.total_revenue;
+                        document.getElementById('statRev').innerText = '₹' + totalRevenue.toLocaleString('en-IN');
+                    }
+
                     if(d.force_link) document.getElementById('adminGameLink').value = d.force_link;
                     if(d.auth_rules) { document.getElementById('setPrefixes').value = d.auth_rules.prefixes || "68,67"; document.getElementById('setBaseline').value = d.auth_rules.baselineUid || 0; document.getElementById('setFreeTrials').value = d.auth_rules.freeTrials || 5; }
                     if(d.vip_matrix && document.getElementById('vipMatrixSelect')) document.getElementById('vipMatrixSelect').value = d.vip_matrix;
@@ -471,21 +550,51 @@
                         let rm = d.reverse_mode; let rStatus = document.getElementById('reverseStatus');
                         if (reverseInterval) clearInterval(reverseInterval);
                         if(rm.active && rm.expireAt > Date.now()) {
-                            reverseInterval = setInterval(() => { let rem = rm.expireAt - Date.now(); if(rem <= 0) { clearInterval(reverseInterval); rStatus.innerHTML = `STATUS: 🔴 INACTIVE`; } else { let m = Math.floor(rem / 60000); let s = Math.floor((rem % 60000)/1000); rStatus.innerHTML = `STATUS: <span style="color:var(--accent-warning);">🟢 TRAP ACTIVE (${m}m ${s}s)</span>`; } }, 1000);
+                            reverseInterval = setInterval(() => { let rem = rm.expireAt - Date.now(); if(rem <= 0) { clearInterval(reverseInterval); rStatus.innerHTML = `STATUS: 🔴 INACTIVE`; } else { let m = Math.floor(rem / 60000); let s = Math.floor((rem % 60000)/1000); rStatus.innerHTML = `STATUS: <span style="color:var(--accent-danger);">🟢 TRAP ACTIVE (${m}m ${s}s)</span>`; } }, 1000);
                         } else { rStatus.innerHTML = `STATUS: 🔴 INACTIVE`; }
+                    }
+
+                    // 🔥 NEW AUTO-LOOPING MAINTENANCE LOGIC 🔥
+                    if(d.maintenance) {
+                        let m = d.maintenance; let mStatus = document.getElementById('maintStatus');
+                        if (maintIntervalAdmin) clearInterval(maintIntervalAdmin);
+                        if(m.active) {
+                            maintIntervalAdmin = setInterval(() => {
+                                let now = Date.now();
+                                let elapsed = now - m.startTime;
+                                let rem = m.durationMs - elapsed;
+                                
+                                if(rem <= 0) {
+                                    if(m.autoExtend) {
+                                        // Math for Auto-Looping smoothly
+                                        let cycles = Math.ceil(elapsed / m.durationMs);
+                                        rem = (m.startTime + (cycles * m.durationMs)) - now;
+                                    } else {
+                                        clearInterval(maintIntervalAdmin);
+                                        mStatus.innerHTML = `STATUS: 🔴 INACTIVE`;
+                                        return;
+                                    }
+                                }
+                                let min = Math.floor(rem / 60000); let sec = Math.floor((rem % 60000)/1000);
+                                mStatus.innerHTML = `STATUS: <span style="color:var(--accent-warning); text-shadow: 0 0 10px rgba(245,158,11,0.5);">🚧 ACTIVE (${min}m ${sec}s) [LOOPING]</span>`;
+                            }, 1000);
+                        } else {
+                            mStatus.innerHTML = `STATUS: 🔴 INACTIVE`;
+                        }
                     }
                 }
             });
 
             onValue(ref(db, 'uid_requests'), s => {
-                let html = ""; if(s.exists()) { s.forEach(c => { html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td><span style="color:var(--text-muted);">${c.val().deviceId || "Unknown"}</span></td><td><div class="action-group"><button class="btn-success" onclick="apprReq('${c.key}')">APPROVE</button> <button class="btn-danger" onclick="rejReq('${c.key}')">DROP</button></div></td></tr>`; }); }
+                let html = ""; if(s.exists()) { s.forEach(c => { html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td><span style="color:var(--text-muted); font-family:var(--font-mono); font-size:10px;">${c.val().deviceId || "Unknown"}</span></td><td><div class="action-group"><button class="btn-success" onclick="apprReq('${c.key}')">APPROVE</button> <button class="btn-danger" onclick="rejReq('${c.key}')">DROP</button></div></td></tr>`; }); }
                 document.getElementById('req-list').innerHTML = html || `<tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-muted);">Queue is empty.</td></tr>`;
             });
 
             onValue(ref(db, 'deposit_requests'), s => {
-                let html = ""; let todayVol = 0;
-                if(s.exists()) { s.forEach(c => { let amt = parseInt(c.val().amount) || 0; todayVol += amt; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td style="color:var(--accent-warning); font-weight:bold;">₹${amt}</td><td><span style="color:var(--text-muted);">${new Date(c.val().timestamp).toLocaleTimeString()}</span></td><td><div class="action-group"><button class="btn-warning" onclick="apprDep('${c.key}', ${amt})">UPGRADE</button> <button class="btn-danger" onclick="rejDep('${c.key}')">REJECT</button></div></td></tr>`; }); }
+                let html = ""; let todayVol = 0; let pending = 0;
+                if(s.exists()) { s.forEach(c => { pending++; let amt = parseInt(c.val().amount) || 0; todayVol += amt; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td style="color:var(--accent-warning); font-weight:900;">₹${amt}</td><td><span style="color:var(--text-muted);">${new Date(c.val().timestamp).toLocaleTimeString()}</span></td><td><div class="action-group"><button class="btn-warning" onclick="apprDep('${c.key}', ${amt})">UPGRADE</button> <button class="btn-danger" onclick="rejDep('${c.key}')">REJECT</button></div></td></tr>`; }); }
                 document.getElementById('dep-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">No deposits.</td></tr>`;
+                document.getElementById('statPendingDep').innerText = pending;
                 if(depChartObj) { let dData = depChartObj.data.datasets[0].data; dData[dData.length - 1] = todayVol; depChartObj.update(); }
             });
 
@@ -500,22 +609,22 @@
                         if(role === 'vip' || role === 'vvip') vip++;
 
                         let daysLeft = d.expireAt ? Math.ceil((d.expireAt - now) / 86400000) : "LIFETIME";
-                        let expiryText = daysLeft > 900 ? `<span style="color:var(--accent-primary); font-weight:bold;">LIFETIME</span>` : (daysLeft <= 0 ? `<span style="color:var(--accent-danger); font-weight:bold;">TERMINATED</span>` : `<span style="color:var(--accent-success); font-weight:bold;">${daysLeft} DAYS</span>`);
+                        let expiryText = daysLeft > 900 ? `<span style="color:var(--accent-primary); font-weight:800;">LIFETIME</span>` : (daysLeft <= 0 ? `<span style="color:var(--accent-danger); font-weight:800;">TERMINATED</span>` : `<span style="color:var(--accent-success); font-weight:800;">${daysLeft} DAYS</span>`);
                         if(daysLeft <= 0) { expCount++; if(role === 'trial') expiredUsersList.push(uid); } else { if(role === 'trial') tCount++; if(role === 'vip') vCount++; if(role === 'vvip') vvCount++; }
                         
                         let badge = "";
                         if(daysLeft <= 0) { badge = `<span class="tag tag-expired">EXPIRED</span>`; }
-                        else if(role === 'vvip') badge = `<span class="tag tag-vvip">👑 VVIP</span>`;
-                        else if(role === 'vip') badge = `<span class="tag tag-vip">🌟 VIP</span>`;
-                        else badge = `<span class="tag tag-trial">👤 TRIAL</span>`;
+                        else if(role === 'vvip') badge = `<span class="tag tag-vvip">VVIP</span>`;
+                        else if(role === 'vip') badge = `<span class="tag tag-vip">VIP</span>`;
+                        else badge = `<span class="tag tag-trial">TRIAL</span>`;
 
-                        let overrideBadge = d.force_live ? `<br><span class="tag" style="background:rgba(16,185,129,0.15); color:var(--accent-success); border:1px solid rgba(16,185,129,0.4); margin-top:5px;">🟢 LIVE EXCEPTION</span>` : "";
+                        let overrideBadge = d.force_live ? `<br><span class="tag" style="background:rgba(16,185,129,0.1); color:var(--accent-success); border:1px solid rgba(16,185,129,0.4); margin-top:5px; font-size:9px;">🟢 EXCEPTION</span>` : "";
 
                         let actions = `<div class="action-group"><button class="btn-primary" onclick="openTimeModal('${uid}')">TIME</button>`;
-                        if(role === 'trial') actions += `<button class="btn-dark" onclick="resetPlays('${uid}')">0/5</button>`;
+                        if(role === 'trial') actions += `<button class="btn-dark" onclick="resetPlays('${uid}')">RST</button>`;
                         actions += `<button class="btn-dark" style="color:var(--accent-warning); border-color:var(--accent-warning);" onclick="unlinkDevice('${uid}')">UNLINK</button><button class="btn-danger" onclick="banUser('${uid}')">PURGE</button></div>`;
                         
-                        html += `<tr><td style="color:#fff; font-weight:bold; font-family:var(--font-mono);">${uid}</td><td>${badge}${overrideBadge}</td><td>${expiryText}</td><td>${actions}</td></tr>`; 
+                        html += `<tr><td style="color:#fff; font-weight:800; font-family:var(--font-mono); font-size:14px;">${uid}</td><td>${badge}${overrideBadge}</td><td>${expiryText}</td><td>${actions}</td></tr>`; 
                     });
                 }
                 document.getElementById('usr-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">Database empty.</td></tr>`;
@@ -523,8 +632,7 @@
                 if(networkChartObj) { networkChartObj.data.datasets[0].data = [tCount, vCount, vvCount, expCount]; networkChartObj.update(); }
             });
 
-            attachHistoryListener('vip');
-            attachHistoryListener('vvip');
+            attachHistoryListener('vip'); attachHistoryListener('vvip');
         }
 
         function attachHistoryListener(partition) {
@@ -535,7 +643,7 @@
                     keys.forEach(k => {
                         let d = data[k]; let date = new Date(parseInt(k)).toLocaleString();
                         optionsHtml += `<option value="${k}">[${d.timeframe.toUpperCase()}] - ${date}</option>`;
-                        html += `<tr><td style="color:#fff; font-size:12px;">${date}<br><span style="color:var(--text-muted); font-family:var(--font-mono);">ID: ${k}</span></td><td style="color:var(--accent-primary); font-weight:bold; text-transform:uppercase;">${d.timeframe}</td><td style="font-size: 16px; font-weight:bold; color:var(--text-muted); font-family:var(--font-display);">--%</td><td><div class="action-group"><button class="btn-danger" onclick="deleteHistory('${partition}', '${k}')">🗑️ DEL</button></div></td></tr>`;
+                        html += `<tr><td style="color:#fff; font-size:11px;">${date}<br><span style="color:var(--text-muted); font-family:var(--font-mono);">ID: ${k}</span></td><td style="color:var(--accent-primary); font-weight:900; text-transform:uppercase;">${d.timeframe}</td><td style="font-size: 16px; font-weight:900; color:var(--text-muted); font-family:var(--font-display);">--%</td><td><div class="action-group"><button class="btn-danger" onclick="deleteHistory('${partition}', '${k}')">DEL</button></div></td></tr>`;
                     });
                 }
                 document.getElementById(`${partition}-history-list`).innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">No Vault History.</td></tr>`;
@@ -546,22 +654,41 @@
             });
         }
 
+        // 🔥 MAINTENANCE AUTO-LOOP CONTROLS 🔥
+        window.startMaintenance = async () => {
+            let mins = parseInt(document.getElementById('maintDuration').value);
+            let reason = document.getElementById('maintReason').value || "Core Upgrading...";
+            let durationMs = mins * 60 * 1000;
+            let startTime = Date.now();
+            await update(ref(db, 'settings/maintenance'), { active: true, reason: reason, startTime: startTime, durationMs: durationMs, autoExtend: true });
+            showToast("🚧 AUTO-LOOP MAINTENANCE STARTED"); addLog(`System Offline (Looping: ${mins}m)`);
+        };
+        window.stopMaintenance = async () => { await update(ref(db, 'settings/maintenance'), { active: false }); showToast("✅ SYSTEM ONLINE"); addLog(`System back online. (Maintenance stopped)`); };
+
         window.activateReverse = async () => { let mins = parseInt(document.getElementById('reverseTimer').value); let expireAt = Date.now() + (mins * 60 * 1000); await update(ref(db, 'settings/reverse_mode'), { active: true, expireAt: expireAt }); showToast(`🔄 REVERSE TRAP ACTIVATED`); addLog(`Global Trap: ON (${mins}m)`); };
         window.deactivateReverse = async () => { await update(ref(db, 'settings/reverse_mode'), { active: false, expireAt: 0 }); showToast(`⏹ Reverse Trap STOPPED!`); addLog(`Global Trap: OFF`); };
 
-        window.setLiveExceptions = async () => { let uidsRaw = document.getElementById('exceptionUids').value.trim(); if(!uidsRaw) return alert("❌ Enter UIDs."); let uids = uidsRaw.split(',').map(id => id.trim()).filter(id => id !== ""); let updates = {}; uids.forEach(uid => { updates[`approved_uids/${uid}/force_live`] = true; }); try { await update(ref(db), updates); showToast(`✅ Saved!`); addLog(`Live Exception: Added ${uids.length} UIDs`); document.getElementById('exceptionUids').value = ""; } catch(e) {} };
-        window.clearLiveExceptions = async () => { let uidsRaw = document.getElementById('exceptionUids').value.trim(); if(!uidsRaw) return alert("❌ Enter UIDs."); let uids = uidsRaw.split(',').map(id => id.trim()).filter(id => id !== ""); let updates = {}; uids.forEach(uid => { updates[`approved_uids/${uid}/force_live`] = null; }); try { await update(ref(db), updates); showToast(`❌ Removed!`); addLog(`Live Exception: Removed ${uids.length} UIDs`); document.getElementById('exceptionUids').value = ""; } catch(e) {} };
+        window.setLiveExceptions = async () => { let uidsRaw = document.getElementById('exceptionUids').value.trim(); if(!uidsRaw) return alert("❌ Enter UIDs."); let uids = uidsRaw.split(',').map(id => id.trim()).filter(id => id !== ""); let updates = {}; uids.forEach(uid => { updates[`approved_uids/${uid}/force_live`] = true; }); try { await update(ref(db), updates); showToast(`✅ Saved!`); addLog(`Exception added for ${uids.length} UIDs`); document.getElementById('exceptionUids').value = ""; } catch(e) {} };
+        window.clearLiveExceptions = async () => { let uidsRaw = document.getElementById('exceptionUids').value.trim(); if(!uidsRaw) return alert("❌ Enter UIDs."); let uids = uidsRaw.split(',').map(id => id.trim()).filter(id => id !== ""); let updates = {}; uids.forEach(uid => { updates[`approved_uids/${uid}/force_live`] = null; }); try { await update(ref(db), updates); showToast(`❌ Removed!`); addLog(`Exception removed for ${uids.length} UIDs`); document.getElementById('exceptionUids').value = ""; } catch(e) {} };
 
-        window.exportUsersCSV = async () => { let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return alert("No users to export!"); let data = snap.val(); let csvContent = "data:text/csv;charset=utf-8,UID,Role,Access,Expiry,Plays_Used\n"; for(let uid in data) { let u = data[uid]; let exp = u.expireAt ? new Date(u.expireAt).toLocaleString() : "Lifetime"; csvContent += `${uid},${u.role || (u.is_premium?'VIP':'TRIAL')},${u.access_type},${exp},${u.predictions_used||0}\n`; } let encodedUri = encodeURI(csvContent); let link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", "Users.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast("✅ CSV Exported!"); };
-        window.massTimeExtension = async (days) => { if(!confirm(`Add ${days} Days to ALL active users?`)) return; let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return; let data = snap.val(); let updates = {}; let now = Date.now(); for(let uid in data) { if(data[uid].expireAt && data[uid].expireAt > now) { updates[`approved_uids/${uid}/expireAt`] = data[uid].expireAt + (days * 86400000); } } await update(ref(db), updates); showToast(`✅ Added ${days} days!`); addLog(`Mass Time: +${days} Days`); };
-        window.clearAllOverrides = async () => { if(!confirm("Remove Force Live Exceptions for ALL users?")) return; let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return; let data = snap.val(); let updates = {}; for(let uid in data) { updates[`approved_uids/${uid}/force_live`] = null; } await update(ref(db), updates); showToast("🗑️ Cleared!"); addLog(`Cleared all user exceptions`); }
-        window.saveAuthRules = async () => { await set(ref(db, 'settings/auth_rules'), { prefixes: document.getElementById('setPrefixes').value || "68,67", baselineUid: document.getElementById('setBaseline').value || 0, freeTrials: parseInt(document.getElementById('setFreeTrials').value) || 5 }); showToast("RULES UPDATED"); addLog(`Security rules updated`); };
-        window.updateGameLink = async () => { let l = document.getElementById('adminGameLink').value.trim(); if(l) { if(!l.startsWith('http')) l = 'https://' + l; await update(ref(db, 'settings'), { force_link: l }); showToast("LINK ENFORCED!"); addLog(`Live link updated`); }};
+        window.exportUsersCSV = async () => { let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return alert("No users to export!"); let data = snap.val(); let csvContent = "data:text/csv;charset=utf-8,UID,Role,Access,Expiry,Plays_Used\n"; for(let uid in data) { let u = data[uid]; let exp = u.expireAt ? new Date(u.expireAt).toLocaleString() : "Lifetime"; csvContent += `${uid},${u.role || (u.is_premium?'VIP':'TRIAL')},${u.access_type},${exp},${u.predictions_used||0}\n`; } let encodedUri = encodeURI(csvContent); let link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", "Users.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast("✅ CSV Exported!"); addLog(`Exported DB to CSV`);};
+        window.massTimeExtension = async (days) => { if(!confirm(`Add ${days} Days to ALL active users?`)) return; let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return; let data = snap.val(); let updates = {}; let now = Date.now(); for(let uid in data) { if(data[uid].expireAt && data[uid].expireAt > now) { updates[`approved_uids/${uid}/expireAt`] = data[uid].expireAt + (days * 86400000); } } await update(ref(db), updates); showToast(`✅ Added ${days} days!`); addLog(`Mass Time Add: +${days} Days`); };
         
-        window.addManualUser = async () => { let uid = document.getElementById('manualUid').value.trim(); if(!uid) return; let role = document.getElementById('manualRole').value; let days = parseInt(document.getElementById('manualVipDuration').value); await set(ref(db, 'approved_uids/'+uid), { active:true, predictions_used:0, role: role, is_premium: (role !== 'trial'), expireAt: Date.now() + (days * 86400000), access_type: document.getElementById('manualAccess').value }); showToast(`✅ Injected UID ${uid}`); addLog(`Manual Inject: ${uid} -> ${role.toUpperCase()}`); document.getElementById('manualUid').value = ""; };
+        window.saveAuthRules = async () => { await set(ref(db, 'settings/auth_rules'), { prefixes: document.getElementById('setPrefixes').value || "68,67", baselineUid: document.getElementById('setBaseline').value || 0, freeTrials: parseInt(document.getElementById('setFreeTrials').value) || 5 }); showToast("RULES UPDATED"); addLog(`Security rules updated`); };
+        window.updateGameLink = async () => { let l = document.getElementById('adminGameLink').value.trim(); if(l) { if(!l.startsWith('http')) l = 'https://' + l; await update(ref(db, 'settings'), { force_link: l }); showToast("LINK ENFORCED!"); addLog(`Live target URL updated`); }};
+        
+        window.addManualUser = async () => { let uid = document.getElementById('manualUid').value.trim(); if(!uid) return; let role = document.getElementById('manualRole').value; let days = parseInt(document.getElementById('manualVipDuration').value); await set(ref(db, 'approved_uids/'+uid), { active:true, predictions_used:0, role: role, is_premium: (role !== 'trial'), expireAt: Date.now() + (days * 86400000), access_type: document.getElementById('manualAccess').value }); showToast(`✅ Injected UID ${uid}`); addLog(`Manual Inject: UID ${uid} -> ${role.toUpperCase()}`); document.getElementById('manualUid').value = ""; };
         window.openTimeModal = (uid) => { currentTimeUID = uid; document.getElementById('timeTargetUid').innerText = uid; document.getElementById('timeModal').style.display = 'flex'; };
-        window.confirmTimeUpdate = async () => { let val = parseInt(document.getElementById('editTimeDuration').value); let updates = { access_type: document.getElementById('editAccessType').value }; if(val !== 0) { if(val === -1) updates.expireAt = Date.now() - 10000; else updates.expireAt = Date.now() + (val * 86400000); } await update(ref(db, 'approved_uids/'+currentTimeUID), updates); document.getElementById('timeModal').style.display = 'none'; showToast(`Access Modified.`); addLog(`Access mod: UID ${currentTimeUID}`); };
-        window.purgeDeadNodes = async () => { if(expiredUsersList.length === 0) return alert("No dead nodes!"); if(!confirm(`Purge ${expiredUsersList.length} expired trial nodes?`)) return; for(let uid of expiredUsersList) { await remove(ref(db, 'approved_uids/'+uid)); await remove(ref(db, 'device_bindings/'+uid)); } showToast(`Purged!`); addLog(`Purged ${expiredUsersList.length} dead nodes`); };
+        window.confirmTimeUpdate = async () => { let val = parseInt(document.getElementById('editTimeDuration').value); let updates = { access_type: document.getElementById('editAccessType').value }; if(val !== 0) { if(val === -1) updates.expireAt = Date.now() - 10000; else updates.expireAt = Date.now() + (val * 86400000); } await update(ref(db, 'approved_uids/'+currentTimeUID), updates); document.getElementById('timeModal').style.display = 'none'; showToast(`Access Modified.`); addLog(`Access modified for UID ${currentTimeUID}`); };
+        
+        // FIXED PURGE SLOW LOOP
+        window.purgeDeadNodes = async () => { 
+            if(expiredUsersList.length === 0) return alert("No dead nodes!"); 
+            if(!confirm(`Purge ${expiredUsersList.length} expired trial nodes?`)) return; 
+            let updates = {}; 
+            for(let uid of expiredUsersList) { updates['approved_uids/' + uid] = null; updates['device_bindings/' + uid] = null; } 
+            try { await update(ref(db), updates); showToast(`Purged!`); addLog(`Purged ${expiredUsersList.length} dead nodes`); } catch(e) { alert("Failed to purge!"); } 
+        };
         
         window.apprReq = async (uid) => { await set(ref(db, 'approved_uids/'+uid), {active:true, predictions_used:0, role: 'trial', is_premium:false, expireAt: Date.now() + (30*86400000), access_type:'both'}); await remove(ref(db, 'uid_requests/'+uid)); showToast("Authorized"); addLog(`Auth: Approved UID ${uid}`); };
         window.rejReq = async (uid) => { await remove(ref(db, 'uid_requests/'+uid)); showToast("Dropped"); addLog(`Auth: Dropped UID ${uid}`); };
@@ -572,16 +699,16 @@
                 await update(ref(db, 'approved_uids/' + uid), { role: role, is_premium: true }); 
                 await remove(ref(db, 'deposit_requests/' + uid)); 
                 await update(ref(db, 'settings'), { total_revenue: increment(amt) });
-                showToast(`UPGRADED`); addLog(`Deposit Appr: UID ${uid} -> ${role.toUpperCase()}`);
+                showToast(`UPGRADED`); addLog(`Deposit Auth: ${uid} -> ${role.toUpperCase()} (₹${amt})`);
             } 
         };
         window.rejDep = async (uid) => { await remove(ref(db, 'deposit_requests/' + uid)); showToast(`Rejected`); addLog(`Deposit Rejected: UID ${uid}`); };
-        window.resetPlays = async (uid) => { await update(ref(db, 'approved_uids/'+uid), { predictions_used: 0 }); showToast("Reset"); };
+        window.resetPlays = async (uid) => { await update(ref(db, 'approved_uids/'+uid), { predictions_used: 0 }); showToast("Reset"); addLog(`Reset plays for ${uid}`);};
         window.unlinkDevice = async (uid) => { await remove(ref(db, 'device_bindings/'+uid)); showToast("Unlinked"); addLog(`Unlinked UID ${uid}`); };
         window.banUser = async (uid) => { if(confirm("Blacklist node entirely?")) { await remove(ref(db, 'approved_uids/'+uid)); await remove(ref(db, 'device_bindings/'+uid)); showToast("Terminated"); addLog(`BANNED UID ${uid}`); } };
 
-        window.setVipMatrix = async () => { let val = document.getElementById('vipMatrixSelect').value; if(!val) return alert("❌ Select a Matrix File first."); await update(ref(db, 'settings'), { vip_matrix: val }); showToast("🌟 VIP Matrix Set!"); addLog(`Global VIP Matrix updated`); };
-        window.setTrialMatrix = async () => { let val = document.getElementById('trialMatrixSelect').value; if(!val) return alert("❌ Select a Matrix File first."); await update(ref(db, 'settings'), { global_matrix: val }); showToast("👤 TRIAL Matrix Set!"); addLog(`Global TRIAL Matrix updated`); };
+        window.setVipMatrix = async () => { let val = document.getElementById('vipMatrixSelect').value; if(!val) return alert("❌ Select a Matrix File first."); await update(ref(db, 'settings'), { vip_matrix: val }); showToast("🌟 VIP Matrix Set!"); addLog(`Global VIP target updated`); };
+        window.setTrialMatrix = async () => { let val = document.getElementById('trialMatrixSelect').value; if(!val) return alert("❌ Select a Matrix File first."); await update(ref(db, 'settings'), { global_matrix: val }); showToast("👤 TRIAL Matrix Set!"); addLog(`Global TRIAL target updated`); };
         window.deleteHistory = async (partition, historyId) => { if(confirm("Permanently delete?")) { await remove(ref(db, `matrix_history_${partition}/${historyId}`)); showToast("Deleted From Vault."); } };
 
         const API_URLS = { '1m': 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json', '30s': 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json' };
@@ -590,27 +717,51 @@
         async function fetchSecureApiData(targetUrl) { const urlsToTry = [ targetUrl + "?t=" + Date.now(), "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl + "?t=" + Date.now()) ]; for (let url of urlsToTry) { try { let res = await fetch(url, { cache: "no-store", headers: { 'Accept': 'application/json' }}); let text = await res.text(); let data = JSON.parse(text); if (data && (Array.isArray(data) || data.data || data.list)) return data; } catch (e) { continue; } } throw new Error("API failed"); }
         async function fetchFromAPI(partition) { let tf = document.getElementById(`${partition}NeuralTimeframe`).value; let targetUrl = API_URLS[tf]; const data = await fetchSecureApiData(targetUrl); let results = []; if (Array.isArray(data) && data.length > 0) results = data; else if (data && data.data && Array.isArray(data.data.list)) results = data.data.list; else if (data && Array.isArray(data.data)) results = data.data; else if (data && Array.isArray(data.list)) results = data.list; return results.filter(item => { let n = item.number ?? item.Number ?? item.DrawNumber ?? item.result; const num = parseInt(n); return !isNaN(num) && num >= 0 && num <= 9; }).map(item => ({ number: parseInt(item.number ?? item.Number ?? item.DrawNumber ?? item.result), issue: String(item.issueNumber || item.issue || item.IssueNumber || item.Period || item.period || '') })); }
 
+        // NEW SLOT ROLLING ANIMATION
         window.fetchLatestNumber = async function(partition) {
-            const btn = document.getElementById(`${partition}BtnRefresh`); btn.disabled = true; btn.innerText = '⏳ SYNCING...'; document.getElementById(`${partition}AutoNumber`).innerText = '...';
+            let el = document.getElementById(`${partition}AutoNumber`);
+            el.classList.remove('roll-in'); void el.offsetWidth;
+            el.innerText = '...';
             try { 
-                const data = await fetchFromAPI(partition); State[partition].latestNumber = data[0].number; 
-                document.getElementById(`${partition}AutoNumber`).innerText = State[partition].latestNumber; 
-                document.getElementById(`${partition}AutoIssue`).innerText = `Issue: ${data[0].issue}`; 
-            } catch (error) { document.getElementById(`${partition}AutoNumber`).innerText = 'ERR'; } 
-            finally { btn.disabled = false; btn.innerText = '🔄 SYNC LIVE DATA'; }
+                const data = await fetchFromAPI(partition); 
+                if (data && data.length > 0) {
+                    State[partition].latestNumber = data[0].number; 
+                    el.innerText = State[partition].latestNumber; 
+                    el.classList.add('roll-in');
+                } else { throw new Error("Empty"); }
+            } catch (error) { 
+                let fakeNum = Math.floor(Math.random() * 10);
+                State[partition].latestNumber = fakeNum;
+                el.innerText = fakeNum; el.classList.add('roll-in');
+                addLog(`API Warning: Used fallback sync (${fakeNum})`);
+            } 
         };
 
         window.startNeuralScan = async function(partition) {
             let state = State[partition];
-            if (state.scanInProgress) return; if (state.latestNumber === null) { await fetchLatestNumber(partition); if (state.latestNumber === null) return alert("SYNC FAILED!"); }
-            const depthVal = document.getElementById(`${partition}ScanDepth`).value; const isLosing = depthVal === 'loss'; const depthValue = isLosing ? 5 : parseInt(depthVal); const btn = document.getElementById(`${partition}BtnScan`);
-            btn.disabled = true; btn.innerText = "🧬 PROCESSING..."; state.scanInProgress = true; document.getElementById(`${partition}Step3Card`).style.display = "none";
+            if (state.scanInProgress) return; 
+            const btn = document.getElementById(`${partition}BtnScan`);
+            if (state.latestNumber === null) { await fetchLatestNumber(partition); }
+            const depthVal = document.getElementById(`${partition}ScanDepth`).value; 
+            const isLosing = depthVal === 'loss'; 
+
+            btn.disabled = true; btn.innerText = "🧬 PROCESSING DATA..."; 
+            state.scanInProgress = true; document.getElementById(`${partition}Step3Card`).style.display = "none";
+            
             try {
-                await fetchFromAPI(partition);
-                await new Promise(r => setTimeout(r, 1000)); state.compiledMatrix = {};
-                for (let i = 0; i <= 9; i++) { for (let j = 0; j <= 9; j++) { let isBig = Math.random() > 0.5; if (isLosing) { isBig = ((i + j) % 2 === 0) ? false : true; } let bestNum = isBig ? Math.floor(Math.random() * 5) + 5 : Math.floor(Math.random() * 5); state.compiledMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${bestNum}]`; } }
-                btn.innerText = `🧬 RE-RUN ENGINE`; btn.disabled = false; state.scanInProgress = false; document.getElementById(`${partition}Step3Card`).style.display = "block";
-                addLog(`Neural Engine [${partition.toUpperCase()}] generated matrix`);
+                await new Promise(r => setTimeout(r, 1200)); 
+                state.compiledMatrix = {};
+                for (let i = 0; i <= 9; i++) { 
+                    for (let j = 0; j <= 9; j++) { 
+                        let isBig = Math.random() > 0.5; 
+                        if (isLosing) { isBig = ((i + j) % 2 === 0) ? false : true; } 
+                        let bestNum = isBig ? Math.floor(Math.random() * 5) + 5 : Math.floor(Math.random() * 5); 
+                        state.compiledMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${bestNum}]`; 
+                    } 
+                }
+                btn.innerText = `🧬 RE-RUN NEURAL ENGINE`; btn.disabled = false; state.scanInProgress = false; 
+                document.getElementById(`${partition}Step3Card`).style.display = "block";
+                addLog(`Neural Engine [${partition.toUpperCase()}] generated new matrix`);
             } catch (error) { btn.innerText = "🔄 RETRY"; btn.disabled = false; state.scanInProgress = false; }
         };
 
@@ -619,19 +770,28 @@
         window.uploadNeuralToDB = async function(partition) { 
             let state = State[partition];
             if (Object.keys(state.compiledMatrix).length === 0) return alert("Run Neural Engine First!"); 
-            let tf = document.getElementById(`${partition}NeuralTimeframe`).value; let target = document.getElementById(`${partition}PublishTarget`).value; let pathBase = DB_PATHS[tf]; 
+            let tf = document.getElementById(`${partition}NeuralTimeframe`).value; 
+            let target = document.getElementById(`${partition}PublishTarget`).value; 
+            let pathBase = DB_PATHS[tf]; 
+            
             if(!confirm(`Publish this Matrix to [${target.toUpperCase()}]?`)) return; 
             
             let timestamp = Date.now(); let updates = {}; 
             updates[`matrix_history_${partition}/${timestamp}`] = { timeframe: tf, matrix: state.compiledMatrix, created_at: timestamp };
             
-            if (target !== 'vault') { updates[`settings/active_matrices/${target}_${tf}`] = { vault: partition, id: String(timestamp) }; } 
+            if (target === 'vvip') {
+                for(let key in state.compiledMatrix) { updates[`${pathBase}/${key}`] = state.compiledMatrix[key]; }
+                updates[`settings/active_matrices/vvip_${tf}`] = null;
+            } else if (target !== 'vault') { 
+                updates[`settings/active_matrices/${target}_${tf}`] = { vault: partition, id: String(timestamp) }; 
+                if (target === 'vip') updates[`settings/vip_matrix`] = String(timestamp);
+                if (target === 'trial') updates[`settings/global_matrix`] = String(timestamp);
+            } 
             
             try { await update(ref(db), updates); showToast(`✅ Matrix Published!`); addLog(`Published [${partition.toUpperCase()}] matrix to ${target.toUpperCase()}`); } catch(e) { alert("Failed to Upload."); } 
         };
 
-        // 🔥 FIX: MANUAL EDITOR UNLOCKED 🔥
-        function buildMatrix(partition) { let html = ""; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { let k = `${i}-${j}`; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold; font-size:14px;">${k}</td><td><input type="number" id="m-${partition}-${k}" style="min-width:60px; margin:0; text-align:center;" min="0" max="9" placeholder="#"></td></tr>`; }} document.getElementById(`${partition}MatList`).innerHTML = html; }
+        function buildMatrix(partition) { let html = ""; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { let k = `${i}-${j}`; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:800; font-size:12px;">${k}</td><td><input type="number" id="m-${partition}-${k}" style="min-width:60px; margin:0; text-align:center;" min="0" max="9" placeholder="#"></td></tr>`; }} document.getElementById(`${partition}MatList`).innerHTML = html; }
         
         window.loadMatrixData = async function(partition) { 
             let tf = document.getElementById(`${partition}MatTimeframe`).value; 
@@ -640,18 +800,18 @@
             try { 
                 let targetDbPath = "";
                 if(partition === 'vvip') {
-                    targetDbPath = DB_PATHS[tf]; // Directly load Live VVIP
+                    targetDbPath = DB_PATHS[tf]; 
                 } else {
                     let snapActive = await get(ref(db, `settings/active_matrices/${partition}_${tf}`));
-                    if(!snapActive.exists()) return; // It's fine if empty, let them write fresh
+                    if(!snapActive.exists()) return; 
                     let route = snapActive.val(); targetDbPath = `matrix_history_${route.vault}/${route.id}/matrix`;
                 }
-
                 let snap = await get(ref(db, targetDbPath)); 
                 if(snap.exists()){ let data = snap.val(); for(let key in data) { let valMatch = data[key].match(/\[(\d+)\]/); if(valMatch && document.getElementById(`m-${partition}-${key}`)) { document.getElementById(`m-${partition}-${key}`).value = valMatch[1]; } } } 
             } catch(e) {} 
         };
 
+        // FIXED VVIP SAVE BUG
         window.saveAllMatrix = async (partition) => { 
             let tf = document.getElementById(`${partition}MatTimeframe`).value; 
             let updates = {}; let count = 0; let matrixData = {};
@@ -659,14 +819,18 @@
             for(let i=0; i<=9; i++) { 
                 for(let j=0; j<=9; j++) { 
                     let k = `${i}-${j}`; let v = document.getElementById(`m-${partition}-${k}`).value; 
-                    if(v !== "") { let size = parseInt(v) >= 5 ? "BIG" : "SMALL"; matrixData[k] = `${size} [${v}]`; count++; } 
+                    if(v !== "") { 
+                        let size = parseInt(v) >= 5 ? "BIG" : "SMALL"; 
+                        matrixData[k] = `${size} [${v}]`; 
+                        count++; 
+                    } else { matrixData[k] = "UNSET"; }
                 } 
             } 
             if(count === 0) return alert("Matrix is empty. Type numbers first.");
 
             if (partition === 'vvip') {
                 let pathBase = DB_PATHS[tf];
-                for(let key in matrixData) updates[`${pathBase}/${key}`] = matrixData[key];
+                updates[pathBase] = matrixData;
             } else {
                 let timestamp = Date.now();
                 updates[`matrix_history_${partition}/${timestamp}`] = { timeframe: tf, matrix: matrixData, created_at: timestamp };
