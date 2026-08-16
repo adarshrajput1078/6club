@@ -26,10 +26,6 @@
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        .ping-indicator { position: absolute; top: 12px; right: 18px; font-family: var(--font-mono); font-size: 11px; font-weight: 800; color: var(--green); display: flex; align-items: center; gap: 4px; text-shadow: 0 0 10px rgba(16,185,129,0.5); }
-        .ping-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; animation: pingPulse 1s infinite; }
-        @keyframes pingPulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
-
         .top-header { width: 100%; display: flex; justify-content: flex-start; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(6,182,212,0.3); padding-bottom: 8px; }
         .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9); display: flex; align-items: center; gap: 8px;}
         .brand span { color: var(--primary); text-shadow: 0 0 15px var(--cyan-glow); }
@@ -76,11 +72,6 @@
         .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 40px var(--primary); }
         .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 40px #4da6ff; }
 
-        .history-bar { margin-top: 10px; display: flex; gap: 6px; overflow-x: auto; padding-bottom: 4px;}
-        .history-item { background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; border-radius: 6px; padding: 4px 8px; font-size: 10px; font-family: var(--font-mono); display: flex; flex-direction: column; align-items: center; min-width: 50px;}
-        .hist-win { color: var(--green); border-color: rgba(16,185,129,0.3); }
-        .hist-loss { color: var(--red); border-color: rgba(239,68,68,0.3); }
-
         .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);}
         .ban-icon { font-size: 60px; margin-bottom: 10px; animation: popIn 0.5s ease;}
         .ban-title { color: var(--red); font-size: 38px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 20px var(--red-glow);}
@@ -93,35 +84,6 @@
         .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 350px; color: #fff; text-decoration: none; padding: 16px; border-radius: 10px; font-weight: 800; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
         .contact-btn:active { transform: scale(0.96); }
         .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 15px rgba(16,185,129,0.4); margin-bottom: 15px; color: #000; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px;}
-
-        #miniAnimScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.95); z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 15px;}
-        .mini-title { font-family: var(--font-main); font-size: 55px; font-weight: 900; margin: 0; letter-spacing: 4px; text-transform: uppercase; text-shadow: 0 5px 20px rgba(0,0,0,0.9);}
-        .real-result-card { background: linear-gradient(145deg, #0f172a, #020617); border-radius: 16px; padding: 24px; width: 100%; max-width: 350px; border: 2px solid #1e293b; opacity: 0; position: relative;}
-        .theme-win { animation: epic3DWin 0.6s forwards; border-color: var(--green); box-shadow: 0 0 30px rgba(16,185,129,0.2); }
-        .theme-jackpot { animation: epic3DWin 0.6s forwards; border-color: var(--primary); box-shadow: 0 0 30px var(--cyan-glow); }
-        .theme-loss { animation: lossShake 0.6s forwards; border-color: var(--red); }
-        @keyframes epic3DWin { 0% { transform: scale(0.5) rotateX(20deg); opacity: 0;} 70% { transform: scale(1.05); opacity: 1; } 100% { transform: scale(1) rotateX(0); opacity: 1; } }
-        @keyframes lossShake { 0% { transform: translateX(0) scale(0.8); opacity: 0;} 20% { transform: translateX(-15px); opacity: 1;} 40% { transform: translateX(15px); } 60% { transform: translateX(-10px); } 80% { transform: translateX(10px); } 100% { transform: translateX(0) scale(1); opacity: 1; box-shadow: 0 10px 40px rgba(239, 68, 68, 0.4);} }
-        
-        .res-row { display: flex; justify-content: space-between; align-items: center; padding: 12px 0; border-bottom: 1px dashed rgba(255,255,255,0.1); }
-        .res-row:last-child { border-bottom: none; }
-        .res-label { font-size: 13px; color: var(--text-muted); font-weight: 700; letter-spacing: 1px; text-transform: uppercase;}
-        .res-val { font-size: 16px; font-weight: 800; font-family: var(--font-mono); display: flex; align-items: center; gap: 8px;}
-        .mini-close { font-size: 13px; color: var(--text-muted); margin-top: 30px; cursor: pointer; border: 1px solid rgba(255,255,255,0.1); padding: 12px 30px; border-radius: 10px; background: rgba(15,23,42,0.8); font-weight: 700; font-family: var(--font-ui); letter-spacing: 1px; text-transform: uppercase;}
-
-        .color-ball { width: 34px; height: 34px; border-radius: 50%; display: flex; justify-content: center; align-items: center; font-weight: 900; color: #fff; font-size: 16px; box-shadow: inset -3px -3px 8px rgba(0,0,0,0.6), inset 2px 2px 5px rgba(255,255,255,0.5), 0 5px 15px rgba(0,0,0,0.8); border: 2px solid rgba(0,0,0,0.8); font-family: var(--font-main); }
-        .bg-green { background: radial-gradient(circle at 30% 30%, #34d399, #10b981); }
-        .bg-red { background: radial-gradient(circle at 30% 30%, #f87171, #ef4444); }
-        .bg-red-violet { background: linear-gradient(135deg, #ef4444 50%, #8b5cf6 50%); }
-        .bg-green-violet { background: linear-gradient(135deg, #10b981 50%, #8b5cf6 50%); }
-        .size-badge { padding: 4px 12px; border-radius: 6px; font-size: 14px; font-weight: 800; box-shadow: 0 4px 10px rgba(0,0,0,0.6); border: 1px solid rgba(0,0,0,0.4); font-family: var(--font-ui);}
-        .size-big { background: linear-gradient(180deg, #f59e0b, #b45309); color: #fff; }
-        .size-small { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #fff; }
-
-        #jackpotScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2, 6, 23, 0.98); z-index: 99999999; display: none; flex-direction: column; justify-content: center; align-items: center; overflow: hidden;}
-        .jackpot-bg { position: absolute; width: 200vw; height: 200vw; background: conic-gradient(from 0deg, transparent, var(--primary), var(--primary-dark), transparent 30%); animation: radarSpin 1.5s linear infinite; z-index: -1; }
-        .jackpot-title { font-family: var(--font-main); font-size: 60px; font-weight: 900; color: #fff; text-shadow: 0 0 20px var(--cyan-glow), 0 0 50px var(--primary); text-align: center; line-height: 1.1; animation: epic3DWin 0.5s forwards;}
-        @keyframes radarSpin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
 
         .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
         .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 20px; height: 20px; border-radius: 50%; animation: spin 1s linear infinite; }
@@ -164,24 +126,7 @@
         <a href="https://t.me/Nse_Dev" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
-    <div id="miniAnimScreen">
-        <h1 id="miniTitle" class="mini-title">🏆 WIN 🏆</h1>
-        <div id="realCard" class="real-result-card">
-            <div class="res-row"><span class="res-label">PERIOD NO.</span><span class="res-val" id="resPeriod" style="color: #cbd5e1; font-family: var(--font-mono);">----</span></div>
-            <div class="res-row" style="background: rgba(6,182,212,0.1); padding: 14px; border-radius: 10px; margin-top: 8px;"><span class="res-label" style="color:var(--primary);">AI PREDICTION</span><span class="res-val" id="resPred">--</span></div>
-            <div class="res-row" style="background: rgba(0,0,0,0.6); padding: 14px; border-radius: 10px; margin-top: 8px; border: 1px solid rgba(255,255,255,0.05);"><span class="res-label">ACTUAL OUTCOME</span><span class="res-val" id="resActual"><span id="resBalls"></span><span id="resSize"></span></span></div>
-        </div>
-        <div class="mini-close" onclick="document.getElementById('miniAnimScreen').style.display='none'">TAP TO DISMISS</div>
-    </div>
-
-    <div id="jackpotScreen">
-        <div class="jackpot-bg"></div>
-        <h1 class="jackpot-title">💎 MEGA JACKPOT 💎<br><span style="font-size:24px; color:var(--primary); text-shadow: 0 0 15px var(--cyan-glow); letter-spacing:4px; font-family:var(--font-ui);">VIOLET SECURED</span></h1>
-    </div>
-
     <div id="top-panel">
-        <div class="ping-indicator"><div class="ping-dot"></div> <span id="pingDisplay">24ms</span></div>
-        
         <div class="top-header">
             <div class="brand">SIKKIM <span class="badge">PRO VIP</span></div>
             <div class="tabs" id="timeframeTabs">
@@ -223,8 +168,6 @@
                 <div id="out-size" class="result-display">--</div>
                 <button class="btn-sleek" id="btnAnalyze" style="width: 110px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
             </div>
-            
-            <div class="history-bar" id="sessionHistory"></div>
         </div>
     </div>
 
@@ -247,10 +190,8 @@
         window.AdminSettings = { prefixes: ["68", "67"], baselineUid: 0, freeTrials: 5 };
         window.GlobalSettings = {}; 
 
-        let currentUid = ""; let currentPrediction = ""; let currentPeriod = ""; let isWaitingAPI = false;
+        let currentUid = ""; let currentPrediction = ""; let currentPeriod = "";
         let maintInterval = null;
-
-        setInterval(() => { document.getElementById('pingDisplay').innerText = (Math.floor(Math.random() * 35) + 15) + 'ms'; }, 2000);
 
         window.Util = class {
             static limit(el) { if(el.value.length > 1) el.value = el.value.slice(0,1); if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; }
@@ -266,8 +207,6 @@
         };
 
         function getDeviceID() { let d = localStorage.getItem('dev_did'); if(!d) { d = 'DEV-' + Math.random().toString(36).substr(2, 9); localStorage.setItem('dev_did', d); } return d; }
-        window.getRealBallHtml = (n) => { if(n == 0) return `<div class="color-ball bg-red-violet">0</div>`; if(n == 5) return `<div class="color-ball bg-green-violet">5</div>`; if(n % 2 == 0) return `<div class="color-ball bg-red">${n}</div>`; return `<div class="color-ball bg-green">${n}</div>`; };
-        window.getSizeBadge = (size) => size.includes("BIG") ? `<span class="size-badge size-big">BIG</span>` : `<span class="size-badge size-small">SMALL</span>`;
 
         window.Auth = class {
             static async verify() {
@@ -336,24 +275,41 @@
         window.Engine = class {
             static activeMode = '1m';
             static state = "IDLE";
-            static historyLog = [];
             
             static switchMode(m) { this.activeMode = m; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.getElementById('btn-'+m).classList.add('active'); this.updateTimerUI(); }
             static startTimer() { setInterval(() => this.updateTimerUI(), 1000); }
 
             static updateTimerUI() {
-                let now = new Date(); let totalMins = (now.getUTCHours() * 60) + now.getUTCMinutes();
-                let year = now.getUTCFullYear(); let month = String(now.getUTCMonth() + 1).padStart(2, '0'); let day = String(now.getUTCDate()).padStart(2, '0');
+                // Fixed time logic accurately synchronized for Indian Standard Time (IST) 
+                let d = new Date();
+                let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
+                let istTime = new Date(utc + (3600000 * 5.5)); // UTC + 5:30
+                
+                let totalMins = (istTime.getHours() * 60) + istTime.getMinutes();
+                let year = istTime.getFullYear(); 
+                let month = String(istTime.getMonth() + 1).padStart(2, '0'); 
+                let day = String(istTime.getDate()).padStart(2, '0');
                 
                 let remSec = 0;
-                if(this.activeMode === '1m') { currentPeriod = `${year}${month}${day}1000${10001 + totalMins + 1}`; remSec = 60 - now.getUTCSeconds(); if(remSec === 60) remSec = 0; } 
-                else { let halfMinBlock = now.getUTCSeconds() >= 30 ? 2 : 1; currentPeriod = `30001${String((totalMins * 2) + halfMinBlock + 1).padStart(4, '0')}`; remSec = now.getUTCSeconds() >= 30 ? 60 - now.getUTCSeconds() : 30 - now.getUTCSeconds(); }
+                if(this.activeMode === '1m') { 
+                    currentPeriod = `${year}${month}${day}1000${10001 + totalMins + 1}`; 
+                    remSec = 60 - istTime.getSeconds(); 
+                    if(remSec === 60) remSec = 0; 
+                } else { 
+                    let halfMinBlock = istTime.getSeconds() >= 30 ? 2 : 1; 
+                    currentPeriod = `30001${String((totalMins * 2) + halfMinBlock + 1).padStart(4, '0')}`; 
+                    remSec = istTime.getSeconds() >= 30 ? 60 - istTime.getSeconds() : 30 - istTime.getSeconds(); 
+                }
                 
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
-                let tDisplay = document.getElementById('displayTimer'); tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`; tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
-
-                if(remSec === 3) isWaitingAPI = false;
-                if(remSec <= 2 && currentPrediction !== "" && !isWaitingAPI) { isWaitingAPI = true; this.triggerWinLossAnimation(currentPeriod, currentPrediction); }
+                let tDisplay = document.getElementById('displayTimer'); 
+                tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`; 
+                tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
+                
+                // Auto-reset UI when period is about to end without playing animations
+                if(remSec <= 2 && this.state !== "IDLE") { 
+                    this.resetUI();
+                }
             }
 
             static async analyze() {
@@ -369,7 +325,7 @@
 
                     btn.disabled = true; btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span>'; n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
 
-                    let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`; // VVIP DEFAULT
+                    let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`; 
 
                     try {
                         if (uData.force_live === true) {
@@ -415,46 +371,7 @@
                 const btn = document.getElementById('btnAnalyze'), n1 = document.getElementById('in-n1'), n2 = document.getElementById('in-n2'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
                 resultBox.classList.remove('show'); inputGroup.style.display = 'flex'; setTimeout(() => { inputGroup.style.opacity = '1'; }, 50);
                 btn.disabled = false; btn.innerText = "EXECUTE"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
-            }
-
-            static addHistory(period, pred, result, type) {
-                this.historyLog.unshift({ period: period.slice(-4), pred: pred, type: type });
-                if(this.historyLog.length > 5) this.historyLog.pop();
-                let html = "";
-                this.historyLog.forEach(h => {
-                    let cls = h.type === 'WIN' || h.type === 'JACKPOT' ? 'hist-win' : 'hist-loss';
-                    html += `<div class="history-item ${cls}"><span>#${h.period}</span><strong>${h.pred[0]}</strong></div>`;
-                });
-                document.getElementById('sessionHistory').innerHTML = html;
-            }
-
-            static async triggerWinLossAnimation(pVerify, pValue) {
-                let attempts = 0; const targetPeriod = String(pVerify); const apiUrl = this.activeMode === '1m' ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
-                const fetchRealResult = async () => {
-                    try {
-                        let rawData = await fetch("https://api.allorigins.win/raw?url=" + encodeURIComponent(apiUrl + "?t=" + Date.now())).then(r=>r.json());
-                        let list = rawData.data?.list || rawData.data || rawData.list || rawData; if (!list || list.length === 0) throw new Error("No Data");
-                        let latestItem = list[0]; let apiPeriod = String(latestItem.issueNumber || latestItem.period);
-                        if(apiPeriod.slice(-4) !== targetPeriod.slice(-4)) { attempts++; if(attempts < 15) { setTimeout(fetchRealResult, 500); return; } }
-                        let num = latestItem.number !== undefined ? parseInt(latestItem.number) : 0; let actual = latestItem.size ? latestItem.size.toUpperCase() : (num >= 5 ? "BIG" : "SMALL"); let cleanPred = pValue.toUpperCase().includes("BIG") ? "BIG" : "SMALL";
-                        
-                        if(cleanPred === actual) { 
-                            if(num === 0 || num === 5) { this.showPopup('JACKPOT', pVerify, pValue, actual, num); this.addHistory(pVerify, pValue, actual, 'JACKPOT'); } 
-                            else { this.showPopup('WIN', pVerify, pValue, actual, num); this.addHistory(pVerify, pValue, actual, 'WIN'); } 
-                        } else { this.showPopup('LOSS', pVerify, pValue, actual, num); this.addHistory(pVerify, pValue, actual, 'LOSS'); } 
-                    } catch(e) { attempts++; if(attempts < 15) { setTimeout(fetchRealResult, 500); } else { this.showPopup('WIN', pVerify, pValue, pValue.toUpperCase().includes("BIG")?"BIG":"SMALL", 8); this.addHistory(pVerify, pValue, pValue, 'WIN'); } }
-                }
-                fetchRealResult(); currentPrediction = ""; 
-            }
-
-            static showPopup(type, period, prediction, actualResult, number) {
-                const miniScreen = document.getElementById('miniAnimScreen'); const mTitle = document.getElementById('miniTitle'); const card = document.getElementById('realCard');
-                document.getElementById('resPeriod').innerText = period; document.getElementById('resBalls').innerHTML = window.getRealBallHtml(number); document.getElementById('resSize').innerHTML = window.getSizeBadge(actualResult);
-                let predSz = prediction.split(' ')[0]; let predNum = (prediction.match(/\[(\d+)\]/) || [])[1] || (predSz === "BIG" ? 8 : 2); document.getElementById('resPred').innerHTML = `${window.getRealBallHtml(predNum)} ${window.getSizeBadge(predSz)}`;
-                card.className = "real-result-card"; void card.offsetWidth; 
-                if(type === 'JACKPOT') { const jpScreen = document.getElementById('jackpotScreen'); jpScreen.style.display = 'flex'; setTimeout(() => { jpScreen.style.display = 'none'; mTitle.innerText = "💎 MEGA JACKPOT 💎"; mTitle.style.color = "var(--primary)"; card.classList.add('theme-jackpot'); miniScreen.style.display = 'flex'; }, 3000); } 
-                else if(type === 'WIN') { mTitle.innerText = "🏆 EPIC WIN 🏆"; mTitle.style.color = "var(--green)"; card.classList.add('theme-win'); miniScreen.style.display = 'flex'; } 
-                else { mTitle.innerText = "❌ FAILED ❌"; mTitle.style.color = "var(--red)"; card.classList.add('theme-loss'); miniScreen.style.display = 'flex'; }
+                currentPrediction = "";
             }
         };
 
