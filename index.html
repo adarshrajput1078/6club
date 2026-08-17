@@ -31,7 +31,8 @@
         .brand span { color: var(--primary); text-shadow: 0 0 15px var(--cyan-glow); }
         .brand .badge { background: rgba(6,182,212,0.15); border: 1px solid var(--primary-dark); font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: 6px; color: var(--primary); letter-spacing: 1px;}
         
-        .tabs { display: flex; background: rgba(2, 6, 23, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); margin-left: 10px;}
+        /* 🛠️ FIX 1: Margin-left auto to push tabs to the right perfectly */
+        .tabs { display: flex; background: rgba(2, 6, 23, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); margin-left: auto;}
         .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 800; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: 0.3s;}
         .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3);}
 
@@ -275,12 +276,41 @@
         window.Engine = class {
             static activeMode = '1m';
             static state = "IDLE";
+            static apiPeriod = null; // Store API fetched period here
             
-            static switchMode(m) { this.activeMode = m; document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); document.getElementById('btn-'+m).classList.add('active'); this.updateTimerUI(); }
-            static startTimer() { setInterval(() => this.updateTimerUI(), 1000); }
+            static switchMode(m) { 
+                this.activeMode = m; 
+                this.apiPeriod = null; // Clear on switch
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); 
+                document.getElementById('btn-'+m).classList.add('active'); 
+                this.updateTimerUI(); 
+                this.syncPeriodFromAPI(); // Fetch immediately on switch
+            }
+            
+            static startTimer() { 
+                this.syncPeriodFromAPI(); // Fetch initially
+                setInterval(() => this.updateTimerUI(), 1000); 
+            }
+
+            // 🛠️ FIX 2: Live API Fetch Logic
+            static async syncPeriodFromAPI() {
+                let url = this.activeMode === '1m' 
+                    ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" 
+                    : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
+                try {
+                    let res = await fetch(url);
+                    let json = await res.json();
+                    if(json && json.data && json.data.list && json.data.list.length > 0) {
+                        let lastIssue = json.data.list[0].IssueNumber || json.data.list[0].issueNumber;
+                        // Add 1 to get the CURRENT ongoing period
+                        this.apiPeriod = (BigInt(lastIssue) + 1n).toString();
+                    }
+                } catch(e) {
+                    console.log("API Sync delayed, fallback system active.");
+                }
+            }
 
             static updateTimerUI() {
-                // FIXED: Accurate Indian Standard Time (IST) Calculation without Local Timezone overlap bugs
                 const formatter = new Intl.DateTimeFormat('en-US', {
                     timeZone: 'Asia/Kolkata',
                     year: 'numeric', month: '2-digit', day: '2-digit',
@@ -301,15 +331,31 @@
 
                 let totalMins = (hour * 60) + min;
                 let remSec = 0;
+                let fallbackPeriod = "";
 
+                // 🛠️ EXACT 14-DIGIT MATHEMATICAL FALLBACK
                 if(this.activeMode === '1m') { 
-                    currentPeriod = `${year}${month}${day}1000${10001 + totalMins + 1}`; 
+                    let seq = String(totalMins + 1).padStart(4, '0');
+                    fallbackPeriod = `${year}${month}${day}01${seq}`; // 01 for 1-Min Wingo
                     remSec = 60 - sec; 
                     if(remSec === 60) remSec = 0; 
                 } else { 
-                    let halfMinBlock = sec >= 30 ? 2 : 1; 
-                    currentPeriod = `30001${String((totalMins * 2) + halfMinBlock + 1).padStart(4, '0')}`; 
+                    let seq = String((totalMins * 2) + (sec >= 30 ? 2 : 1)).padStart(4, '0');
+                    fallbackPeriod = `${year}${month}${day}30${seq}`; // 30 for 30-Sec Wingo
                     remSec = sec >= 30 ? 60 - sec : 30 - sec; 
+                }
+                
+                // Prioritize the Live API. If it's slow/fails, use mathematical fallback
+                currentPeriod = this.apiPeriod ? this.apiPeriod : fallbackPeriod;
+
+                // Sync API directly when period is ending to get next ID
+                if (remSec === 58 || remSec === 28) {
+                    this.syncPeriodFromAPI();
+                }
+
+                // Clear old API data exactly when UI resets to allow fallback to bridge the gap
+                if (remSec === 59 || remSec === 29) {
+                    this.apiPeriod = null; 
                 }
                 
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
@@ -317,7 +363,6 @@
                 tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`; 
                 tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
                 
-                // Auto-reset UI when period is about to end without playing animations
                 if(remSec <= 2 && this.state !== "IDLE") { 
                     this.resetUI();
                 }
