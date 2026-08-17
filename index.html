@@ -280,25 +280,36 @@
             static startTimer() { setInterval(() => this.updateTimerUI(), 1000); }
 
             static updateTimerUI() {
-                // Fixed time logic accurately synchronized for Indian Standard Time (IST) 
-                let d = new Date();
-                let utc = d.getTime() + (d.getTimezoneOffset() * 60000);
-                let istTime = new Date(utc + (3600000 * 5.5)); // UTC + 5:30
+                // FIXED: Accurate Indian Standard Time (IST) Calculation without Local Timezone overlap bugs
+                const formatter = new Intl.DateTimeFormat('en-US', {
+                    timeZone: 'Asia/Kolkata',
+                    year: 'numeric', month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit',
+                    hour12: false
+                });
                 
-                let totalMins = (istTime.getHours() * 60) + istTime.getMinutes();
-                let year = istTime.getFullYear(); 
-                let month = String(istTime.getMonth() + 1).padStart(2, '0'); 
-                let day = String(istTime.getDate()).padStart(2, '0');
+                const parts = formatter.formatToParts(new Date());
+                const t = {};
+                parts.forEach(p => t[p.type] = p.value);
                 
+                let year = t.year;
+                let month = t.month;
+                let day = t.day;
+                let hour = parseInt(t.hour) === 24 ? 0 : parseInt(t.hour);
+                let min = parseInt(t.minute);
+                let sec = parseInt(t.second);
+
+                let totalMins = (hour * 60) + min;
                 let remSec = 0;
+
                 if(this.activeMode === '1m') { 
                     currentPeriod = `${year}${month}${day}1000${10001 + totalMins + 1}`; 
-                    remSec = 60 - istTime.getSeconds(); 
+                    remSec = 60 - sec; 
                     if(remSec === 60) remSec = 0; 
                 } else { 
-                    let halfMinBlock = istTime.getSeconds() >= 30 ? 2 : 1; 
+                    let halfMinBlock = sec >= 30 ? 2 : 1; 
                     currentPeriod = `30001${String((totalMins * 2) + halfMinBlock + 1).padStart(4, '0')}`; 
-                    remSec = istTime.getSeconds() >= 30 ? 60 - istTime.getSeconds() : 30 - istTime.getSeconds(); 
+                    remSec = sec >= 30 ? 60 - sec : 30 - sec; 
                 }
                 
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
