@@ -220,7 +220,14 @@
                     <h3 style="color:var(--accent-primary);">⚡ DIRECT UID INJECTION</h3>
                     <input type="number" id="manualUid" placeholder="Target UID (e.g. 6820644)">
                     <div class="flex-wrap-gap" style="margin-bottom:10px;">
-                        <select id="manualRole" style="margin-bottom:0;"><option value="trial">TRIAL</option><option value="vip">VIP</option><option value="vvip" selected>VVIP (Live Matrix)</option></select>
+                        <!-- 🔥 ADDED VVIP 1, 2, 3 TIERS TO DROPDOWN HERE 🔥 -->
+                        <select id="manualRole" style="margin-bottom:0;">
+                            <option value="trial">TRIAL</option>
+                            <option value="vip">VIP</option>
+                            <option value="vvip1">VVIP 1 (Big/Small Only)</option>
+                            <option value="vvip2">VVIP 2 (Big/Small + 2 Numbers)</option>
+                            <option value="vvip3" selected>VVIP 3 (Standard + 1 Number)</option>
+                        </select>
                         <select id="manualVipDuration" style="margin-bottom:0;"><option value="1">1 Day</option><option value="7">7 Days</option><option value="30">30 Days</option><option value="999" selected>Lifetime</option></select>
                     </div>
                     <select id="manualAccess"><option value="both">BOTH MODES</option><option value="1m">1 MIN ONLY</option><option value="30s">30 SEC ONLY</option></select>
@@ -606,15 +613,17 @@
                     s.forEach(c => { 
                         tot++; let d = c.val(); let uid = c.key; 
                         let role = d.role || (d.is_premium ? 'vip' : 'trial');
-                        if(role === 'vip' || role === 'vvip') vip++;
+                        if(role === 'vip' || role.includes('vvip')) vip++;
 
                         let daysLeft = d.expireAt ? Math.ceil((d.expireAt - now) / 86400000) : "LIFETIME";
                         let expiryText = daysLeft > 900 ? `<span style="color:var(--accent-primary); font-weight:800;">LIFETIME</span>` : (daysLeft <= 0 ? `<span style="color:var(--accent-danger); font-weight:800;">TERMINATED</span>` : `<span style="color:var(--accent-success); font-weight:800;">${daysLeft} DAYS</span>`);
-                        if(daysLeft <= 0) { expCount++; if(role === 'trial') expiredUsersList.push(uid); } else { if(role === 'trial') tCount++; if(role === 'vip') vCount++; if(role === 'vvip') vvCount++; }
+                        if(daysLeft <= 0) { expCount++; if(role === 'trial') expiredUsersList.push(uid); } else { if(role === 'trial') tCount++; if(role === 'vip') vCount++; if(role.includes('vvip')) vvCount++; }
                         
                         let badge = "";
                         if(daysLeft <= 0) { badge = `<span class="tag tag-expired">EXPIRED</span>`; }
-                        else if(role === 'vvip') badge = `<span class="tag tag-vvip">VVIP</span>`;
+                        else if(role === 'vvip1') badge = `<span class="tag tag-vvip">VVIP 1</span>`;
+                        else if(role === 'vvip2') badge = `<span class="tag tag-vvip">VVIP 2</span>`;
+                        else if(role === 'vvip3' || role === 'vvip') badge = `<span class="tag tag-vvip">VVIP 3</span>`;
                         else if(role === 'vip') badge = `<span class="tag tag-vip">VIP</span>`;
                         else badge = `<span class="tag tag-trial">TRIAL</span>`;
 
@@ -677,11 +686,11 @@
         window.saveAuthRules = async () => { await set(ref(db, 'settings/auth_rules'), { prefixes: document.getElementById('setPrefixes').value || "68,67", baselineUid: document.getElementById('setBaseline').value || 0, freeTrials: parseInt(document.getElementById('setFreeTrials').value) || 5 }); showToast("RULES UPDATED"); addLog(`Security rules updated`); };
         window.updateGameLink = async () => { let l = document.getElementById('adminGameLink').value.trim(); if(l) { if(!l.startsWith('http')) l = 'https://' + l; await update(ref(db, 'settings'), { force_link: l }); showToast("LINK ENFORCED!"); addLog(`Live target URL updated`); }};
         
+        // 🔥 UPDATED DIRECT INJECTOR (VVIP1, 2, 3) 🔥
         window.addManualUser = async () => { let uid = document.getElementById('manualUid').value.trim(); if(!uid) return; let role = document.getElementById('manualRole').value; let days = parseInt(document.getElementById('manualVipDuration').value); await set(ref(db, 'approved_uids/'+uid), { active:true, predictions_used:0, role: role, is_premium: (role !== 'trial'), expireAt: Date.now() + (days * 86400000), access_type: document.getElementById('manualAccess').value }); showToast(`✅ Injected UID ${uid}`); addLog(`Manual Inject: UID ${uid} -> ${role.toUpperCase()}`); document.getElementById('manualUid').value = ""; };
         window.openTimeModal = (uid) => { currentTimeUID = uid; document.getElementById('timeTargetUid').innerText = uid; document.getElementById('timeModal').style.display = 'flex'; };
         window.confirmTimeUpdate = async () => { let val = parseInt(document.getElementById('editTimeDuration').value); let updates = { access_type: document.getElementById('editAccessType').value }; if(val !== 0) { if(val === -1) updates.expireAt = Date.now() - 10000; else updates.expireAt = Date.now() + (val * 86400000); } await update(ref(db, 'approved_uids/'+currentTimeUID), updates); document.getElementById('timeModal').style.display = 'none'; showToast(`Access Modified.`); addLog(`Access modified for UID ${currentTimeUID}`); };
         
-        // FIXED PURGE SLOW LOOP
         window.purgeDeadNodes = async () => { 
             if(expiredUsersList.length === 0) return alert("No dead nodes!"); 
             if(!confirm(`Purge ${expiredUsersList.length} expired trial nodes?`)) return; 
@@ -694,13 +703,15 @@
         window.rejReq = async (uid) => { await remove(ref(db, 'uid_requests/'+uid)); showToast("Dropped"); addLog(`Auth: Dropped UID ${uid}`); };
         
         window.apprDep = async (uid, amt) => { 
-            let role = prompt("Upgrade user to VIP (File) or VVIP (Live)? Type 'vip' or 'vvip'", "vip"); 
-            if(role === 'vip' || role === 'vvip') { 
+            let role = prompt("Upgrade user to VIP or VVIP (vvip1, vvip2, vvip3)? Type EXACTLY: vip, vvip1, vvip2, or vvip3", "vip"); 
+            if(role === 'vip' || role.includes('vvip')) { 
                 await update(ref(db, 'approved_uids/' + uid), { role: role, is_premium: true }); 
                 await remove(ref(db, 'deposit_requests/' + uid)); 
                 await update(ref(db, 'settings'), { total_revenue: increment(amt) });
-                showToast(`UPGRADED`); addLog(`Deposit Auth: ${uid} -> ${role.toUpperCase()} (₹${amt})`);
-            } 
+                showToast(`UPGRADED TO ${role.toUpperCase()}`); addLog(`Deposit Auth: ${uid} -> ${role.toUpperCase()} (₹${amt})`);
+            } else {
+                alert("Invalid Role! Please type vip, vvip1, vvip2, or vvip3 exactly.");
+            }
         };
         window.rejDep = async (uid) => { await remove(ref(db, 'deposit_requests/' + uid)); showToast(`Rejected`); addLog(`Deposit Rejected: UID ${uid}`); };
         window.resetPlays = async (uid) => { await update(ref(db, 'approved_uids/'+uid), { predictions_used: 0 }); showToast("Reset"); addLog(`Reset plays for ${uid}`);};
@@ -717,7 +728,6 @@
         async function fetchSecureApiData(targetUrl) { const urlsToTry = [ targetUrl + "?t=" + Date.now(), "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl + "?t=" + Date.now()) ]; for (let url of urlsToTry) { try { let res = await fetch(url, { cache: "no-store", headers: { 'Accept': 'application/json' }}); let text = await res.text(); let data = JSON.parse(text); if (data && (Array.isArray(data) || data.data || data.list)) return data; } catch (e) { continue; } } throw new Error("API failed"); }
         async function fetchFromAPI(partition) { let tf = document.getElementById(`${partition}NeuralTimeframe`).value; let targetUrl = API_URLS[tf]; const data = await fetchSecureApiData(targetUrl); let results = []; if (Array.isArray(data) && data.length > 0) results = data; else if (data && data.data && Array.isArray(data.data.list)) results = data.data.list; else if (data && Array.isArray(data.data)) results = data.data; else if (data && Array.isArray(data.list)) results = data.list; return results.filter(item => { let n = item.number ?? item.Number ?? item.DrawNumber ?? item.result; const num = parseInt(n); return !isNaN(num) && num >= 0 && num <= 9; }).map(item => ({ number: parseInt(item.number ?? item.Number ?? item.DrawNumber ?? item.result), issue: String(item.issueNumber || item.issue || item.IssueNumber || item.Period || item.period || '') })); }
 
-        // NEW SLOT ROLLING ANIMATION
         window.fetchLatestNumber = async function(partition) {
             let el = document.getElementById(`${partition}AutoNumber`);
             el.classList.remove('roll-in'); void el.offsetWidth;
@@ -811,7 +821,6 @@
             } catch(e) {} 
         };
 
-        // FIXED VVIP SAVE BUG
         window.saveAllMatrix = async (partition) => { 
             let tf = document.getElementById(`${partition}MatTimeframe`).value; 
             let updates = {}; let count = 0; let matrixData = {};
