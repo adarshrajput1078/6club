@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>SIKKIM PRO VIP</title>
+    <title>DEV ARMY SYSTEM</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,7 +13,7 @@
         :root { 
             --primary: #06b6d4; --primary-dark: #0891b2; --primary-3d: #164e63; --cyan-glow: rgba(6, 182, 212, 0.6);
             --bg-top: linear-gradient(135deg, #020617, #0f172a, #020617);
-            --green: #10b981; --red: #ef4444; --red-glow: rgba(239, 68, 68, 0.4); --gold: #f59e0b;
+            --green: #10b981; --red: #ef4444; --red-glow: rgba(239, 68, 68, 0.5); --gold: #f59e0b;
             --purple: #8b5cf6;
             
             --font-main: 'Rajdhani', sans-serif; --font-ui: 'Inter', sans-serif; --font-mono: 'Fira Code', monospace; --font-zombie: 'Creepster', cursive; 
@@ -22,103 +22,138 @@
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
         body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: #020617; }
         
-        #top-panel { flex: 0 0 auto; min-height: 20vh; max-height: 35vh; width: 100%; z-index: 10; position: relative; padding: 12px 18px; background: var(--bg-top); border-bottom: 2px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.05); display: flex; flex-direction: column; justify-content: center; }
+        #top-panel { 
+            flex: 0 0 auto; min-height: 20vh; max-height: 35vh; width: 100%; z-index: 10; position: relative; 
+            padding: 12px 16px; border-bottom: 2px solid #1e293b; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.05); 
+            display: flex; flex-direction: column; justify-content: center; 
+            background: linear-gradient(135deg, rgba(2,6,23,0.95), rgba(15,23,42,0.95)), radial-gradient(circle at center, rgba(6,182,212,0.1) 0%, transparent 100%);
+            background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
+            background-size: 20px 20px;
+        }
+        
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        .top-header { width: 100%; display: flex; justify-content: flex-start; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(6,182,212,0.3); padding-bottom: 8px; }
-        .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9); display: flex; align-items: center; gap: 8px;}
-        .brand span { color: var(--primary); text-shadow: 0 0 15px var(--cyan-glow); }
-        .brand .badge { background: rgba(6,182,212,0.15); border: 1px solid var(--primary-dark); font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: 6px; color: var(--primary); letter-spacing: 1px;}
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(6,182,212,0.2); padding-bottom: 10px; }
+        .header-left { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+
+        .brand { font-family: var(--font-main); font-size: 24px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
         
-        .tabs { display: flex; background: rgba(2, 6, 23, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); margin-left: auto;}
-        .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 800; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: 0.3s;}
-        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3);}
+        .server-status { display: inline-flex; align-items: center; width: fit-content; gap: 5px; font-size: 9px; font-family: var(--font-mono); color: var(--red); letter-spacing: 1px; font-weight: 800; background: rgba(239, 68, 68, 0.08); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(239, 68, 68, 0.3); text-shadow: 0 0 5px rgba(239, 68, 68, 0.5); transition: all 0.4s ease;}
+        .live-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; box-shadow: 0 0 10px var(--red); animation: blinkRed 1s infinite alternate; transition: all 0.4s ease;}
+        
+        @keyframes blinkRed { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--red); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--red); } }
+        
+        .server-status.connected { color: var(--green); background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3); text-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+        .server-status.connected .live-dot { background: var(--green); box-shadow: 0 0 10px var(--green); animation: blinkGreen 1s infinite alternate; }
+        @keyframes blinkGreen { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--green); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--green); } }
+
+        .tabs { display: flex; background: rgba(2, 6, 23, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .tab-btn { padding: 6px 12px; font-size: 10px; font-weight: 800; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: all 0.3s ease;}
+        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 12px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3); transform: scale(1.05);}
 
         input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        input { width: 100%; height: 100%; padding: 0 10px; border: 2px solid #1e293b; border-radius: 10px; text-align: center; font-size: 22px; font-weight: 800; background: rgba(15, 23, 42, 0.6); color: var(--primary); outline: none; transition: 0.3s; font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), inset 0 3px 10px rgba(0,0,0,0.9); background: #020617;}
-        input::placeholder { color: #334155; font-size: 14px; letter-spacing: 2px; font-family: var(--font-ui); font-weight: 600;}
+        input { width: 100%; height: 100%; padding: 0 8px; border: 2px solid #1e293b; border-radius: 8px; text-align: center; font-size: 17px; font-weight: 800; background: rgba(15, 23, 42, 0.6); color: var(--primary); outline: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), inset 0 3px 10px rgba(0,0,0,0.9); background: rgba(2, 6, 23, 0.9); transform: translateY(-2px);}
+        input::placeholder { color: #334155; font-size: 11px; letter-spacing: 2px; font-family: var(--font-mono); font-weight: 600;}
 
-        .btn-sleek { height: 50px; padding: 0 18px; font-size: 15px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 10px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: 0.2s; box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px rgba(6,182,212,0.4); flex-shrink: 0; }
+        .btn-sleek { position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 13px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 0 var(--primary-3d), 0 6px 12px rgba(6,182,212,0.4); flex-shrink: 0; }
+        .btn-sleek::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); animation: shimmerBtn 3s infinite; }
+        @keyframes shimmerBtn { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
         .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
         .btn-dark { background: #0f172a; color: #fff; border: 1px solid #1e293b; box-shadow: 0 4px 0 #020617;}
 
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
-        .auth-row { display: flex; gap: 10px; align-items: center; width: 100%; height: 50px; }
+        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; height: 42px; }
         
-        .pending-box { display: flex; flex-direction: column; gap: 10px; width: 100%; animation: fadeIn 0.3s ease; margin-top: 2px;}
+        .pending-box { display: flex; flex-direction: column; gap: 8px; width: 100%; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-top: 2px;}
         .pending-header { display: flex; justify-content: space-between; align-items: center; }
-        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; text-shadow: 0 0 10px var(--cyan-glow);}
+        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 15px; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; text-shadow: 0 0 8px var(--cyan-glow);}
         
-        .deposit-alert-strip { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px 12px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
-        .deposit-alert-strip .alert-text { color: var(--red); font-size: 11px; font-weight: 800; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
-        @keyframes pulseText { from { text-shadow: 0 0 2px rgba(239,68,68,0.2); } to { text-shadow: 0 0 15px var(--red); } }
-        .pending-actions { display: flex; gap: 10px; height: 40px; }
+        .deposit-alert-strip { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 6px 10px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
+        .deposit-alert-strip .alert-text { color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
+        @keyframes pulseText { from { text-shadow: 0 0 2px rgba(239,68,68,0.2); transform: scale(1); } to { text-shadow: 0 0 10px var(--red); transform: scale(1.02); } }
+        .pending-actions { display: flex; gap: 8px; height: 38px; }
 
-        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; color: #94a3b8; font-weight: 700; background: rgba(15, 23, 42, 0.8); padding: 8px 12px; border-radius: 8px; border: 1px solid #1e293b;}
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 10px; color: #94a3b8; font-weight: 700; background: rgba(15, 23, 42, 0.8); padding: 6px 12px; border-radius: 8px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
         .info-col { flex: 1; }
-        .tool-info-row span { color: var(--primary); font-size: 16px; font-weight: 800; text-shadow: 0 0 10px var(--cyan-glow);}
+        .tool-info-row span { color: var(--primary); font-size: 14px; font-weight: 800; text-shadow: 0 0 8px var(--cyan-glow); transition: color 0.3s;}
 
-        .action-row { display: flex; gap: 10px; height: 50px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
-        .input-group { display: flex; gap: 10px; flex: 1; transition: opacity 0.3s; height: 100%; }
+        .action-row { display: flex; gap: 8px; height: 42px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
+        .input-group { display: flex; gap: 8px; flex: 1; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%; }
         
-        .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; background: transparent; border: none; box-shadow: none; z-index: 5; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .result-display.show { display: flex; }
-        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+        .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; background: transparent; border: none; box-shadow: none; z-index: 5; }
+        .result-display.show { display: flex; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        
+        @keyframes popIn { 
+            0% { transform: scale(0.6) translateY(12px); opacity: 0; filter: blur(4px); } 
+            70% { transform: scale(1.05) translateY(-2px); opacity: 1; filter: blur(0px); } 
+            100% { transform: scale(1) translateY(0); opacity: 1; } 
+        }
 
-        .zombie-text { font-family: var(--font-zombie); font-size: clamp(38px, 10vw, 48px); letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; }
-        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 40px var(--primary); }
-        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 40px #4da6ff; }
+        @keyframes textSmash {
+            0% { transform: scale(1.5) rotate(-3deg); opacity: 0; }
+            50% { transform: scale(0.95) rotate(2deg); opacity: 1; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        }
 
-        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);}
-        .ban-icon { font-size: 60px; margin-bottom: 10px; animation: popIn 0.5s ease;}
-        .ban-title { color: var(--red); font-size: 38px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 20px var(--red-glow);}
+        .zombie-text { font-family: var(--font-zombie); font-size: clamp(28px, 7vw, 36px); letter-spacing: 4px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; animation: textSmash 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .res-text-big { color: #ffffff; text-shadow: 0 0 12px var(--cyan-glow), 0 0 25px var(--primary); }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 12px rgba(77,166,255,0.7), 0 0 25px #4da6ff; }
         
-        .ban-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); padding: 20px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 350px; margin-bottom: 20px;}
-        .dynamic-deposit { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
-        .dynamic-deposit .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 600;}
-        .dynamic-deposit .amount { font-size: 42px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 20px rgba(245,158,11,0.5);}
+        .res-img-anim { animation: floatUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: translateY(10px); }
+        .res-img-anim:nth-child(2) { animation-delay: 0.1s; }
+        @keyframes floatUp { to { opacity: 1; transform: translateY(0); } }
+
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px); background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(239, 68, 68, 0.03) 40px, rgba(239, 68, 68, 0.03) 80px);}
+        .ban-icon { font-size: 50px; margin-bottom: 8px; animation: popIn 0.5s ease;}
+        .ban-title { color: var(--red); font-size: 34px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
         
-        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 350px; color: #fff; text-decoration: none; padding: 16px; border-radius: 10px; font-weight: 800; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
+        .ban-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); padding: 15px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 320px; margin-bottom: 20px;}
+        .dynamic-deposit { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
+        .dynamic-deposit .label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 600; letter-spacing: 1px;}
+        .dynamic-deposit .amount { font-size: 38px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px rgba(245,158,11,0.5);}
+        
+        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; color: #fff; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 800; font-family: var(--font-ui); font-size: 13px; text-transform: uppercase; background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; box-shadow: 0 8px 15px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
         .contact-btn:active { transform: scale(0.96); }
-        .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 15px rgba(16,185,129,0.4); margin-bottom: 15px; color: #000; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px;}
+        .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 12px rgba(16,185,129,0.4); margin-bottom: 12px; color: #000; font-family: var(--font-main); font-size: 16px; letter-spacing: 2px;}
 
-        .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
-        .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 20px; height: 20px; border-radius: 50%; animation: spin 1s linear infinite; }
+        .spinner { display: inline-block; width: 14px; height: 14px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 6px; }
+        .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 16px; height: 16px; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px); background: rgba(15, 23, 42, 0.95); color: #fff; padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 13px; border: 1px solid var(--primary-dark); z-index: 999999; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-ui); box-shadow: 0 10px 30px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 0.5px; backdrop-filter: blur(10px);}
-        #toast.show { transform: translateX(-50%) translateY(0); }
+        #toast { position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px) scale(0.9); background: rgba(15, 23, 42, 0.95); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 12px; border: 1px solid var(--primary-dark); z-index: 999999; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: 0 8px 25px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 0.5px; backdrop-filter: blur(10px); opacity: 0; text-transform: uppercase;}
+        #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
     </style>
 </head>
 <body>
 
     <!-- 🚧 SYSTEM MAINTENANCE SCREEN -->
     <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);">
-        <div style="font-size: 70px; animation: pulseText 2s infinite;">🚧</div>
-        <h1 class="ban-title" style="color: var(--accent-warning); text-shadow: 0 0 20px rgba(245,158,11,0.5); font-size:45px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
-        <div class="ban-box" style="border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.05); max-width: 400px;">
-            <span style="color:var(--accent-warning); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
-            <span id="maintReasonDisplay" style="color:#fff; font-size: 16px; font-weight:600; display:block; margin-top:10px; margin-bottom: 20px;">System Upgrading...</span>
-            <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 12px; border: 1px inset rgba(255,255,255,0.1);">
-                <div style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
-                <div id="maintTimerDisplay" style="font-size: 48px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 4px; text-shadow: 0 0 15px rgba(255,255,255,0.4);">00:00</div>
+        <div style="font-size: 60px; animation: pulseText 2s infinite;">🚧</div>
+        <h1 class="ban-title" style="color: var(--accent-warning); text-shadow: 0 0 15px rgba(245,158,11,0.5); font-size:40px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
+        <div class="ban-box" style="border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.05); max-width: 350px;">
+            <span style="color:var(--accent-warning); font-weight:900; font-size: 13px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
+            <span id="maintReasonDisplay" style="color:#fff; font-size: 14px; font-weight:600; display:block; margin-top:8px; margin-bottom: 18px;">System Upgrading...</span>
+            <div style="background: rgba(0,0,0,0.5); padding: 18px; border-radius: 10px; border: 1px inset rgba(255,255,255,0.1);">
+                <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
+                <div id="maintTimerDisplay" style="font-size: 42px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,255,255,0.4);">00:00</div>
             </div>
         </div>
-        <p style="color: var(--text-muted); font-size: 12px; font-family: var(--font-mono);">Do not close this window. The app will auto-resume.</p>
+        <p style="color: var(--text-muted); font-size: 11px; font-family: var(--font-mono);">Do not close this window. The app will auto-resume.</p>
     </div>
 
     <div id="bannedScreen" class="hard-screen">
         <div class="ban-icon">🛑</div>
         <h1 class="ban-title">ACCESS REVOKED</h1>
         <div class="ban-box">
-            <span style="color:var(--red); font-weight:800; font-size: 13px; font-family: var(--font-mono); letter-spacing: 1px;">SYSTEM ALERT</span><br>
-            <span id="banReasonText" style="color:#fff; font-size: 15px; font-weight:600; display:block; margin-top:10px;">Your 5 Free Trials are exhausted.</span>
+            <span style="color:var(--red); font-weight:800; font-size: 12px; font-family: var(--font-mono); letter-spacing: 1px;">SYSTEM ALERT</span><br>
+            <span id="banReasonText" style="color:#fff; font-size: 14px; font-weight:600; display:block; margin-top:8px;">Your 5 Free Trials are exhausted.</span>
             <div id="dynamicDepositBox" class="dynamic-deposit">
-                <div class="label">VIP ACTIVATION FEE</div>
+                <div class="label">PREMIUM ACTIVATION FEE</div>
                 <div id="depositAmountDisplay" class="amount">₹---</div>
             </div>
         </div>
@@ -128,7 +163,11 @@
 
     <div id="top-panel">
         <div class="top-header">
-            <div class="brand">DEV ARMY <span class="badge">PRO VIP</span></div>
+            <div class="header-left">
+                <div class="brand">DEV ARMY</div>
+                <div id="serverStatus" class="server-status"><div class="live-dot"></div> <span id="serverStatusText">SYSTEM LIVE</span></div>
+            </div>
+            
             <div class="tabs" id="timeframeTabs">
                 <button class="tab-btn" id="btn-30s" onclick="Engine.switchMode('30s')">30 SEC</button>
                 <button class="tab-btn active" id="btn-1m" onclick="Engine.switchMode('1m')">1 MIN</button>
@@ -137,18 +176,18 @@
 
         <div id="authScreen" class="auth-container">
             <div class="auth-row" id="auth-input-area">
-                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER SIKKIM UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                <button id="authBtn" class="btn-sleek" style="width: 115px; height: 50px;" onclick="Auth.verify()">CONNECT</button>
+                <input type="text" inputmode="numeric" id="uidInput" placeholder="[ ENTER UID ]" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <button id="authBtn" class="btn-sleek" style="width: 100px;" onclick="Auth.verify()">CONNECT</button>
             </div>
             <div id="auth-pending" class="pending-box hidden">
                 <div class="pending-header">
                     <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING...</span>
-                    <span style="font-size: 11px; color: #94a3b8; font-family:var(--font-mono); font-weight:700;">Awaiting Admin</span>
+                    <span style="font-size: 10px; color: #94a3b8; font-family:var(--font-mono); font-weight:700;">Awaiting Admin</span>
                 </div>
-                <div class="deposit-alert-strip"><span class="alert-text">⚠️ ₹1000 DEPOSIT REQUIRED FOR ACTIVATION</span></div>
+                <div class="deposit-alert-strip"><span class="alert-text">⚠️ PREMIUM ACTIVATION DEPOSIT 800₹</span></div>
                 <div class="pending-actions">
-                    <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:40px;">✈️ MSG ADMIN</a>
-                    <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:40px;" onclick="location.reload()">🔄 REFRESH</button>
+                    <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:11px; height:38px;">✈️ MSG ADMIN</a>
+                    <button class="btn-sleek btn-dark" style="flex:1; font-size:11px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
                 </div>
             </div>
         </div>
@@ -156,7 +195,7 @@
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row">
                 <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--gold); display:none; font-weight:800;">PLAYS: 0/5</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:10px; color:var(--gold); display:none; font-weight:800;">PLAYS: 0/5</span></div>
                 <div class="info-col" style="text-align: right;">TIMER: <span id="displayTimer">00:00</span></div>
             </div>
             
@@ -166,7 +205,7 @@
                     <input type="number" id="in-n2" placeholder="N2" oninput="Util.limit(this)">
                 </div>
                 <div id="out-size" class="result-display">--</div>
-                <button class="btn-sleek" id="btnAnalyze" style="width: 110px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
+                <button class="btn-sleek" id="btnAnalyze" style="width: 100px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
             </div>
         </div>
     </div>
@@ -197,7 +236,7 @@
             static limit(el) { if(el.value.length > 1) el.value = el.value.slice(0,1); if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; }
             static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
-                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
+                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR") || msg.includes("BANNED")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
                 } else {
                     t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(6, 182, 212, 0.3)";
@@ -211,7 +250,7 @@
         window.Auth = class {
             static async verify() {
                 let uid = document.getElementById('uidInput').value.trim(); let btn = document.getElementById('authBtn'); 
-                if(!uid) return Util.toast("ENTER UID FIRST"); if(!/^\d{7}$/.test(uid)) { return Util.toast("THIS IS NOT SIKKIM UID. CREATE NEW ID."); }
+                if(!uid) return Util.toast("ENTER UID FIRST"); if(!/^\d{7}$/.test(uid)) { return Util.toast("INVALID FORMAT. CREATE NEW ID."); }
                 btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
                 try {
@@ -232,8 +271,8 @@
                     }
                     
                     let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
-                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS IS NOT SIKKIM UID. CREATE NEW ID."); }
-                    if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. CREATE NEW ID FOR TRIAL."); }
+                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("INVALID PREFIX. CREATE NEW ID."); }
+                    if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. CREATE NEW ID."); }
 
                     await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: getDeviceID(), status: "pending", timestamp: Date.now() });
                     document.getElementById('auth-input-area').classList.add('hidden'); document.getElementById('auth-pending').classList.remove('hidden');
@@ -242,9 +281,12 @@
 
             static showDepositScreen(uid, msg) {
                 document.getElementById('banReasonText').innerText = msg; document.getElementById('banReasonText').style.color = "var(--red)";
-                const amounts = [200, 300, 500, 1000]; let hash = 0;
+                
+                const amounts = [800, 1000]; 
+                let hash = 0;
                 for (let i = 0; i < uid.length; i++) { hash = uid.charCodeAt(i) + ((hash << 5) - hash); }
                 window.currentDepositAmount = amounts[Math.abs(hash) % amounts.length];
+                
                 document.getElementById('depositAmountDisplay').innerText = "₹" + window.currentDepositAmount;
                 document.getElementById('dynamicDepositBox').style.display = "block"; document.getElementById('bannedScreen').style.display = 'flex';
             }
@@ -275,6 +317,15 @@
 
                     trialDisp.style.color = userData.role.includes('vvip') ? "var(--green)" : "var(--primary)"; 
                 }
+                
+                // 🔥 Switch Status Indicator to Green 🔥
+                const sStatus = document.getElementById('serverStatus');
+                const sText = document.getElementById('serverStatusText');
+                if(sStatus && sText) {
+                    sStatus.classList.add('connected');
+                    sText.innerText = "SERVER SECURE";
+                }
+
                 Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
             }
         };
@@ -328,7 +379,7 @@
                             if (isWin) {
                                 resultBox.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; gap:8px;">
                                     <span class="zombie-text ${this.lastPrediction === 'BIG' ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${this.lastPrediction}</span>
-                                    <img src="${num}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">
+                                    <img src="${num}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
                                 </div>`;
                                 
                                 btn.innerText = "RESET";
@@ -397,6 +448,7 @@
                 let tDisplay = document.getElementById('displayTimer'); 
                 tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`; 
                 tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
+                tDisplay.style.transform = remSec <= 5 ? "scale(1.05)" : "scale(1)";
                 
                 if(remSec <= 2 && this.state !== "IDLE") { 
                     if (this.isVvipUser && this.lastPredictedPeriod) {
@@ -412,7 +464,7 @@
                 let btn = document.getElementById('btnAnalyze'); let resultBox = document.getElementById('out-size'); let inputGroup = document.getElementById('input-group');
 
                 if(this.state === "IDLE") {
-                    if(!n1.value || !n2.value) return Util.toast("INPUT N1 AND N2 REQUIRED");
+                    if(!n1.value || !n2.value) return Util.toast("INPUT REQUIRED");
                     let userSnap = await get(ref(db, 'approved_uids/' + currentUid)); let uData = userSnap.val();
                     let role = uData.role || (uData.is_premium ? 'vip' : 'trial');
                     
@@ -420,8 +472,13 @@
 
                     if(role === 'trial' && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) { Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
 
-                    btn.disabled = true; btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span>'; n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
-
+                    btn.disabled = true; 
+                    btn.innerHTML = '<span class="spinner" style="border-top-color:#000; width:12px; height:12px; margin-right:4px;"></span> <span style="font-size:10px; letter-spacing:0px;">DECRYPT</span>'; 
+                    n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
+                    
+                    inputGroup.style.opacity = '0';
+                    inputGroup.style.transform = 'translateY(-10px) scale(0.95)';
+                    
                     let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`; 
 
                     try {
@@ -438,6 +495,7 @@
                         }
 
                         let snap = await get(ref(db, targetDbPath));
+                        
                         setTimeout(async () => {
                             if(snap.exists() && !snap.val().includes("UNSET")) {
                                 let rawPrediction = snap.val(); 
@@ -449,7 +507,7 @@
 
                                 currentPrediction = isBig ? "BIG" : "SMALL";
                                 
-                                if(role.startsWith('vvip')) {
+                                if(role.startsWith('vvip') && role !== 'vvip1') {
                                     this.isVvipUser = true;
                                     this.lastPrediction = currentPrediction;
                                     this.lastPredictedPeriod = currentPeriod;
@@ -464,46 +522,48 @@
                                 
                                 inputGroup.style.display = 'none'; 
                                 
-                                // 🔥 TIER-BASED DISPLAY LOGIC (SIDE BY SIDE NUMBERS) 🔥
                                 let extractedNum = rawPrediction.match(/\[(\d+)\]/);
                                 let baseNum = extractedNum ? parseInt(extractedNum[1]) : (isBig ? 7 : 2);
                                 
                                 let imagesHtml = "";
 
-                                if (role === 'vvip1') {
-                                    // NO NUMBERS
+                                if (role === 'vvip1' || role === 'vip') {
                                     imagesHtml = "";
                                 } else if (role === 'vvip2') {
-                                    // 2 NUMBERS SIDE BY SIDE
                                     let pool = isBig ? [5,6,7,8,9] : [0,1,2,3,4];
                                     pool = pool.filter(n => n !== baseNum); 
                                     let num2 = pool[Math.floor(Math.random() * pool.length)];
                                     imagesHtml = `
-                                        <img src="${baseNum}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">
-                                        <img src="${num2}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">
+                                        <img src="${baseNum}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
+                                        <img src="${num2}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
                                     `;
                                 } else {
-                                    // VIP, TRIAL, VVIP3 -> 1 NUMBER SIDE BY SIDE
-                                    imagesHtml = `<img src="${baseNum}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">`;
+                                    imagesHtml = `<img src="${baseNum}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">`;
                                 }
 
                                 let displayHtml = `<div style="display:flex; align-items:center; justify-content:center; width:100%; gap: 10px;">
-                                    <span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${currentPrediction}</span>
+                                    <span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}">${currentPrediction}</span>
                                     <div style="display:flex; gap: 5px;">${imagesHtml}</div>
                                 </div>`;
 
                                 resultBox.innerHTML = displayHtml; 
                                 resultBox.classList.add('show');
                                 this.state = "NEXT"; btn.disabled = false; btn.innerText = "RESET";
-                            } else { Util.toast("NO DATA FOR PATTERN"); this.resetUI(); }
-                        }, 500);
+                            } else { Util.toast("NO PATTERN FOUND"); this.resetUI(); }
+                        }, 1200); 
                     } catch(e) { Util.toast("SERVER ERROR"); this.resetUI(); }
                 } else { this.resetUI(); }
             }
             
             static resetUI() {
                 const btn = document.getElementById('btnAnalyze'), n1 = document.getElementById('in-n1'), n2 = document.getElementById('in-n2'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
-                resultBox.classList.remove('show'); inputGroup.style.display = 'flex'; setTimeout(() => { inputGroup.style.opacity = '1'; }, 50);
+                resultBox.classList.remove('show'); 
+                inputGroup.style.display = 'flex'; 
+                setTimeout(() => { 
+                    inputGroup.style.opacity = '1'; 
+                    inputGroup.style.transform = 'translateY(0) scale(1)'; 
+                }, 50);
+                
                 btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#000"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
                 currentPrediction = "";
             }
@@ -538,5 +598,3 @@
     </script>
 </body>
 </html>
-
-
