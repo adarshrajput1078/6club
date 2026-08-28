@@ -3,314 +3,177 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DEV ARMY VIP ENGINE</title>
+    <title>SIKKIM PRO VIP</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700;800;900&family=Rajdhani:wght@600;700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;600;800&family=Rajdhani:wght@600;700;900&family=Fira+Code:wght@600;800&display=swap" rel="stylesheet">
     
     <style>
         :root { 
-            --primary: #00f0ff; --primary-dark: #008899; 
-            --bg-base: #02060d; --bg-panel: rgba(5, 10, 20, 0.85); --bg-card: rgba(8, 15, 30, 0.9);
-            --success: #00ff66; --danger: #ff2a55; --gold: #ffb800; --purple: #b026ff;
-            --text-main: #f8fafc; --text-muted: #64748b;
-            --font-ui: 'Inter', sans-serif; --font-mono: 'JetBrains Mono', monospace; --font-head: 'Rajdhani', sans-serif;
+            --primary: #06b6d4; --primary-dark: #0891b2; --primary-3d: #164e63; --cyan-glow: rgba(6, 182, 212, 0.6);
+            --bg-top: linear-gradient(135deg, #020617, #0f172a, #020617);
+            --green: #10b981; --red: #ef4444; --red-glow: rgba(239, 68, 68, 0.4); --gold: #f59e0b;
+            --purple: #8b5cf6;
+            
+            --font-main: 'Rajdhani', sans-serif; --font-ui: 'Inter', sans-serif; --font-mono: 'Fira Code', monospace; --font-zombie: 'Creepster', cursive; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
+        body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: #020617; }
         
-        body, html { 
-            height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: var(--text-main); overflow: hidden; display: flex; flex-direction: column; 
-            background-color: var(--bg-base);
-            background-image: linear-gradient(rgba(0, 240, 255, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 240, 255, 0.05) 1px, transparent 1px);
-            background-size: 40px 40px; background-position: center center;
-        }
+        #top-panel { flex: 0 0 auto; min-height: 20vh; max-height: 35vh; width: 100%; z-index: 10; position: relative; padding: 12px 18px; background: var(--bg-top); border-bottom: 2px solid #1e293b; box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.05); display: flex; flex-direction: column; justify-content: center; }
+        #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
+        iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        /* 🔥 GLITCH TEXT EFFECT */
-        .glitch-text { position: relative; color: #fff; font-family: var(--font-head); font-size: 26px; font-weight: 900; letter-spacing: 2px; line-height: 1; text-shadow: 0 0 10px rgba(0,240,255,0.8);}
-        .glitch-text::before, .glitch-text::after { content: attr(data-text); position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0.8; }
-        .glitch-text::before { left: 2px; text-shadow: -2px 0 var(--danger); clip: rect(24px, 550px, 90px, 0); animation: glitch-anim 3s infinite linear alternate-reverse; }
-        .glitch-text::after { left: -2px; text-shadow: -2px 0 var(--primary); clip: rect(85px, 550px, 140px, 0); animation: glitch-anim 2.5s infinite linear alternate-reverse; }
-        @keyframes glitch-anim { 0% { clip: rect(15px, 9999px, 94px, 0); } 20% { clip: rect(85px, 9999px, 12px, 0); } 40% { clip: rect(10px, 9999px, 85px, 0); } 60% { clip: rect(98px, 9999px, 45px, 0); } 80% { clip: rect(25px, 9999px, 11px, 0); } 100% { clip: rect(65px, 9999px, 99px, 0); } }
-
-        /* 📱 SLEEK GLASS HEADER */
-        .top-header { flex: 0 0 75px; width: 100%; display: flex; justify-content: space-between; align-items: center; background: rgba(2, 6, 13, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid rgba(0, 240, 255, 0.3); z-index: 100; padding: 0 15px; box-shadow: 0 10px 40px rgba(0,0,0,0.9);}
+        .top-header { width: 100%; display: flex; justify-content: flex-start; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(6,182,212,0.3); padding-bottom: 8px; }
+        .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9); display: flex; align-items: center; gap: 8px;}
+        .brand span { color: var(--primary); text-shadow: 0 0 15px var(--cyan-glow); }
+        .brand .badge { background: rgba(6,182,212,0.15); border: 1px solid var(--primary-dark); font-size: 10px; font-weight: 900; padding: 3px 8px; border-radius: 6px; color: var(--primary); letter-spacing: 1px;}
         
-        .header-left { display: flex; align-items: center; gap: 12px; }
-        .header-logo { height: 45px; width: 45px; border-radius: 12px; object-fit: cover; border: 2px solid var(--primary); box-shadow: 0 0 20px rgba(0,240,255,0.4); background: #000; padding: 2px;}
-        .brand span { color: var(--primary); display: block; font-family: var(--font-mono); font-size: 10px; letter-spacing: 5px; text-transform: uppercase; font-weight: 800; margin-top: 4px;}
+        .tabs { display: flex; background: rgba(2, 6, 23, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); margin-left: auto;}
+        .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 800; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: 0.3s;}
+        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 15px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3);}
 
-        .header-right { display: flex; align-items: center; gap: 12px; }
-        .gift-btn { background: rgba(255, 184, 0, 0.1); border: 1px solid rgba(255, 184, 0, 0.5); color: var(--gold); border-radius: 8px; width: 40px; height: 40px; display: flex; justify-content: center; align-items: center; font-size: 20px; cursor: pointer; transition: 0.3s; box-shadow: 0 0 15px rgba(255,184,0,0.2);}
-        .user-badge { display: flex; flex-direction: column; align-items: flex-end; justify-content: center; background: rgba(0,240,255,0.05); border: 1px solid rgba(0,240,255,0.2); padding: 4px 10px; border-radius: 6px;}
-        .user-badge .status-dot { width: 6px; height: 6px; background: var(--success); border-radius: 50%; box-shadow: 0 0 10px var(--success); display: inline-block; margin-right: 4px; animation: pulse 1s infinite alternate;}
-        .user-badge span { font-size: 11px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 1px;}
+        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
+        input { width: 100%; height: 100%; padding: 0 10px; border: 2px solid #1e293b; border-radius: 10px; text-align: center; font-size: 22px; font-weight: 800; background: rgba(15, 23, 42, 0.6); color: var(--primary); outline: none; transition: 0.3s; font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), inset 0 3px 10px rgba(0,0,0,0.9); background: #020617;}
+        input::placeholder { color: #334155; font-size: 14px; letter-spacing: 2px; font-family: var(--font-ui); font-weight: 600;}
 
-        /* 📱 MAIN CONTENT AREA */
-        #main-container { flex: 1; width: 100%; position: relative; overflow-y: auto; display: flex; flex-direction: column; scroll-behavior: smooth;}
-        .view-section { display: none; width: 100%; height: 100%; flex-direction: column; }
-        .view-section.active { display: flex; animation: fadeIn 0.4s ease-out; }
-        #view-game iframe { width: 100%; height: 100%; border: none; background: #000; }
-        .tool-wrapper { padding: 20px; display: flex; flex-direction: column; align-items: center; min-height: 100%; max-width: 480px; margin: 0 auto; width: 100%; position: relative;}
+        .btn-sleek { height: 50px; padding: 0 18px; font-size: 15px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 10px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: 0.2s; box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px rgba(6,182,212,0.4); flex-shrink: 0; }
+        .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
+        .btn-dark { background: #0f172a; color: #fff; border: 1px solid #1e293b; box-shadow: 0 4px 0 #020617;}
 
-        /* 📱 BOTTOM NAV */
-        .bottom-nav { flex: 0 0 75px; width: 100%; background: rgba(2, 6, 13, 0.95); border-top: 1px solid rgba(0, 240, 255, 0.2); display: flex; justify-content: space-around; align-items: center; z-index: 100; backdrop-filter: blur(20px); padding-bottom: env(safe-area-inset-bottom);}
-        .b-nav-item { flex: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; color: var(--text-muted); font-family: var(--font-head); font-weight: 800; font-size: 14px; letter-spacing: 2px; transition: 0.3s; cursor: pointer; height: 100%;}
-        .b-nav-item .icon { font-size: 24px; filter: grayscale(100%) opacity(0.3); transition: 0.3s;}
-        .b-nav-item.active { color: var(--primary); text-shadow: 0 0 15px rgba(0, 240, 255, 0.6); background: radial-gradient(ellipse at bottom, rgba(0,240,255,0.15) 0%, transparent 60%);}
-        .b-nav-item.active .icon { opacity: 1; transform: translateY(-4px); filter: drop-shadow(0 0 8px var(--primary));}
-
-        /* ⚡ CYBER PANELS (Cards) */
-        .cyber-panel { width: 100%; background: rgba(8, 15, 30, 0.85); border: 1px solid rgba(0,240,255,0.2); border-radius: 12px; padding: 20px; margin-bottom: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.8), inset 0 0 20px rgba(0,240,255,0.05); position: relative; overflow: hidden; backdrop-filter: blur(10px);}
-        .cyber-panel::before { content: ''; position: absolute; top: 0; left: 0; width: 100%; height: 3px; background: linear-gradient(90deg, transparent, var(--primary), transparent); opacity: 0.5;}
-        .panel-header { font-family: var(--font-head); font-size: 14px; color: var(--primary); font-weight: 900; text-transform: uppercase; letter-spacing: 3px; margin-bottom: 15px; display: flex; align-items: center; gap: 8px; text-shadow: 0 0 10px rgba(0,240,255,0.5);}
-        
-        /* ⚡ 80% LURE LIST */
-        .lure-list { display: flex; flex-direction: column; gap: 10px; max-height: 260px; overflow: hidden; position: relative;}
-        .lure-list::after { content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 80px; background: linear-gradient(transparent, var(--bg-card)); pointer-events: none;}
-        .lure-item { display: flex; justify-content: space-between; align-items: center; background: rgba(0,0,0,0.6); padding: 12px 15px; border-radius: 8px; font-size: 12px; font-family: var(--font-mono); font-weight: bold; border-left: 4px solid transparent;}
-        .lure-item.win { border-left-color: var(--success); box-shadow: inset 30px 0 30px -30px rgba(0,255,102,0.3);}
-        .lure-item.jackpot { border-left-color: var(--gold); background: rgba(255, 184, 0, 0.1); box-shadow: inset 30px 0 30px -30px rgba(255,184,0,0.5); animation: pulseGold 2s infinite;}
-        .lure-item.loss { border-left-color: var(--red); opacity: 0.5;}
-        .d-res { display: flex; align-items: center; gap: 10px; font-size: 15px; font-family: var(--font-head); letter-spacing: 2px;}
-        .d-res img { width: 24px; height: 24px; border-radius: 50%; filter: drop-shadow(0 0 8px rgba(255,255,255,0.4));}
-
-        /* ⚡ INPUTS */
-        .cyber-input-wrap { position: relative; width: 100%; margin-bottom: 15px; flex: 1; min-width: 0;}
-        .cyber-input-wrap::before { content: '>'; position: absolute; left: 20px; top: 50%; transform: translateY(-50%); font-family: var(--font-mono); color: var(--primary); font-size: 18px; font-weight: 900;}
-        input[type=number]::-webkit-inner-spin-button, input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; margin: 0; }
-        input { width: 100%; height: 65px; padding: 0 20px 0 50px; border: 1px solid rgba(0,240,255,0.3); border-radius: 8px; font-size: 22px; font-weight: 900; background: rgba(0,0,0,0.7); color: #fff; outline: none; transition: 0.3s; font-family: var(--font-mono); letter-spacing: 3px; box-shadow: inset 0 0 20px rgba(0,0,0,1); appearance: textfield;}
-        input:focus { border-color: var(--primary); box-shadow: 0 0 15px rgba(0,240,255,0.2), inset 0 0 20px rgba(0,0,0,1); background: rgba(0,240,255,0.05);}
-        input::placeholder { color: #334155; font-size: 14px; letter-spacing: 2px; font-weight: 700;}
-
-        /* ⚡ TACTICAL BUTTONS */
-        .btn-premium { height: 65px; width: 100%; font-family: var(--font-head); font-size: 18px; letter-spacing: 3px; font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary); background: linear-gradient(135deg, rgba(0,240,255,0.2), rgba(0,136,153,0.9)); color: #fff; display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: 0.3s; box-shadow: 0 5px 30px rgba(0, 240, 255, 0.3); position: relative; overflow: hidden;}
-        .btn-premium::after { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); transition: 0.5s;}
-        .btn-premium:hover::after { left: 150%; }
-        .btn-premium:active { transform: scale(0.96); box-shadow: 0 0 10px rgba(0,240,255,0.5); }
-        .btn-premium:disabled { background: #1e293b; border-color: #334155; color: #64748b; box-shadow: none; cursor: not-allowed;}
-        
-        /* Tactical Reset Button */
-        .btn-reset { background: rgba(0, 240, 255, 0.05); border: 1px solid rgba(0, 240, 255, 0.6); color: var(--primary); box-shadow: inset 0 0 20px rgba(0, 240, 255, 0.1); text-shadow: 0 0 10px rgba(0,240,255,0.5);}
-        .btn-reset:active { background: rgba(0, 240, 255, 0.15); }
-
-        /* 🔥 HUGE FULL-SCREEN VERIFICATION OVERLAY 🔥 */
-        #verify-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2,6,13,0.98); z-index: 99999; display: none; flex-direction: column; justify-content: center; align-items: center; backdrop-filter: blur(15px);}
-        .huge-scanner { width: 220px; height: 220px; border: 3px dashed rgba(0,240,255,0.3); border-radius: 50%; position: relative; display: flex; justify-content: center; align-items: center; box-shadow: 0 0 60px rgba(0,240,255,0.15); margin-bottom: 30px;}
-        .huge-scanner::before { content:''; position:absolute; width:100%; height:100%; border-radius:50%; border: 4px solid transparent; border-top-color: var(--primary); border-bottom-color: var(--primary); animation: scanSpin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;}
-        .huge-scanner img { width: 120px; height: 120px; object-fit: contain; filter: drop-shadow(0 0 25px var(--primary)); z-index: 5;}
-        .loading-text { font-family: var(--font-mono); font-size: 18px; color: var(--primary); font-weight: 900; letter-spacing: 5px; text-shadow: 0 0 15px var(--cyan-glow); margin-bottom: 10px;}
-        .loading-pct { font-family: var(--font-head); font-size: 60px; font-weight: 900; color: #fff; text-shadow: 0 0 30px var(--primary); line-height: 1;}
-
-        /* ⚡ VERIFIED HUD UI */
+        .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
-        .hud-top { display: flex; justify-content: space-between; align-items: center; width: 100%; margin-bottom: 25px; background: rgba(0,0,0,0.6); border: 1px solid rgba(0,240,255,0.2); padding: 15px 20px; border-radius: 12px; border-left: 5px solid var(--primary); box-shadow: 0 10px 20px rgba(0,0,0,0.5);}
-        .hud-col { display: flex; flex-direction: column; gap: 4px; }
-        .hud-lbl { font-size: 11px; font-family: var(--font-mono); color: var(--primary); font-weight: 800; letter-spacing: 2px; text-shadow: 0 0 5px rgba(0,240,255,0.3);}
-        .hud-val { font-family: var(--font-mono); font-size: 26px; font-weight: 900; color: #fff; text-shadow: 0 0 15px rgba(255,255,255,0.4);}
-        .input-row { display: flex; gap: 15px; width: 100%; transition: 0.3s; margin-bottom: 25px;}
-        .input-row .cyber-input-wrap { margin-bottom: 0; }
+        .auth-row { display: flex; gap: 10px; align-items: center; width: 100%; height: 50px; }
         
-        /* 🚀 THE PREDICTION DECRYPTOR SCREEN */
-        .result-display { width: 100%; min-height: 200px; display: none; align-items: center; justify-content: center; flex-direction: column; background: rgba(0,0,0,0.9); border-radius: 12px; border: 2px solid rgba(0, 240, 255, 0.4); padding: 30px; margin-bottom: 25px; position: relative; overflow: hidden; box-shadow: inset 0 0 60px rgba(0,240,255,0.1), 0 15px 40px rgba(0,0,0,0.9);}
-        .result-display::before { content:''; position:absolute; top:0; left:0; width:100%; height:100%; background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0,240,255,0.05) 2px, rgba(0,240,255,0.05) 4px); pointer-events:none;}
-        .result-display.show { display: flex; animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
+        .pending-box { display: flex; flex-direction: column; gap: 10px; width: 100%; animation: fadeIn 0.3s ease; margin-top: 2px;}
+        .pending-header { display: flex; justify-content: space-between; align-items: center; }
+        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 18px; font-weight: 900; display: flex; align-items: center; gap: 8px; letter-spacing: 1px; text-shadow: 0 0 10px var(--cyan-glow);}
         
-        /* Improved Text Typography */
-        .res-text { font-family: var(--font-head); font-size: 65px; font-weight: 900; letter-spacing: 2px; line-height: 1; text-transform: uppercase; z-index: 2; margin-right: 20px;}
-        .res-text.big { background: linear-gradient(to bottom, #ffffff, var(--primary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px var(--primary-dark)); }
-        .res-text.small { background: linear-gradient(to bottom, #ffffff, var(--danger)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 0 15px var(--danger)); }
+        .deposit-alert-strip { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 8px 12px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
+        .deposit-alert-strip .alert-text { color: var(--red); font-size: 11px; font-weight: 800; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
+        @keyframes pulseText { from { text-shadow: 0 0 2px rgba(239,68,68,0.2); } to { text-shadow: 0 0 15px var(--red); } }
+        .pending-actions { display: flex; gap: 10px; height: 40px; }
+
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-family: var(--font-mono); font-size: 12px; color: #94a3b8; font-weight: 700; background: rgba(15, 23, 42, 0.8); padding: 8px 12px; border-radius: 8px; border: 1px solid #1e293b;}
+        .info-col { flex: 1; }
+        .tool-info-row span { color: var(--primary); font-size: 16px; font-weight: 800; text-shadow: 0 0 10px var(--cyan-glow);}
+
+        .action-row { display: flex; gap: 10px; height: 50px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
+        .input-group { display: flex; gap: 10px; flex: 1; transition: opacity 0.3s; height: 100%; }
         
-        /* ⚡ PROFESSIONAL GRID LEDGER */
-        .ph-box { width: 100%; display: flex; flex-direction: column; gap: 10px;}
-        .ph-header { display: grid; grid-template-columns: 1.2fr 1.5fr 1fr 1fr; padding: 0 10px 10px; border-bottom: 1px dashed rgba(0,240,255,0.3); font-size: 10px; color: var(--text-muted); font-family: var(--font-mono); font-weight: 900; letter-spacing: 1px;}
-        .ph-list { display: flex; flex-direction: column; gap: 8px; max-height: 250px; overflow-y: auto; padding-right: 5px;}
-        .ph-list::-webkit-scrollbar { width: 4px; } .ph-list::-webkit-scrollbar-thumb { background: rgba(0,240,255,0.3); border-radius: 4px;}
+        .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; background: transparent; border: none; box-shadow: none; z-index: 5; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .result-display.show { display: flex; }
+        @keyframes popIn { 0% { transform: scale(0.8); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+
+        .zombie-text { font-family: var(--font-zombie); font-size: clamp(38px, 10vw, 48px); letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; }
+        .res-text-big { color: #ffffff; text-shadow: 0 0 15px var(--cyan-glow), 0 0 40px var(--primary); }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 15px rgba(77,166,255,0.7), 0 0 40px #4da6ff; }
+
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);}
+        .ban-icon { font-size: 60px; margin-bottom: 10px; animation: popIn 0.5s ease;}
+        .ban-title { color: var(--red); font-size: 38px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 20px var(--red-glow);}
         
-        .ph-item { display: grid; grid-template-columns: 1.2fr 1.5fr 1fr 1fr; align-items: center; background: rgba(0,0,0,0.6); padding: 12px 10px; border-radius: 8px; font-family: var(--font-mono); font-size: 13px; font-weight: 900; border-left: 3px solid transparent; transition: 0.2s;}
-        .ph-item.win { border-left-color: var(--success); }
-        .ph-item.loss { border-left-color: var(--danger); opacity: 0.7;}
-        .ph-item.wait { border-left-color: var(--gold); background: rgba(255,184,0,0.05);}
-        .ph-col { display: flex; align-items: center; color: #fff;}
-        .ph-status { font-size: 11px; text-align: right; display: flex; flex-direction: column; justify-content: center; align-items: flex-end;}
+        .ban-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); padding: 20px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 350px; margin-bottom: 20px;}
+        .dynamic-deposit { display: none; margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
+        .dynamic-deposit .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 600;}
+        .dynamic-deposit .amount { font-size: 42px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 20px rgba(245,158,11,0.5);}
+        
+        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 350px; color: #fff; text-decoration: none; padding: 16px; border-radius: 10px; font-weight: 800; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; box-shadow: 0 10px 20px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
+        .contact-btn:active { transform: scale(0.96); }
+        .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 15px rgba(16,185,129,0.4); margin-bottom: 15px; color: #000; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px;}
 
-        /* STATS STRIP */
-        .summary-strip { background: rgba(0,0,0,0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 15px; display: flex; justify-content: space-around; width: 100%; font-family: var(--font-mono); font-size: 13px; font-weight: 900; letter-spacing: 1px;}
-        .s-win { color: var(--success); text-shadow: 0 0 15px rgba(0,255,102,0.4);} 
-        .s-loss { color: var(--danger); } 
-        .s-jackpot { color: var(--gold); text-shadow: 0 0 15px rgba(255,184,0,0.5);}
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 8px; }
+        .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 20px; height: 20px; border-radius: 50%; animation: spin 1s linear infinite; }
+        @keyframes spin { 100% { transform: rotate(360deg); } }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* 🎁 GIFT MODAL (DISPLAY ONLY) */
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(2,6,18,0.9); z-index: 9999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(10px); padding: 20px;}
-        .modal-box { background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1); border-radius: 20px; width: 100%; max-width: 400px; padding: 30px; animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 25px 50px rgba(0,0,0,0.8);}
-        .modal-title { font-family: var(--font-head); font-size: 24px; font-weight: 900; color: var(--gold); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; letter-spacing: 1px;}
-        .gift-list-box { background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px; padding: 12px; margin: 20px 0; max-height: 250px; overflow-y: auto;}
-        .gift-item { background: rgba(255, 184, 0, 0.05); border-left: 4px solid var(--gold); border-radius: 8px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;}
-
-        @keyframes scanSpin { 100% { transform: rotate(360deg); } }
-        @keyframes zoomIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px);} to { opacity: 1; transform: translateY(0); } }
-        @keyframes pulse { from { opacity: 0.5; } to { opacity: 1; box-shadow: 0 0 20px var(--green); } }
-
-        /* TOAST */
-        #toast { position: fixed; top: 90px; left: 50%; transform: translateX(-50%) translateY(-150px); background: rgba(10, 15, 30, 0.95); color: #fff; padding: 15px 30px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 1px solid var(--primary-dark); z-index: 999999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: 0 15px 40px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 1.5px; text-transform: uppercase;}
-        #toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(2, 5, 10, 0.98); backdrop-filter: blur(20px);}
-        .ban-title { color: var(--red); font-size: 42px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 30px rgba(255,42,85,0.5); letter-spacing: 2px;}
+        #toast { position: fixed; top: 30px; left: 50%; transform: translateX(-50%) translateY(-100px); background: rgba(15, 23, 42, 0.95); color: #fff; padding: 14px 24px; border-radius: 10px; font-weight: 700; font-size: 13px; border: 1px solid var(--primary-dark); z-index: 999999; transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-ui); box-shadow: 0 10px 30px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 0.5px; backdrop-filter: blur(10px);}
+        #toast.show { transform: translateX(-50%) translateY(0); }
     </style>
 </head>
 <body>
 
-    <!-- 🎁 LIVE VIP GIFT CENTER MODAL -->
-    <div class="modal-overlay" id="giftModal">
-        <div class="modal-box">
-            <div class="modal-title">🎁 SECURE DROP</div>
-            <div style="font-size: 12px; color: var(--text-muted); line-height: 1.5; font-family: var(--font-ui);">Active bonuses mapped by the Server. Copy the Hash Code to claim inside the Casino Application.</div>
-            
-            <div class="gift-list-box" id="liveGiftsList">
-                <div style="text-align:center; color:var(--text-muted); font-size:12px; padding: 15px; font-family: var(--font-mono);">SYNCING SECURE DROPS...</div>
+    <!-- 🚧 SYSTEM MAINTENANCE SCREEN -->
+    <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);">
+        <div style="font-size: 70px; animation: pulseText 2s infinite;">🚧</div>
+        <h1 class="ban-title" style="color: var(--accent-warning); text-shadow: 0 0 20px rgba(245,158,11,0.5); font-size:45px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
+        <div class="ban-box" style="border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.05); max-width: 400px;">
+            <span style="color:var(--accent-warning); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
+            <span id="maintReasonDisplay" style="color:#fff; font-size: 16px; font-weight:600; display:block; margin-top:10px; margin-bottom: 20px;">System Upgrading...</span>
+            <div style="background: rgba(0,0,0,0.5); padding: 20px; border-radius: 12px; border: 1px inset rgba(255,255,255,0.1);">
+                <div style="font-size: 12px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
+                <div id="maintTimerDisplay" style="font-size: 48px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 4px; text-shadow: 0 0 15px rgba(255,255,255,0.4);">00:00</div>
             </div>
-
-            <button class="btn-premium" style="background: rgba(255,255,255,0.05); border-color: rgba(255,255,255,0.1); color: #fff;" onclick="document.getElementById('giftModal').style.display='none'">CLOSE INTERFACE</button>
         </div>
-    </div>
-
-    <!-- 🔥 MEGA FULL-SCREEN VERIFICATION OVERLAY 🔥 -->
-    <div id="verify-overlay">
-        <div class="huge-scanner">
-            <img src="center.png" alt="Scanner" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 100 100\'><circle cx=\'50\' cy=\'50\' r=\'40\' fill=\'none\' stroke=\'%2300f0ff\' stroke-width=\'4\'/><text x=\'50\' y=\'65\' font-size=\'40\' text-anchor=\'middle\' fill=\'%2300f0ff\' font-family=\'sans-serif\' font-weight=\'bold\'>AI</text></svg>'">
-        </div>
-        <div class="loading-text" id="v-text">INJECTING NODE...</div>
-        <div class="loading-pct" id="v-pct">0%</div>
+        <p style="color: var(--text-muted); font-size: 12px; font-family: var(--font-mono);">Do not close this window. The app will auto-resume.</p>
     </div>
 
     <div id="bannedScreen" class="hard-screen">
-        <div style="font-size: 60px; margin-bottom: 10px;">🛑</div>
-        <h1 class="ban-title">ACCESS DENIED</h1>
-        <p style="color:#94a3b8; font-size: 14px; margin-top:10px; font-family:var(--font-mono);">Your connection was refused by the server.</p>
+        <div class="ban-icon">🛑</div>
+        <h1 class="ban-title">ACCESS REVOKED</h1>
+        <div class="ban-box">
+            <span style="color:var(--red); font-weight:800; font-size: 13px; font-family: var(--font-mono); letter-spacing: 1px;">SYSTEM ALERT</span><br>
+            <span id="banReasonText" style="color:#fff; font-size: 15px; font-weight:600; display:block; margin-top:10px;">Your 5 Free Trials are exhausted.</span>
+            <div id="dynamicDepositBox" class="dynamic-deposit">
+                <div class="label">VIP ACTIVATION FEE</div>
+                <div id="depositAmountDisplay" class="amount">₹---</div>
+            </div>
+        </div>
+        <button id="depositDoneBtn" class="btn-deposit contact-btn" onclick="Auth.submitDeposit()">✅ DEPOSIT DONE</button>
+        <a href="https://t.me/Nse_Dev" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
-    <!-- 📱 TOP HEADER -->
-    <header class="top-header">
-        <div class="header-left">
-            <img src="logo.png" alt="Logo" class="header-logo" onerror="this.style.display='none'">
-            <div class="brand">
-                <div class="glitch-text" data-text="DEV ARMY">DEV ARMY</div>
-                <span>VIP HACK ENGINE</span>
+    <div id="top-panel">
+        <div class="top-header">
+            <div class="brand">DEV ARMY <span class="badge">PRO VIP</span></div>
+            <div class="tabs" id="timeframeTabs">
+                <button class="tab-btn" id="btn-30s" onclick="Engine.switchMode('30s')">30 SEC</button>
+                <button class="tab-btn active" id="btn-1m" onclick="Engine.switchMode('1m')">1 MIN</button>
             </div>
         </div>
-        <div class="header-right">
-            <div class="gift-btn" onclick="document.getElementById('giftModal').style.display='flex'">🎁</div>
-            <div class="user-badge" id="headerUserStatus">
-                <span style="color:var(--text-muted); font-size:9px; letter-spacing:1px; margin-bottom:2px;">UPLINK</span>
-                <div style="display:flex; align-items:center;"><div class="status-dot" style="background:var(--danger); box-shadow: 0 0 10px var(--danger);"></div> <span id="u-role" style="color:var(--danger);">UNAUTH</span></div>
-            </div>
-        </div>
-    </header>
 
-    <!-- 📱 MAIN CONTAINER -->
-    <div id="main-container">
+        <div id="authScreen" class="auth-container">
+            <div class="auth-row" id="auth-input-area">
+                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER SIKKIM UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <button id="authBtn" class="btn-sleek" style="width: 115px; height: 50px;" onclick="Auth.verify()">CONNECT</button>
+            </div>
+            <div id="auth-pending" class="pending-box hidden">
+                <div class="pending-header">
+                    <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING...</span>
+                    <span style="font-size: 11px; color: #94a3b8; font-family:var(--font-mono); font-weight:700;">Awaiting Admin</span>
+                </div>
+                <div class="deposit-alert-strip"><span class="alert-text">⚠️ ₹1000 DEPOSIT REQUIRED FOR ACTIVATION</span></div>
+                <div class="pending-actions">
+                    <a href="https://t.me/Nse_Dev" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:40px;">✈️ MSG ADMIN</a>
+                    <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:40px;" onclick="location.reload()">🔄 REFRESH</button>
+                </div>
+            </div>
+        </div>
         
-        <div id="view-hack" class="view-section active">
-            <div class="tool-wrapper">
-                
-                <!-- UNVERIFIED STATE -->
-                <div id="unverified-state" style="width: 100%;">
-                    
-                    <div class="cyber-panel">
-                        <div class="panel-header">● TARGET SYSTEM LOGIN</div>
-                        <div class="auth-container">
-                            <div class="cyber-input-wrap">
-                                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                            </div>
-                            <button id="authBtn" class="btn-premium" onclick="Auth.verify()">INITIALIZE BYPASS</button>
-                        </div>
-                    </div>
-
-                    <!-- 🔥 80% WINNING LURE HISTORY 🔥 -->
-                    <div class="cyber-panel">
-                        <div class="panel-header" style="justify-content:center;">LIVE SERVER INTERCEPTS</div>
-                        <div class="lure-list" id="demoHistoryList">
-                            <div style="text-align:center; padding: 30px; font-family: var(--font-mono); font-size: 13px; color: var(--primary);">
-                                <span class="pulse-dot" style="display:inline-block; margin-right:8px;"></span> DECRYPTING SIKKIM SERVER...
-                            </div>
-                        </div>
-                    </div>
+        <div id="toolScreen" class="tool-container hidden">
+            <div class="tool-info-row">
+                <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--gold); display:none; font-weight:800;">PLAYS: 0/5</span></div>
+                <div class="info-col" style="text-align: right;">TIMER: <span id="displayTimer">00:00</span></div>
+            </div>
+            
+            <div class="action-row">
+                <div class="input-group" id="input-group">
+                    <input type="number" id="in-n1" placeholder="N1" oninput="Util.limit(this)">
+                    <input type="number" id="in-n2" placeholder="N2" oninput="Util.limit(this)">
                 </div>
-                
-                <!-- VERIFIED STATE (REAL TOOL) -->
-                <div id="verified-state" class="hidden" style="width: 100%;">
-                    
-                    <div class="hud-top">
-                        <div class="hud-col">
-                            <span class="hud-lbl">SERVER PERIOD</span>
-                            <span class="hud-val" id="displayPeriod">SYNC...</span>
-                        </div>
-                        <div class="hud-col" style="align-items: flex-end;">
-                            <span class="hud-lbl">SYNC TIMER</span>
-                            <span class="hud-val" id="displayTimer" style="color:var(--gold);">00:00</span>
-                        </div>
-                    </div>
-                    
-                    <div class="input-row" id="input-group">
-                        <div class="cyber-input-wrap" style="flex:1;">
-                            <input type="number" id="in-n1" placeholder="N1" oninput="Util.limit(this)">
-                        </div>
-                        <div class="cyber-input-wrap" style="flex:1;">
-                            <input type="number" id="in-n2" placeholder="N2" oninput="Util.limit(this)">
-                        </div>
-                    </div>
-
-                    <!-- 🚀 THE DECRYPTOR HUD -->
-                    <div id="out-size" class="result-display"></div>
-                    
-                    <button class="btn-premium" id="btnAnalyze" onclick="Engine.analyze()" style="margin-bottom: 25px;">INJECT PAYLOAD</button>
-
-                    <!-- ⚡ PROFESSIONAL GRID LEDGER ⚡ -->
-                    <div class="cyber-panel" style="padding: 20px 15px;">
-                        <div class="panel-header" style="margin-left: 5px;">SESSION LEDGER</div>
-                        <div class="ph-box" id="predictionHistoryBox">
-                            <div class="ph-header">
-                                <div>PERIOD</div>
-                                <div>PREDICT</div>
-                                <div>ACTUAL</div>
-                                <div style="text-align:right;">STATUS</div>
-                            </div>
-                            <div class="ph-list" id="ph-list-container">
-                                <div style="text-align:center; color:#475569; font-size:12px; padding:20px; font-family:var(--font-mono);">AWAITING PAYLOAD INJECTION...</div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="summary-strip">
-                        <div class="s-win">WINS: <span id="sum-win">0</span></div>
-                        <div class="s-loss">LOSS: <span id="sum-loss">0</span></div>
-                        <div class="s-jackpot">JACKPOT: <span id="sum-jp">0</span></div>
-                    </div>
-
-                </div>
+                <div id="out-size" class="result-display">--</div>
+                <button class="btn-sleek" id="btnAnalyze" style="width: 110px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
             </div>
         </div>
-
-        <div id="view-game" class="view-section">
-            <iframe id="main-frame" src="about:blank" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
-        </div>
-
     </div>
 
-    <!-- 📱 BOTTOM NAVIGATION -->
-    <nav class="bottom-nav">
-        <div class="b-nav-item active" id="nav-hack" onclick="switchMainTab('hack')">
-            <span class="icon">💻</span>
-            <span>TERMINAL</span>
-        </div>
-        <div class="b-nav-item" id="nav-game" onclick="switchMainTab('game')">
-            <span class="icon">🎰</span>
-            <span>SERVER</span>
-        </div>
-    </nav>
+    <div id="bottom-panel">
+        <iframe id="main-frame" src="http://sikkimgg.club/#/register?invitationCode=388236805221#/" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
+    </div>
 
     <div id="toast">Message</div>
 
@@ -319,70 +182,27 @@
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", authDomain: "sikkimaitool.firebaseapp.com", databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "sikkimaitool" };
-        const app = initializeApp(firebaseConfig); const db = getDatabase(app);
-        const DB_PATHS = { '1m': 'patterns' };
+        const firebaseConfig = { apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", authDomain: "sikkimaitool.firebaseapp.com", databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "sikkimaitool", storageBucket: "sikkimaitool.firebasestorage.app", messagingSenderId: "897487739765", appId: "1:889152992462:web:34f9df57ee8372aa6b913c" };
+        const app = initializeApp(firebaseConfig); 
+        const db = getDatabase(app);
+        const DB_PATHS = { '30s': 'patterns_30s', '1m': 'patterns' };
 
         window.AdminSettings = { prefixes: ["68", "67"], baselineUid: 0, freeTrials: 5 };
-        let currentUid = ""; let currentPeriod = ""; window.pendingPredictions = [];
-        let stats = { win: 0, loss: 0, jackpot: 0 };
+        window.GlobalSettings = {}; 
 
-        window.switchMainTab = function(tab) {
-            document.querySelectorAll('.view-section, .b-nav-item').forEach(el => el.classList.remove('active'));
-            document.getElementById('view-' + tab).classList.add('active'); 
-            document.getElementById('nav-' + tab).classList.add('active');
-        };
+        let currentUid = ""; let currentPrediction = ""; let currentPeriod = "";
+        let maintInterval = null;
 
         window.Util = class {
             static limit(el) { if(el.value.length > 1) el.value = el.value.slice(0,1); if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; }
-            static toast(msg, isErr=false) { 
+            static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
-                t.style.borderLeft = isErr ? "4px solid var(--danger)" : "4px solid var(--primary)";
-                t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
-            }
-        };
-
-        window.APICore = class {
-            static async fetchSikkimData() {
-                const targetUrl = "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json";
-                try {
-                    let res = await fetch(targetUrl, { method: 'GET', headers: { 'Accept': 'application/json' } });
-                    return await res.json();
-                } catch (e) {
-                    try {
-                        let proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-                        let proxyRes = await fetch(proxyUrl);
-                        let proxyData = await proxyRes.json();
-                        return JSON.parse(proxyData.contents);
-                    } catch (err) { return null; }
+                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR")) {
+                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
+                } else {
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(6, 182, 212, 0.3)";
                 }
-            }
-        };
-
-        window.GiftCore = class {
-            static initLiveGifts() {
-                onValue(ref(db, 'active_gifts'), snap => {
-                    let list = document.getElementById('liveGiftsList');
-                    if(!snap.exists()) { list.innerHTML = '<div style="text-align:center; color:var(--text-muted); font-size:12px; padding: 15px; font-family:var(--font-mono);">No active drops detected in server.</div>'; return; }
-                    let html = "";
-                    snap.forEach(child => {
-                        let g = child.val(); let code = child.key;
-                        if(g.status === 'active' && g.current_claims < g.max_claims) {
-                            html += `
-                            <div class="gift-item" style="background: rgba(255, 184, 0, 0.05); border-left: 4px solid var(--gold); border-radius: 8px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center;">
-                                <div>
-                                    <div style="color:var(--gold); font-weight:900; font-size:16px; font-family:var(--font-head); letter-spacing:1px;">₹${g.reward_amount} SECURE FUND</div>
-                                    <div style="font-size:10px; color:var(--text-muted); margin-top:4px; font-family:var(--font-mono);">Dep Req: ₹${g.min_deposit || 0}</div>
-                                </div>
-                                <div style="text-align:right;">
-                                    <div style="font-family:var(--font-mono); color:#fff; font-size:13px; background:rgba(0,0,0,0.6); padding:4px 8px; border-radius:6px; letter-spacing:2px; border: 1px dashed rgba(255,255,255,0.2);">${code}</div>
-                                    <div style="font-size:9px; color:var(--text-muted); margin-top:6px; font-family:var(--font-mono);">${g.max_claims - g.current_claims} REMAINING</div>
-                                </div>
-                            </div>`;
-                        }
-                    });
-                    list.innerHTML = html || '<div style="text-align:center; color:var(--text-muted); font-size:12px; padding: 15px;">Drops exhausted for current cycle.</div>';
-                });
+                t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
             }
         };
 
@@ -390,238 +210,333 @@
 
         window.Auth = class {
             static async verify() {
-                let uid = document.getElementById('uidInput').value.trim();
-                if(!uid) return Util.toast("TARGET UID REQUIRED", true); 
+                let uid = document.getElementById('uidInput').value.trim(); let btn = document.getElementById('authBtn'); 
+                if(!uid) return Util.toast("ENTER UID FIRST"); if(!/^\d{7}$/.test(uid)) { return Util.toast("THIS IS NOT SIKKIM UID. CREATE NEW ID."); }
+                btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
-                const overlay = document.getElementById('verify-overlay');
-                overlay.style.display = 'flex';
-                let textEl = document.getElementById('v-text');
-                let pctEl = document.getElementById('v-pct');
-                
-                let pct = 0;
-                let loaderIntv = setInterval(() => {
-                    pct += Math.floor(Math.random() * 25);
-                    if(pct >= 100) { pct = 100; clearInterval(loaderIntv); }
-                    pctEl.innerText = pct + "%";
-                    
-                    if(pct > 30 && pct < 70) textEl.innerText = "BYPASSING FIREWALL...";
-                    if(pct >= 70) textEl.innerText = "DECRYPTING NODE...";
-                }, 300);
-
                 try {
                     let snapshot = await get(ref(db, 'approved_uids/' + uid));
-                    setTimeout(async () => {
-                        if(snapshot.exists()) {
-                            let data = snapshot.val(); currentUid = uid;
-                            if(data.is_banned || (data.expireAt && data.expireAt < Date.now())) {
-                                overlay.style.display = 'none'; return Util.toast("UPLINK DENIED.", true);
-                            }
-                            this.grant(data.role || (data.is_premium ? 'vip' : 'trial'));
-                        } else {
-                            let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
-                            if(!isValidPrefix) { overlay.style.display = 'none'; return Util.toast("INVALID ACCOUNT PREFIX.", true); }
-                            await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: 'WEB', status: "pending", timestamp: Date.now() });
-                            currentUid = uid; this.grant('trial');
-                        }
-                    }, 2500); 
-                } catch (error) { overlay.style.display = 'none'; Util.toast("PROXY ERROR", true); }
+                    if(snapshot.exists()) {
+                        let data = snapshot.val(); currentUid = uid;
+                        if(data.is_banned) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS UID IS BANNED."); }
+                        if(data.expireAt && data.expireAt < Date.now()) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, "Your VIP Subscription has expired. Please renew."); return; }
+                        
+                        let role = data.role || (data.is_premium ? 'vip' : 'trial');
+                        if(role === 'trial' && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
+                        
+                        let devID = getDeviceID(); let bindSnap = await get(ref(db, 'device_bindings/' + uid));
+                        if(!bindSnap.exists()) await set(ref(db, 'device_bindings/' + uid), devID); else if (bindSnap.val() !== devID) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("UID BOUND TO ANOTHER DEVICE."); }
+                        
+                        data.role = role; 
+                        this.grant(data.access_type || 'both', data); return;
+                    }
+                    
+                    let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
+                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS IS NOT SIKKIM UID. CREATE NEW ID."); }
+                    if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. CREATE NEW ID FOR TRIAL."); }
+
+                    await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: getDeviceID(), status: "pending", timestamp: Date.now() });
+                    document.getElementById('auth-input-area').classList.add('hidden'); document.getElementById('auth-pending').classList.remove('hidden');
+                } catch (error) { btn.innerText = "CONNECT"; btn.disabled = false; Util.toast("NETWORK ERROR"); }
             }
 
-            static grant(role) { 
-                document.getElementById('verify-overlay').style.display = 'none';
-                document.getElementById('unverified-state').classList.add('hidden'); 
-                document.getElementById('verified-state').classList.remove('hidden');
-                
-                let rName = "TRIAL"; let rCol = "#64748b"; 
-                if (role && role !== 'trial') {
-                    if(role === 'vvip1') { rName = 'VVIP 1'; rCol = 'var(--gold)'; }
-                    else if(role === 'vvip2') { rName = 'VVIP 2'; rCol = 'var(--success)'; }
-                    else if(role === 'vvip3' || role === 'vvip') { rName = 'VVIP 3'; rCol = 'var(--purple)'; }
-                    else { rName = 'VIP'; rCol = 'var(--primary)'; }
+            static showDepositScreen(uid, msg) {
+                document.getElementById('banReasonText').innerText = msg; document.getElementById('banReasonText').style.color = "var(--red)";
+                const amounts = [200, 300, 500, 1000]; let hash = 0;
+                for (let i = 0; i < uid.length; i++) { hash = uid.charCodeAt(i) + ((hash << 5) - hash); }
+                window.currentDepositAmount = amounts[Math.abs(hash) % amounts.length];
+                document.getElementById('depositAmountDisplay').innerText = "₹" + window.currentDepositAmount;
+                document.getElementById('dynamicDepositBox').style.display = "block"; document.getElementById('bannedScreen').style.display = 'flex';
+            }
+
+            static async submitDeposit() {
+                if(!currentUid) return Util.toast("UID ERROR"); const btn = document.getElementById('depositDoneBtn'); btn.innerText = "SUBMITTING..."; btn.disabled = true;
+                try { await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: window.currentDepositAmount || 0, status: "pending", timestamp: Date.now() }); Util.toast("DEPOSIT REQUEST SENT"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "var(--bg-panel)"; btn.style.borderColor = "var(--border-color)"; btn.style.color = "#fff"; } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
+            }
+
+            static grant(accessType, userData) { 
+                document.getElementById('authScreen').classList.add('hidden'); document.getElementById('toolScreen').classList.remove('hidden');
+                const tabsContainer = document.getElementById('timeframeTabs');
+                if (accessType === '1m') { tabsContainer.classList.add('hidden'); Engine.switchMode('1m'); } 
+                else if (accessType === '30s') { tabsContainer.classList.add('hidden'); Engine.switchMode('30s'); } 
+                else { tabsContainer.classList.remove('hidden'); Engine.switchMode('1m'); }
+
+                const trialDisp = document.getElementById('trialsDisplay');
+                if(userData.role === 'trial') { 
+                    trialDisp.style.display = 'inline-block'; 
+                    trialDisp.innerText = `PLAYS: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; 
+                } 
+                else { 
+                    trialDisp.style.display = 'inline-block';
+                    if(userData.role === 'vvip1') trialDisp.innerText = '👑 VVIP 1 ACTIVE';
+                    else if(userData.role === 'vvip2') trialDisp.innerText = '👑 VVIP 2 ACTIVE';
+                    else if(userData.role === 'vvip3' || userData.role === 'vvip') trialDisp.innerText = '👑 VVIP 3 ACTIVE';
+                    else trialDisp.innerText = '🌟 VIP ACTIVE';
+
+                    trialDisp.style.color = userData.role.includes('vvip') ? "var(--green)" : "var(--primary)"; 
                 }
-
-                document.getElementById('u-role').innerText = rName;
-                document.getElementById('u-role').style.color = rCol;
-                document.querySelector('.status-dot').style.background = rCol;
-                document.querySelector('.status-dot').style.boxShadow = `0 0 10px ${rCol}`;
-
-                Engine.startTimer(); Util.toast("SYSTEM CONNECTED"); 
+                Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
             }
         };
 
         window.Engine = class {
+            static activeMode = '1m';
+            static state = "IDLE";
+            static apiPeriod = null; 
+            
+            // 🔥 VVIP VARIABLES 🔥
+            static isVvipUser = false;
+            static lastPrediction = null;
+            static lastPredictedPeriod = null;
+            
+            static switchMode(m) { 
+                this.activeMode = m; 
+                this.apiPeriod = null; 
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); 
+                document.getElementById('btn-'+m).classList.add('active'); 
+                this.updateTimerUI(); 
+                this.syncPeriodFromAPI(); 
+            }
+            
             static startTimer() { 
-                this.syncAPI(); 
+                this.syncPeriodFromAPI(); 
                 setInterval(() => this.updateTimerUI(), 1000); 
-                setInterval(() => this.syncAPI(), 4000);
             }
 
-            static async syncAPI() {
-                let json = await APICore.fetchSikkimData();
-                if(json && json.data && json.data.list) {
-                    let list = json.data.list;
-                    this.updateHistoryLure(list.slice(0, 10)); 
-                    
-                    let lastIssue = String(list[0].IssueNumber || list[0].issueNumber);
-                    currentPeriod = (BigInt(lastIssue) + 1n).toString();
-                    document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6);
-                    
-                    this.verifyPendingResults(list);
+            static async syncPeriodFromAPI() {
+                let url = this.activeMode === '1m' 
+                    ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" 
+                    : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
+                try {
+                    let res = await fetch(url);
+                    let json = await res.json();
+                    if(json && json.data && json.data.list && json.data.list.length > 0) {
+                        let lastIssue = json.data.list[0].IssueNumber || json.data.list[0].issueNumber;
+                        let lastNumber = json.data.list[0].Number || json.data.list[0].number;
+
+                        // 🔥 VVIP RESULT CHECKER 🔥
+                        if (this.isVvipUser && this.lastPredictedPeriod === String(lastIssue)) {
+                            let num = parseInt(lastNumber);
+                            let isWin = false;
+                            
+                            if (this.lastPrediction === "BIG" && num >= 5 && num <= 9) isWin = true;
+                            if (this.lastPrediction === "SMALL" && num >= 0 && num <= 4) isWin = true;
+                            
+                            let btn = document.getElementById('btnAnalyze');
+                            let resultBox = document.getElementById('out-size');
+                            
+                            if (isWin) {
+                                resultBox.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                                    <span class="zombie-text ${this.lastPrediction === 'BIG' ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${this.lastPrediction}</span>
+                                    <img src="${num}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">
+                                </div>`;
+                                
+                                btn.innerText = "RESET";
+                                btn.style.background = "var(--green)";
+                                btn.style.color = "#fff";
+                            } else {
+                                btn.innerText = "RESET";
+                                btn.style.background = "var(--red)";
+                                btn.style.color = "#fff";
+                            }
+                            
+                            btn.disabled = false;
+                            this.state = "NEXT"; 
+                            this.lastPredictedPeriod = null; 
+                        }
+
+                        this.apiPeriod = (BigInt(lastIssue) + 1n).toString();
+                    }
+                } catch(e) {
+                    console.log("API Sync delayed, fallback system active.");
                 }
             }
 
-            // 🔥 80% WINNING LURE ALGORITHM 🔥
-            static updateHistoryLure(trades) {
-                const histDiv = document.getElementById('demoHistoryList');
-                let html = "";
-                trades.forEach(t => {
-                    let num = parseInt(t.Number || t.number);
-                    let isBig = num >= 5; let resText = isBig ? 'BIG' : 'SMALL';
-                    let period = String(t.IssueNumber || t.issueNumber).slice(-6);
-                    
-                    // 80% Positive Lure Logic
-                    let type = Math.random() > 0.2 ? 'win' : 'loss';
-                    if (type === 'win' && (num === 0 || num === 5 || Math.random() > 0.7)) type = 'jackpot';
-
-                    let badge = type === 'jackpot' ? '<span style="color:var(--gold);">🔥 JACKPOT</span>' : (type === 'win' ? '<span style="color:var(--success);">✅ WIN</span>' : '<span style="color:var(--red);">❌ LOSS</span>');
-                    html += `<div class="lure-item ${type}"><div class="d-col">ID<span>${period}</span></div><div class="d-res">${resText} <img src="${num}.png" onerror="this.style.display='none'"></div><div style="font-size:14px;">${badge}</div></div>`;
-                });
-                if(!document.getElementById('unverified-state').classList.contains('hidden')) { histDiv.innerHTML = html; }
-            }
-
             static updateTimerUI() {
-                let tz = new Date(new Date().toLocaleString("en-US", {timeZone: "Asia/Kolkata"}));
-                let sec = tz.getSeconds();
-                let remSec = 60 - sec; if(remSec === 60) remSec = 0;
+                const formatter = new Intl.DateTimeFormat('en-US', {
+                    timeZone: 'Asia/Kolkata',
+                    year: 'numeric', month: '2-digit', day: '2-digit',
+                    hour: '2-digit', minute: '2-digit', second: '2-digit',
+                    hour12: false
+                });
+                
+                const parts = formatter.formatToParts(new Date());
+                const t = {};
+                parts.forEach(p => t[p.type] = p.value);
+                
+                let year = t.year; let month = t.month; let day = t.day;
+                let hour = parseInt(t.hour) === 24 ? 0 : parseInt(t.hour);
+                let min = parseInt(t.minute); let sec = parseInt(t.second);
+
+                let totalMins = (hour * 60) + min;
+                let remSec = 0;
+                let fallbackPeriod = "";
+
+                if(this.activeMode === '1m') { 
+                    let seq = String(totalMins + 1).padStart(4, '0');
+                    fallbackPeriod = `${year}${month}${day}01${seq}`; 
+                    remSec = 60 - sec; 
+                    if(remSec === 60) remSec = 0; 
+                } else { 
+                    let seq = String((totalMins * 2) + (sec >= 30 ? 2 : 1)).padStart(4, '0');
+                    fallbackPeriod = `${year}${month}${day}30${seq}`; 
+                    remSec = sec >= 30 ? 60 - sec : 30 - sec; 
+                }
+                
+                currentPeriod = this.apiPeriod ? this.apiPeriod : fallbackPeriod;
+
+                if (remSec === 58 || remSec === 28) {
+                    this.syncPeriodFromAPI();
+                }
+
+                if (remSec === 59 || remSec === 29) {
+                    this.apiPeriod = null; 
+                }
+                
+                document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
                 let tDisplay = document.getElementById('displayTimer'); 
                 tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`; 
-                tDisplay.style.color = remSec <= 5 ? "var(--danger)" : "var(--gold)";
+                tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
+                
+                if(remSec <= 2 && this.state !== "IDLE") { 
+                    if (this.isVvipUser && this.lastPredictedPeriod) {
+                        let btn = document.getElementById('btnAnalyze');
+                        btn.disabled = true;
+                        btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span> WAIT...';
+                    }
+                }
             }
 
             static async analyze() {
                 let n1 = document.getElementById('in-n1'); let n2 = document.getElementById('in-n2');
                 let btn = document.getElementById('btnAnalyze'); let resultBox = document.getElementById('out-size'); let inputGroup = document.getElementById('input-group');
 
-                if(!n1.value || !n2.value) return Util.toast("INPUTS REQUIRED", true);
-                if(btn.innerText === "RESET TERMINAL") { this.resetUI(); return; }
+                if(this.state === "IDLE") {
+                    if(!n1.value || !n2.value) return Util.toast("INPUT N1 AND N2 REQUIRED");
+                    let userSnap = await get(ref(db, 'approved_uids/' + currentUid)); let uData = userSnap.val();
+                    let role = uData.role || (uData.is_premium ? 'vip' : 'trial');
+                    
+                    let queryRole = role.startsWith('vvip') ? 'vvip' : role;
 
-                btn.disabled = true; n1.readOnly = true; n2.readOnly = true;
-                inputGroup.style.display = 'none'; resultBox.classList.add('show');
-                
-                // Fast Hacker Flicker Text
-                let flickerInt = setInterval(() => {
-                    let rTxt = Math.random() > 0.5 ? "BIG" : "SMALL";
-                    resultBox.innerHTML = `
-                        <div style="font-family:var(--font-mono); font-size:12px; color:var(--primary); text-align:center; margin-bottom:10px; opacity:0.7;">INJECTING ALGORITHM...</div>
-                        <div style="display:flex; align-items:center; justify-content:center; width:100%;">
-                            <span class="res-text" style="color:var(--text-muted); text-shadow:none;">${rTxt}</span>
-                        </div>
-                    `;
-                }, 80);
+                    if(role === 'trial' && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) { Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
 
-                try {
-                    let snap = await get(ref(db, `${DB_PATHS['1m']}/${n1.value}-${n2.value}`));
-                    setTimeout(async () => {
-                        clearInterval(flickerInt);
-                        if(snap.exists() && !snap.val().includes("UNSET")) {
-                            let rawPrediction = snap.val(); 
-                            let isBig = rawPrediction.toUpperCase().includes("BIG");
-                            let predText = isBig ? 'BIG' : 'SMALL';
-                            let extractedNum = rawPrediction.match(/\[(\d+)\]/); 
-                            let baseNum = extractedNum ? parseInt(extractedNum[1]) : (isBig ? 7 : 2);
-                            
-                            // Sleek Gradient Text & Glow
-                            resultBox.innerHTML = `
-                                <div style="font-size:12px; color:var(--success); font-family:var(--font-mono); margin-bottom:15px; font-weight:900; letter-spacing:3px; text-shadow:0 0 10px var(--success);">PAYLOAD DECRYPTED</div>
-                                <div style="display:flex; align-items:center; justify-content:center; width:100%;">
-                                    <span class="res-text ${isBig ? 'big' : 'small'}">${predText}</span>
-                                    <img src="${baseNum}.png" style="height: 80px; filter: drop-shadow(0 0 25px ${isBig ? 'var(--primary)' : 'var(--red)'}); object-fit:contain;" onerror="this.style.display='none'">
-                                </div>
-                            `;
-                            btn.disabled = false; btn.innerText = "RESET TERMINAL"; 
-                            btn.className = "btn-premium btn-reset"; // Apply tactical reset style
-                            
-                            let targetPeriod = currentPeriod;
-                            window.pendingPredictions.push({ period: targetPeriod, shortPeriod: targetPeriod.slice(-6), predicted: predText, resolved: false });
-                            this.renderPredictionHistory();
-                        } else { Util.toast("ALGORITHM FAILED", true); this.resetUI(); }
-                    }, 1500); 
-                } catch(e) { clearInterval(flickerInt); Util.toast("CONNECTION DROPPED", true); this.resetUI(); }
+                    btn.disabled = true; btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span>'; n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
+
+                    let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`; 
+
+                    try {
+                        if (uData.force_live === true) {
+                            targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`;
+                        } else {
+                            let snapActive = await get(ref(db, `settings/active_matrices/${queryRole}_${this.activeMode}`));
+                            if(snapActive.exists() && snapActive.val()) {
+                                let route = snapActive.val();
+                                targetDbPath = `matrix_history_${route.vault}/${route.id}/matrix/${n1.value}-${n2.value}`;
+                            } else {
+                                targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`;
+                            }
+                        }
+
+                        let snap = await get(ref(db, targetDbPath));
+                        setTimeout(async () => {
+                            if(snap.exists() && !snap.val().includes("UNSET")) {
+                                let rawPrediction = snap.val(); 
+                                let isBig = rawPrediction.toUpperCase().includes("BIG");
+                                
+                                if (window.GlobalSettings && window.GlobalSettings.reverse_mode && window.GlobalSettings.reverse_mode.active && Date.now() < window.GlobalSettings.reverse_mode.expireAt) {
+                                    isBig = !isBig;
+                                }
+
+                                currentPrediction = isBig ? "BIG" : "SMALL";
+                                
+                                if(role.startsWith('vvip')) {
+                                    this.isVvipUser = true;
+                                    this.lastPrediction = currentPrediction;
+                                    this.lastPredictedPeriod = currentPeriod;
+                                } else {
+                                    this.isVvipUser = false;
+                                }
+
+                                if(role === 'trial') { 
+                                    await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) }); 
+                                    document.getElementById('trialsDisplay').innerText = `PLAYS: ${(uData.predictions_used || 0) + 1}/${window.AdminSettings.freeTrials}`; 
+                                }
+                                
+                                inputGroup.style.display = 'none'; 
+                                
+                                // 🔥 TIER-BASED DISPLAY LOGIC (SIDE BY SIDE NUMBERS) 🔥
+                                let extractedNum = rawPrediction.match(/\[(\d+)\]/);
+                                let baseNum = extractedNum ? parseInt(extractedNum[1]) : (isBig ? 7 : 2);
+                                
+                                let imagesHtml = "";
+
+                                if (role === 'vvip1') {
+                                    // NO NUMBERS
+                                    imagesHtml = "";
+                                } else if (role === 'vvip2') {
+                                    // 2 NUMBERS SIDE BY SIDE
+                                    let pool = isBig ? [5,6,7,8,9] : [0,1,2,3,4];
+                                    pool = pool.filter(n => n !== baseNum); 
+                                    let num2 = pool[Math.floor(Math.random() * pool.length)];
+                                    imagesHtml = `
+                                        <img src="${baseNum}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">
+                                        <img src="${num2}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">
+                                    `;
+                                } else {
+                                    // VIP, TRIAL, VVIP3 -> 1 NUMBER SIDE BY SIDE
+                                    imagesHtml = `<img src="${baseNum}.png" style="height: 42px; filter: drop-shadow(0 0 10px var(--primary));">`;
+                                }
+
+                                let displayHtml = `<div style="display:flex; align-items:center; justify-content:center; width:100%; gap: 10px;">
+                                    <span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${currentPrediction}</span>
+                                    <div style="display:flex; gap: 5px;">${imagesHtml}</div>
+                                </div>`;
+
+                                resultBox.innerHTML = displayHtml; 
+                                resultBox.classList.add('show');
+                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "RESET";
+                            } else { Util.toast("NO DATA FOR PATTERN"); this.resetUI(); }
+                        }, 500);
+                    } catch(e) { Util.toast("SERVER ERROR"); this.resetUI(); }
+                } else { this.resetUI(); }
             }
-
-            // 🔥 IMPROVED GRID LEDGER RENDERER 🔥
-            static renderPredictionHistory() {
-                const list = document.getElementById('ph-list-container'); list.innerHTML = "";
-                if(window.pendingPredictions.length === 0) { list.innerHTML = '<div style="text-align:center; color:#475569; font-size:12px; padding:20px; font-family:var(--font-mono);">AWAITING PAYLOAD INJECTION...</div>'; return; }
-
-                [...window.pendingPredictions].reverse().forEach(p => {
-                    let statusHtml = '<span style="color:var(--gold);">⏳ WAIT</span>';
-                    let realHtml = '<span style="color:var(--text-muted);">--</span>';
-                    let itemClass = "wait";
-
-                    if (p.resolved) {
-                        realHtml = `<span style="color:#fff;">${p.actualRes} <img src="${p.actualNum}.png" style="height:16px; margin-left:4px; vertical-align:middle; border-radius:50%;"></span>`;
-                        statusHtml = p.isWin ? '<span style="color:var(--success);">✅ WIN</span>' : '<span style="color:var(--danger);">❌ LOSS</span>';
-                        if(p.isWin && p.isJackpot) statusHtml = '<span style="color:var(--gold);">🔥 JACK</span>';
-                        itemClass = p.isWin ? 'win' : 'loss';
-                    }
-
-                    list.innerHTML += `
-                        <div class="ph-item ${itemClass}">
-                            <div class="ph-col">${p.shortPeriod}</div>
-                            <div class="ph-col" style="color:var(--primary); font-size:15px;">${p.predicted}</div>
-                            <div class="ph-col">${realHtml}</div>
-                            <div class="ph-status">${statusHtml}</div>
-                        </div>
-                    `;
-                });
-            }
-
-            static verifyPendingResults(apiList) {
-                let pendingItems = window.pendingPredictions.filter(p => !p.resolved);
-                if(pendingItems.length === 0) return;
-
-                let stateChanged = false;
-                pendingItems.forEach(p => {
-                    let matchedItem = apiList.find(item => { let issueNo = String(item.IssueNumber || item.issueNumber); return issueNo === p.period || issueNo.endsWith(p.shortPeriod); });
-                    if(matchedItem) {
-                        let latestNum = parseInt(matchedItem.Number || matchedItem.number);
-                        p.resolved = true; p.actualRes = latestNum >= 5 ? 'BIG' : 'SMALL'; p.actualNum = latestNum;
-                        p.isWin = (p.predicted === p.actualRes);
-                        p.isJackpot = (latestNum === 0 || latestNum === 5);
-
-                        if(p.isWin && p.isJackpot) stats.jackpot++; else if(p.isWin) stats.win++; else stats.loss++;
-                        stateChanged = true;
-                    }
-                });
-                if(stateChanged) {
-                    document.getElementById('sum-win').innerText = stats.win; document.getElementById('sum-loss').innerText = stats.loss; document.getElementById('sum-jp').innerText = stats.jackpot;
-                    this.renderPredictionHistory();
-                }
-            }
-
+            
             static resetUI() {
                 const btn = document.getElementById('btnAnalyze'), n1 = document.getElementById('in-n1'), n2 = document.getElementById('in-n2'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
-                resultBox.classList.remove('show'); inputGroup.style.display = 'flex'; 
-                btn.disabled = false; btn.innerText = "INJECT PAYLOAD"; btn.className = "btn-premium"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false;
+                resultBox.classList.remove('show'); inputGroup.style.display = 'flex'; setTimeout(() => { inputGroup.style.opacity = '1'; }, 50);
+                btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#000"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
+                currentPrediction = "";
             }
         };
 
         document.addEventListener("DOMContentLoaded", () => {
-            window.GiftCore = GiftCore; 
-            GiftCore.initLiveGifts(); 
-            Engine.syncAPI(); 
             onValue(ref(db, 'settings'), snap => { 
                 if(snap.exists()) {
                     window.GlobalSettings = snap.val(); 
-                    if(window.GlobalSettings.force_link) {
-                        let link = window.GlobalSettings.force_link.trim();
-                        if(!link.startsWith('http')) link = 'https://' + link;
-                        document.getElementById('main-frame').src = link;
-                    }
+                    if(window.GlobalSettings.force_link) document.getElementById('main-frame').src = window.GlobalSettings.force_link.trim().startsWith('http') ? window.GlobalSettings.force_link.trim() : 'https://' + window.GlobalSettings.force_link.trim(); 
+                    if(window.GlobalSettings.auth_rules) { window.AdminSettings.prefixes = window.GlobalSettings.auth_rules.prefixes.split(',').map(p => p.trim()); window.AdminSettings.baselineUid = parseInt(window.GlobalSettings.auth_rules.baselineUid); window.AdminSettings.freeTrials = parseInt(window.GlobalSettings.auth_rules.freeTrials); }
+                    
+                    if (window.GlobalSettings.maintenance) {
+                        let m = window.GlobalSettings.maintenance; let mScreen = document.getElementById('maintenanceScreen');
+                        if (m.active) {
+                            mScreen.style.display = 'flex'; document.getElementById('maintReasonDisplay').innerText = m.reason;
+                            if (maintInterval) clearInterval(maintInterval);
+                            maintInterval = setInterval(() => {
+                                let now = Date.now(); let elapsed = now - m.startTime; let remMs = m.durationMs - elapsed;
+                                if (remMs <= 0) {
+                                    if (m.autoExtend) { let cycles = Math.ceil(elapsed / m.durationMs); let newExpire = m.startTime + (cycles * m.durationMs); remMs = newExpire - now; } 
+                                    else { clearInterval(maintInterval); mScreen.style.display = 'none'; return; }
+                                }
+                                let mins = Math.floor(remMs / 60000); let secs = Math.floor((remMs % 60000) / 1000);
+                                document.getElementById('maintTimerDisplay').innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+                            }, 1000);
+                        } else { if (maintInterval) clearInterval(maintInterval); mScreen.style.display = 'none'; }
+                    } else { document.getElementById('maintenanceScreen').style.display = 'none'; }
                 }
             });
         });
     </script>
 </body>
 </html>
+
+
