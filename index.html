@@ -7,41 +7,43 @@
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@400;600;800&family=Rajdhani:wght@600;700;900&family=Fira+Code:wght@600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@600;800;900&family=Rajdhani:wght@700;800;900&family=Fira+Code:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         :root { 
-            --primary: #06b6d4; --primary-dark: #0891b2; --primary-3d: #164e63; --cyan-glow: rgba(6, 182, 212, 0.6);
-            --bg-top: linear-gradient(135deg, #020617, #0f172a, #020617);
-            --green: #10b981; --red: #ef4444; --red-glow: rgba(239, 68, 68, 0.5); --gold: #f59e0b;
+            /* Updated to match the Gold/Orange Casino App Theme */
+            --primary: #fca311; 
+            --primary-dark: #e85d04; 
+            --primary-3d: #9d0208; 
+            --cyan-glow: rgba(252, 163, 17, 0.6);
+            --bg-top: linear-gradient(135deg, #111114, #1c1c24, #111114);
+            --green: #10b981; --red: #ef4444; --red-glow: rgba(239, 68, 68, 0.5); --gold: #fca311;
             --purple: #8b5cf6;
             
             --font-main: 'Rajdhani', sans-serif; --font-ui: 'Inter', sans-serif; --font-mono: 'Fira Code', monospace; --font-zombie: 'Creepster', cursive; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
-        body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: #020617; }
+        body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: #0a0a0f; }
         
         #top-panel { 
             flex: 0 0 auto; min-height: 20vh; max-height: 35vh; width: 100%; z-index: 10; position: relative; 
-            padding: 12px 16px; border-bottom: 2px solid #1e293b; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(6, 182, 212, 0.05); 
+            padding: 12px 16px; border-bottom: 2px solid #2a2a35; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(252, 163, 17, 0.05); 
             display: flex; flex-direction: column; justify-content: center; 
-            background: linear-gradient(135deg, rgba(2,6,23,0.95), rgba(15,23,42,0.95)), radial-gradient(circle at center, rgba(6,182,212,0.1) 0%, transparent 100%);
-            background-image: linear-gradient(rgba(6, 182, 212, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(6, 182, 212, 0.03) 1px, transparent 1px);
-            background-size: 20px 20px;
+            background: linear-gradient(135deg, rgba(17,17,20,0.95), rgba(28,28,36,0.95)), radial-gradient(circle at center, rgba(252,163,17,0.05) 0%, transparent 100%);
         }
         
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(6,182,212,0.2); padding-bottom: 10px; }
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(252,163,17,0.3); padding-bottom: 10px; }
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
 
-        .brand { font-family: var(--font-main); font-size: 24px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
+        .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px var(--cyan-glow); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
         
-        .server-status { display: inline-flex; align-items: center; width: fit-content; gap: 5px; font-size: 9px; font-family: var(--font-mono); color: var(--red); letter-spacing: 1px; font-weight: 800; background: rgba(239, 68, 68, 0.08); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(239, 68, 68, 0.3); text-shadow: 0 0 5px rgba(239, 68, 68, 0.5); transition: all 0.4s ease;}
-        .live-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; box-shadow: 0 0 10px var(--red); animation: blinkRed 1s infinite alternate; transition: all 0.4s ease;}
+        .server-status { display: inline-flex; align-items: center; width: fit-content; gap: 5px; font-size: 10px; font-family: var(--font-mono); color: var(--red); letter-spacing: 1px; font-weight: 900; background: rgba(239, 68, 68, 0.08); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(239, 68, 68, 0.3); text-shadow: 0 0 5px rgba(239, 68, 68, 0.5); transition: all 0.4s ease;}
+        .live-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; box-shadow: 0 0 10px var(--red); animation: blinkRed 1s infinite alternate; transition: all 0.4s ease;}
         
         @keyframes blinkRed { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--red); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--red); } }
         
@@ -49,20 +51,20 @@
         .server-status.connected .live-dot { background: var(--green); box-shadow: 0 0 10px var(--green); animation: blinkGreen 1s infinite alternate; }
         @keyframes blinkGreen { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--green); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--green); } }
 
-        .tabs { display: flex; background: rgba(2, 6, 23, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
-        .tab-btn { padding: 6px 12px; font-size: 10px; font-weight: 800; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1px; transition: all 0.3s ease;}
-        .tab-btn.active { background: var(--primary); color: #000; box-shadow: 0 0 12px var(--cyan-glow); text-shadow: 1px 1px 0px rgba(255,255,255,0.3); transform: scale(1.05);}
+        .tabs { display: flex; background: rgba(10, 10, 15, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #2a2a35; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 900; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1.5px; transition: all 0.3s ease;}
+        .tab-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 0 12px var(--cyan-glow); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); transform: scale(1.05);}
 
         input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        input { width: 100%; height: 100%; padding: 0 8px; border: 2px solid #1e293b; border-radius: 8px; text-align: center; font-size: 17px; font-weight: 800; background: rgba(15, 23, 42, 0.6); color: var(--primary); outline: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(6, 182, 212, 0.15), inset 0 3px 10px rgba(0,0,0,0.9); background: rgba(2, 6, 23, 0.9); transform: translateY(-2px);}
-        input::placeholder { color: #334155; font-size: 11px; letter-spacing: 2px; font-family: var(--font-mono); font-weight: 600;}
+        input { width: 100%; height: 100%; padding: 0 8px; border: 2px solid #2a2a35; border-radius: 8px; text-align: center; font-size: 18px; font-weight: 900; background: rgba(28, 28, 36, 0.6); color: var(--primary); outline: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
+        input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.2), inset 0 3px 10px rgba(0,0,0,0.9); background: rgba(10, 10, 15, 0.9); transform: translateY(-2px);}
+        input::placeholder { color: #64748b; font-size: 12px; letter-spacing: 2px; font-family: var(--font-mono); font-weight: 800;}
 
-        .btn-sleek { position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 13px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 0 var(--primary-3d), 0 6px 12px rgba(6,182,212,0.4); flex-shrink: 0; }
+        .btn-sleek { position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 14px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 0 var(--primary-3d), 0 6px 12px rgba(252,163,17,0.4); flex-shrink: 0; }
         .btn-sleek::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); animation: shimmerBtn 3s infinite; }
         @keyframes shimmerBtn { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
         .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
-        .btn-dark { background: #0f172a; color: #fff; border: 1px solid #1e293b; box-shadow: 0 4px 0 #020617;}
+        .btn-dark { background: #1c1c24; color: #fff; border: 1px solid #2a2a35; box-shadow: 0 4px 0 #0a0a0f;}
 
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
@@ -70,16 +72,16 @@
         
         .pending-box { display: flex; flex-direction: column; gap: 8px; width: 100%; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-top: 2px;}
         .pending-header { display: flex; justify-content: space-between; align-items: center; }
-        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 15px; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; text-shadow: 0 0 8px var(--cyan-glow);}
+        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; text-shadow: 0 0 8px var(--cyan-glow);}
         
         .deposit-alert-strip { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 6px 10px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
-        .deposit-alert-strip .alert-text { color: var(--red); font-size: 10px; font-weight: 800; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
+        .deposit-alert-strip .alert-text { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
         @keyframes pulseText { from { text-shadow: 0 0 2px rgba(239,68,68,0.2); transform: scale(1); } to { text-shadow: 0 0 10px var(--red); transform: scale(1.02); } }
         .pending-actions { display: flex; gap: 8px; height: 38px; }
 
-        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 10px; color: #94a3b8; font-weight: 700; background: rgba(15, 23, 42, 0.8); padding: 6px 12px; border-radius: 8px; border: 1px solid #1e293b; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 11px; color: #94a3b8; font-weight: 900; background: rgba(28, 28, 36, 0.8); padding: 6px 12px; border-radius: 8px; border: 1px solid #2a2a35; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
         .info-col { flex: 1; }
-        .tool-info-row span { color: var(--primary); font-size: 14px; font-weight: 800; text-shadow: 0 0 8px var(--cyan-glow); transition: color 0.3s;}
+        .tool-info-row span { color: var(--primary); font-size: 15px; font-weight: 900; text-shadow: 0 0 8px var(--cyan-glow); transition: color 0.3s;}
 
         .action-row { display: flex; gap: 8px; height: 42px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
         .input-group { display: flex; gap: 8px; flex: 1; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%; }
@@ -99,59 +101,60 @@
             100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
-        .zombie-text { font-family: var(--font-zombie); font-size: clamp(28px, 7vw, 36px); letter-spacing: 4px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; animation: textSmash 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .zombie-text { font-family: var(--font-zombie); font-size: clamp(30px, 7vw, 40px); letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; animation: textSmash 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         .res-text-big { color: #ffffff; text-shadow: 0 0 12px var(--cyan-glow), 0 0 25px var(--primary); }
-        .res-text-small { color: #ffffff; text-shadow: 0 0 12px rgba(77,166,255,0.7), 0 0 25px #4da6ff; }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 12px rgba(252, 163, 17, 0.7), 0 0 25px #fca311; }
         
         .res-img-anim { animation: floatUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: translateY(10px); }
         .res-img-anim:nth-child(2) { animation-delay: 0.1s; }
         @keyframes floatUp { to { opacity: 1; transform: translateY(0); } }
 
-        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px); background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(239, 68, 68, 0.03) 40px, rgba(239, 68, 68, 0.03) 80px);}
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(239, 68, 68, 0.03) 40px, rgba(239, 68, 68, 0.03) 80px);}
         .ban-icon { font-size: 50px; margin-bottom: 8px; animation: popIn 0.5s ease;}
-        .ban-title { color: var(--red); font-size: 34px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
+        .ban-title { color: var(--red); font-size: 36px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
         
         .ban-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); padding: 15px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 320px; margin-bottom: 20px;}
         .dynamic-deposit { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
-        .dynamic-deposit .label { font-size: 12px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 600; letter-spacing: 1px;}
-        .dynamic-deposit .amount { font-size: 38px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px rgba(245,158,11,0.5);}
+        .dynamic-deposit .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 800; letter-spacing: 1px;}
+        .dynamic-deposit .amount { font-size: 40px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px rgba(252,163,17,0.5);}
         
-        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; color: #fff; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 800; font-family: var(--font-ui); font-size: 13px; text-transform: uppercase; background: rgba(15, 23, 42, 0.8); border: 1px solid #1e293b; box-shadow: 0 8px 15px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
+        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; color: #fff; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 900; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(28, 28, 36, 0.8); border: 1px solid #2a2a35; box-shadow: 0 8px 15px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
         .contact-btn:active { transform: scale(0.96); }
-        .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 12px rgba(16,185,129,0.4); margin-bottom: 12px; color: #000; font-family: var(--font-main); font-size: 16px; letter-spacing: 2px;}
+        .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 12px rgba(16,185,129,0.4); margin-bottom: 12px; color: #fff; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
 
-        .spinner { display: inline-block; width: 14px; height: 14px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 6px; }
-        .spinner-cyan { border: 3px solid rgba(6,182,212,0.3); border-top-color: var(--primary); display: inline-block; width: 16px; height: 16px; border-radius: 50%; animation: spin 1s linear infinite; }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 6px; }
+        .spinner-cyan { border: 3px solid rgba(252,163,17,0.3); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        #toast { position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px) scale(0.9); background: rgba(15, 23, 42, 0.95); color: #fff; padding: 12px 20px; border-radius: 8px; font-weight: 700; font-size: 12px; border: 1px solid var(--primary-dark); z-index: 999999; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: 0 8px 25px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 0.5px; backdrop-filter: blur(10px); opacity: 0; text-transform: uppercase;}
+        #toast { position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px) scale(0.9); background: rgba(28, 28, 36, 0.95); color: #fff; padding: 14px 22px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid var(--primary-dark); z-index: 999999; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: 0 8px 25px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 1px; backdrop-filter: blur(10px); opacity: 0; text-transform: uppercase;}
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
     </style>
 </head>
+<!-- Rest of HTML and JS remains identical -->
 <body>
 
     <!-- 🚧 SYSTEM MAINTENANCE SCREEN -->
-    <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999; background: rgba(2, 6, 23, 0.98); backdrop-filter: blur(20px);">
+    <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px);">
         <div style="font-size: 60px; animation: pulseText 2s infinite;">🚧</div>
-        <h1 class="ban-title" style="color: var(--accent-warning); text-shadow: 0 0 15px rgba(245,158,11,0.5); font-size:40px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
-        <div class="ban-box" style="border-color: rgba(245,158,11,0.3); background: rgba(245,158,11,0.05); max-width: 350px;">
-            <span style="color:var(--accent-warning); font-weight:900; font-size: 13px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
-            <span id="maintReasonDisplay" style="color:#fff; font-size: 14px; font-weight:600; display:block; margin-top:8px; margin-bottom: 18px;">System Upgrading...</span>
+        <h1 class="ban-title" style="color: var(--gold); text-shadow: 0 0 15px rgba(252,163,17,0.5); font-size:42px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
+        <div class="ban-box" style="border-color: rgba(252,163,17,0.3); background: rgba(252,163,17,0.05); max-width: 350px;">
+            <span style="color:var(--gold); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
+            <span id="maintReasonDisplay" style="color:#fff; font-size: 15px; font-weight:800; display:block; margin-top:8px; margin-bottom: 18px;">System Upgrading...</span>
             <div style="background: rgba(0,0,0,0.5); padding: 18px; border-radius: 10px; border: 1px inset rgba(255,255,255,0.1);">
-                <div style="font-size: 11px; color: var(--text-muted); font-family: var(--font-mono); margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
-                <div id="maintTimerDisplay" style="font-size: 42px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,255,255,0.4);">00:00</div>
+                <div style="font-size: 12px; color: #94a3b8; font-family: var(--font-mono); font-weight: 800; margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
+                <div id="maintTimerDisplay" style="font-size: 46px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,255,255,0.4);">00:00</div>
             </div>
         </div>
-        <p style="color: var(--text-muted); font-size: 11px; font-family: var(--font-mono);">Do not close this window. The app will auto-resume.</p>
+        <p style="color: #64748b; font-size: 12px; font-weight: 800; font-family: var(--font-mono);">Do not close this window. The app will auto-resume.</p>
     </div>
 
     <div id="bannedScreen" class="hard-screen">
         <div class="ban-icon">🛑</div>
         <h1 class="ban-title">ACCESS REVOKED</h1>
         <div class="ban-box">
-            <span style="color:var(--red); font-weight:800; font-size: 12px; font-family: var(--font-mono); letter-spacing: 1px;">SYSTEM ALERT</span><br>
-            <span id="banReasonText" style="color:#fff; font-size: 14px; font-weight:600; display:block; margin-top:8px;">Your 5 Free Trials are exhausted.</span>
+            <span style="color:var(--red); font-weight:900; font-size: 13px; font-family: var(--font-mono); letter-spacing: 1.5px;">SYSTEM ALERT</span><br>
+            <span id="banReasonText" style="color:#fff; font-size: 15px; font-weight:800; display:block; margin-top:8px;">Your 5 Free Trials are exhausted.</span>
             <div id="dynamicDepositBox" class="dynamic-deposit">
                 <div class="label">PREMIUM ACTIVATION FEE</div>
                 <div id="depositAmountDisplay" class="amount">₹---</div>
@@ -182,12 +185,12 @@
             <div id="auth-pending" class="pending-box hidden">
                 <div class="pending-header">
                     <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING...</span>
-                    <span style="font-size: 10px; color: #94a3b8; font-family:var(--font-mono); font-weight:700;">Awaiting Admin</span>
+                    <span style="font-size: 11px; color: #94a3b8; font-family:var(--font-mono); font-weight:800;">Awaiting Admin</span>
                 </div>
                 <div class="deposit-alert-strip"><span class="alert-text">⚠️ PREMIUM ACTIVATION DEPOSIT 800₹</span></div>
                 <div class="pending-actions">
-                    <a href="t.me/BADSHAH_BHAI_700" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:11px; height:38px;">✈️ MSG ADMIN</a>
-                    <button class="btn-sleek btn-dark" style="flex:1; font-size:11px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
+                    <a href="t.me/BADSHAH_BHAI_700" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
+                    <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
                 </div>
             </div>
         </div>
@@ -195,7 +198,7 @@
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row">
                 <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:10px; color:var(--gold); display:none; font-weight:800;">PLAYS: 0/5</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--gold); display:none; font-weight:900;">PLAYS: 0/5</span></div>
                 <div class="info-col" style="text-align: right;">TIMER: <span id="displayTimer">00:00</span></div>
             </div>
             
@@ -216,7 +219,7 @@
 
     <div id="toast">Message</div>
 
-    <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ -->
+    <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ (Original Script Retained) -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -239,7 +242,7 @@
                 if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR") || msg.includes("BANNED")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
                 } else {
-                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(6, 182, 212, 0.3)";
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(252, 163, 17, 0.3)";
                 }
                 t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
             }
@@ -293,7 +296,7 @@
 
             static async submitDeposit() {
                 if(!currentUid) return Util.toast("UID ERROR"); const btn = document.getElementById('depositDoneBtn'); btn.innerText = "SUBMITTING..."; btn.disabled = true;
-                try { await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: window.currentDepositAmount || 0, status: "pending", timestamp: Date.now() }); Util.toast("DEPOSIT REQUEST SENT"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "var(--bg-panel)"; btn.style.borderColor = "var(--border-color)"; btn.style.color = "#fff"; } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
+                try { await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: window.currentDepositAmount || 0, status: "pending", timestamp: Date.now() }); Util.toast("DEPOSIT REQUEST SENT"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "var(--bg-top)"; btn.style.borderColor = "var(--primary-dark)"; btn.style.color = "#fff"; } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
             }
 
             static grant(accessType, userData) { 
@@ -318,7 +321,6 @@
                     trialDisp.style.color = userData.role.includes('vvip') ? "var(--green)" : "var(--primary)"; 
                 }
                 
-                // 🔥 Switch Status Indicator to Green 🔥
                 const sStatus = document.getElementById('serverStatus');
                 const sText = document.getElementById('serverStatusText');
                 if(sStatus && sText) {
@@ -335,7 +337,6 @@
             static state = "IDLE";
             static apiPeriod = null; 
             
-            // 🔥 VVIP VARIABLES 🔥
             static isVvipUser = false;
             static lastPrediction = null;
             static lastPredictedPeriod = null;
@@ -365,7 +366,6 @@
                         let lastIssue = json.data.list[0].IssueNumber || json.data.list[0].issueNumber;
                         let lastNumber = json.data.list[0].Number || json.data.list[0].number;
 
-                        // 🔥 VVIP RESULT CHECKER 🔥
                         if (this.isVvipUser && this.lastPredictedPeriod === String(lastIssue)) {
                             let num = parseInt(lastNumber);
                             let isWin = false;
@@ -473,7 +473,7 @@
                     if(role === 'trial' && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) { Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
 
                     btn.disabled = true; 
-                    btn.innerHTML = '<span class="spinner" style="border-top-color:#000; width:12px; height:12px; margin-right:4px;"></span> <span style="font-size:10px; letter-spacing:0px;">DECRYPT</span>'; 
+                    btn.innerHTML = '<span class="spinner" style="border-top-color:#fff; width:12px; height:12px; margin-right:4px;"></span> <span style="font-size:11px; letter-spacing:0px;">DECRYPT</span>'; 
                     n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
                     
                     inputGroup.style.opacity = '0';
@@ -564,7 +564,7 @@
                     inputGroup.style.transform = 'translateY(0) scale(1)'; 
                 }, 50);
                 
-                btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#000"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
+                btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#fff"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
                 currentPrediction = "";
             }
         };
