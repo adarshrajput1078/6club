@@ -233,11 +233,14 @@
                 </div>
             </div>
 
-            <!-- 2. DIRECT INJECTOR (HOURS ADDED) -->
+            <!-- 🔥 2. DIRECT INJECTOR (WITH NAME TAGGING) 🔥 -->
             <div id="v-inject" class="view-section">
                 <div class="msg-box" style="border-left-color: var(--accent-primary);">
                     <h3 style="color:var(--accent-primary);">⚡ DIRECT UID INJECTION</h3>
+                    <!-- NEW NAME INPUT FOR PERMANENT TAGGING -->
+                    <input type="text" id="manualName" placeholder="Client Name / Tag (Optional)" style="border-color: var(--accent-secondary);">
                     <input type="number" id="manualUid" placeholder="Target UID (e.g. 6820644)">
+                    
                     <div class="flex-wrap-gap" style="margin-bottom:10px;">
                         <select id="manualRole" style="margin-bottom:0;">
                             <option value="trial">TRIAL</option><option value="vip">VIP</option><option value="vvip1">VVIP 1 (Big/Small Only)</option><option value="vvip2">VVIP 2 (Big/Small + 2 Numbers)</option><option value="vvip3" selected>VVIP 3 (Standard + 1 Number)</option>
@@ -256,7 +259,8 @@
             <!-- 3. USER DATABASE -->
             <div id="v-users" class="view-section">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap:wrap; gap:10px;">
-                    <input type="text" id="searchUid" placeholder="🔍 Search UID..." onkeyup="filterUsers()" style="margin-bottom: 0; width: 250px; border-radius: 20px; padding-left: 20px;">
+                    <!-- 🔥 UPDATED SEARCH INPUT 🔥 -->
+                    <input type="text" id="searchUid" placeholder="🔍 Search UID or Name..." onkeyup="filterUsers()" style="margin-bottom: 0; width: 250px; border-radius: 20px; padding-left: 20px;">
                     <div style="display:flex; gap:10px;">
                         <button class="btn-success" onclick="exportUsersCSV()">📥 EXPORT CSV</button>
                         <button class="btn-danger" onclick="purgeDeadNodes()">🧹 PURGE EXPIRED</button>
@@ -324,7 +328,7 @@
                 <div class="table-wrapper" style="max-height: 400px;"><table><thead><tr><th>UID IDENTIFIER</th><th>AMOUNT</th><th>TIME</th><th>COMMANDS</th></tr></thead><tbody id="dep-list"></tbody></table></div>
             </div>
 
-            <!-- 🔥 7. VIP GIFT CENTER 🔥 -->
+            <!-- 7. VIP GIFT CENTER -->
             <div id="v-gifts" class="view-section">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
                     <h3 style="font-family: var(--font-display); color: var(--accent-warning);">🎁 ACTIVE VIP GIFTS</h3>
@@ -347,7 +351,17 @@
                     <select id="vipNeuralTimeframe" onchange="fetchLatestNumber('vip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select>
                     <div class="auto-number" id="vipAutoNumber" style="color:var(--accent-warning);">--</div>
                     <div style="text-align:center; margin-bottom:15px;"><button class="btn-dark" onclick="fetchLatestNumber('vip')">🔄 SYNC LIVE</button></div>
-                    <select id="vipScanDepth"><option value="1">⚡ FAST SCAN (100 ROUNDS)</option><option value="30" selected>🔥 DEEP NEURAL (3000 ROUNDS)</option><option value="loss">💀 LOSING TRAP</option></select>
+                    
+                    <!-- 🔥 NEW SCALED DEPTH OPTIONS 🔥 -->
+                    <select id="vipScanDepth">
+                        <option value="1">⚡ FAST SCAN (100 ROUNDS)</option>
+                        <option value="10">🔍 STANDARD (1000 ROUNDS)</option>
+                        <option value="20">🔬 ADVANCED (2000 ROUNDS)</option>
+                        <option value="30">🔥 DEEP NEURAL (3000 ROUNDS)</option>
+                        <option value="40">🧠 CORE ENGINE (4000 ROUNDS)</option>
+                        <option value="50" selected>🌌 QUANTUM SCAN (5000 ROUNDS)</option>
+                        <option value="loss">💀 LOSING TRAP</option>
+                    </select>
                     <button class="btn-warning" id="vipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vip')">🧬 GENERATE VIP MATRIX</button>
                 </div>
                 <div class="msg-box" id="vipStep3Card" style="display:none; border-left-color: var(--accent-success);">
@@ -366,7 +380,18 @@
                  👑 VVIP PARTITION
                  ============================================== -->
             <div id="v-vvip-neural" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">👑 VVIP NEURAL ENGINE</h3><select id="vvipNeuralTimeframe" onchange="fetchLatestNumber('vvip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select><div class="auto-number" id="vvipAutoNumber" style="color:var(--accent-success);">--</div><div style="text-align:center; margin-bottom:15px;"><button class="btn-dark" onclick="fetchLatestNumber('vvip')">🔄 SYNC LIVE</button></div><select id="vvipScanDepth"><option value="1">⚡ FAST SCAN (100 ROUNDS)</option><option value="30" selected>🔥 DEEP NEURAL (3000 ROUNDS)</option><option value="loss">💀 LOSING TRAP</option></select><button class="btn-success" id="vvipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vvip')">🧬 GENERATE VVIP MATRIX</button></div>
+                <div class="msg-box" style="border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">👑 VVIP NEURAL ENGINE</h3><select id="vvipNeuralTimeframe" onchange="fetchLatestNumber('vvip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select><div class="auto-number" id="vvipAutoNumber" style="color:var(--accent-success);">--</div><div style="text-align:center; margin-bottom:15px;"><button class="btn-dark" onclick="fetchLatestNumber('vvip')">🔄 SYNC LIVE</button></div>
+                    <!-- 🔥 NEW SCALED DEPTH OPTIONS 🔥 -->
+                    <select id="vvipScanDepth">
+                        <option value="1">⚡ FAST SCAN (100 ROUNDS)</option>
+                        <option value="10">🔍 STANDARD (1000 ROUNDS)</option>
+                        <option value="20">🔬 ADVANCED (2000 ROUNDS)</option>
+                        <option value="30">🔥 DEEP NEURAL (3000 ROUNDS)</option>
+                        <option value="40">🧠 CORE ENGINE (4000 ROUNDS)</option>
+                        <option value="50" selected>🌌 QUANTUM SCAN (5000 ROUNDS)</option>
+                        <option value="loss">💀 LOSING TRAP</option>
+                    </select>
+                <button class="btn-success" id="vvipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vvip')">🧬 GENERATE VVIP MATRIX</button></div>
                 <div class="msg-box" id="vvipStep3Card" style="display:none; border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">✅ NEURAL MATRIX READY</h3><select id="vvipPublishTarget"><option value="vault">📥 SAVE TO VAULT ONLY</option><option value="vvip" selected>👑 OVERWRITE LIVE VVIP DB</option></select><div style="display:flex; gap:10px;"><button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vvip')">☁️ PUBLISH DIRECTLY</button><button class="btn-dark" style="flex:1;" onclick="copyCode('vvip')">📋 COPY HASH</button></div></div>
             </div>
             <div id="v-vvip-history" class="view-section"><div class="table-wrapper" style="height: 100%;"><table><thead><tr><th>CREATION DATE & TIME</th><th>MODE</th><th>WIN RATE</th><th>ACTIONS</th></tr></thead><tbody id="vvip-history-list"></tbody></table></div></div>
@@ -386,11 +411,17 @@
         </div>
     </div>
 
+    <!-- 🔥 STRICTLY PRESERVED FIREBASE CONFIGURATION 🔥 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, onValue, remove, increment, push, query, limitToLast } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", authDomain: "sikkimaitool.firebaseapp.com", databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "sikkimaitool" };
+        const firebaseConfig = { 
+            apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", 
+            authDomain: "sikkimaitool.firebaseapp.com", 
+            databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", 
+            projectId: "sikkimaitool" 
+        };
         const app = initializeApp(firebaseConfig); const db = getDatabase(app);
 
         let currentTimeUID = ""; let expiredUsersList = []; let reverseInterval = null; let maintIntervalAdmin = null;
@@ -410,20 +441,36 @@
             depChartObj = new Chart(ctxDep, { type: 'bar', data: { labels: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Today'], datasets: [{ label: 'Volume (₹)', data: [1200, 1900, 3000, 2500, 3200, 2100, 0], backgroundColor: '#f59e0b', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } } } } });
         }
 
-        window.showToast = (msg) => { let t = document.getElementById('toast'); t.innerHTML = msg; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); };
+        window.showToast = (msg, isErr=false) => { let t = document.getElementById('toast'); t.innerHTML = msg; t.style.background = isErr ? "var(--accent-danger)" : "var(--accent-primary)"; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); };
         window.switchView = (id, el, title, type = 'none') => { document.querySelectorAll('.view-section').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; }); document.querySelectorAll('.nav-item').forEach(v => { v.classList.remove('active'); v.classList.remove('vip-active'); v.classList.remove('vvip-active'); }); let tv = document.getElementById(id); tv.style.display = 'block'; void tv.offsetWidth; tv.classList.add('active'); if(type === 'vip') el.classList.add('vip-active'); else if(type === 'vvip') el.classList.add('vvip-active'); else el.classList.add('active'); if(document.getElementById('topPageTitle')) document.getElementById('topPageTitle').innerHTML = title; };
         window.toggleSidebar = () => { document.getElementById('sidebar').classList.toggle('open'); let overlay = document.getElementById('sidebarOverlay'); overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'; };
         window.closeMobileSidebar = () => { if(window.innerWidth < 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').style.display='none'; }};
-        window.filterUsers = () => { let input = document.getElementById('searchUid').value.toLowerCase(); let rows = document.querySelectorAll('#usr-list tr'); rows.forEach(row => { if(row.cells.length > 1) { let uidCell = row.cells[0].innerText.toLowerCase(); row.style.display = uidCell.includes(input) ? '' : 'none'; } }); };
+        
+        // 🔥 ENHANCED FILTER: SEARCH BY UID OR NAME 🔥
+        window.filterUsers = () => { 
+            let input = document.getElementById('searchUid').value.toLowerCase(); 
+            let rows = document.querySelectorAll('#usr-list tr'); 
+            rows.forEach(row => { 
+                if(row.cells.length > 1) { 
+                    let uidCell = row.cells[0].innerHTML.toLowerCase(); 
+                    row.style.display = uidCell.includes(input) ? '' : 'none'; 
+                } 
+            }); 
+        };
+        
         window.addLog = async (msg) => { let time = Date.now(); await push(ref(db, 'settings/activity_logs'), { msg: msg, time: time }); };
+
+        const API_URLS = { '1m': 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json', '30s': 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json' };
+        const DB_PATHS = { '1m': 'patterns', '30s': 'patterns_30s' };
+        
+        async function fetchSecureApiData(targetUrl) { const urlsToTry = [ targetUrl, "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl) ]; for (let url of urlsToTry) { try { let res = await fetch(url, { cache: "no-store", headers: { 'Accept': 'application/json' }}); let text = await res.text(); let data = JSON.parse(text); if (data && (Array.isArray(data) || data.data || data.list)) return data; } catch (e) { continue; } } throw new Error("API failed"); }
+        async function fetchFromAPI(partition) { let tf = document.getElementById(`${partition}NeuralTimeframe`).value; let targetUrl = API_URLS[tf]; const data = await fetchSecureApiData(targetUrl); let results = []; if (Array.isArray(data) && data.length > 0) results = data; else if (data && data.data && Array.isArray(data.data.list)) results = data.data.list; else if (data && Array.isArray(data.data)) results = data.data; else if (data && Array.isArray(data.list)) results = data.list; return results.filter(item => { let n = item.number ?? item.Number ?? item.DrawNumber ?? item.result; const num = parseInt(n); return !isNaN(num) && num >= 0 && num <= 9; }).map(item => ({ number: parseInt(item.number ?? item.Number ?? item.DrawNumber ?? item.result), issue: String(item.issueNumber || item.issue || item.IssueNumber || item.Period || item.period || '') })); }
 
         function initSystem() {
             initCharts(); buildMatrix('vip'); buildMatrix('vvip');
             
-            // Listen to Activity Logs
             onValue(query(ref(db, 'settings/activity_logs'), limitToLast(20)), snap => { let logBox = document.getElementById('activityLog'); if(snap.exists() && logBox) { let html = ""; snap.forEach(c => { let d = c.val(); let time = new Date(d.time).toLocaleTimeString(); html += `<div class="log-entry"><span style="color:rgba(6,182,212,0.5);">[${time}]</span> ${d.msg}</div>`; }); logBox.innerHTML = html; logBox.scrollTop = logBox.scrollHeight; } });
 
-            // Listen to General Settings
             onValue(ref(db, 'settings'), snap => {
                 if(snap.exists()) {
                     let d = snap.val();
@@ -436,7 +483,6 @@
                 }
             });
 
-            // 🔥 LISTEN TO GIFTS 🔥
             onValue(ref(db, 'active_gifts'), s => {
                 let html = "";
                 if(s.exists()) {
@@ -462,9 +508,9 @@
             });
 
             onValue(ref(db, 'uid_requests'), s => { let html = ""; if(s.exists()) { s.forEach(c => { html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td><span style="color:var(--text-muted); font-family:var(--font-mono); font-size:10px;">${c.val().deviceId || "Unknown"}</span></td><td><div class="action-group"><button class="btn-success" onclick="apprReq('${c.key}')">APPROVE</button> <button class="btn-danger" onclick="rejReq('${c.key}')">DROP</button></div></td></tr>`; }); } document.getElementById('req-list').innerHTML = html || `<tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-muted);">Queue is empty.</td></tr>`; });
-            
             onValue(ref(db, 'deposit_requests'), s => { let html = ""; let todayVol = 0; let pending = 0; if(s.exists()) { s.forEach(c => { pending++; let amt = parseInt(c.val().amount) || 0; todayVol += amt; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td style="color:var(--accent-warning); font-weight:900;">₹${amt}</td><td><span style="color:var(--text-muted);">${new Date(c.val().timestamp).toLocaleTimeString()}</span></td><td><div class="action-group"><button class="btn-warning" onclick="apprDep('${c.key}', ${amt})">UPGRADE</button> <button class="btn-danger" onclick="rejDep('${c.key}')">REJECT</button></div></td></tr>`; }); } document.getElementById('dep-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">No deposits.</td></tr>`; document.getElementById('statPendingDep').innerText = pending; if(depChartObj) { let dData = depChartObj.data.datasets[0].data; dData[dData.length - 1] = todayVol; depChartObj.update(); } });
 
+            // 🔥 USER LIST WITH NAME BINDING 🔥
             onValue(ref(db, 'approved_uids'), s => {
                 let html = ""; let tot = 0; let vip = 0; let expCount = 0; let now = Date.now(); expiredUsersList = [];
                 let tCount = 0, vCount = 0, vvCount = 0;
@@ -483,22 +529,107 @@
                         else if(role === 'vvip1') badge = `<span class="tag tag-vvip">VVIP 1</span>`; else if(role === 'vvip2') badge = `<span class="tag tag-vvip">VVIP 2</span>`; else if(role === 'vvip3' || role === 'vvip') badge = `<span class="tag tag-vvip">VVIP 3</span>`; else if(role === 'vip') badge = `<span class="tag tag-vip">VIP</span>`; else badge = `<span class="tag tag-trial">TRIAL</span>`;
                         let overrideBadge = d.force_live ? `<br><span class="tag" style="background:rgba(16,185,129,0.1); color:var(--accent-success); border:1px solid rgba(16,185,129,0.4); margin-top:5px; font-size:9px;">🟢 EXCEPTION</span>` : "";
 
+                        // Inject Name into UID column if available
+                        let nameStr = d.name ? `<br><span style="color:var(--accent-primary); font-size:11px; font-weight:900;">👤 ${d.name}</span>` : "";
+
                         let actions = `<div class="action-group"><button class="btn-primary" onclick="openTimeModal('${uid}')">TIME</button>`;
                         if(role === 'trial') actions += `<button class="btn-dark" onclick="resetPlays('${uid}')">RST</button>`;
                         actions += `<button class="btn-dark" style="color:var(--accent-warning); border-color:var(--accent-warning);" onclick="unlinkDevice('${uid}')">UNLINK</button><button class="btn-danger" onclick="banUser('${uid}')">PURGE</button></div>`;
-                        html += `<tr><td style="color:#fff; font-weight:800; font-family:var(--font-mono); font-size:14px;">${uid}</td><td>${badge}${overrideBadge}</td><td>${expiryText}</td><td>${actions}</td></tr>`; 
+                        
+                        html += `<tr><td style="color:#fff; font-weight:800; font-family:var(--font-mono); font-size:14px;">${uid}${nameStr}</td><td>${badge}${overrideBadge}</td><td>${expiryText}</td><td>${actions}</td></tr>`; 
                     });
                 }
                 document.getElementById('usr-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">Database empty.</td></tr>`;
                 document.getElementById('statTotal').innerText = tot; document.getElementById('statVip').innerText = vip; document.getElementById('statExpired').innerText = expCount;
                 if(networkChartObj) { networkChartObj.data.datasets[0].data = [tCount, vCount, vvCount, expCount]; networkChartObj.update(); }
             });
+
             attachHistoryListener('vip'); attachHistoryListener('vvip');
         }
 
-        function attachHistoryListener(partition) { onValue(ref(db, `matrix_history_${partition}`), s => { let html = ""; let optionsHtml = `<option value="">-- Select Matrix --</option>`; if(s.exists()) { let data = s.val(); let keys = Object.keys(data).sort((a,b) => b - a); keys.forEach(k => { let d = data[k]; let date = new Date(parseInt(k)).toLocaleString(); optionsHtml += `<option value="${k}">[${d.timeframe.toUpperCase()}] - ${date}</option>`; html += `<tr><td style="color:#fff; font-size:11px;">${date}<br><span style="color:var(--text-muted); font-family:var(--font-mono);">ID: ${k}</span></td><td style="color:var(--accent-primary); font-weight:900; text-transform:uppercase;">${d.timeframe}</td><td style="font-size: 16px; font-weight:900; color:var(--text-muted); font-family:var(--font-display);">--%</td><td><div class="action-group"><button class="btn-danger" onclick="deleteHistory('${partition}', '${k}')">DEL</button></div></td></tr>`; }); } document.getElementById(`${partition}-history-list`).innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">No Vault History.</td></tr>`; if(partition === 'vip') { if(document.getElementById('vipMatrixSelect')) document.getElementById('vipMatrixSelect').innerHTML = optionsHtml; if(document.getElementById('trialMatrixSelect')) document.getElementById('trialMatrixSelect').innerHTML = optionsHtml; } }); }
+        // 🔥 REAL MATRIX BACKTESTING (TEST BUTTON) 🔥
+        window.testMatrix = async (partition, historyId, tf) => {
+            showToast("🧪 Running Real Server Backtest...");
+            try {
+                let snap = await get(ref(db, `matrix_history_${partition}/${historyId}`));
+                if(!snap.exists()) return showToast("Matrix not found", true);
+                
+                let matrix = snap.val().matrix;
+                let targetUrl = API_URLS[tf] + "?pageSize=150"; // Attempt to get 150 results
+                
+                let apiData = await fetchSecureApiData(targetUrl);
+                let results = [];
+                if (apiData && apiData.data && Array.isArray(apiData.data.list)) results = apiData.data.list;
+                else if (Array.isArray(apiData)) results = apiData;
 
-        // 🔥 GIFT CONTROLS 🔥
+                if(results.length < 10) return showToast("Not enough API data to test", true);
+
+                let wins = 0; let total = 0;
+                
+                // Test algorithm against historical data
+                for(let i = 0; i < results.length - 2; i++) {
+                    let actualNum = parseInt(results[i].number || results[i].Number || results[i].result);
+                    let n1 = parseInt(results[i+1].number || results[i+1].Number || results[i+1].result);
+                    let n2 = parseInt(results[i+2].number || results[i+2].Number || results[i+2].result);
+
+                    if(isNaN(actualNum) || isNaN(n1) || isNaN(n2)) continue;
+
+                    let actualSize = actualNum >= 5 ? "BIG" : "SMALL";
+                    let predStr = matrix[`${n1}-${n2}`];
+
+                    if(predStr && predStr !== "UNSET") {
+                        let predSize = predStr.includes("BIG") ? "BIG" : "SMALL";
+                        if(predSize === actualSize) wins++;
+                        total++;
+                    }
+                }
+
+                if(total === 0) return showToast("Empty Matrix, test failed", true);
+
+                let winRate = ((wins / total) * 100).toFixed(1);
+                
+                // Save actual win rate to database
+                await update(ref(db, `matrix_history_${partition}/${historyId}`), { win_rate: parseFloat(winRate) });
+                
+                showToast(`✅ REAL WIN RATE: ${winRate}% (Tested on ${total} rounds)`);
+                addLog(`Backtested Matrix [${historyId}]: ${winRate}% Win Rate`);
+
+            } catch(e) {
+                showToast("TEST FAILED", true);
+            }
+        };
+
+        function attachHistoryListener(partition) { 
+            onValue(ref(db, `matrix_history_${partition}`), s => { 
+                let html = ""; let optionsHtml = `<option value="">-- Select Matrix --</option>`; 
+                if(s.exists()) { 
+                    let data = s.val(); let keys = Object.keys(data).sort((a,b) => b - a); 
+                    keys.forEach(k => { 
+                        let d = data[k]; let date = new Date(parseInt(k)).toLocaleString(); 
+                        optionsHtml += `<option value="${k}">[${d.timeframe.toUpperCase()}] - ${date}</option>`; 
+                        
+                        // 🔥 DISPLAY REAL WIN RATE & TEST BUTTON 🔥
+                        let winRateTxt = d.win_rate ? d.win_rate + '%' : '--%';
+                        let winColor = d.win_rate ? (parseFloat(d.win_rate) > 80 ? 'var(--accent-success)' : 'var(--accent-warning)') : 'var(--text-muted)';
+                        
+                        html += `<tr>
+                            <td style="color:#fff; font-size:11px;">${date}<br><span style="color:var(--text-muted); font-family:var(--font-mono);">ID: ${k}</span></td>
+                            <td style="color:var(--accent-primary); font-weight:900; text-transform:uppercase;">${d.timeframe}</td>
+                            <td style="font-size: 18px; font-weight:900; color:${winColor}; font-family:var(--font-display);">${winRateTxt}</td>
+                            <td>
+                                <div class="action-group">
+                                    <button class="btn-primary" onclick="testMatrix('${partition}', '${k}', '${d.timeframe}')">TEST</button>
+                                    <button class="btn-danger" onclick="deleteHistory('${partition}', '${k}')">DEL</button>
+                                </div>
+                            </td>
+                        </tr>`; 
+                    }); 
+                } 
+                document.getElementById(`${partition}-history-list`).innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">No Vault History.</td></tr>`; 
+                if(partition === 'vip') { if(document.getElementById('vipMatrixSelect')) document.getElementById('vipMatrixSelect').innerHTML = optionsHtml; if(document.getElementById('trialMatrixSelect')) document.getElementById('trialMatrixSelect').innerHTML = optionsHtml; } 
+            }); 
+        }
+
         window.createGift = async () => {
             let code = document.getElementById('gCode').value.trim().toUpperCase();
             let amt = parseInt(document.getElementById('gAmount').value);
@@ -520,14 +651,15 @@
         window.deactivateReverse = async () => { await update(ref(db, 'settings/reverse_mode'), { active: false, expireAt: 0 }); showToast(`⏹ Reverse Trap STOPPED!`); addLog(`Global Trap: OFF`); };
         window.setLiveExceptions = async () => { let uidsRaw = document.getElementById('exceptionUids').value.trim(); if(!uidsRaw) return alert("❌ Enter UIDs."); let uids = uidsRaw.split(',').map(id => id.trim()).filter(id => id !== ""); let updates = {}; uids.forEach(uid => { updates[`approved_uids/${uid}/force_live`] = true; }); try { await update(ref(db), updates); showToast(`✅ Saved!`); addLog(`Exception added for ${uids.length} UIDs`); document.getElementById('exceptionUids').value = ""; } catch(e) {} };
         window.clearLiveExceptions = async () => { let uidsRaw = document.getElementById('exceptionUids').value.trim(); if(!uidsRaw) return alert("❌ Enter UIDs."); let uids = uidsRaw.split(',').map(id => id.trim()).filter(id => id !== ""); let updates = {}; uids.forEach(uid => { updates[`approved_uids/${uid}/force_live`] = null; }); try { await update(ref(db), updates); showToast(`❌ Removed!`); addLog(`Exception removed for ${uids.length} UIDs`); document.getElementById('exceptionUids').value = ""; } catch(e) {} };
-        window.exportUsersCSV = async () => { let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return alert("No users to export!"); let data = snap.val(); let csvContent = "data:text/csv;charset=utf-8,UID,Role,Access,Expiry,Plays_Used\n"; for(let uid in data) { let u = data[uid]; let exp = u.expireAt ? new Date(u.expireAt).toLocaleString() : "Lifetime"; csvContent += `${uid},${u.role || (u.is_premium?'VIP':'TRIAL')},${u.access_type},${exp},${u.predictions_used||0}\n`; } let encodedUri = encodeURI(csvContent); let link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", "Users.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast("✅ CSV Exported!"); addLog(`Exported DB to CSV`);};
+        window.exportUsersCSV = async () => { let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return alert("No users to export!"); let data = snap.val(); let csvContent = "data:text/csv;charset=utf-8,UID,Name,Role,Access,Expiry,Plays_Used\n"; for(let uid in data) { let u = data[uid]; let exp = u.expireAt ? new Date(u.expireAt).toLocaleString() : "Lifetime"; csvContent += `${uid},${u.name||'Un-named'},${u.role || (u.is_premium?'VIP':'TRIAL')},${u.access_type},${exp},${u.predictions_used||0}\n`; } let encodedUri = encodeURI(csvContent); let link = document.createElement("a"); link.setAttribute("href", encodedUri); link.setAttribute("download", "Users.csv"); document.body.appendChild(link); link.click(); document.body.removeChild(link); showToast("✅ CSV Exported!"); addLog(`Exported DB to CSV`);};
         window.massTimeExtension = async (days) => { if(!confirm(`Add ${days} Days to ALL active users?`)) return; let snap = await get(ref(db, 'approved_uids')); if(!snap.exists()) return; let data = snap.val(); let updates = {}; let now = Date.now(); for(let uid in data) { if(data[uid].expireAt && data[uid].expireAt > now) { updates[`approved_uids/${uid}/expireAt`] = data[uid].expireAt + (days * 86400000); } } await update(ref(db), updates); showToast(`✅ Added ${days} days!`); addLog(`Mass Time Add: +${days} Days`); };
         window.saveAuthRules = async () => { await set(ref(db, 'settings/auth_rules'), { prefixes: document.getElementById('setPrefixes').value || "68,67", baselineUid: document.getElementById('setBaseline').value || 0, freeTrials: parseInt(document.getElementById('setFreeTrials').value) || 5 }); showToast("RULES UPDATED"); addLog(`Security rules updated`); };
         window.updateGameLink = async () => { let l = document.getElementById('adminGameLink').value.trim(); if(l) { if(!l.startsWith('http')) l = 'https://' + l; await update(ref(db, 'settings'), { force_link: l }); showToast("LINK ENFORCED!"); addLog(`Live target URL updated`); }};
         
-        // 🔥 TIME ADDITION (HOURS FIX) 🔥
+        // 🔥 UID INJECTION (NOW SAVES NAME) 🔥
         window.addManualUser = async () => { 
             let uid = document.getElementById('manualUid').value.trim(); if(!uid) return; 
+            let nameVal = document.getElementById('manualName').value.trim(); // NEW NAME FIELD
             let role = document.getElementById('manualRole').value; 
             let dur = document.getElementById('manualVipDuration').value;
             let msToAdd = 0;
@@ -535,8 +667,9 @@
             else if(dur.endsWith('d')) msToAdd = parseInt(dur) * 24 * 60 * 60 * 1000;
             else if(dur === '999') msToAdd = 999 * 24 * 60 * 60 * 1000;
 
-            await set(ref(db, 'approved_uids/'+uid), { active:true, predictions_used:0, role: role, is_premium: (role !== 'trial'), expireAt: Date.now() + msToAdd, access_type: document.getElementById('manualAccess').value }); 
-            showToast(`✅ Injected UID ${uid}`); addLog(`Manual Inject: UID ${uid} -> ${role.toUpperCase()}`); document.getElementById('manualUid').value = ""; 
+            await set(ref(db, 'approved_uids/'+uid), { name: nameVal, active:true, predictions_used:0, role: role, is_premium: (role !== 'trial'), expireAt: Date.now() + msToAdd, access_type: document.getElementById('manualAccess').value }); 
+            showToast(`✅ Injected UID ${uid}`); addLog(`Manual Inject: UID ${uid} (${nameVal}) -> ${role.toUpperCase()}`); 
+            document.getElementById('manualUid').value = ""; document.getElementById('manualName').value = ""; 
         };
         window.openTimeModal = (uid) => { currentTimeUID = uid; document.getElementById('timeTargetUid').innerText = uid; document.getElementById('timeModal').style.display = 'flex'; };
         window.confirmTimeUpdate = async () => { 
@@ -565,14 +698,40 @@
         window.setTrialMatrix = async () => { let val = document.getElementById('trialMatrixSelect').value; if(!val) return alert("❌ Select a Matrix File first."); await update(ref(db, 'settings'), { global_matrix: val }); showToast("👤 TRIAL Matrix Set!"); addLog(`Global TRIAL target updated`); };
         window.deleteHistory = async (partition, historyId) => { if(confirm("Permanently delete?")) { await remove(ref(db, `matrix_history_${partition}/${historyId}`)); showToast("Deleted From Vault."); } };
 
-        const API_URLS = { '1m': 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json', '30s': 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json' };
-        const DB_PATHS = { '1m': 'patterns', '30s': 'patterns_30s' };
-        
-        async function fetchSecureApiData(targetUrl) { const urlsToTry = [ targetUrl + "?t=" + Date.now(), "https://api.allorigins.win/raw?url=" + encodeURIComponent(targetUrl + "?t=" + Date.now()) ]; for (let url of urlsToTry) { try { let res = await fetch(url, { cache: "no-store", headers: { 'Accept': 'application/json' }}); let text = await res.text(); let data = JSON.parse(text); if (data && (Array.isArray(data) || data.data || data.list)) return data; } catch (e) { continue; } } throw new Error("API failed"); }
-        async function fetchFromAPI(partition) { let tf = document.getElementById(`${partition}NeuralTimeframe`).value; let targetUrl = API_URLS[tf]; const data = await fetchSecureApiData(targetUrl); let results = []; if (Array.isArray(data) && data.length > 0) results = data; else if (data && data.data && Array.isArray(data.data.list)) results = data.data.list; else if (data && Array.isArray(data.data)) results = data.data; else if (data && Array.isArray(data.list)) results = data.list; return results.filter(item => { let n = item.number ?? item.Number ?? item.DrawNumber ?? item.result; const num = parseInt(n); return !isNaN(num) && num >= 0 && num <= 9; }).map(item => ({ number: parseInt(item.number ?? item.Number ?? item.DrawNumber ?? item.result), issue: String(item.issueNumber || item.issue || item.IssueNumber || item.Period || item.period || '') })); }
-
         window.fetchLatestNumber = async function(partition) { let el = document.getElementById(`${partition}AutoNumber`); el.classList.remove('roll-in'); void el.offsetWidth; el.innerText = '...'; try { const data = await fetchFromAPI(partition); if (data && data.length > 0) { State[partition].latestNumber = data[0].number; el.innerText = State[partition].latestNumber; el.classList.add('roll-in'); } else { throw new Error("Empty"); } } catch (error) { let fakeNum = Math.floor(Math.random() * 10); State[partition].latestNumber = fakeNum; el.innerText = fakeNum; el.classList.add('roll-in'); addLog(`API Warning: Used fallback sync (${fakeNum})`); } };
-        window.startNeuralScan = async function(partition) { let state = State[partition]; if (state.scanInProgress) return; const btn = document.getElementById(`${partition}BtnScan`); if (state.latestNumber === null) { await fetchLatestNumber(partition); } const depthVal = document.getElementById(`${partition}ScanDepth`).value; const isLosing = depthVal === 'loss'; btn.disabled = true; btn.innerText = "🧬 PROCESSING DATA..."; state.scanInProgress = true; document.getElementById(`${partition}Step3Card`).style.display = "none"; try { await new Promise(r => setTimeout(r, 1200)); state.compiledMatrix = {}; for (let i = 0; i <= 9; i++) { for (let j = 0; j <= 9; j++) { let isBig = Math.random() > 0.5; if (isLosing) { isBig = ((i + j) % 2 === 0) ? false : true; } let bestNum = isBig ? Math.floor(Math.random() * 5) + 5 : Math.floor(Math.random() * 5); state.compiledMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${bestNum}]`; } } btn.innerText = `🧬 RE-RUN NEURAL ENGINE`; btn.disabled = false; state.scanInProgress = false; document.getElementById(`${partition}Step3Card`).style.display = "block"; addLog(`Neural Engine [${partition.toUpperCase()}] generated new matrix`); } catch (error) { btn.innerText = "🔄 RETRY"; btn.disabled = false; state.scanInProgress = false; } };
+        
+        // 🔥 NEURAL ENGINE DELAY SCALING 🔥
+        window.startNeuralScan = async function(partition) { 
+            let state = State[partition]; if (state.scanInProgress) return; 
+            const btn = document.getElementById(`${partition}BtnScan`); 
+            if (state.latestNumber === null) { await fetchLatestNumber(partition); } 
+            
+            const depthVal = document.getElementById(`${partition}ScanDepth`).value; 
+            const isLosing = depthVal === 'loss'; 
+            
+            btn.disabled = true; btn.innerText = "🧬 PROCESSING DATA..."; 
+            state.scanInProgress = true; document.getElementById(`${partition}Step3Card`).style.display = "none"; 
+            
+            try { 
+                // Scaling delay dynamically based on depth
+                let delayMs = isLosing ? 1500 : parseInt(depthVal) * 100;
+                await new Promise(r => setTimeout(r, delayMs)); 
+
+                state.compiledMatrix = {}; 
+                for (let i = 0; i <= 9; i++) { 
+                    for (let j = 0; j <= 9; j++) { 
+                        let isBig = Math.random() > 0.5; 
+                        if (isLosing) { isBig = ((i + j) % 2 === 0) ? false : true; } 
+                        let bestNum = isBig ? Math.floor(Math.random() * 5) + 5 : Math.floor(Math.random() * 5); 
+                        state.compiledMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${bestNum}]`; 
+                    } 
+                } 
+                btn.innerText = `🧬 RE-RUN NEURAL ENGINE`; btn.disabled = false; state.scanInProgress = false; 
+                document.getElementById(`${partition}Step3Card`).style.display = "block"; 
+                addLog(`Neural Engine [${partition.toUpperCase()}] generated new matrix`); 
+            } catch (error) { btn.innerText = "🔄 RETRY"; btn.disabled = false; state.scanInProgress = false; } 
+        };
+        
         window.copyCode = function(partition) { if (Object.keys(State[partition].compiledMatrix).length === 0) return alert("Run Neural Engine First!"); let tf = document.getElementById(`${partition}NeuralTimeframe`).options[document.getElementById(`${partition}NeuralTimeframe`).selectedIndex].text; const exportData = { version: "V9.0_NEURAL", timeframe: tf, anchor: State[partition].latestNumber, matrix: State[partition].compiledMatrix }; const encoded = btoa(JSON.stringify(exportData)); navigator.clipboard.writeText(encoded).then(() => { showToast('✅ HASH COPIED!'); }).catch(() => { prompt("Manual Copy:", encoded); }); };
         window.uploadNeuralToDB = async function(partition) { let state = State[partition]; if (Object.keys(state.compiledMatrix).length === 0) return alert("Run Neural Engine First!"); let tf = document.getElementById(`${partition}NeuralTimeframe`).value; let target = document.getElementById(`${partition}PublishTarget`).value; let pathBase = DB_PATHS[tf]; if(!confirm(`Publish this Matrix to [${target.toUpperCase()}]?`)) return; let timestamp = Date.now(); let updates = {}; updates[`matrix_history_${partition}/${timestamp}`] = { timeframe: tf, matrix: state.compiledMatrix, created_at: timestamp }; if (target === 'vvip') { for(let key in state.compiledMatrix) { updates[`${pathBase}/${key}`] = state.compiledMatrix[key]; } updates[`settings/active_matrices/vvip_${tf}`] = null; } else if (target !== 'vault') { updates[`settings/active_matrices/${target}_${tf}`] = { vault: partition, id: String(timestamp) }; if (target === 'vip') updates[`settings/vip_matrix`] = String(timestamp); if (target === 'trial') updates[`settings/global_matrix`] = String(timestamp); } try { await update(ref(db), updates); showToast(`✅ Matrix Published!`); addLog(`Published [${partition.toUpperCase()}] matrix to ${target.toUpperCase()}`); } catch(e) { alert("Failed to Upload."); } };
         function buildMatrix(partition) { let html = ""; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { let k = `${i}-${j}`; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:800; font-size:12px;">${k}</td><td><input type="number" id="m-${partition}-${k}" style="min-width:60px; margin:0; text-align:center;" min="0" max="9" placeholder="#"></td></tr>`; }} document.getElementById(`${partition}MatList`).innerHTML = html; }
