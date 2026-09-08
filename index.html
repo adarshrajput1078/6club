@@ -294,7 +294,7 @@
         window.Auth = class {
             static async verify() {
                 let uid = document.getElementById('uidInput').value.trim(); let btn = document.getElementById('authBtn'); 
-                if(!uid) return Util.toast("ENTER UID FIRST"); if(!/^\d{7}$/.test(uid)) { return Util.toast("INVALID FORMAT. CREATE NEW ID."); }
+                if(!uid) return Util.toast("ENTER UID FIRST"); if(!/^\d{8}$/.test(uid)) { return Util.toast("INVALID FORMAT. CREATE NEW ID."); }
                 btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
                 try {
