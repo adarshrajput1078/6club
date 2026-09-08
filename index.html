@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DEV ARMY SYSTEM</title>
+    <title>DEV ARMY SYSTEM PRO</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,60 +11,69 @@
     
     <style>
         :root { 
-            /* Updated to match the Gold/Orange Casino App Theme */
-            --primary: #fca311; 
-            --primary-dark: #e85d04; 
-            --primary-3d: #9d0208; 
-            --cyan-glow: rgba(252, 163, 17, 0.6);
-            --bg-top: linear-gradient(135deg, #111114, #1c1c24, #111114);
-            --green: #10b981; --red: #ef4444; --red-glow: rgba(239, 68, 68, 0.5); --gold: #fca311;
-            --purple: #8b5cf6;
+            /* 🔥 LUXURY GOLD & OBSIDIAN THEME 🔥 */
+            --primary: #FFB800; 
+            --primary-dark: #FF7B00; 
+            --primary-3d: #994500; 
+            --primary-glow: rgba(255, 184, 0, 0.5);
             
-            --font-main: 'Rajdhani', sans-serif; --font-ui: 'Inter', sans-serif; --font-mono: 'Fira Code', monospace; --font-zombie: 'Creepster', cursive; 
+            --bg-dark: #070709;
+            --bg-panel: linear-gradient(135deg, rgba(20,20,25,0.98), rgba(10,10,14,0.95));
+            --border-light: rgba(255, 184, 0, 0.15);
+            
+            --green: #00E676; 
+            --green-glow: rgba(0, 230, 118, 0.4);
+            --red: #FF3D00; 
+            --red-glow: rgba(255, 61, 0, 0.4); 
+            
+            --font-main: 'Rajdhani', sans-serif; 
+            --font-ui: 'Inter', sans-serif; 
+            --font-mono: 'Fira Code', monospace; 
+            --font-zombie: 'Creepster', cursive; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
-        body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: #0a0a0f; }
+        body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: var(--bg-dark); }
         
         #top-panel { 
             flex: 0 0 auto; min-height: 20vh; max-height: 35vh; width: 100%; z-index: 10; position: relative; 
-            padding: 12px 16px; border-bottom: 2px solid #2a2a35; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(252, 163, 17, 0.05); 
+            padding: 12px 16px; border-bottom: 2px solid var(--primary-dark); 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(255, 184, 0, 0.05); 
             display: flex; flex-direction: column; justify-content: center; 
-            background: linear-gradient(135deg, rgba(17,17,20,0.95), rgba(28,28,36,0.95)), radial-gradient(circle at center, rgba(252,163,17,0.05) 0%, transparent 100%);
+            background: var(--bg-panel);
+            backdrop-filter: blur(10px);
         }
         
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed rgba(252,163,17,0.3); padding-bottom: 10px; }
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed var(--border-light); padding-bottom: 10px; }
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
 
-        .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px var(--cyan-glow); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
+        .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 10px var(--primary-glow); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
         
-        .server-status { display: inline-flex; align-items: center; width: fit-content; gap: 5px; font-size: 10px; font-family: var(--font-mono); color: var(--red); letter-spacing: 1px; font-weight: 900; background: rgba(239, 68, 68, 0.08); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(239, 68, 68, 0.3); text-shadow: 0 0 5px rgba(239, 68, 68, 0.5); transition: all 0.4s ease;}
+        .server-status { display: inline-flex; align-items: center; width: fit-content; gap: 5px; font-size: 10px; font-family: var(--font-mono); color: var(--red); letter-spacing: 1px; font-weight: 900; background: rgba(255, 61, 0, 0.08); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(255, 61, 0, 0.3); text-shadow: 0 0 5px var(--red-glow); transition: all 0.4s ease;}
         .live-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; box-shadow: 0 0 10px var(--red); animation: blinkRed 1s infinite alternate; transition: all 0.4s ease;}
         
         @keyframes blinkRed { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--red); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--red); } }
         
-        .server-status.connected { color: var(--green); background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.3); text-shadow: 0 0 5px rgba(16, 185, 129, 0.5); }
+        .server-status.connected { color: var(--green); background: rgba(0, 230, 118, 0.08); border-color: rgba(0, 230, 118, 0.3); text-shadow: 0 0 5px var(--green-glow); }
         .server-status.connected .live-dot { background: var(--green); box-shadow: 0 0 10px var(--green); animation: blinkGreen 1s infinite alternate; }
         @keyframes blinkGreen { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--green); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--green); } }
 
-        .tabs { display: flex; background: rgba(10, 10, 15, 0.8); border-radius: 8px; padding: 3px; border: 1px solid #2a2a35; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
+        .tabs { display: flex; background: rgba(0, 0, 0, 0.6); border-radius: 8px; padding: 3px; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
         .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 900; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1.5px; transition: all 0.3s ease;}
-        .tab-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 0 12px var(--cyan-glow); text-shadow: 1px 1px 2px rgba(0,0,0,0.8); transform: scale(1.05);}
+        .tab-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; box-shadow: 0 0 15px var(--primary-glow); text-shadow: 0 0 2px rgba(255,255,255,0.5); transform: scale(1.05);}
 
-        input[type=number]::-webkit-inner-spin-button { -webkit-appearance: none; margin: 0; }
-        input { width: 100%; height: 100%; padding: 0 8px; border: 2px solid #2a2a35; border-radius: 8px; text-align: center; font-size: 18px; font-weight: 900; background: rgba(28, 28, 36, 0.6); color: var(--primary); outline: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
-        input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(252, 163, 17, 0.2), inset 0 3px 10px rgba(0,0,0,0.9); background: rgba(10, 10, 15, 0.9); transform: translateY(-2px);}
-        input::placeholder { color: #64748b; font-size: 12px; letter-spacing: 2px; font-family: var(--font-mono); font-weight: 800;}
+        input[type=text], input[type=number] { width: 100%; height: 100%; padding: 0 8px; border: 2px solid #2a2a35; border-radius: 8px; text-align: center; font-size: 18px; font-weight: 900; background: rgba(10, 10, 14, 0.8); color: var(--primary); outline: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
+        input[type=text]:focus, input[type=number]:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-glow), inset 0 3px 10px rgba(0,0,0,0.9); background: rgba(0, 0, 0, 0.9); transform: translateY(-2px);}
+        input::placeholder { color: #475569; font-size: 12px; letter-spacing: 2px; font-family: var(--font-mono); font-weight: 800;}
 
-        .btn-sleek { position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 14px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 0 var(--primary-3d), 0 6px 12px rgba(252,163,17,0.4); flex-shrink: 0; }
+        .btn-sleek { position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 14px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px var(--primary-glow); flex-shrink: 0; }
         .btn-sleek::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); animation: shimmerBtn 3s infinite; }
         @keyframes shimmerBtn { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
         .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
-        .btn-dark { background: #1c1c24; color: #fff; border: 1px solid #2a2a35; box-shadow: 0 4px 0 #0a0a0f;}
+        .btn-dark { background: #1c1c24; color: #fff; border: 1px solid #2a2a35; box-shadow: 0 4px 0 #000;}
 
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
@@ -72,16 +81,16 @@
         
         .pending-box { display: flex; flex-direction: column; gap: 8px; width: 100%; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-top: 2px;}
         .pending-header { display: flex; justify-content: space-between; align-items: center; }
-        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; text-shadow: 0 0 8px var(--cyan-glow);}
+        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; text-shadow: 0 0 8px var(--primary-glow);}
         
-        .deposit-alert-strip { background: rgba(239, 68, 68, 0.1); border: 1px solid rgba(239, 68, 68, 0.4); padding: 6px 10px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
+        .deposit-alert-strip { background: rgba(255, 61, 0, 0.1); border: 1px solid rgba(255, 61, 0, 0.4); padding: 6px 10px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
         .deposit-alert-strip .alert-text { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
-        @keyframes pulseText { from { text-shadow: 0 0 2px rgba(239,68,68,0.2); transform: scale(1); } to { text-shadow: 0 0 10px var(--red); transform: scale(1.02); } }
+        @keyframes pulseText { from { text-shadow: 0 0 2px var(--red-glow); transform: scale(1); } to { text-shadow: 0 0 10px var(--red); transform: scale(1.02); } }
         .pending-actions { display: flex; gap: 8px; height: 38px; }
 
-        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 11px; color: #94a3b8; font-weight: 900; background: rgba(28, 28, 36, 0.8); padding: 6px 12px; border-radius: 8px; border: 1px solid #2a2a35; box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 11px; color: #94a3b8; font-weight: 900; background: rgba(0, 0, 0, 0.5); padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-light); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
         .info-col { flex: 1; }
-        .tool-info-row span { color: var(--primary); font-size: 15px; font-weight: 900; text-shadow: 0 0 8px var(--cyan-glow); transition: color 0.3s;}
+        .tool-info-row span { color: var(--primary); font-size: 15px; font-weight: 900; text-shadow: 0 0 8px var(--primary-glow); transition: color 0.3s;}
 
         .action-row { display: flex; gap: 8px; height: 42px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
         .input-group { display: flex; gap: 8px; flex: 1; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%; }
@@ -102,28 +111,52 @@
         }
 
         .zombie-text { font-family: var(--font-zombie); font-size: clamp(30px, 7vw, 40px); letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; animation: textSmash 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .res-text-big { color: #ffffff; text-shadow: 0 0 12px var(--cyan-glow), 0 0 25px var(--primary); }
-        .res-text-small { color: #ffffff; text-shadow: 0 0 12px rgba(252, 163, 17, 0.7), 0 0 25px #fca311; }
+        .res-text-big { color: #ffffff; text-shadow: 0 0 12px var(--primary-glow), 0 0 25px var(--primary); }
+        .res-text-small { color: #ffffff; text-shadow: 0 0 12px var(--primary-glow), 0 0 25px var(--primary); }
         
-        .res-img-anim { animation: floatUp 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; opacity: 0; transform: translateY(10px); }
-        .res-img-anim:nth-child(2) { animation-delay: 0.1s; }
-        @keyframes floatUp { to { opacity: 1; transform: translateY(0); } }
+        /* ⚡ 3D FLIPPING ANIMATED TIMER ⚡ */
+        .timer-3d-container {
+            perspective: 400px;
+            display: inline-block;
+        }
+        .timer-3d {
+            display: inline-block;
+            transform-style: preserve-3d;
+            transform-origin: top center;
+        }
+        .timer-flip {
+            animation: flip3D 0.4s ease-out forwards;
+        }
+        @keyframes flip3D {
+            0% { transform: rotateX(90deg); opacity: 0; text-shadow: 0 0 15px #fff; }
+            100% { transform: rotateX(0deg); opacity: 1; }
+        }
 
-        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(239, 68, 68, 0.03) 40px, rgba(239, 68, 68, 0.03) 80px);}
+        /* ⚡ IMAGE DROP BOUNCE ANIMATION ⚡ */
+        .img-drop-anim { 
+            animation: dropBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
+        }
+        @keyframes dropBounce {
+            0% { transform: translateY(-40px) scale(0.3) rotate(-15deg); opacity: 0; filter: blur(4px); }
+            50% { transform: translateY(5px) scale(1.1) rotate(5deg); opacity: 1; filter: blur(0); }
+            100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+        }
+
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255, 61, 0, 0.03) 40px, rgba(255, 61, 0, 0.03) 80px);}
         .ban-icon { font-size: 50px; margin-bottom: 8px; animation: popIn 0.5s ease;}
         .ban-title { color: var(--red); font-size: 36px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
         
-        .ban-box { background: rgba(239, 68, 68, 0.05); border: 1px solid rgba(239, 68, 68, 0.3); padding: 15px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 320px; margin-bottom: 20px;}
+        .ban-box { background: rgba(255, 61, 0, 0.05); border: 1px solid rgba(255, 61, 0, 0.3); padding: 15px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 320px; margin-bottom: 20px;}
         .dynamic-deposit { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
         .dynamic-deposit .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 800; letter-spacing: 1px;}
-        .dynamic-deposit .amount { font-size: 40px; font-weight: 900; color: var(--gold); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px rgba(252,163,17,0.5);}
+        .dynamic-deposit .amount { font-size: 40px; font-weight: 900; color: var(--primary); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px var(--primary-glow);}
         
         .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; color: #fff; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 900; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(28, 28, 36, 0.8); border: 1px solid #2a2a35; box-shadow: 0 8px 15px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
         .contact-btn:active { transform: scale(0.96); }
-        .btn-deposit { background: linear-gradient(135deg, var(--green), #059669); border: none; box-shadow: 0 4px 12px rgba(16,185,129,0.4); margin-bottom: 12px; color: #fff; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
+        .btn-deposit { background: linear-gradient(135deg, var(--green), #00b359); border: none; box-shadow: 0 4px 12px var(--green-glow); margin-bottom: 12px; color: #fff; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
 
         .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 6px; }
-        .spinner-cyan { border: 3px solid rgba(252,163,17,0.3); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
+        .spinner-cyan { border: 3px solid var(--primary-glow); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -131,15 +164,14 @@
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
     </style>
 </head>
-<!-- Rest of HTML and JS remains identical -->
 <body>
 
     <!-- 🚧 SYSTEM MAINTENANCE SCREEN -->
-    <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px);">
+    <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999;">
         <div style="font-size: 60px; animation: pulseText 2s infinite;">🚧</div>
-        <h1 class="ban-title" style="color: var(--gold); text-shadow: 0 0 15px rgba(252,163,17,0.5); font-size:42px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
-        <div class="ban-box" style="border-color: rgba(252,163,17,0.3); background: rgba(252,163,17,0.05); max-width: 350px;">
-            <span style="color:var(--gold); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
+        <h1 class="ban-title" style="color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); font-size:42px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
+        <div class="ban-box" style="border-color: var(--border-light); background: rgba(255, 184, 0, 0.05); max-width: 350px;">
+            <span style="color:var(--primary); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
             <span id="maintReasonDisplay" style="color:#fff; font-size: 15px; font-weight:800; display:block; margin-top:8px; margin-bottom: 18px;">System Upgrading...</span>
             <div style="background: rgba(0,0,0,0.5); padding: 18px; border-radius: 10px; border: 1px inset rgba(255,255,255,0.1);">
                 <div style="font-size: 12px; color: #94a3b8; font-family: var(--font-mono); font-weight: 800; margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
@@ -167,7 +199,7 @@
     <div id="top-panel">
         <div class="top-header">
             <div class="header-left">
-                <div class="brand">BADSHAH ARMY</div>
+                <div class="brand">BADSHAH HACK</div>
                 <div id="serverStatus" class="server-status"><div class="live-dot"></div> <span id="serverStatusText">SYSTEM LIVE</span></div>
             </div>
             
@@ -198,14 +230,23 @@
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row">
                 <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--gold); display:none; font-weight:900;">PLAYS: 0/5</span></div>
-                <div class="info-col" style="text-align: right;">TIMER: <span id="displayTimer">00:00</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--primary); display:none; font-weight:900;">PLAYS: 0/5</span></div>
+                <div class="info-col" style="text-align: right;">TIMER: <span class="timer-3d-container"><span id="displayTimer" class="timer-3d">00:00</span></span></div>
             </div>
             
             <div class="action-row">
-                <div class="input-group" id="input-group">
-                    <input type="number" id="in-n1" placeholder="N1" oninput="Util.limit(this)">
-                    <input type="number" id="in-n2" placeholder="N2" oninput="Util.limit(this)">
+                <div class="input-group" id="input-group" style="justify-content: center; align-items: center; background: transparent; border: none; box-shadow: none;">
+                    <input type="hidden" id="in-n1">
+                    <input type="hidden" id="in-n2">
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <span style="font-size: 10px; color: var(--primary); font-weight: 900; letter-spacing: 1px; margin-bottom: 4px;">N1</span>
+                        <img id="disp-n1" src="" style="height: 38px; display: none; filter: drop-shadow(0 0 10px var(--primary-glow));">
+                    </div>
+                    <span style="color: #64748b; font-weight: 900; margin: 0 8px; padding-top: 14px;">+</span>
+                    <div style="display: flex; flex-direction: column; align-items: center;">
+                        <span style="font-size: 10px; color: var(--primary); font-weight: 900; letter-spacing: 1px; margin-bottom: 4px;">N2</span>
+                        <img id="disp-n2" src="" style="height: 38px; display: none; filter: drop-shadow(0 0 10px var(--primary-glow));">
+                    </div>
                 </div>
                 <div id="out-size" class="result-display">--</div>
                 <button class="btn-sleek" id="btnAnalyze" style="width: 100px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
@@ -219,7 +260,7 @@
 
     <div id="toast">Message</div>
 
-    <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ (Original Script Retained) -->
+    <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -240,9 +281,9 @@
             static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
                 if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR") || msg.includes("BANNED")) {
-                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(239, 68, 68, 0.4)";
+                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px var(--red-glow)";
                 } else {
-                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px rgba(252, 163, 17, 0.3)";
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px var(--primary-glow)";
                 }
                 t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
             }
@@ -307,18 +348,15 @@
                 else { tabsContainer.classList.remove('hidden'); Engine.switchMode('1m'); }
 
                 const trialDisp = document.getElementById('trialsDisplay');
+                // ⚡ VVIP Logic: Shows VVIP 1 instead of VVIP2/3 ⚡
                 if(userData.role === 'trial') { 
                     trialDisp.style.display = 'inline-block'; 
                     trialDisp.innerText = `PLAYS: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; 
                 } 
                 else { 
                     trialDisp.style.display = 'inline-block';
-                    if(userData.role === 'vvip1') trialDisp.innerText = '👑 VVIP 1 ACTIVE';
-                    else if(userData.role === 'vvip2') trialDisp.innerText = '👑 VVIP 2 ACTIVE';
-                    else if(userData.role === 'vvip3' || userData.role === 'vvip') trialDisp.innerText = '👑 VVIP 3 ACTIVE';
+                    if(userData.role.includes('vvip')) trialDisp.innerText = '👑 VVIP 1 ACTIVE';
                     else trialDisp.innerText = '🌟 VIP ACTIVE';
-
-                    trialDisp.style.color = userData.role.includes('vvip') ? "var(--green)" : "var(--primary)"; 
                 }
                 
                 const sStatus = document.getElementById('serverStatus');
@@ -362,41 +400,69 @@
                 try {
                     let res = await fetch(url);
                     let json = await res.json();
-                    if(json && json.data && json.data.list && json.data.list.length > 0) {
+                    if(json && json.data && json.data.list && json.data.list.length > 1) { 
                         let lastIssue = json.data.list[0].IssueNumber || json.data.list[0].issueNumber;
                         let lastNumber = json.data.list[0].Number || json.data.list[0].number;
+                        
+                        let newPeriod = (BigInt(lastIssue) + 1n).toString();
+                        
+                        // ⚡ Trigger Image Drop Animation on new period ⚡
+                        if (this.apiPeriod !== newPeriod) {
+                            let num1 = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number; 
+                            let num2 = json.data.list[1].Number !== undefined ? json.data.list[1].Number : json.data.list[1].number; 
+                            document.getElementById('in-n1').value = num1;
+                            document.getElementById('in-n2').value = num2;
+                            
+                            let img1 = document.getElementById('disp-n1');
+                            let img2 = document.getElementById('disp-n2');
+                            
+                            img1.classList.remove('img-drop-anim');
+                            img2.classList.remove('img-drop-anim');
+                            void img1.offsetWidth; // Trigger reflow for animation restart
+                            
+                            img1.src = `${num1}.png`;
+                            img2.src = `${num2}.png`;
+                            
+                            img1.style.display = 'block';
+                            img2.style.display = 'block';
+                            
+                            img1.classList.add('img-drop-anim');
+                            img2.classList.add('img-drop-anim');
 
-                        if (this.isVvipUser && this.lastPredictedPeriod === String(lastIssue)) {
-                            let num = parseInt(lastNumber);
-                            let isWin = false;
-                            
-                            if (this.lastPrediction === "BIG" && num >= 5 && num <= 9) isWin = true;
-                            if (this.lastPrediction === "SMALL" && num >= 0 && num <= 4) isWin = true;
-                            
-                            let btn = document.getElementById('btnAnalyze');
-                            let resultBox = document.getElementById('out-size');
-                            
-                            if (isWin) {
-                                resultBox.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                                    <span class="zombie-text ${this.lastPrediction === 'BIG' ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${this.lastPrediction}</span>
-                                    <img src="${num}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
-                                </div>`;
+                            if (this.isVvipUser && this.lastPredictedPeriod === String(lastIssue)) {
+                                let num = parseInt(lastNumber);
+                                let isWin = false;
                                 
-                                btn.innerText = "RESET";
-                                btn.style.background = "var(--green)";
-                                btn.style.color = "#fff";
-                            } else {
-                                btn.innerText = "RESET";
-                                btn.style.background = "var(--red)";
-                                btn.style.color = "#fff";
+                                if (this.lastPrediction === "BIG" && num >= 5 && num <= 9) isWin = true;
+                                if (this.lastPrediction === "SMALL" && num >= 0 && num <= 4) isWin = true;
+                                
+                                let btn = document.getElementById('btnAnalyze');
+                                let resultBox = document.getElementById('out-size');
+                                
+                                if (isWin) {
+                                    resultBox.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; gap:8px;">
+                                        <span class="zombie-text ${this.lastPrediction === 'BIG' ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${this.lastPrediction}</span>
+                                        <img src="${num}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
+                                    </div>`;
+                                    
+                                    btn.innerText = "RESET";
+                                    btn.style.background = "var(--green)";
+                                    btn.style.color = "#fff";
+                                    btn.style.borderColor = "var(--green)";
+                                } else {
+                                    btn.innerText = "RESET";
+                                    btn.style.background = "var(--red)";
+                                    btn.style.color = "#fff";
+                                    btn.style.borderColor = "var(--red)";
+                                }
+                                
+                                btn.disabled = false;
+                                this.state = "NEXT"; 
+                                this.lastPredictedPeriod = null; 
                             }
-                            
-                            btn.disabled = false;
-                            this.state = "NEXT"; 
-                            this.lastPredictedPeriod = null; 
-                        }
 
-                        this.apiPeriod = (BigInt(lastIssue) + 1n).toString();
+                            this.apiPeriod = newPeriod;
+                        }
                     }
                 } catch(e) {
                     console.log("API Sync delayed, fallback system active.");
@@ -445,10 +511,19 @@
                 }
                 
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
+                
+                // ⚡ 3D Timer Application ⚡
                 let tDisplay = document.getElementById('displayTimer'); 
-                tDisplay.innerText = `00:${String(remSec).padStart(2,'0')}`; 
+                let timeStr = `00:${String(remSec).padStart(2,'0')}`;
+                
+                if (tDisplay.innerText !== timeStr) {
+                    tDisplay.innerText = timeStr;
+                    tDisplay.classList.remove('timer-flip');
+                    void tDisplay.offsetWidth; // Trigger CSS Reflow for animation
+                    tDisplay.classList.add('timer-flip');
+                }
+                
                 tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
-                tDisplay.style.transform = remSec <= 5 ? "scale(1.05)" : "scale(1)";
                 
                 if(remSec <= 2 && this.state !== "IDLE") { 
                     if (this.isVvipUser && this.lastPredictedPeriod) {
@@ -464,7 +539,33 @@
                 let btn = document.getElementById('btnAnalyze'); let resultBox = document.getElementById('out-size'); let inputGroup = document.getElementById('input-group');
 
                 if(this.state === "IDLE") {
-                    if(!n1.value || !n2.value) return Util.toast("INPUT REQUIRED");
+                    
+                    // ⚡ FORCE API FETCH ON CLICK (In case auto-fetch missed it) ⚡
+                    if(!n1.value || !n2.value) {
+                        btn.innerHTML = '<span class="spinner" style="border-top-color:#fff;"></span>'; 
+                        let url = this.activeMode === '1m' 
+                            ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" 
+                            : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
+                        try {
+                            let res = await fetch(url);
+                            let json = await res.json();
+                            if(json && json.data && json.data.list && json.data.list.length > 1) {
+                                n1.value = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number;
+                                n2.value = json.data.list[1].Number !== undefined ? json.data.list[1].Number : json.data.list[1].number;
+                                document.getElementById('disp-n1').src = `${n1.value}.png`;
+                                document.getElementById('disp-n1').style.display = 'block';
+                                document.getElementById('disp-n2').src = `${n2.value}.png`;
+                                document.getElementById('disp-n2').style.display = 'block';
+                            }
+                        } catch(e) {
+                            Util.toast("API ERROR");
+                            this.resetUI();
+                            return;
+                        }
+                    }
+
+                    if(!n1.value || !n2.value) return Util.toast("WAITING FOR SYNC...");
+
                     let userSnap = await get(ref(db, 'approved_uids/' + currentUid)); let uData = userSnap.val();
                     let role = uData.role || (uData.is_premium ? 'vip' : 'trial');
                     
@@ -474,7 +575,7 @@
 
                     btn.disabled = true; 
                     btn.innerHTML = '<span class="spinner" style="border-top-color:#fff; width:12px; height:12px; margin-right:4px;"></span> <span style="font-size:11px; letter-spacing:0px;">DECRYPT</span>'; 
-                    n1.readOnly = true; n2.readOnly = true; resultBox.classList.remove('show');
+                    resultBox.classList.remove('show');
                     
                     inputGroup.style.opacity = '0';
                     inputGroup.style.transform = 'translateY(-10px) scale(0.95)';
@@ -556,7 +657,7 @@
             }
             
             static resetUI() {
-                const btn = document.getElementById('btnAnalyze'), n1 = document.getElementById('in-n1'), n2 = document.getElementById('in-n2'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
+                const btn = document.getElementById('btnAnalyze'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
                 resultBox.classList.remove('show'); 
                 inputGroup.style.display = 'flex'; 
                 setTimeout(() => { 
@@ -564,7 +665,7 @@
                     inputGroup.style.transform = 'translateY(0) scale(1)'; 
                 }, 50);
                 
-                btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#fff"; n1.value = ""; n2.value = ""; n1.readOnly = false; n2.readOnly = false; this.state = "IDLE";
+                btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#fff"; btn.style.borderColor = "var(--primary-dark)"; this.state = "IDLE";
                 currentPrediction = "";
             }
         };
