@@ -52,41 +52,49 @@
         .view-section.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
         @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to {opacity:1; transform: translateY(0);} }
 
+        /* 🔥 PROFESSIONAL GRID & FORM MANAGEMENT 🔥 */
         .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px;}
         .stat-card { background: var(--bg-panel); backdrop-filter: blur(10px); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; transition: 0.3s; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);}
         .stat-card:hover { transform: translateY(-5px); border-color: var(--accent-primary); box-shadow: 0 10px 20px rgba(6, 182, 212, 0.15);}
         .stat-card div:first-child { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px; letter-spacing: 1px;}
         .stat-card div:last-child { font-family: var(--font-display); font-size: 32px; font-weight: 900; text-shadow: 0 2px 10px rgba(0,0,0,0.5);}
 
+        .form-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-bottom: 15px;}
+        .form-group { display: flex; flex-direction: column; gap: 6px; }
+        .form-group label { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;}
+        
+        .input-group { display: flex; gap: 10px; width: 100%; align-items: stretch; }
+        .input-group input, .input-group select { margin-bottom: 0; flex: 1; }
+        .input-group button { flex-shrink: 0; white-space: nowrap; }
+
+        input, select, textarea { padding: 10px 14px; background: rgba(0,0,0,0.4); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; width: 100%; font-family: var(--font-mono); font-size: 13px; transition: 0.3s; box-shadow: inset 0 2px 5px rgba(0,0,0,0.5);}
+        input:focus, select:focus, textarea:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 2px rgba(6,182,212,0.2), inset 0 2px 5px rgba(0,0,0,0.5); outline: none;}
+        textarea { height: 100px; resize: vertical; }
+
+        /* Professional Buttons */
+        button { font-family: var(--font-ui); cursor: pointer; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 700; font-size: 12px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px; display: inline-flex; align-items: center; justify-content: center; gap: 8px;}
+        button:active { transform: scale(0.95); }
+        .btn-primary { background: linear-gradient(135deg, var(--accent-primary), #0284c7); color: #fff; box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3); border: 1px solid rgba(255,255,255,0.1);} 
+        .btn-warning { background: linear-gradient(135deg, var(--accent-warning), #d97706); color: #fff; box-shadow: 0 4px 15px rgba(245, 158, 11, 0.3); border: 1px solid rgba(255,255,255,0.1);}
+        .btn-success { background: linear-gradient(135deg, var(--accent-success), #059669); color: #fff; box-shadow: 0 4px 15px rgba(16, 185, 129, 0.3); border: 1px solid rgba(255,255,255,0.1);} 
+        .btn-danger { background: rgba(239,68,68,0.1); border: 1px solid var(--accent-danger); color: var(--accent-danger); box-shadow: 0 4px 15px rgba(239, 68, 68, 0.15);}
+        .btn-dark { background: rgba(0,0,0,0.5); color: var(--text-main); border: 1px solid var(--border-color); }
+        .btn-secondary { background: linear-gradient(135deg, var(--accent-secondary), #6d28d9); color: #fff; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); border: 1px solid rgba(255,255,255,0.1);}
+        .action-group { display: flex; gap: 6px; flex-wrap: wrap; }
+        
+        .msg-box { background: var(--bg-panel); backdrop-filter: blur(10px); border: 1px solid var(--border-color); padding: 22px; border-radius: 12px; margin-bottom: 20px; position: relative; overflow: hidden; box-shadow: 0 8px 32px rgba(0,0,0,0.2);}
+        .msg-box::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: inherit; z-index: 1;}
+        .msg-box h3 { margin-bottom: 15px; font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; display: flex; align-items: center; gap: 8px;}
+        
         /* Data-Dense Tables */
         .table-wrapper { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: var(--bg-panel); backdrop-filter: blur(10px);}
         table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; min-width: 800px; }
-        th { background: rgba(0,0,0,0.3); padding: 12px 15px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-family: var(--font-ui); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px;}
-        td { padding: 12px 15px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle;}
-        tr:hover td { background: rgba(255,255,255,0.02); }
+        th { background: rgba(0,0,0,0.4); padding: 14px 18px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-family: var(--font-ui); font-size: 11px; text-transform: uppercase; font-weight: 800; letter-spacing: 1px;}
+        td { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle;}
+        tr:hover td { background: rgba(255,255,255,0.03); }
 
-        button { font-family: var(--font-ui); cursor: pointer; border: none; padding: 10px 16px; border-radius: 8px; font-weight: 700; font-size: 12px; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); text-transform: uppercase; letter-spacing: 1px;}
-        button:active { transform: scale(0.95); }
-        .btn-primary { background: var(--accent-primary); color: #000; box-shadow: 0 0 10px rgba(6, 182, 212, 0.4);} 
-        .btn-warning { background: var(--accent-warning); color: #000; box-shadow: 0 0 10px rgba(245, 158, 11, 0.4);}
-        .btn-success { background: var(--accent-success); color: #000; box-shadow: 0 0 10px rgba(16, 185, 129, 0.4);} 
-        .btn-danger { background: rgba(239,68,68,0.15); border: 1px solid var(--accent-danger); color: var(--accent-danger); }
-        .btn-dark { background: rgba(0,0,0,0.4); color: var(--text-main); border: 1px solid var(--border-color); }
-        .action-group { display: flex; gap: 6px; flex-wrap: wrap; }
-        
-        input, select, textarea { padding: 12px 15px; background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; width: 100%; font-family: var(--font-mono); margin-bottom: 10px; font-size: 13px; transition: 0.3s;}
-        input:focus, select:focus, textarea:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 2px rgba(6,182,212,0.2); outline: none;}
-        textarea { height: 100px; resize: vertical; }
-        
-        .msg-box { background: var(--bg-panel); backdrop-filter: blur(10px); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; margin-bottom: 20px; position: relative; overflow: hidden;}
-        .msg-box::before { content: ''; position: absolute; top: 0; left: 0; width: 4px; height: 100%; background: inherit; z-index: 1;}
-        .msg-box h3 { margin-bottom: 15px; font-family: var(--font-display); font-size: 18px; letter-spacing: 1px; }
-        
-        .flex-wrap-gap { display: flex; gap: 10px; flex-wrap: wrap; align-items: center;}
-        .flex-wrap-gap > * { flex: 1 1 100%; }
-        
         /* Premium Pill Tags */
-        .tag { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; gap: 4px; font-family: var(--font-ui); letter-spacing: 0.5px; text-transform: uppercase;}
+        .tag { padding: 4px 10px; border-radius: 12px; font-size: 10px; font-weight: 800; display: inline-flex; align-items: center; gap: 6px; font-family: var(--font-ui); letter-spacing: 0.5px; text-transform: uppercase;}
         .tag::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; }
         .tag-vip { background: rgba(245, 158, 11, 0.1); color: var(--accent-warning); border: 1px solid rgba(245, 158, 11, 0.3); }
         .tag-vip::before { background: var(--accent-warning); box-shadow: 0 0 5px var(--accent-warning);}
@@ -114,8 +122,7 @@
 
         .chart-container { width: 100%; height: 250px; position: relative; margin-top: 10px; }
 
-        @media (min-width: 768px) { .mobile-header { display: none; } .sidebar { transform: translateX(0) !important; position: relative;} .flex-wrap-gap > input, .flex-wrap-gap > select { flex: 1 1 auto; margin-bottom: 0;} .flex-wrap-gap > button { flex: 0 0 auto; } }
-        @media (max-width: 767px) { .mobile-header { display: flex; } .sidebar { position: absolute; height: 100%; transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } .top-bar { display: none;} }
+        @media (max-width: 767px) { .mobile-header { display: flex; } .sidebar { position: absolute; height: 100%; transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } .top-bar { display: none;} .input-group { flex-direction: column; } }
     </style>
 </head>
 <body>
@@ -124,22 +131,24 @@
     <!-- 🔥 TIME INJECTION MODAL (WITH HOURS) 🔥 -->
     <div id="timeModal" class="modal-overlay">
         <div class="modal-box">
-            <h3 style="color: var(--accent-primary); margin-bottom: 5px; font-family: var(--font-display);">MODIFY ACCESS</h3>
+            <h3 style="color: var(--accent-primary); margin-bottom: 5px; font-family: var(--font-display);">⏱ MODIFY ACCESS</h3>
             <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">UID: <span id="timeTargetUid" style="color:#fff; font-family: var(--font-mono);"></span></p>
-            <select id="editAccessType"><option value="both">Access: BOTH (1M + 30S)</option><option value="1m">Access: ONLY 1 MINUTE</option><option value="30s">Access: ONLY 30 SECONDS</option></select>
-            <select id="editTimeDuration">
-                <option value="0">Keep Current Time</option>
-                <option value="1h">+ Add 1 Hour</option>
-                <option value="6h">+ Add 6 Hours</option>
-                <option value="12h">+ Add 12 Hours</option>
-                <option value="1d">+ Add 1 Day</option>
-                <option value="3d">+ Add 3 Days</option>
-                <option value="7d">+ Add 7 Days</option>
-                <option value="30d">+ Add 30 Days</option>
-                <option value="999">Grant LIFETIME</option>
-                <option value="-1">☠️ TERMINATE ACCESS</option>
-            </select>
-            <div style="display: flex; gap: 10px; margin-top:10px;"><button class="btn-primary" style="flex: 1;" onclick="confirmTimeUpdate()">CONFIRM</button><button class="btn-dark" style="flex: 1;" onclick="document.getElementById('timeModal').style.display='none'">CANCEL</button></div>
+            <div class="form-group">
+                <select id="editAccessType"><option value="both">Access: BOTH (1M + 30S)</option><option value="1m">Access: ONLY 1 MINUTE</option><option value="30s">Access: ONLY 30 SECONDS</option></select>
+                <select id="editTimeDuration">
+                    <option value="0">Keep Current Time</option>
+                    <option value="1h">+ Add 1 Hour</option>
+                    <option value="6h">+ Add 6 Hours</option>
+                    <option value="12h">+ Add 12 Hours</option>
+                    <option value="1d">+ Add 1 Day</option>
+                    <option value="3d">+ Add 3 Days</option>
+                    <option value="7d">+ Add 7 Days</option>
+                    <option value="30d">+ Add 30 Days</option>
+                    <option value="999">Grant LIFETIME</option>
+                    <option value="-1">☠️ TERMINATE ACCESS</option>
+                </select>
+            </div>
+            <div style="display: flex; gap: 10px; margin-top:15px;"><button class="btn-primary" style="flex: 1;" onclick="confirmTimeUpdate()">✔ CONFIRM</button><button class="btn-dark" style="flex: 1;" onclick="document.getElementById('timeModal').style.display='none'">CANCEL</button></div>
         </div>
     </div>
 
@@ -147,13 +156,17 @@
     <div id="giftModal" class="modal-overlay">
         <div class="modal-box">
             <h3 style="color: var(--accent-warning); margin-bottom: 15px; font-family: var(--font-display);">🎁 CREATE VIP GIFT</h3>
-            <input type="text" id="gCode" placeholder="GIFT CODE (e.g. MEGA500)" style="text-transform: uppercase;">
-            <div style="display:flex; gap:10px;">
+            <div class="form-group" style="margin-bottom: 10px;">
+                <input type="text" id="gCode" placeholder="GIFT CODE (e.g. MEGA500)" style="text-transform: uppercase;">
+            </div>
+            <div class="form-grid" style="margin-bottom: 10px;">
                 <input type="number" id="gAmount" placeholder="Reward ₹">
                 <input type="number" id="gClaims" placeholder="Max Claims">
             </div>
-            <input type="number" id="gMinDep" placeholder="Min Deposit Required (₹0 for free)">
-            <div style="display: flex; gap: 10px; margin-top:10px;"><button class="btn-warning" style="flex: 1;" onclick="createGift()">CREATE GIFT</button><button class="btn-dark" style="flex: 1;" onclick="document.getElementById('giftModal').style.display='none'">CANCEL</button></div>
+            <div class="form-group">
+                <input type="number" id="gMinDep" placeholder="Min Deposit Required (₹0 for free)">
+            </div>
+            <div style="display: flex; gap: 10px; margin-top:15px;"><button class="btn-warning" style="flex: 1;" onclick="createGift()">CREATE GIFT</button><button class="btn-dark" style="flex: 1;" onclick="document.getElementById('giftModal').style.display='none'">CANCEL</button></div>
         </div>
     </div>
 
@@ -202,6 +215,20 @@
                     <div class="stat-card"><div>LIVE ACCURACY</div><div id="statAccuracy" style="color:var(--accent-success);">94.8%</div></div>
                     <div class="stat-card"><div>TERMINATED</div><div id="statExpired" style="color:var(--accent-danger);">0</div></div>
                 </div>
+
+                <!-- 🔥 NEW: GLOBAL NOTIFICATION CENTER 🔥 -->
+                <div class="msg-box" style="border-left-color: var(--accent-secondary);">
+                    <h3 style="color:var(--accent-secondary);">📢 GLOBAL NOTIFICATION CENTER</h3>
+                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Push live alerts to all connected client devices (Bell Icon updates instantly).</p>
+                    <div class="input-group">
+                        <input type="text" id="adminNotiMsg" placeholder="Enter alert message here...">
+                        <button class="btn-secondary" onclick="publishNotification()">🔔 PUSH LIVE</button>
+                        <button class="btn-danger" onclick="clearNotification()">❌ CLEAR</button>
+                    </div>
+                    <div style="margin-top: 15px; padding: 12px; background: rgba(0,0,0,0.4); border-radius: 8px; border: 1px solid var(--border-color); font-family: var(--font-mono); font-size: 12px; color: var(--text-muted);">
+                        Current Live Alert: <span id="activeNotiText" style="color: var(--accent-secondary); font-weight: bold;">Loading...</span>
+                    </div>
+                </div>
                 
                 <div class="msg-box" style="border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">📈 GLOBAL AI PREDICTION ACCURACY</h3>
@@ -213,8 +240,8 @@
                         <h3 style="color:var(--text-main);">📜 AUDIT ACTIVITY LOG</h3>
                         <div id="activityLog" class="system-terminal"><div>> System Initialized & Secure...</div></div>
                     </div>
-                    <div class="msg-box" style="border-left-color: var(--accent-secondary); margin-bottom:0;">
-                        <h3 style="color:var(--accent-secondary);">📈 NETWORK DISTRIBUTION</h3>
+                    <div class="msg-box" style="border-left-color: var(--accent-warning); margin-bottom:0;">
+                        <h3 style="color:var(--accent-warning);">📈 NETWORK DISTRIBUTION</h3>
                         <div class="chart-container" style="height: 150px;"><canvas id="networkChart"></canvas></div>
                     </div>
                 </div>
@@ -222,45 +249,59 @@
                 <div class="msg-box" style="border-left-color: var(--accent-danger); margin-top:20px; background: rgba(239, 68, 68, 0.05);">
                     <h3 style="color:var(--accent-danger);">🔄 REVERSE PATTERN OVERRIDE (GLOBAL TRAP)</h3>
                     <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Temporarily flip ALL outcomes globally (BIG ↔ SMALL).</p>
-                    <div class="flex-wrap-gap">
-                        <select id="reverseTimer" style="margin-bottom:0; flex:1; border-color: rgba(239,68,68,0.3);">
+                    <div class="input-group">
+                        <select id="reverseTimer">
                             <option value="5">Activate for 5 Minutes</option><option value="15">Activate for 15 Minutes</option><option value="30">Activate for 30 Minutes</option>
                         </select>
-                        <button class="btn-primary" style="background: var(--accent-danger);" onclick="activateReverse()">▶ ACTIVATE TRAP</button>
-                        <button class="btn-dark" style="color:var(--text-muted);" onclick="deactivateReverse()">⏹ STOP</button>
+                        <button class="btn-danger" style="background: var(--accent-danger); color:#fff;" onclick="activateReverse()">▶ ACTIVATE TRAP</button>
+                        <button class="btn-dark" onclick="deactivateReverse()">⏹ STOP</button>
                     </div>
                     <div id="reverseStatus" style="margin-top:15px; font-size:13px; font-weight:800; color:var(--text-muted); font-family: var(--font-mono);">STATUS: 🔴 INACTIVE</div>
                 </div>
             </div>
 
-            <!-- 🔥 2. DIRECT INJECTOR (WITH NAME TAGGING) 🔥 -->
+            <!-- 2. DIRECT INJECTOR (PRO GRID LAYOUT) -->
             <div id="v-inject" class="view-section">
                 <div class="msg-box" style="border-left-color: var(--accent-primary);">
                     <h3 style="color:var(--accent-primary);">⚡ DIRECT UID INJECTION</h3>
-                    <!-- NEW NAME INPUT FOR PERMANENT TAGGING -->
-                    <input type="text" id="manualName" placeholder="Client Name / Tag (Optional)" style="border-color: var(--accent-secondary);">
-                    <input type="number" id="manualUid" placeholder="Target UID (e.g. 6820644)">
-                    
-                    <div class="flex-wrap-gap" style="margin-bottom:10px;">
-                        <select id="manualRole" style="margin-bottom:0;">
-                            <option value="trial">TRIAL</option><option value="vip">VIP</option><option value="vvip1">VVIP 1 (Big/Small Only)</option><option value="vvip2">VVIP 2 (Big/Small + 2 Numbers)</option><option value="vvip3" selected>VVIP 3 (Standard + 1 Number)</option>
-                        </select>
-                        <select id="manualVipDuration" style="margin-bottom:0;">
-                            <option value="1h">1 Hour</option><option value="6h">6 Hours</option><option value="12h">12 Hours</option>
-                            <option value="1d">1 Day</option><option value="7d">7 Days</option><option value="30d">30 Days</option>
-                            <option value="999" selected>Lifetime</option>
-                        </select>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Target UID</label>
+                            <input type="number" id="manualUid" placeholder="e.g. 6820644">
+                        </div>
+                        <div class="form-group">
+                            <label>Client Name / Tag (Optional)</label>
+                            <input type="text" id="manualName" placeholder="e.g. John Doe">
+                        </div>
+                        <div class="form-group">
+                            <label>Privilege Role</label>
+                            <select id="manualRole">
+                                <option value="trial">TRIAL</option><option value="vip">VIP</option><option value="vvip1">VVIP 1 (Big/Small Only)</option><option value="vvip2">VVIP 2 (+ 2 Numbers)</option><option value="vvip3" selected>VVIP 3 (+ 1 Number)</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Duration / Validity</label>
+                            <select id="manualVipDuration">
+                                <option value="1h">1 Hour</option><option value="6h">6 Hours</option><option value="12h">12 Hours</option>
+                                <option value="1d">1 Day</option><option value="7d">7 Days</option><option value="30d">30 Days</option>
+                                <option value="999" selected>Lifetime</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Game Access Allowed</label>
+                            <select id="manualAccess"><option value="both">BOTH MODES</option><option value="1m">1 MIN ONLY</option><option value="30s">30 SEC ONLY</option></select>
+                        </div>
                     </div>
-                    <select id="manualAccess"><option value="both">BOTH MODES</option><option value="1m">1 MIN ONLY</option><option value="30s">30 SEC ONLY</option></select>
-                    <button class="btn-primary" style="width: 100%;" onclick="addManualUser()">🚀 INJECT UID</button>
+                    <button class="btn-primary" style="width: 100%; margin-top: 10px;" onclick="addManualUser()">🚀 INJECT NODE</button>
                 </div>
             </div>
 
             <!-- 3. USER DATABASE -->
             <div id="v-users" class="view-section">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; flex-wrap:wrap; gap:10px;">
-                    <!-- 🔥 UPDATED SEARCH INPUT 🔥 -->
-                    <input type="text" id="searchUid" placeholder="🔍 Search UID or Name..." onkeyup="filterUsers()" style="margin-bottom: 0; width: 250px; border-radius: 20px; padding-left: 20px;">
+                    <div class="input-group" style="width: auto; flex:1;">
+                        <input type="text" id="searchUid" placeholder="🔍 Search UID or Name..." onkeyup="filterUsers()" style="border-radius: 20px; padding-left: 20px; max-width: 300px;">
+                    </div>
                     <div style="display:flex; gap:10px;">
                         <button class="btn-success" onclick="exportUsersCSV()">📥 EXPORT CSV</button>
                         <button class="btn-danger" onclick="purgeDeadNodes()">🧹 PURGE EXPIRED</button>
@@ -277,10 +318,10 @@
                     </div>
                     <div class="msg-box" style="border-left-color: var(--accent-primary); margin-bottom:0;">
                         <h3 style="color:var(--accent-primary); font-size:14px;">✅ FORCE NORMAL (TRUE LIVE)</h3>
-                        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                            <input type="text" id="exceptionUids" placeholder="Paste UIDs separated by comma..." style="margin-bottom:0; flex:2;">
-                            <button class="btn-primary" style="flex: 1;" onclick="setLiveExceptions()">✅ SET</button>
-                            <button class="btn-dark" style="flex: 1; color: var(--accent-danger);" onclick="clearLiveExceptions()">❌ CLEAR</button>
+                        <div class="input-group">
+                            <input type="text" id="exceptionUids" placeholder="Paste UIDs separated by comma...">
+                            <button class="btn-primary" onclick="setLiveExceptions()">✅ SET</button>
+                            <button class="btn-danger" onclick="clearLiveExceptions()">❌ CLR</button>
                         </div>
                     </div>
                 </div>
@@ -294,15 +335,19 @@
             <div id="v-roles" class="view-section">
                 <div class="msg-box" style="border-left-color: var(--accent-secondary);">
                     <h3 style="color:var(--accent-secondary);">🎯 ROLE-BASED MATRIX ASSIGNMENT</h3>
-                    <label style="font-size:12px; color:var(--accent-warning); font-weight:bold;">🌟 Select VIP File (Affects VIP tag users):</label>
-                    <div class="flex-wrap-gap" style="margin-bottom:20px;">
-                        <select id="vipMatrixSelect" style="flex:2; margin-bottom:0;"></select>
-                        <button class="btn-warning" onclick="setVipMatrix()" style="flex:1;">APPLY TO VIPs</button>
+                    <div class="form-group" style="margin-bottom: 20px;">
+                        <label style="color:var(--accent-warning);">🌟 Select VIP File (Affects VIP tag users):</label>
+                        <div class="input-group">
+                            <select id="vipMatrixSelect"></select>
+                            <button class="btn-warning" onclick="setVipMatrix()">APPLY TO VIPs</button>
+                        </div>
                     </div>
-                    <label style="font-size:12px; color:var(--accent-primary); font-weight:bold;">👤 Select TRIAL File (Affects Trial tag users):</label>
-                    <div class="flex-wrap-gap" style="margin-bottom:20px;">
-                        <select id="trialMatrixSelect" style="flex:2; margin-bottom:0;"></select>
-                        <button class="btn-primary" onclick="setTrialMatrix()" style="flex:1;">APPLY TO TRIALS</button>
+                    <div class="form-group">
+                        <label style="color:var(--accent-primary);">👤 Select TRIAL File (Affects Trial tag users):</label>
+                        <div class="input-group">
+                            <select id="trialMatrixSelect"></select>
+                            <button class="btn-primary" onclick="setTrialMatrix()">APPLY TO TRIALS</button>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -348,31 +393,32 @@
             <div id="v-vip-neural" class="view-section">
                 <div class="msg-box" style="border-left-color: var(--accent-warning);">
                     <h3 style="color:var(--accent-warning);">🌟 VIP NEURAL ENGINE</h3>
-                    <select id="vipNeuralTimeframe" onchange="fetchLatestNumber('vip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select>
+                    <div class="input-group" style="justify-content: center; margin-bottom: 10px;">
+                        <select id="vipNeuralTimeframe" onchange="fetchLatestNumber('vip')" style="max-width: 300px;"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select>
+                        <button class="btn-dark" onclick="fetchLatestNumber('vip')">🔄 SYNC</button>
+                    </div>
                     <div class="auto-number" id="vipAutoNumber" style="color:var(--accent-warning);">--</div>
-                    <div style="text-align:center; margin-bottom:15px;"><button class="btn-dark" onclick="fetchLatestNumber('vip')">🔄 SYNC LIVE</button></div>
                     
-                    <!-- 🔥 NEW SCALED DEPTH OPTIONS 🔥 -->
-                    <select id="vipScanDepth">
-                        <option value="1">⚡ FAST SCAN (100 ROUNDS)</option>
-                        <option value="10">🔍 STANDARD (1000 ROUNDS)</option>
-                        <option value="20">🔬 ADVANCED (2000 ROUNDS)</option>
-                        <option value="30">🔥 DEEP NEURAL (3000 ROUNDS)</option>
-                        <option value="40">🧠 CORE ENGINE (4000 ROUNDS)</option>
-                        <option value="50" selected>🌌 QUANTUM SCAN (5000 ROUNDS)</option>
-                        <option value="loss">💀 LOSING TRAP</option>
-                    </select>
-                    <button class="btn-warning" id="vipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vip')">🧬 GENERATE VIP MATRIX</button>
+                    <div class="form-group">
+                        <label>Select Neural Scanning Depth</label>
+                        <select id="vipScanDepth">
+                            <option value="1">⚡ FAST SCAN (100 ROUNDS)</option><option value="10">🔍 STANDARD (1000 ROUNDS)</option><option value="20">🔬 ADVANCED (2000 ROUNDS)</option><option value="30">🔥 DEEP NEURAL (3000 ROUNDS)</option><option value="40">🧠 CORE ENGINE (4000 ROUNDS)</option><option value="50" selected>🌌 QUANTUM SCAN (5000 ROUNDS)</option><option value="loss">💀 LOSING TRAP</option>
+                        </select>
+                    </div>
+                    <button class="btn-warning" id="vipBtnScan" style="width:100%; margin-top:10px;" onclick="startNeuralScan('vip')">🧬 GENERATE VIP MATRIX</button>
                 </div>
                 <div class="msg-box" id="vipStep3Card" style="display:none; border-left-color: var(--accent-success);">
                     <h3 style="color:var(--accent-success);">✅ NEURAL MATRIX READY</h3>
-                    <select id="vipPublishTarget"><option value="vault">📥 SAVE TO VAULT ONLY</option><option value="trial">👤 PUBLISH TO: TRIALS</option><option value="vip" selected>🌟 PUBLISH TO: VIP USERS</option></select>
-                    <div style="display:flex; gap:10px;"><button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vip')">☁️ PUBLISH SECURELY</button><button class="btn-dark" style="flex:1;" onclick="copyCode('vip')">📋 COPY HASH</button></div>
+                    <div class="input-group">
+                        <select id="vipPublishTarget"><option value="vault">📥 SAVE TO VAULT ONLY</option><option value="trial">👤 PUBLISH TO: TRIALS</option><option value="vip" selected>🌟 PUBLISH TO: VIP USERS</option></select>
+                        <button class="btn-success" onclick="uploadNeuralToDB('vip')">☁️ PUBLISH</button>
+                        <button class="btn-dark" onclick="copyCode('vip')">📋 COPY HASH</button>
+                    </div>
                 </div>
             </div>
             <div id="v-vip-history" class="view-section"><div class="table-wrapper" style="height: 100%;"><table><thead><tr><th>CREATION DATE & TIME</th><th>MODE</th><th>WIN RATE</th><th>ACTIONS</th></tr></thead><tbody id="vip-history-list"></tbody></table></div></div>
             <div id="v-vip-mat" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-warning);"><h3 style="color:var(--accent-warning);">🌟 VIP MANUAL MATRIX EDITOR</h3><p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Manually set numbers and save. It will automatically publish as the Active VIP Matrix.</p><div class="flex-wrap-gap" style="margin-bottom: 20px;"><select id="vipMatTimeframe" onchange="loadMatrixData('vip')" style="margin-bottom:0; flex:1;"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select><button class="btn-warning" style="flex:1;" onclick="saveAllMatrix('vip')">💾 SAVE & PUBLISH</button><button class="btn-dark" style="flex:0 0 auto;" onclick="pasteMatrix('vip')">📥 PASTE HASH</button></div></div>
+                <div class="msg-box" style="border-left-color: var(--accent-warning);"><h3 style="color:var(--accent-warning);">🌟 VIP MANUAL MATRIX EDITOR</h3><p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Manually set numbers and save. It will automatically publish as the Active VIP Matrix.</p><div class="input-group" style="margin-bottom: 20px;"><select id="vipMatTimeframe" onchange="loadMatrixData('vip')"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select><button class="btn-warning" onclick="saveAllMatrix('vip')">💾 SAVE & PUBLISH</button><button class="btn-dark" onclick="pasteMatrix('vip')">📥 PASTE HASH</button></div></div>
                 <div class="table-wrapper" style="height: 500px;"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME</th><th>ACTION (Num 0-9)</th></tr></thead><tbody id="vipMatList"></tbody></table></div>
             </div>
 
@@ -380,23 +426,30 @@
                  👑 VVIP PARTITION
                  ============================================== -->
             <div id="v-vvip-neural" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">👑 VVIP NEURAL ENGINE</h3><select id="vvipNeuralTimeframe" onchange="fetchLatestNumber('vvip')"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select><div class="auto-number" id="vvipAutoNumber" style="color:var(--accent-success);">--</div><div style="text-align:center; margin-bottom:15px;"><button class="btn-dark" onclick="fetchLatestNumber('vvip')">🔄 SYNC LIVE</button></div>
-                    <!-- 🔥 NEW SCALED DEPTH OPTIONS 🔥 -->
-                    <select id="vvipScanDepth">
-                        <option value="1">⚡ FAST SCAN (100 ROUNDS)</option>
-                        <option value="10">🔍 STANDARD (1000 ROUNDS)</option>
-                        <option value="20">🔬 ADVANCED (2000 ROUNDS)</option>
-                        <option value="30">🔥 DEEP NEURAL (3000 ROUNDS)</option>
-                        <option value="40">🧠 CORE ENGINE (4000 ROUNDS)</option>
-                        <option value="50" selected>🌌 QUANTUM SCAN (5000 ROUNDS)</option>
-                        <option value="loss">💀 LOSING TRAP</option>
-                    </select>
-                <button class="btn-success" id="vvipBtnScan" style="width:100%; font-size:14px;" onclick="startNeuralScan('vvip')">🧬 GENERATE VVIP MATRIX</button></div>
-                <div class="msg-box" id="vvipStep3Card" style="display:none; border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">✅ NEURAL MATRIX READY</h3><select id="vvipPublishTarget"><option value="vault">📥 SAVE TO VAULT ONLY</option><option value="vvip" selected>👑 OVERWRITE LIVE VVIP DB</option></select><div style="display:flex; gap:10px;"><button class="btn-success" style="flex:1;" onclick="uploadNeuralToDB('vvip')">☁️ PUBLISH DIRECTLY</button><button class="btn-dark" style="flex:1;" onclick="copyCode('vvip')">📋 COPY HASH</button></div></div>
+                <div class="msg-box" style="border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">👑 VVIP NEURAL ENGINE</h3>
+                    <div class="input-group" style="justify-content: center; margin-bottom: 10px;">
+                        <select id="vvipNeuralTimeframe" onchange="fetchLatestNumber('vvip')" style="max-width: 300px;"><option value="1m">Wingo 1 Minute</option><option value="30s">Wingo 30 Seconds</option></select>
+                        <button class="btn-dark" onclick="fetchLatestNumber('vvip')">🔄 SYNC</button>
+                    </div>
+                    <div class="auto-number" id="vvipAutoNumber" style="color:var(--accent-success);">--</div>
+                    <div class="form-group">
+                        <label>Select Neural Scanning Depth</label>
+                        <select id="vvipScanDepth">
+                            <option value="1">⚡ FAST SCAN (100 ROUNDS)</option><option value="10">🔍 STANDARD (1000 ROUNDS)</option><option value="20">🔬 ADVANCED (2000 ROUNDS)</option><option value="30">🔥 DEEP NEURAL (3000 ROUNDS)</option><option value="40">🧠 CORE ENGINE (4000 ROUNDS)</option><option value="50" selected>🌌 QUANTUM SCAN (5000 ROUNDS)</option><option value="loss">💀 LOSING TRAP</option>
+                        </select>
+                    </div>
+                <button class="btn-success" id="vvipBtnScan" style="width:100%; margin-top:10px;" onclick="startNeuralScan('vvip')">🧬 GENERATE VVIP MATRIX</button></div>
+                <div class="msg-box" id="vvipStep3Card" style="display:none; border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">✅ NEURAL MATRIX READY</h3>
+                    <div class="input-group">
+                        <select id="vvipPublishTarget"><option value="vault">📥 SAVE TO VAULT ONLY</option><option value="vvip" selected>👑 OVERWRITE LIVE VVIP DB</option></select>
+                        <button class="btn-success" onclick="uploadNeuralToDB('vvip')">☁️ PUBLISH</button>
+                        <button class="btn-dark" onclick="copyCode('vvip')">📋 COPY HASH</button>
+                    </div>
+                </div>
             </div>
             <div id="v-vvip-history" class="view-section"><div class="table-wrapper" style="height: 100%;"><table><thead><tr><th>CREATION DATE & TIME</th><th>MODE</th><th>WIN RATE</th><th>ACTIONS</th></tr></thead><tbody id="vvip-history-list"></tbody></table></div></div>
             <div id="v-vvip-mat" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">👑 VVIP MANUAL MATRIX EDITOR</h3><p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Manually set numbers and save. It will directly overwrite the LIVE game patterns for VVIPs.</p><div class="flex-wrap-gap" style="margin-bottom: 20px;"><select id="vvipMatTimeframe" onchange="loadMatrixData('vvip')" style="margin-bottom:0; flex:1;"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select><button class="btn-success" style="flex:1;" onclick="saveAllMatrix('vvip')">💾 SAVE TO LIVE DB</button><button class="btn-dark" style="flex:0 0 auto;" onclick="pasteMatrix('vvip')">📥 PASTE HASH</button></div></div>
+                <div class="msg-box" style="border-left-color: var(--accent-success);"><h3 style="color:var(--accent-success);">👑 VVIP MANUAL MATRIX EDITOR</h3><p style="font-size:12px; color:var(--text-muted); margin-bottom:15px;">Manually set numbers and save. It will directly overwrite the LIVE game patterns for VVIPs.</p><div class="input-group" style="margin-bottom: 20px;"><select id="vvipMatTimeframe" onchange="loadMatrixData('vvip')"><option value="1m">Wingo 1 Minute DB</option><option value="30s">Wingo 30 Seconds DB</option></select><button class="btn-success" onclick="saveAllMatrix('vvip')">💾 SAVE TO LIVE DB</button><button class="btn-dark" onclick="pasteMatrix('vvip')">📥 PASTE HASH</button></div></div>
                 <div class="table-wrapper" style="height: 500px;"><table><thead><tr><th>VECTOR (N-1 : N-2)</th><th>OUTCOME</th><th>ACTION (Num 0-9)</th></tr></thead><tbody id="vvipMatList"></tbody></table></div>
             </div>
 
@@ -404,9 +457,42 @@
                  ⚙️ SETTINGS 
                  ============================================== -->
             <div id="v-settings" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-warning); background: rgba(245, 158, 11, 0.05);"><h3 style="color:var(--accent-warning);">🚧 AUTO-LOOPING MAINTENANCE</h3><p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Block access. Timer will auto-restart when it hits 0, until you explicitly STOP it.</p><input type="text" id="maintReason" placeholder="Reason (e.g., Core Upgrading...)" style="border-color: rgba(245,158,11,0.3);"><div class="flex-wrap-gap"><select id="maintDuration" style="margin-bottom:0; flex:1; border-color: rgba(245,158,11,0.3);"><option value="15">Loop 15 Minutes</option><option value="30">Loop 30 Minutes</option><option value="60">Loop 1 Hour</option></select><button class="btn-warning" onclick="startMaintenance()">▶ START LOOP</button><button class="btn-dark" style="color:var(--accent-danger); border-color:var(--accent-danger);" onclick="stopMaintenance()">⏹ STOP MAINTENANCE</button></div><div id="maintStatus" style="margin-top:15px; font-size:13px; font-weight:900; color:var(--text-muted); font-family: var(--font-mono);">STATUS: 🔴 INACTIVE</div></div>
-                <div class="msg-box" style="border-left-color: var(--accent-primary);"><h3 style="color:var(--accent-primary);">🛡️ SECURITY & AUTH RULES</h3><label style="font-size:12px; color:var(--text-muted); font-weight:700;">Allowed UID Prefixes (Comma Separated)</label><input type="text" id="setPrefixes" placeholder="e.g. 68,67"><label style="font-size:12px; color:var(--text-muted); font-weight:700;">Baseline UID Limit</label><input type="number" id="setBaseline" placeholder="Baseline UID"><label style="font-size:12px; color:var(--text-muted); font-weight:700;">Free Trials Allotted</label><input type="number" id="setFreeTrials" placeholder="Number of plays"><button class="btn-primary" style="width:100%; margin-top:10px;" onclick="saveAuthRules()">💾 SAVE SECURITY RULES</button></div>
-                <div class="msg-box" style="border-left-color: var(--text-muted);"><h3 style="color:var(--text-main);">🔗 TARGET LIVE GAME URL</h3><input type="text" id="adminGameLink" placeholder="Target Game URL (e.g., https://6clubm.com/#/)"><button class="btn-dark" style="width:100%;" onclick="updateGameLink()">⚡ OVERRIDE LIVE APP LINK</button></div>
+                <div class="msg-box" style="border-left-color: var(--accent-warning); background: rgba(245, 158, 11, 0.05);"><h3 style="color:var(--accent-warning);">🚧 AUTO-LOOPING MAINTENANCE</h3><p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Block access. Timer will auto-restart when it hits 0, until you explicitly STOP it.</p>
+                    <div class="form-group" style="margin-bottom: 10px;">
+                        <input type="text" id="maintReason" placeholder="Reason (e.g., Core Upgrading...)" style="border-color: rgba(245,158,11,0.3);">
+                    </div>
+                    <div class="input-group">
+                        <select id="maintDuration" style="border-color: rgba(245,158,11,0.3);"><option value="15">Loop 15 Minutes</option><option value="30">Loop 30 Minutes</option><option value="60">Loop 1 Hour</option></select>
+                        <button class="btn-warning" onclick="startMaintenance()">▶ START LOOP</button>
+                        <button class="btn-danger" onclick="stopMaintenance()">⏹ STOP</button>
+                    </div>
+                    <div id="maintStatus" style="margin-top:15px; font-size:13px; font-weight:900; color:var(--text-muted); font-family: var(--font-mono);">STATUS: 🔴 INACTIVE</div>
+                </div>
+
+                <div class="msg-box" style="border-left-color: var(--accent-primary);"><h3 style="color:var(--accent-primary);">🛡️ SECURITY & AUTH RULES</h3>
+                    <div class="form-grid">
+                        <div class="form-group">
+                            <label>Allowed UID Prefixes (Comma Sep)</label>
+                            <input type="text" id="setPrefixes" placeholder="e.g. 68,67">
+                        </div>
+                        <div class="form-group">
+                            <label>Baseline UID Limit</label>
+                            <input type="number" id="setBaseline" placeholder="Baseline UID">
+                        </div>
+                        <div class="form-group">
+                            <label>Free Trials Allotted</label>
+                            <input type="number" id="setFreeTrials" placeholder="Number of plays">
+                        </div>
+                    </div>
+                    <button class="btn-primary" style="width:100%; margin-top:5px;" onclick="saveAuthRules()">💾 SAVE SECURITY RULES</button>
+                </div>
+
+                <div class="msg-box" style="border-left-color: var(--text-muted);"><h3 style="color:var(--text-main);">🔗 TARGET LIVE GAME URL</h3>
+                    <div class="input-group">
+                        <input type="text" id="adminGameLink" placeholder="Target Game URL (e.g., https://6clubm.com/#/)">
+                        <button class="btn-dark" onclick="updateGameLink()">⚡ OVERRIDE LINK</button>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -446,19 +532,24 @@
         window.toggleSidebar = () => { document.getElementById('sidebar').classList.toggle('open'); let overlay = document.getElementById('sidebarOverlay'); overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'; };
         window.closeMobileSidebar = () => { if(window.innerWidth < 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').style.display='none'; }};
         
-        // 🔥 ENHANCED FILTER: SEARCH BY UID OR NAME 🔥
-        window.filterUsers = () => { 
-            let input = document.getElementById('searchUid').value.toLowerCase(); 
-            let rows = document.querySelectorAll('#usr-list tr'); 
-            rows.forEach(row => { 
-                if(row.cells.length > 1) { 
-                    let uidCell = row.cells[0].innerHTML.toLowerCase(); 
-                    row.style.display = uidCell.includes(input) ? '' : 'none'; 
-                } 
-            }); 
-        };
+        window.filterUsers = () => { let input = document.getElementById('searchUid').value.toLowerCase(); let rows = document.querySelectorAll('#usr-list tr'); rows.forEach(row => { if(row.cells.length > 1) { let uidCell = row.cells[0].innerHTML.toLowerCase(); row.style.display = uidCell.includes(input) ? '' : 'none'; } }); };
         
         window.addLog = async (msg) => { let time = Date.now(); await push(ref(db, 'settings/activity_logs'), { msg: msg, time: time }); };
+
+        // 🔥 NOTIFICATION FUNCTIONS 🔥
+        window.publishNotification = async () => {
+            let msg = document.getElementById('adminNotiMsg').value.trim();
+            if(!msg) return showToast("Enter a message first!", true);
+            await update(ref(db, 'settings'), { admin_message: msg });
+            showToast("🔔 NOTIFICATION PUSHED LIVE!");
+            addLog(`Global Notification Sent: ${msg}`);
+            document.getElementById('adminNotiMsg').value = '';
+        };
+        window.clearNotification = async () => {
+            await update(ref(db, 'settings'), { admin_message: null });
+            showToast("❌ NOTIFICATION CLEARED!");
+            addLog(`Global Notification Cleared`);
+        };
 
         const API_URLS = { '1m': 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json', '30s': 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json' };
         const DB_PATHS = { '1m': 'patterns', '30s': 'patterns_30s' };
@@ -477,6 +568,12 @@
                     if(d.total_revenue) { totalRevenue = d.total_revenue; document.getElementById('statRev').innerText = '₹' + totalRevenue.toLocaleString('en-IN'); }
                     if(d.force_link) document.getElementById('adminGameLink').value = d.force_link;
                     if(d.auth_rules) { document.getElementById('setPrefixes').value = d.auth_rules.prefixes || "68,67"; document.getElementById('setBaseline').value = d.auth_rules.baselineUid || 0; document.getElementById('setFreeTrials').value = d.auth_rules.freeTrials || 5; }
+                    
+                    // Handle Notification Display
+                    if(d.admin_message !== undefined) {
+                        document.getElementById('activeNotiText').innerText = d.admin_message ? d.admin_message : "No Active Alerts";
+                    }
+
                     if(d.vip_matrix && document.getElementById('vipMatrixSelect')) document.getElementById('vipMatrixSelect').value = d.vip_matrix;
                     if(d.global_matrix && document.getElementById('trialMatrixSelect')) document.getElementById('trialMatrixSelect').value = d.global_matrix;
                     if(d.maintenance) { let m = d.maintenance; let mStatus = document.getElementById('maintStatus'); if (maintIntervalAdmin) clearInterval(maintIntervalAdmin); if(m.active) { maintIntervalAdmin = setInterval(() => { let now = Date.now(); let elapsed = now - m.startTime; let rem = m.durationMs - elapsed; if(rem <= 0) { if(m.autoExtend) { let cycles = Math.ceil(elapsed / m.durationMs); rem = (m.startTime + (cycles * m.durationMs)) - now; } else { clearInterval(maintIntervalAdmin); mStatus.innerHTML = `STATUS: 🔴 INACTIVE`; return; } } let min = Math.floor(rem / 60000); let sec = Math.floor((rem % 60000)/1000); mStatus.innerHTML = `STATUS: <span style="color:var(--accent-warning); text-shadow: 0 0 10px rgba(245,158,11,0.5);">🚧 ACTIVE (${min}m ${sec}s) [LOOPING]</span>`; }, 1000); } else { mStatus.innerHTML = `STATUS: 🔴 INACTIVE`; } }
@@ -510,7 +607,6 @@
             onValue(ref(db, 'uid_requests'), s => { let html = ""; if(s.exists()) { s.forEach(c => { html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td><span style="color:var(--text-muted); font-family:var(--font-mono); font-size:10px;">${c.val().deviceId || "Unknown"}</span></td><td><div class="action-group"><button class="btn-success" onclick="apprReq('${c.key}')">APPROVE</button> <button class="btn-danger" onclick="rejReq('${c.key}')">DROP</button></div></td></tr>`; }); } document.getElementById('req-list').innerHTML = html || `<tr><td colspan="3" style="text-align:center; padding:30px; color:var(--text-muted);">Queue is empty.</td></tr>`; });
             onValue(ref(db, 'deposit_requests'), s => { let html = ""; let todayVol = 0; let pending = 0; if(s.exists()) { s.forEach(c => { pending++; let amt = parseInt(c.val().amount) || 0; todayVol += amt; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:bold;">${c.key}</td><td style="color:var(--accent-warning); font-weight:900;">₹${amt}</td><td><span style="color:var(--text-muted);">${new Date(c.val().timestamp).toLocaleTimeString()}</span></td><td><div class="action-group"><button class="btn-warning" onclick="apprDep('${c.key}', ${amt})">UPGRADE</button> <button class="btn-danger" onclick="rejDep('${c.key}')">REJECT</button></div></td></tr>`; }); } document.getElementById('dep-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:30px; color:var(--text-muted);">No deposits.</td></tr>`; document.getElementById('statPendingDep').innerText = pending; if(depChartObj) { let dData = depChartObj.data.datasets[0].data; dData[dData.length - 1] = todayVol; depChartObj.update(); } });
 
-            // 🔥 USER LIST WITH NAME BINDING 🔥
             onValue(ref(db, 'approved_uids'), s => {
                 let html = ""; let tot = 0; let vip = 0; let expCount = 0; let now = Date.now(); expiredUsersList = [];
                 let tCount = 0, vCount = 0, vvCount = 0;
@@ -528,8 +624,6 @@
                         if(daysLeft <= 0) { badge = `<span class="tag tag-expired">EXPIRED</span>`; }
                         else if(role === 'vvip1') badge = `<span class="tag tag-vvip">VVIP 1</span>`; else if(role === 'vvip2') badge = `<span class="tag tag-vvip">VVIP 2</span>`; else if(role === 'vvip3' || role === 'vvip') badge = `<span class="tag tag-vvip">VVIP 3</span>`; else if(role === 'vip') badge = `<span class="tag tag-vip">VIP</span>`; else badge = `<span class="tag tag-trial">TRIAL</span>`;
                         let overrideBadge = d.force_live ? `<br><span class="tag" style="background:rgba(16,185,129,0.1); color:var(--accent-success); border:1px solid rgba(16,185,129,0.4); margin-top:5px; font-size:9px;">🟢 EXCEPTION</span>` : "";
-
-                        // Inject Name into UID column if available
                         let nameStr = d.name ? `<br><span style="color:var(--accent-primary); font-size:11px; font-weight:900;">👤 ${d.name}</span>` : "";
 
                         let actions = `<div class="action-group"><button class="btn-primary" onclick="openTimeModal('${uid}')">TIME</button>`;
@@ -547,7 +641,6 @@
             attachHistoryListener('vip'); attachHistoryListener('vvip');
         }
 
-        // 🔥 REAL MATRIX BACKTESTING (TEST BUTTON) 🔥
         window.testMatrix = async (partition, historyId, tf) => {
             showToast("🧪 Running Real Server Backtest...");
             try {
@@ -555,7 +648,7 @@
                 if(!snap.exists()) return showToast("Matrix not found", true);
                 
                 let matrix = snap.val().matrix;
-                let targetUrl = API_URLS[tf] + "?pageSize=150"; // Attempt to get 150 results
+                let targetUrl = API_URLS[tf] + "?pageSize=150"; 
                 
                 let apiData = await fetchSecureApiData(targetUrl);
                 let results = [];
@@ -566,7 +659,6 @@
 
                 let wins = 0; let total = 0;
                 
-                // Test algorithm against historical data
                 for(let i = 0; i < results.length - 2; i++) {
                     let actualNum = parseInt(results[i].number || results[i].Number || results[i].result);
                     let n1 = parseInt(results[i+1].number || results[i+1].Number || results[i+1].result);
@@ -587,11 +679,8 @@
                 if(total === 0) return showToast("Empty Matrix, test failed", true);
 
                 let winRate = ((wins / total) * 100).toFixed(1);
-                
-                // Save actual win rate to database
                 await update(ref(db, `matrix_history_${partition}/${historyId}`), { win_rate: parseFloat(winRate) });
-                
-                showToast(`✅ REAL WIN RATE: ${winRate}% (Tested on ${total} rounds)`);
+                showToast(`✅ REAL WIN RATE: ${winRate}%`);
                 addLog(`Backtested Matrix [${historyId}]: ${winRate}% Win Rate`);
 
             } catch(e) {
@@ -608,7 +697,6 @@
                         let d = data[k]; let date = new Date(parseInt(k)).toLocaleString(); 
                         optionsHtml += `<option value="${k}">[${d.timeframe.toUpperCase()}] - ${date}</option>`; 
                         
-                        // 🔥 DISPLAY REAL WIN RATE & TEST BUTTON 🔥
                         let winRateTxt = d.win_rate ? d.win_rate + '%' : '--%';
                         let winColor = d.win_rate ? (parseFloat(d.win_rate) > 80 ? 'var(--accent-success)' : 'var(--accent-warning)') : 'var(--text-muted)';
                         
@@ -635,9 +723,7 @@
             let amt = parseInt(document.getElementById('gAmount').value);
             let claims = parseInt(document.getElementById('gClaims').value);
             let minDep = parseInt(document.getElementById('gMinDep').value) || 0;
-            
             if(!code || !amt || !claims) return alert("Fill all required fields!");
-            
             await set(ref(db, `active_gifts/${code}`), { reward_amount: amt, max_claims: claims, current_claims: 0, min_deposit: minDep, status: 'active' });
             showToast("🎁 GIFT CREATED!"); addLog(`Created Gift: ${code} (₹${amt})`);
             document.getElementById('giftModal').style.display = 'none';
@@ -656,10 +742,9 @@
         window.saveAuthRules = async () => { await set(ref(db, 'settings/auth_rules'), { prefixes: document.getElementById('setPrefixes').value || "68,67", baselineUid: document.getElementById('setBaseline').value || 0, freeTrials: parseInt(document.getElementById('setFreeTrials').value) || 5 }); showToast("RULES UPDATED"); addLog(`Security rules updated`); };
         window.updateGameLink = async () => { let l = document.getElementById('adminGameLink').value.trim(); if(l) { if(!l.startsWith('http')) l = 'https://' + l; await update(ref(db, 'settings'), { force_link: l }); showToast("LINK ENFORCED!"); addLog(`Live target URL updated`); }};
         
-        // 🔥 UID INJECTION (NOW SAVES NAME) 🔥
         window.addManualUser = async () => { 
-            let uid = document.getElementById('manualUid').value.trim(); if(!uid) return; 
-            let nameVal = document.getElementById('manualName').value.trim(); // NEW NAME FIELD
+            let uid = document.getElementById('manualUid').value.trim(); if(!uid) return showToast("Enter UID!", true);
+            let nameVal = document.getElementById('manualName').value.trim(); 
             let role = document.getElementById('manualRole').value; 
             let dur = document.getElementById('manualVipDuration').value;
             let msToAdd = 0;
@@ -675,7 +760,6 @@
         window.confirmTimeUpdate = async () => { 
             let dur = document.getElementById('editTimeDuration').value; 
             let updates = { access_type: document.getElementById('editAccessType').value }; 
-            
             if(dur !== "0") { 
                 if(dur === "-1") updates.expireAt = Date.now() - 10000; 
                 else if(dur === "999") updates.expireAt = Date.now() + (999 * 24 * 60 * 60 * 1000);
@@ -700,7 +784,6 @@
 
         window.fetchLatestNumber = async function(partition) { let el = document.getElementById(`${partition}AutoNumber`); el.classList.remove('roll-in'); void el.offsetWidth; el.innerText = '...'; try { const data = await fetchFromAPI(partition); if (data && data.length > 0) { State[partition].latestNumber = data[0].number; el.innerText = State[partition].latestNumber; el.classList.add('roll-in'); } else { throw new Error("Empty"); } } catch (error) { let fakeNum = Math.floor(Math.random() * 10); State[partition].latestNumber = fakeNum; el.innerText = fakeNum; el.classList.add('roll-in'); addLog(`API Warning: Used fallback sync (${fakeNum})`); } };
         
-        // 🔥 NEURAL ENGINE DELAY SCALING 🔥
         window.startNeuralScan = async function(partition) { 
             let state = State[partition]; if (state.scanInProgress) return; 
             const btn = document.getElementById(`${partition}BtnScan`); 
@@ -713,7 +796,6 @@
             state.scanInProgress = true; document.getElementById(`${partition}Step3Card`).style.display = "none"; 
             
             try { 
-                // Scaling delay dynamically based on depth
                 let delayMs = isLosing ? 1500 : parseInt(depthVal) * 100;
                 await new Promise(r => setTimeout(r, delayMs)); 
 
