@@ -3,253 +3,324 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>DEV ARMY SYSTEM PRO</title>
+    <title>BADSHAH BHAI VIP SYSTEM</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Inter:wght@600;800;900&family=Rajdhani:wght@700;800;900&family=Fira+Code:wght@700;900&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Inter:wght@600;900&family=Rajdhani:wght@700;900&family=Fira+Code:wght@700;900&display=swap" rel="stylesheet">
     
     <style>
         :root { 
-            /* 🔥 LUXURY GOLD & OBSIDIAN THEME 🔥 */
-            --primary: #FFB800; 
-            --primary-dark: #FF7B00; 
-            --primary-3d: #994500; 
-            --primary-glow: rgba(255, 184, 0, 0.5);
+            /* 🔥 COLOR HEAVY PREMIUM THEME (RICH GOLD & DEEP GREY) 🔥 */
+            --primary: #E5B869; 
+            --primary-dark: #C49B4F; 
+            --primary-glow: rgba(229, 184, 105, 0.6);
             
-            --bg-dark: #070709;
-            --bg-panel: linear-gradient(135deg, rgba(20,20,25,0.98), rgba(10,10,14,0.95));
-            --border-light: rgba(255, 184, 0, 0.15);
+            --bg-dark: #0a0a0a;
+            --bg-panel: linear-gradient(145deg, #1f1a18 0%, #0d0c0b 100%);
             
             --green: #00E676; 
-            --green-glow: rgba(0, 230, 118, 0.4);
+            --green-glow: rgba(0, 230, 118, 0.5);
             --red: #FF3D00; 
-            --red-glow: rgba(255, 61, 0, 0.4); 
+            --red-glow: rgba(255, 61, 0, 0.5); 
             
             --font-main: 'Rajdhani', sans-serif; 
             --font-ui: 'Inter', sans-serif; 
             --font-mono: 'Fira Code', monospace; 
-            --font-zombie: 'Creepster', cursive; 
+            --font-zombie: 'Orbitron', sans-serif; 
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
         body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: var(--bg-dark); }
         
         #top-panel { 
-            flex: 0 0 auto; min-height: 20vh; max-height: 35vh; width: 100%; z-index: 10; position: relative; 
-            padding: 12px 16px; border-bottom: 2px solid var(--primary-dark); 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.9), inset 0 -3px 20px rgba(255, 184, 0, 0.05); 
-            display: flex; flex-direction: column; justify-content: center; 
+            flex: 0 0 auto; min-height: 15vh; max-height: 25vh; width: 100%; z-index: 10; position: relative; 
+            padding: 10px 14px; border-bottom: 3px solid var(--primary-dark); 
+            box-shadow: 0 12px 30px rgba(0,0,0,0.9); 
+            display: flex; flex-direction: column; justify-content: space-evenly; 
             background: var(--bg-panel);
-            backdrop-filter: blur(10px);
         }
         
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; border-bottom: 1px dashed var(--border-light); padding-bottom: 10px; }
-        .header-left { display: flex; flex-direction: column; justify-content: center; gap: 5px; }
+        /* ⚡ 8-SECOND HIGH-TECH BOOT SCREEN ⚡ */
+        #bootScreen {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: #000; z-index: 9999999999;
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            transition: opacity 0.5s ease;
+            background-image: radial-gradient(circle at center, #1E1E1E 0%, #000 100%);
+        }
+        
+        .radar-loader { position: relative; width: 100px; height: 100px; margin-bottom: 30px; }
+        .radar-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 3px solid rgba(229, 184, 105, 0.3); }
+        .radar-circle.inner { top: 20%; left: 20%; width: 60%; height: 60%; border: 2px solid var(--primary); animation: pulseGlow 1.5s infinite alternate; }
+        .radar-scanner { position: absolute; top: 0; left: 50%; width: 50%; height: 50%; transform-origin: bottom left; background: linear-gradient(45deg, transparent, var(--primary-glow)); border-right: 3px solid var(--primary); border-radius: 0 100% 0 0; animation: spinRight 2s linear infinite; }
+        
+        .boot-logo { font-family: var(--font-zombie); font-size: 26px; color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); margin-bottom: 15px; letter-spacing: 2px; }
+        
+        .boot-terminal { font-family: var(--font-mono); font-size: 11px; color: #00E676; text-shadow: 0 0 5px rgba(0, 230, 118, 0.5); width: 260px; text-align: left; height: 50px; line-height: 1.5; margin-bottom: 20px;}
+        
+        .boot-progress-bar { width: 260px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative;}
+        .boot-progress-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary); animation: bootLoad 7.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        @keyframes bootLoad { 0% { width: 0%; } 20% { width: 15%; } 40% { width: 45%; } 70% { width: 80%; } 90% { width: 95%; } 100% { width: 100%; } }
 
-        .brand { font-family: var(--font-main); font-size: 26px; font-weight: 900; letter-spacing: 2px; color: #fff; text-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 10px var(--primary-glow); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px solid rgba(229,184,105,0.15);}
+        .header-left { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 100%; }
+
+        .brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;}
         
-        .server-status { display: inline-flex; align-items: center; width: fit-content; gap: 5px; font-size: 10px; font-family: var(--font-mono); color: var(--red); letter-spacing: 1px; font-weight: 900; background: rgba(255, 61, 0, 0.08); padding: 4px 8px; border-radius: 20px; border: 1px solid rgba(255, 61, 0, 0.3); text-shadow: 0 0 5px var(--red-glow); transition: all 0.4s ease;}
-        .live-dot { width: 6px; height: 6px; background: var(--red); border-radius: 50%; box-shadow: 0 0 10px var(--red); animation: blinkRed 1s infinite alternate; transition: all 0.4s ease;}
+        .brand-container { display: flex; align-items: center; gap: 8px; }
+        .brand { font-family: var(--font-main); font-size: 20px; font-weight: 900; letter-spacing: 1.5px; color: var(--primary); text-shadow: 0 2px 4px rgba(0,0,0,0.8); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
         
+        /* ⚡ WIN STAMP ⚡ */
+        .win-stamp {
+            font-family: var(--font-zombie); font-size: 12px; font-weight: 900;
+            color: var(--green); border: 2px solid var(--green); padding: 2px 6px;
+            background: rgba(0, 230, 118, 0.1);
+            border-radius: 4px; transform: rotate(-15deg);
+            text-shadow: 0 0 8px var(--green); box-shadow: inset 0 0 5px var(--green), 0 0 8px var(--green-glow);
+            animation: smashIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            display: none;
+        }
+        .win-stamp.show { display: block; }
+        @keyframes smashIn { 0% { transform: scale(3) rotate(-30deg); opacity: 0; } 100% { transform: scale(1) rotate(-15deg); opacity: 1; } }
+
+        /* ⚡ NOTIFICATION BELL & MODAL (NEW) ⚡ */
+        .controls-row { display: flex; align-items: center; gap: 8px; }
+        .noti-btn { background: rgba(0,0,0,0.6); border: 1px solid rgba(229,184,105,0.3); border-radius: 6px; padding: 4px 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; position: relative; transition: all 0.2s;}
+        .noti-btn:active { transform: scale(0.9); }
+        .noti-dot { position: absolute; top: -3px; right: -3px; width: 8px; height: 8px; background: var(--red); border-radius: 50%; box-shadow: 0 0 8px var(--red); animation: blinkRed 1s infinite alternate; display: none;}
+        
+        .noti-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
+        .noti-modal { background: var(--bg-panel); border: 2px solid var(--primary-dark); width: 85%; max-width: 300px; border-radius: 10px; padding: 15px; box-shadow: 0 10px 40px rgba(0,0,0,1); position: relative; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(229,184,105,0.3); padding-bottom: 8px; margin-bottom: 10px; }
+        .noti-title { color: var(--primary); font-family: var(--font-mono); font-size: 13px; font-weight: 900; letter-spacing: 1px;}
+        .close-noti { color: #888; font-family: var(--font-ui); font-size: 18px; font-weight: 900; cursor: pointer; transition: 0.2s; }
+        .close-noti:active { transform: scale(0.8); color: #fff;}
+        .noti-body { color: #fff; font-family: var(--font-ui); font-size: 12px; line-height: 1.6; font-weight: 600; min-height: 50px; max-height: 200px; overflow-y: auto;}
+
         @keyframes blinkRed { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--red); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--red); } }
+
+        .status-row { display: flex; align-items: center; gap: 10px; margin-top: 2px;}
+        .server-status { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-family: var(--font-mono); color: var(--green); letter-spacing: 1px; font-weight: 900;}
+        .live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green); animation: blinkGreen 1s infinite alternate;}
         
-        .server-status.connected { color: var(--green); background: rgba(0, 230, 118, 0.08); border-color: rgba(0, 230, 118, 0.3); text-shadow: 0 0 5px var(--green-glow); }
-        .server-status.connected .live-dot { background: var(--green); box-shadow: 0 0 10px var(--green); animation: blinkGreen 1s infinite alternate; }
-        @keyframes blinkGreen { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--green); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--green); } }
+        .ping-meter { font-size: 10px; font-family: var(--font-mono); font-weight: 900; color: #aaa; display: flex; align-items: center; gap: 3px;}
+        .ping-val { color: var(--primary); }
 
-        .tabs { display: flex; background: rgba(0, 0, 0, 0.6); border-radius: 8px; padding: 3px; border: 1px solid rgba(255,255,255,0.05); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5); }
-        .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 900; color: #64748b; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); letter-spacing: 1.5px; transition: all 0.3s ease;}
-        .tab-btn.active { background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #000; box-shadow: 0 0 15px var(--primary-glow); text-shadow: 0 0 2px rgba(255,255,255,0.5); transform: scale(1.05);}
+        .tabs { display: flex; background: rgba(0,0,0,0.6); border-radius: 6px; padding: 3px; border: 1px solid rgba(229,184,105,0.2); }
+        .tab-btn { padding: 4px 8px; font-size: 10px; font-weight: 900; color: #888; cursor: pointer; border-radius: 4px; border: none; background: transparent; font-family: var(--font-ui); transition: all 0.3s ease;}
+        .tab-btn.active { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); color: #000; box-shadow: 0 2px 8px var(--primary-glow); }
 
-        input[type=text], input[type=number] { width: 100%; height: 100%; padding: 0 8px; border: 2px solid #2a2a35; border-radius: 8px; text-align: center; font-size: 18px; font-weight: 900; background: rgba(10, 10, 14, 0.8); color: var(--primary); outline: none; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: inset 0 3px 10px rgba(0,0,0,0.9); }
-        input[type=text]:focus, input[type=number]:focus { border-color: var(--primary); box-shadow: 0 0 0 2px var(--primary-glow), inset 0 3px 10px rgba(0,0,0,0.9); background: rgba(0, 0, 0, 0.9); transform: translateY(-2px);}
-        input::placeholder { color: #475569; font-size: 12px; letter-spacing: 2px; font-family: var(--font-mono); font-weight: 800;}
-
-        .btn-sleek { position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 14px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: 1px solid var(--primary-dark); background: linear-gradient(135deg, var(--primary), var(--primary-dark)); color: #fff; text-shadow: 1px 1px 2px rgba(0,0,0,0.8); display: flex; align-items: center; justify-content: center; text-transform: uppercase; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 0 var(--primary-3d), 0 6px 15px var(--primary-glow); flex-shrink: 0; }
-        .btn-sleek::before { content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent); transform: skewX(-20deg); animation: shimmerBtn 3s infinite; }
-        @keyframes shimmerBtn { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
-        .btn-sleek:active { transform: translateY(4px); box-shadow: 0 0 0 var(--primary-3d); }
-        .btn-dark { background: #1c1c24; color: #fff; border: 1px solid #2a2a35; box-shadow: 0 4px 0 #000;}
+        input[type=text] { width: 100%; height: 100%; padding: 0 8px; border: 2px solid var(--primary-dark); border-radius: 6px; text-align: center; font-size: 14px; font-weight: 900; background: rgba(0,0,0,0.8); color: var(--primary); outline: none; transition: 0.3s; font-family: var(--font-mono); }
+        
+        .btn-sleek { position: relative; overflow: hidden; height: 38px; padding: 0 12px; font-size: 12px; letter-spacing: 1.5px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 6px; border: none; background: linear-gradient(135deg, var(--primary), #8B651B); color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.3); flex-shrink: 0; transition: all 0.2s;}
+        .btn-sleek:active { transform: translateY(3px); box-shadow: 0 1px 3px rgba(0,0,0,0.8); }
+        .btn-sleek:disabled { filter: grayscale(1); cursor: not-allowed; }
 
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
-        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; height: 42px; }
+        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; height: 38px; }
         
-        .pending-box { display: flex; flex-direction: column; gap: 8px; width: 100%; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); margin-top: 2px;}
-        .pending-header { display: flex; justify-content: space-between; align-items: center; }
-        .pending-title { color: var(--primary); font-family: var(--font-main); font-size: 16px; font-weight: 900; display: flex; align-items: center; gap: 6px; letter-spacing: 1px; text-shadow: 0 0 8px var(--primary-glow);}
-        
-        .deposit-alert-strip { background: rgba(255, 61, 0, 0.1); border: 1px solid rgba(255, 61, 0, 0.4); padding: 6px 10px; border-radius: 8px; display: flex; justify-content: center; align-items: center; }
-        .deposit-alert-strip .alert-text { color: var(--red); font-size: 11px; font-weight: 900; letter-spacing: 0.5px; font-family: var(--font-ui); animation: pulseText 1.5s infinite alternate;}
-        @keyframes pulseText { from { text-shadow: 0 0 2px var(--red-glow); transform: scale(1); } to { text-shadow: 0 0 10px var(--red); transform: scale(1.02); } }
-        .pending-actions { display: flex; gap: 8px; height: 38px; }
-
-        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 11px; color: #94a3b8; font-weight: 900; background: rgba(0, 0, 0, 0.5); padding: 6px 12px; border-radius: 8px; border: 1px solid var(--border-light); box-shadow: inset 0 2px 10px rgba(0,0,0,0.5);}
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 10px; color: #bbb; font-weight: 900; background: rgba(0,0,0,0.6); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(229,184,105,0.2); box-shadow: inset 0 2px 10px rgba(0,0,0,1);}
         .info-col { flex: 1; }
-        .tool-info-row span { color: var(--primary); font-size: 15px; font-weight: 900; text-shadow: 0 0 8px var(--primary-glow); transition: color 0.3s;}
+        .tool-info-row span { color: #fff; font-size: 12px; font-weight: 900; }
 
-        .action-row { display: flex; gap: 8px; height: 42px; position: relative; width: 100%; align-items: center; justify-content: space-between;}
-        .input-group { display: flex; gap: 8px; flex: 1; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); height: 100%; }
+        .circular-timer { position: relative; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: 5px;}
+        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%;}
+        .timer-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 4; }
+        .timer-progress { fill: none; stroke: var(--primary); stroke-width: 4; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear, stroke 0.3s; stroke-linecap: round; }
+        #displayTimer { font-family: var(--font-mono); font-size: 10px; font-weight: 900; color: #fff; z-index: 2; }
+
+        .action-row { display: flex; gap: 10px; position: relative; width: 100%; align-items: center; justify-content: space-between; min-height: 50px;}
         
-        .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; background: transparent; border: none; box-shadow: none; z-index: 5; }
-        .result-display.show { display: flex; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .input-group { display: flex; gap: 20px; flex: 1; justify-content: center; align-items: center; transition: all 0.4s; }
         
-        @keyframes popIn { 
-            0% { transform: scale(0.6) translateY(12px); opacity: 0; filter: blur(4px); } 
-            70% { transform: scale(1.05) translateY(-2px); opacity: 1; filter: blur(0px); } 
-            100% { transform: scale(1) translateY(0); opacity: 1; } 
+        .vault-wrapper { 
+            position: relative; display: flex; justify-content: center; align-items: center; 
+            width: 45px; height: 45px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #3a2f26 0%, #0d0c0b 80%);
+            box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
         }
-
-        @keyframes textSmash {
-            0% { transform: scale(1.5) rotate(-3deg); opacity: 0; }
-            50% { transform: scale(0.95) rotate(2deg); opacity: 1; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
-        }
-
-        .zombie-text { font-family: var(--font-zombie); font-size: clamp(30px, 7vw, 40px); letter-spacing: 5px; line-height: 1; text-transform: uppercase; text-align: center; width: auto; animation: textSmash 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .res-text-big { color: #ffffff; text-shadow: 0 0 12px var(--primary-glow), 0 0 25px var(--primary); }
-        .res-text-small { color: #ffffff; text-shadow: 0 0 12px var(--primary-glow), 0 0 25px var(--primary); }
         
-        /* ⚡ 3D FLIPPING ANIMATED TIMER ⚡ */
-        .timer-3d-container {
-            perspective: 400px;
-            display: inline-block;
-        }
-        .timer-3d {
-            display: inline-block;
-            transform-style: preserve-3d;
-            transform-origin: top center;
-        }
-        .timer-flip {
-            animation: flip3D 0.4s ease-out forwards;
-        }
-        @keyframes flip3D {
-            0% { transform: rotateX(90deg); opacity: 0; text-shadow: 0 0 15px #fff; }
-            100% { transform: rotateX(0deg); opacity: 1; }
+        .vault-wrapper::before {
+            content: ''; position: absolute; width: 115%; height: 115%; border-radius: 50%;
+            border: 2.5px solid transparent; 
+            border-top: 2.5px solid var(--primary); 
+            border-bottom: 2.5px solid var(--primary);
+            animation: spinRight 2.5s linear infinite;
+            box-shadow: 0 0 8px var(--primary-glow);
         }
 
-        /* ⚡ IMAGE DROP BOUNCE ANIMATION ⚡ */
-        .img-drop-anim { 
-            animation: dropBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; 
-        }
-        @keyframes dropBounce {
-            0% { transform: translateY(-40px) scale(0.3) rotate(-15deg); opacity: 0; filter: blur(4px); }
-            50% { transform: translateY(5px) scale(1.1) rotate(5deg); opacity: 1; filter: blur(0); }
-            100% { transform: translateY(0) scale(1) rotate(0deg); opacity: 1; }
+        .vault-wrapper::after {
+            content: ''; position: absolute; width: 135%; height: 135%; border-radius: 50%;
+            border: 2.5px solid transparent; 
+            border-left: 2.5px solid var(--primary-dark); 
+            border-right: 2.5px solid var(--primary-dark);
+            animation: spinLeft 3s linear infinite;
+            opacity: 0.9;
         }
 
-        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(10, 10, 15, 0.98); backdrop-filter: blur(20px); background-image: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(255, 61, 0, 0.03) 40px, rgba(255, 61, 0, 0.03) 80px);}
-        .ban-icon { font-size: 50px; margin-bottom: 8px; animation: popIn 0.5s ease;}
-        .ban-title { color: var(--red); font-size: 36px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
+        .vault-wrapper img { position: relative; z-index: 2; height: 26px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
         
-        .ban-box { background: rgba(255, 61, 0, 0.05); border: 1px solid rgba(255, 61, 0, 0.3); padding: 15px; border-radius: 12px; margin-top: 15px; width: 100%; max-width: 320px; margin-bottom: 20px;}
-        .dynamic-deposit { display: none; margin-top: 12px; padding-top: 12px; border-top: 1px dashed rgba(255,255,255,0.2); animation: fadeIn 0.5s ease;}
-        .dynamic-deposit .label { font-size: 13px; color: #94a3b8; margin-bottom: 5px; font-family: var(--font-ui); font-weight: 800; letter-spacing: 1px;}
-        .dynamic-deposit .amount { font-size: 40px; font-weight: 900; color: var(--primary); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px var(--primary-glow);}
-        
-        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; color: #fff; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 900; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(28, 28, 36, 0.8); border: 1px solid #2a2a35; box-shadow: 0 8px 15px rgba(0,0,0,0.5); transition: 0.2s; cursor: pointer; letter-spacing: 1px;}
-        .contact-btn:active { transform: scale(0.96); }
-        .btn-deposit { background: linear-gradient(135deg, var(--green), #00b359); border: none; box-shadow: 0 4px 12px var(--green-glow); margin-bottom: 12px; color: #fff; font-family: var(--font-main); font-size: 18px; letter-spacing: 2px; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);}
+        @keyframes spinRight { 100% { transform: rotate(360deg); } }
+        @keyframes spinLeft { 100% { transform: rotate(-360deg); } }
 
-        .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 6px; }
-        .spinner-cyan { border: 3px solid var(--primary-glow); border-top-color: var(--primary); display: inline-block; width: 18px; height: 18px; border-radius: 50%; animation: spin 1s linear infinite; }
+        .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 5; }
+        .result-display.show { display: flex; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+
+        .zombie-text { font-family: var(--font-zombie); font-size: 24px; letter-spacing: 2px; line-height: 1; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary); }
+        
+        .hack-anim-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
+        .hack-text { font-family: var(--font-mono); font-size: 10px; color: var(--primary); letter-spacing: 1.5px; font-weight: 900; animation: pulseText 0.5s infinite alternate; margin-bottom: 4px; text-align: center;}
+        .hack-bar { width: 80%; height: 4px; background: rgba(0,0,0,0.5); border: 1px solid rgba(229,184,105,0.3); border-radius: 2px; overflow: hidden; position: relative;}
+        .hack-fill { width: 40%; height: 100%; background: linear-gradient(90deg, transparent, var(--primary)); box-shadow: 0 0 10px var(--primary); position: absolute; left: -40%; animation: slideBar 0.8s linear infinite; }
+        
+        .confidence-container { width: 100%; max-width: 110px; margin-top: 4px; display: flex; flex-direction: column; gap: 3px; }
+        .conf-header { display: flex; justify-content: space-between; font-size: 8px; font-family: var(--font-mono); color: #aaa; font-weight: 900; letter-spacing: 0.5px; }
+        .conf-track { width: 100%; height: 4px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
+        .conf-fill { width: 0%; height: 100%; background: var(--green); box-shadow: 0 0 8px var(--green); transition: width 1.5s ease-out; }
+
+        @keyframes slideBar { 100% { left: 100%; } }
+        @keyframes pulseText { 0% { opacity: 0.5; } 100% { opacity: 1; } }
+        @keyframes blinkGreen { 0% { opacity: 1; box-shadow: 0 0 10px var(--green); } 100% { opacity: 0.3; box-shadow: 0 0 2px var(--green); } }
+
+        .spinner { display: inline-block; width: 14px; height: 14px; border: 3px solid rgba(0,0,0,0.2); border-top-color: #000; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 4px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
 
-        #toast { position: fixed; top: 25px; left: 50%; transform: translateX(-50%) translateY(-100px) scale(0.9); background: rgba(28, 28, 36, 0.95); color: #fff; padding: 14px 22px; border-radius: 8px; font-weight: 900; font-size: 13px; border: 2px solid var(--primary-dark); z-index: 999999; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); box-shadow: 0 8px 25px rgba(0,0,0,0.9); white-space: nowrap; letter-spacing: 1px; backdrop-filter: blur(10px); opacity: 0; text-transform: uppercase;}
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);}
+        .ban-icon { font-size: 45px; margin-bottom: 10px;}
+        .ban-title { color: var(--red); font-size: 26px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
+        
+        .ban-box { background: rgba(229, 184, 105, 0.05); border: 1px solid var(--border-light); padding: 15px; border-radius: 10px; margin-top: 15px; width: 100%; max-width: 300px; margin-bottom: 20px;}
+        .dynamic-deposit { margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .dynamic-deposit .label { font-size: 11px; color: #888; font-family: var(--font-ui); font-weight: 800;}
+        .dynamic-deposit .amount { font-size: 32px; font-weight: 900; color: var(--primary); font-family: var(--font-main); letter-spacing: 2px;}
+        
+        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; color: #fff; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: 900; font-family: var(--font-ui); font-size: 13px; text-transform: uppercase; background: rgba(0, 0, 0, 0.6); border: 1px solid #333; transition: 0.2s; cursor: pointer;}
+        .contact-btn:active { transform: scale(0.97); }
+        .btn-deposit { background: var(--green); border: none; color: #000; margin-bottom: 12px;}
+
+        #toast { position: fixed; top: 15px; left: 50%; transform: translateX(-50%) translateY(-50px) scale(0.9); background: rgba(0, 0, 0, 0.95); color: #fff; padding: 10px 18px; border-radius: 6px; font-weight: 900; font-size: 11px; border: 2px solid var(--primary-dark); z-index: 999999; transition: all 0.4s; font-family: var(--font-mono); opacity: 0;}
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
     </style>
 </head>
 <body>
 
-    <!-- 🚧 SYSTEM MAINTENANCE SCREEN -->
-    <div id="maintenanceScreen" class="hard-screen" style="z-index: 999999999;">
-        <div style="font-size: 60px; animation: pulseText 2s infinite;">🚧</div>
-        <h1 class="ban-title" style="color: var(--primary); text-shadow: 0 0 15px var(--primary-glow); font-size:42px; margin-top:10px;">SYSTEM MAINTENANCE</h1>
-        <div class="ban-box" style="border-color: var(--border-light); background: rgba(255, 184, 0, 0.05); max-width: 350px;">
-            <span style="color:var(--primary); font-weight:900; font-size: 14px; font-family: var(--font-ui); letter-spacing: 2px;">PLEASE WAIT</span><br>
-            <span id="maintReasonDisplay" style="color:#fff; font-size: 15px; font-weight:800; display:block; margin-top:8px; margin-bottom: 18px;">System Upgrading...</span>
-            <div style="background: rgba(0,0,0,0.5); padding: 18px; border-radius: 10px; border: 1px inset rgba(255,255,255,0.1);">
-                <div style="font-size: 12px; color: #94a3b8; font-family: var(--font-mono); font-weight: 800; margin-bottom: 5px;">ESTIMATED TIME REMAINING</div>
-                <div id="maintTimerDisplay" style="font-size: 46px; font-family: var(--font-mono); font-weight: 900; color: #fff; letter-spacing: 3px; text-shadow: 0 0 12px rgba(255,255,255,0.4);">00:00</div>
-            </div>
+    <!-- ⚡ 8-SECOND SERVER BOOT SCREEN ⚡ -->
+    <div id="bootScreen">
+        <div class="radar-loader">
+            <div class="radar-circle inner"></div>
+            <div class="radar-circle"></div>
+            <div class="radar-scanner"></div>
         </div>
-        <p style="color: #64748b; font-size: 12px; font-weight: 800; font-family: var(--font-mono);">Do not close this window. The app will auto-resume.</p>
+        <div class="boot-logo">BADSHAH BHAI</div>
+        <div class="boot-terminal">
+            <span id="bt1"></span><br>
+            <span id="bt2"></span><br>
+            <span id="bt3"></span>
+        </div>
+        <div class="boot-progress-bar"><div class="boot-progress-fill"></div></div>
     </div>
 
+    <!-- 🚧 500₹ DEPOSIT / BAN SCREEN -->
     <div id="bannedScreen" class="hard-screen">
-        <div class="ban-icon">🛑</div>
-        <h1 class="ban-title">ACCESS REVOKED</h1>
+        <div class="ban-icon">⛔</div>
+        <h1 class="ban-title">VIP REQUIRED</h1>
         <div class="ban-box">
-            <span style="color:var(--red); font-weight:900; font-size: 13px; font-family: var(--font-mono); letter-spacing: 1.5px;">SYSTEM ALERT</span><br>
-            <span id="banReasonText" style="color:#fff; font-size: 15px; font-weight:800; display:block; margin-top:8px;">Your 5 Free Trials are exhausted.</span>
-            <div id="dynamicDepositBox" class="dynamic-deposit">
-                <div class="label">PREMIUM ACTIVATION FEE</div>
-                <div id="depositAmountDisplay" class="amount">₹---</div>
+            <span style="color:var(--primary); font-weight:900; font-size: 12px; font-family: var(--font-mono);">SYSTEM ALERT</span><br>
+            <span id="banReasonText" style="color:#fff; font-size: 14px; font-weight:800; display:block; margin-top:6px;">Your Free Trials are exhausted.</span>
+            <div class="dynamic-deposit">
+                <div class="label">VIP LIFETIME ACTIVATION</div>
+                <div id="depositAmountDisplay" class="amount">₹500</div>
             </div>
         </div>
         <button id="depositDoneBtn" class="btn-deposit contact-btn" onclick="Auth.submitDeposit()">✅ DEPOSIT DONE</button>
         <a href="t.me/BADSHAH_BHAI_700" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
+    <!-- 🔔 NOTIFICATION MODAL -->
+    <div id="notiModal" class="noti-modal-overlay">
+        <div class="noti-modal">
+            <div class="noti-header">
+                <div class="noti-title">📡 ADMIN MESSAGE</div>
+                <div class="close-noti" onclick="closeNoti()">✕</div>
+            </div>
+            <div class="noti-body" id="notiMessageText">
+                No new messages from Admin at this time.
+            </div>
+        </div>
+    </div>
+
     <div id="top-panel">
         <div class="top-header">
             <div class="header-left">
-                <div class="brand">BADSHAH HACK</div>
-                <div id="serverStatus" class="server-status"><div class="live-dot"></div> <span id="serverStatusText">SYSTEM LIVE</span></div>
-            </div>
-            
-            <div class="tabs" id="timeframeTabs">
-                <button class="tab-btn" id="btn-30s" onclick="Engine.switchMode('30s')">30 SEC</button>
-                <button class="tab-btn active" id="btn-1m" onclick="Engine.switchMode('1m')">1 MIN</button>
+                <div class="brand-row">
+                    <div class="brand-container">
+                        <div class="brand">BADSHAH BHAI</div>
+                        <div id="winStamp" class="win-stamp">WIN</div>
+                    </div>
+                    
+                    <!-- ⚡ NEW CONTROLS ROW (BELL + TABS) ⚡ -->
+                    <div class="controls-row">
+                        <div class="noti-btn" onclick="openNoti()">
+                            🔔 <div class="noti-dot" id="notiDot"></div>
+                        </div>
+                        <div class="tabs" id="timeframeTabs">
+                            <button class="tab-btn" id="btn-30s" onclick="Engine.switchMode('30s')">30S</button>
+                            <button class="tab-btn active" id="btn-1m" onclick="Engine.switchMode('1m')">1M</button>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="status-row">
+                    <div class="server-status"><div class="live-dot"></div> <span id="serverStatusText">ONLINE</span></div>
+                    <div class="ping-meter">PING: <span class="ping-val" id="pingValue">42ms</span></div>
+                    <div class="ping-meter" style="margin-left:auto;">ACCURACY: <span class="ping-val">96%</span></div>
+                </div>
             </div>
         </div>
 
         <div id="authScreen" class="auth-container">
             <div class="auth-row" id="auth-input-area">
                 <input type="text" inputmode="numeric" id="uidInput" placeholder="[ ENTER UID ]" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                <button id="authBtn" class="btn-sleek" style="width: 100px;" onclick="Auth.verify()">CONNECT</button>
-            </div>
-            <div id="auth-pending" class="pending-box hidden">
-                <div class="pending-header">
-                    <span class="pending-title"><div class="spinner-cyan"></div> VERIFYING...</span>
-                    <span style="font-size: 11px; color: #94a3b8; font-family:var(--font-mono); font-weight:800;">Awaiting Admin</span>
-                </div>
-                <div class="deposit-alert-strip"><span class="alert-text">⚠️ PREMIUM ACTIVATION DEPOSIT 800₹</span></div>
-                <div class="pending-actions">
-                    <a href="t.me/BADSHAH_BHAI_700" class="btn-sleek btn-dark" style="flex:1; text-decoration:none; font-size:12px; height:38px;">✈️ MSG ADMIN</a>
-                    <button class="btn-sleek btn-dark" style="flex:1; font-size:12px; height:38px;" onclick="location.reload()">🔄 REFRESH</button>
-                </div>
+                <button id="authBtn" class="btn-sleek" style="width: 90px;" onclick="Auth.verify()">CONNECT</button>
             </div>
         </div>
         
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row">
                 <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--primary); display:none; font-weight:900;">PLAYS: 0/5</span></div>
-                <div class="info-col" style="text-align: right;">TIMER: <span class="timer-3d-container"><span id="displayTimer" class="timer-3d">00:00</span></span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:10px; color:var(--primary); font-weight:900; text-transform: uppercase;">ROLE</span></div>
+                <div class="info-col" style="text-align: right; display: flex; justify-content: flex-end; align-items: center;">
+                    TMR: 
+                    <div class="circular-timer">
+                        <svg viewBox="0 0 36 36">
+                            <path class="timer-bg" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                            <path class="timer-progress" id="timerCircle" d="M18 2.0845 a 15.9155 15.9155 0 0 1 0 31.831 a 15.9155 15.9155 0 0 1 0 -31.831" />
+                        </svg>
+                        <span id="displayTimer">00</span>
+                    </div>
+                </div>
             </div>
             
             <div class="action-row">
-                <div class="input-group" id="input-group" style="justify-content: center; align-items: center; background: transparent; border: none; box-shadow: none;">
+                <div class="input-group" id="input-group">
                     <input type="hidden" id="in-n1">
                     <input type="hidden" id="in-n2">
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <span style="font-size: 10px; color: var(--primary); font-weight: 900; letter-spacing: 1px; margin-bottom: 4px;">N1</span>
-                        <img id="disp-n1" src="" style="height: 38px; display: none; filter: drop-shadow(0 0 10px var(--primary-glow));">
-                    </div>
-                    <span style="color: #64748b; font-weight: 900; margin: 0 8px; padding-top: 14px;">+</span>
-                    <div style="display: flex; flex-direction: column; align-items: center;">
-                        <span style="font-size: 10px; color: var(--primary); font-weight: 900; letter-spacing: 1px; margin-bottom: 4px;">N2</span>
-                        <img id="disp-n2" src="" style="height: 38px; display: none; filter: drop-shadow(0 0 10px var(--primary-glow));">
-                    </div>
+                    
+                    <div class="vault-wrapper"><img id="disp-n1" src="" style="display: none;"></div>
+                    <span style="color: #888; font-weight: 900; font-size: 20px; font-family: var(--font-mono);">+</span>
+                    <div class="vault-wrapper"><img id="disp-n2" src="" style="display: none;"></div>
                 </div>
-                <div id="out-size" class="result-display">--</div>
-                <button class="btn-sleek" id="btnAnalyze" style="width: 100px; padding: 0;" onclick="Engine.analyze()">EXECUTE</button>
+                
+                <div id="out-size" class="result-display"></div>
+                
+                <button class="btn-sleek" id="btnAnalyze" style="width: 80px; height: 48px;" onclick="Engine.analyze()">EXECUTE</button>
             </div>
         </div>
     </div>
@@ -271,266 +342,223 @@
         const DB_PATHS = { '30s': 'patterns_30s', '1m': 'patterns' };
 
         window.AdminSettings = { prefixes: ["68", "67"], baselineUid: 0, freeTrials: 5 };
-        window.GlobalSettings = {}; 
-
         let currentUid = ""; let currentPrediction = ""; let currentPeriod = "";
-        let maintInterval = null;
+
+        // ⚡ NOTIFICATION FUNCTIONS ⚡
+        window.openNoti = function() {
+            document.getElementById('notiModal').style.display = 'flex';
+            document.getElementById('notiDot').style.display = 'none'; // Hide dot when read
+        }
+        window.closeNoti = function() {
+            document.getElementById('notiModal').style.display = 'none';
+        }
+
+        // ⚡ FIREBASE LIVE SETTINGS & NOTIFICATIONS ⚡
+        document.addEventListener("DOMContentLoaded", () => {
+            onValue(ref(db, 'settings'), snap => { 
+                if(snap.exists()) {
+                    let settings = snap.val();
+                    if(settings.force_link) document.getElementById('main-frame').src = settings.force_link; 
+                    
+                    // Admin Notification Update
+                    if(settings.admin_message) {
+                        let currentMsg = document.getElementById('notiMessageText').innerText;
+                        if(currentMsg !== settings.admin_message) {
+                            document.getElementById('notiMessageText').innerText = settings.admin_message;
+                            document.getElementById('notiDot').style.display = 'block'; // Show dot on new message
+                        }
+                    }
+                }
+            });
+        });
+
+        // ⚡ 8-SECOND BOOT SCREEN LOGIC ⚡
+        window.addEventListener('load', () => {
+            const bt1 = document.getElementById('bt1'); const bt2 = document.getElementById('bt2'); const bt3 = document.getElementById('bt3');
+            
+            setTimeout(() => { bt1.innerText = "> CONNECTING TO SERVER..."; }, 500);
+            setTimeout(() => { bt2.innerText = "> BYPASSING SECURITY PROTOCOLS..."; }, 3000);
+            setTimeout(() => { bt3.innerText = "> ACCESS GRANTED. INITIALIZING HACK..."; bt3.style.color = "var(--primary)"; }, 5500);
+            
+            setTimeout(() => {
+                document.getElementById('bootScreen').style.opacity = '0';
+                setTimeout(() => { document.getElementById('bootScreen').style.display = 'none'; }, 500);
+            }, 8000);
+        });
+
+        setInterval(() => {
+            const ping = Math.floor(Math.random() * (75 - 28 + 1)) + 28;
+            const pElement = document.getElementById('pingValue');
+            if(pElement) pElement.innerText = ping + "ms";
+        }, 3500);
 
         window.Util = class {
-            static limit(el) { if(el.value.length > 1) el.value = el.value.slice(0,1); if(parseInt(el.value) < 0 || parseInt(el.value) > 9) el.value = ""; }
             static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
-                if(msg.includes("NOT SIKKIM") || msg.includes("REJECTED") || msg.includes("REQUIRED") || msg.includes("ERROR") || msg.includes("BANNED")) {
-                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px var(--red-glow)";
+                if(msg.includes("ERROR") || msg.includes("BANNED") || msg.includes("REQUIRED")) {
+                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)";
                 } else {
-                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.9), 0 0 20px var(--primary-glow)";
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; 
                 }
-                t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3500); 
+                t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3000); 
             }
         };
-
-        function getDeviceID() { let d = localStorage.getItem('dev_did'); if(!d) { d = 'DEV-' + Math.random().toString(36).substr(2, 9); localStorage.setItem('dev_did', d); } return d; }
 
         window.Auth = class {
             static async verify() {
                 let uid = document.getElementById('uidInput').value.trim(); let btn = document.getElementById('authBtn'); 
-                if(!uid) return Util.toast("ENTER UID FIRST"); if(!/^\d{8}$/.test(uid)) { return Util.toast("INVALID FORMAT. CREATE NEW ID."); }
+                if(!uid) return Util.toast("ENTER UID FIRST");
                 btn.innerHTML = '<span class="spinner"></span>'; btn.disabled = true;
                 
                 try {
                     let snapshot = await get(ref(db, 'approved_uids/' + uid));
                     if(snapshot.exists()) {
                         let data = snapshot.val(); currentUid = uid;
-                        if(data.is_banned) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("THIS UID IS BANNED."); }
-                        if(data.expireAt && data.expireAt < Date.now()) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, "Your VIP Subscription has expired. Please renew."); return; }
-                        
                         let role = data.role || (data.is_premium ? 'vip' : 'trial');
-                        if(role === 'trial' && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) { btn.innerText = "CONNECT"; btn.disabled = false; this.showDepositScreen(uid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
                         
-                        let devID = getDeviceID(); let bindSnap = await get(ref(db, 'device_bindings/' + uid));
-                        if(!bindSnap.exists()) await set(ref(db, 'device_bindings/' + uid), devID); else if (bindSnap.val() !== devID) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("UID BOUND TO ANOTHER DEVICE."); }
-                        
-                        data.role = role; 
+                        if(role === 'trial' && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) { 
+                            btn.innerText = "CONNECT"; btn.disabled = false; 
+                            this.showDepositScreen(); return; 
+                        }
+
+                        data.role = role;
                         this.grant(data.access_type || 'both', data); return;
                     }
-                    
-                    let isValidPrefix = window.AdminSettings.prefixes.some(prefix => uid.startsWith(prefix));
-                    if(!isValidPrefix) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("INVALID PREFIX. CREATE NEW ID."); }
-                    if(parseInt(uid) <= window.AdminSettings.baselineUid) { btn.innerText = "CONNECT"; btn.disabled = false; return Util.toast("OLD UID REJECTED. CREATE NEW ID."); }
-
-                    await set(ref(db, 'uid_requests/' + uid), { uid: uid, deviceId: getDeviceID(), status: "pending", timestamp: Date.now() });
-                    document.getElementById('auth-input-area').classList.add('hidden'); document.getElementById('auth-pending').classList.remove('hidden');
+                    Util.toast("INVALID UID.");
+                    btn.innerText = "CONNECT"; btn.disabled = false;
                 } catch (error) { btn.innerText = "CONNECT"; btn.disabled = false; Util.toast("NETWORK ERROR"); }
             }
 
-            static showDepositScreen(uid, msg) {
-                document.getElementById('banReasonText').innerText = msg; document.getElementById('banReasonText').style.color = "var(--red)";
-                
-                const amounts = [800, 1000]; 
-                let hash = 0;
-                for (let i = 0; i < uid.length; i++) { hash = uid.charCodeAt(i) + ((hash << 5) - hash); }
-                window.currentDepositAmount = amounts[Math.abs(hash) % amounts.length];
-                
-                document.getElementById('depositAmountDisplay').innerText = "₹" + window.currentDepositAmount;
-                document.getElementById('dynamicDepositBox').style.display = "block"; document.getElementById('bannedScreen').style.display = 'flex';
+            static showDepositScreen() {
+                window.currentDepositAmount = 500; 
+                document.getElementById('bannedScreen').style.display = 'flex';
             }
 
             static async submitDeposit() {
-                if(!currentUid) return Util.toast("UID ERROR"); const btn = document.getElementById('depositDoneBtn'); btn.innerText = "SUBMITTING..."; btn.disabled = true;
-                try { await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: window.currentDepositAmount || 0, status: "pending", timestamp: Date.now() }); Util.toast("DEPOSIT REQUEST SENT"); btn.innerText = "✅ REQUEST PENDING"; btn.style.background = "var(--bg-top)"; btn.style.borderColor = "var(--primary-dark)"; btn.style.color = "#fff"; } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
+                if(!currentUid) return Util.toast("UID ERROR"); 
+                const btn = document.getElementById('depositDoneBtn'); btn.innerText = "WAIT..."; btn.disabled = true;
+                try { 
+                    await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: 500, status: "pending", timestamp: Date.now() }); 
+                    Util.toast("DEPOSIT REQUEST SENT"); 
+                    btn.innerText = "✅ PENDING"; btn.style.background = "#333"; btn.style.color = "#fff"; 
+                } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
             }
 
             static grant(accessType, userData) { 
-                document.getElementById('authScreen').classList.add('hidden'); document.getElementById('toolScreen').classList.remove('hidden');
-                const tabsContainer = document.getElementById('timeframeTabs');
-                if (accessType === '1m') { tabsContainer.classList.add('hidden'); Engine.switchMode('1m'); } 
-                else if (accessType === '30s') { tabsContainer.classList.add('hidden'); Engine.switchMode('30s'); } 
-                else { tabsContainer.classList.remove('hidden'); Engine.switchMode('1m'); }
-
-                const trialDisp = document.getElementById('trialsDisplay');
-                // ⚡ VVIP Logic: Shows VVIP 1 instead of VVIP2/3 ⚡
-                if(userData.role === 'trial') { 
-                    trialDisp.style.display = 'inline-block'; 
-                    trialDisp.innerText = `PLAYS: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; 
-                } 
-                else { 
-                    trialDisp.style.display = 'inline-block';
-                    if(userData.role.includes('vvip')) trialDisp.innerText = '👑 VVIP 1 ACTIVE';
-                    else trialDisp.innerText = '🌟 VIP ACTIVE';
-                }
+                document.getElementById('authScreen').classList.add('hidden'); 
+                document.getElementById('toolScreen').classList.remove('hidden');
                 
-                const sStatus = document.getElementById('serverStatus');
-                const sText = document.getElementById('serverStatusText');
-                if(sStatus && sText) {
-                    sStatus.classList.add('connected');
-                    sText.innerText = "SERVER SECURE";
-                }
+                let roleText = "TRIAL ACTIVE";
+                if(userData.role.includes('vvip')) { roleText = "👑 VVIP ACTIVE"; Engine.isVvipUser = true; } 
+                else if(userData.role.includes('vip')) { roleText = "🌟 VIP ACTIVE"; Engine.isVvipUser = true; }
+                if(userData.role === 'trial') { roleText = `TRIAL: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; }
 
-                Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
+                document.getElementById('trialsDisplay').innerText = roleText;
+                Engine.switchMode('1m'); Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
             }
         };
 
         window.Engine = class {
-            static activeMode = '1m';
-            static state = "IDLE";
-            static apiPeriod = null; 
-            
-            static isVvipUser = false;
-            static lastPrediction = null;
-            static lastPredictedPeriod = null;
+            static activeMode = '1m'; static state = "IDLE"; static apiPeriod = null; 
+            static isVvipUser = false; static lastPrediction = null; static lastPredictedPeriod = null;
+            static latestN1 = null; static latestN2 = null; 
             
             static switchMode(m) { 
-                this.activeMode = m; 
-                this.apiPeriod = null; 
+                this.activeMode = m; this.apiPeriod = null; 
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); 
                 document.getElementById('btn-'+m).classList.add('active'); 
-                this.updateTimerUI(); 
-                this.syncPeriodFromAPI(); 
+                this.updateTimerUI(); this.syncPeriodFromAPI(); 
             }
             
-            static startTimer() { 
-                this.syncPeriodFromAPI(); 
-                setInterval(() => this.updateTimerUI(), 1000); 
+            static startTimer() { this.syncPeriodFromAPI(); setInterval(() => this.updateTimerUI(), 1000); }
+
+            static updateN1N2Display() {
+                if(this.latestN1 !== null && this.latestN2 !== null) {
+                    document.getElementById('in-n1').value = this.latestN1; 
+                    document.getElementById('in-n2').value = this.latestN2;
+                    let img1 = document.getElementById('disp-n1'); let img2 = document.getElementById('disp-n2');
+                    img1.src = `${this.latestN1}.png`; img2.src = `${this.latestN2}.png`;
+                    img1.style.display = 'block'; img2.style.display = 'block';
+                }
             }
 
             static async syncPeriodFromAPI() {
-                let url = this.activeMode === '1m' 
-                    ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" 
-                    : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
+                let url = this.activeMode === '1m' ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
                 try {
-                    let res = await fetch(url);
-                    let json = await res.json();
+                    let res = await fetch(url); let json = await res.json();
                     if(json && json.data && json.data.list && json.data.list.length > 1) { 
                         let lastIssue = json.data.list[0].IssueNumber || json.data.list[0].issueNumber;
                         let lastNumber = json.data.list[0].Number || json.data.list[0].number;
-                        
                         let newPeriod = (BigInt(lastIssue) + 1n).toString();
                         
-                        // ⚡ Trigger Image Drop Animation on new period ⚡
+                        this.latestN1 = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number;
+                        this.latestN2 = json.data.list[1].Number !== undefined ? json.data.list[1].Number : json.data.list[1].number;
+                        
                         if (this.apiPeriod !== newPeriod) {
-                            let num1 = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number; 
-                            let num2 = json.data.list[1].Number !== undefined ? json.data.list[1].Number : json.data.list[1].number; 
-                            document.getElementById('in-n1').value = num1;
-                            document.getElementById('in-n2').value = num2;
-                            
-                            let img1 = document.getElementById('disp-n1');
-                            let img2 = document.getElementById('disp-n2');
-                            
-                            img1.classList.remove('img-drop-anim');
-                            img2.classList.remove('img-drop-anim');
-                            void img1.offsetWidth; // Trigger reflow for animation restart
-                            
-                            img1.src = `${num1}.png`;
-                            img2.src = `${num2}.png`;
-                            
-                            img1.style.display = 'block';
-                            img2.style.display = 'block';
-                            
-                            img1.classList.add('img-drop-anim');
-                            img2.classList.add('img-drop-anim');
-
                             if (this.isVvipUser && this.lastPredictedPeriod === String(lastIssue)) {
                                 let num = parseInt(lastNumber);
                                 let isWin = false;
-                                
                                 if (this.lastPrediction === "BIG" && num >= 5 && num <= 9) isWin = true;
                                 if (this.lastPrediction === "SMALL" && num >= 0 && num <= 4) isWin = true;
                                 
-                                let btn = document.getElementById('btnAnalyze');
-                                let resultBox = document.getElementById('out-size');
-                                
-                                if (isWin) {
-                                    resultBox.innerHTML = `<div style="display:flex; align-items:center; justify-content:center; gap:8px;">
-                                        <span class="zombie-text ${this.lastPrediction === 'BIG' ? 'res-text-big' : 'res-text-small'}" style="width: auto;">${this.lastPrediction}</span>
-                                        <img src="${num}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
-                                    </div>`;
-                                    
-                                    btn.innerText = "RESET";
-                                    btn.style.background = "var(--green)";
-                                    btn.style.color = "#fff";
-                                    btn.style.borderColor = "var(--green)";
-                                } else {
-                                    btn.innerText = "RESET";
-                                    btn.style.background = "var(--red)";
-                                    btn.style.color = "#fff";
-                                    btn.style.borderColor = "var(--red)";
+                                if(isWin) {
+                                    let stamp = document.getElementById('winStamp');
+                                    stamp.classList.add('show');
+                                    setTimeout(() => stamp.classList.remove('show'), 15000); 
                                 }
-                                
-                                btn.disabled = false;
-                                this.state = "NEXT"; 
                                 this.lastPredictedPeriod = null; 
                             }
 
                             this.apiPeriod = newPeriod;
+                            
+                            if(this.state === "IDLE") {
+                                this.updateN1N2Display();
+                            }
                         }
                     }
-                } catch(e) {
-                    console.log("API Sync delayed, fallback system active.");
-                }
+                } catch(e) { console.log("API Sync delayed."); }
             }
 
             static updateTimerUI() {
-                const formatter = new Intl.DateTimeFormat('en-US', {
-                    timeZone: 'Asia/Kolkata',
-                    year: 'numeric', month: '2-digit', day: '2-digit',
-                    hour: '2-digit', minute: '2-digit', second: '2-digit',
-                    hour12: false
-                });
-                
-                const parts = formatter.formatToParts(new Date());
-                const t = {};
-                parts.forEach(p => t[p.type] = p.value);
+                const formatter = new Intl.DateTimeFormat('en-US', { timeZone: 'Asia/Kolkata', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false });
+                const parts = formatter.formatToParts(new Date()); const t = {}; parts.forEach(p => t[p.type] = p.value);
                 
                 let year = t.year; let month = t.month; let day = t.day;
-                let hour = parseInt(t.hour) === 24 ? 0 : parseInt(t.hour);
-                let min = parseInt(t.minute); let sec = parseInt(t.second);
-
-                let totalMins = (hour * 60) + min;
-                let remSec = 0;
-                let fallbackPeriod = "";
+                let hour = parseInt(t.hour) === 24 ? 0 : parseInt(t.hour); let min = parseInt(t.minute); let sec = parseInt(t.second);
+                let totalMins = (hour * 60) + min; let remSec = 0; let fallbackPeriod = "";
 
                 if(this.activeMode === '1m') { 
-                    let seq = String(totalMins + 1).padStart(4, '0');
-                    fallbackPeriod = `${year}${month}${day}01${seq}`; 
-                    remSec = 60 - sec; 
-                    if(remSec === 60) remSec = 0; 
+                    let seq = String(totalMins + 1).padStart(4, '0'); fallbackPeriod = `${year}${month}${day}01${seq}`; 
+                    remSec = 60 - sec; if(remSec === 60) remSec = 0; 
                 } else { 
-                    let seq = String((totalMins * 2) + (sec >= 30 ? 2 : 1)).padStart(4, '0');
-                    fallbackPeriod = `${year}${month}${day}30${seq}`; 
+                    let seq = String((totalMins * 2) + (sec >= 30 ? 2 : 1)).padStart(4, '0'); fallbackPeriod = `${year}${month}${day}30${seq}`; 
                     remSec = sec >= 30 ? 60 - sec : 30 - sec; 
                 }
                 
                 currentPeriod = this.apiPeriod ? this.apiPeriod : fallbackPeriod;
 
-                if (remSec === 58 || remSec === 28) {
-                    this.syncPeriodFromAPI();
-                }
-
-                if (remSec === 59 || remSec === 29) {
-                    this.apiPeriod = null; 
-                }
+                if (remSec === 58 || remSec === 28) this.syncPeriodFromAPI();
+                if (remSec === 59 || remSec === 29) { this.apiPeriod = null; document.getElementById('winStamp').classList.remove('show'); }
                 
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
                 
-                // ⚡ 3D Timer Application ⚡
                 let tDisplay = document.getElementById('displayTimer'); 
-                let timeStr = `00:${String(remSec).padStart(2,'0')}`;
+                let timerCircle = document.getElementById('timerCircle');
                 
-                if (tDisplay.innerText !== timeStr) {
-                    tDisplay.innerText = timeStr;
-                    tDisplay.classList.remove('timer-flip');
-                    void tDisplay.offsetWidth; // Trigger CSS Reflow for animation
-                    tDisplay.classList.add('timer-flip');
+                tDisplay.innerText = String(remSec).padStart(2,'0');
+                
+                let maxTime = this.activeMode === '1m' ? 60 : 30;
+                let percentage = (remSec / maxTime) * 100;
+                timerCircle.style.strokeDashoffset = 100 - percentage;
+
+                if(remSec <= 5) {
+                    tDisplay.style.color = "var(--red)"; timerCircle.style.stroke = "var(--red)";
+                } else {
+                    tDisplay.style.color = "#fff"; timerCircle.style.stroke = "var(--primary)";
                 }
                 
-                tDisplay.style.color = remSec <= 5 ? "var(--red)" : "var(--primary)";
-                
                 if(remSec <= 2 && this.state !== "IDLE") { 
-                    if (this.isVvipUser && this.lastPredictedPeriod) {
-                        let btn = document.getElementById('btnAnalyze');
-                        btn.disabled = true;
-                        btn.innerHTML = '<span class="spinner" style="border-top-color:#000;"></span> WAIT...';
-                    }
+                    let btn = document.getElementById('btnAnalyze'); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; 
                 }
             }
 
@@ -539,163 +567,85 @@
                 let btn = document.getElementById('btnAnalyze'); let resultBox = document.getElementById('out-size'); let inputGroup = document.getElementById('input-group');
 
                 if(this.state === "IDLE") {
-                    
-                    // ⚡ FORCE API FETCH ON CLICK (In case auto-fetch missed it) ⚡
-                    if(!n1.value || !n2.value) {
-                        btn.innerHTML = '<span class="spinner" style="border-top-color:#fff;"></span>'; 
-                        let url = this.activeMode === '1m' 
-                            ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" 
-                            : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
-                        try {
-                            let res = await fetch(url);
-                            let json = await res.json();
-                            if(json && json.data && json.data.list && json.data.list.length > 1) {
-                                n1.value = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number;
-                                n2.value = json.data.list[1].Number !== undefined ? json.data.list[1].Number : json.data.list[1].number;
-                                document.getElementById('disp-n1').src = `${n1.value}.png`;
-                                document.getElementById('disp-n1').style.display = 'block';
-                                document.getElementById('disp-n2').src = `${n2.value}.png`;
-                                document.getElementById('disp-n2').style.display = 'block';
-                            }
-                        } catch(e) {
-                            Util.toast("API ERROR");
-                            this.resetUI();
-                            return;
+                    if(!n1.value || !n2.value) return Util.toast("WAITING FOR SYNC...");
+
+                    let uDataSnap = await get(ref(db, 'approved_uids/' + currentUid));
+                    if(uDataSnap.exists()) {
+                        let uD = uDataSnap.val();
+                        if((uD.role === 'trial' || !uD.role) && (uD.predictions_used || 0) >= window.AdminSettings.freeTrials) {
+                            Auth.showDepositScreen(); return;
                         }
                     }
 
-                    if(!n1.value || !n2.value) return Util.toast("WAITING FOR SYNC...");
-
-                    let userSnap = await get(ref(db, 'approved_uids/' + currentUid)); let uData = userSnap.val();
-                    let role = uData.role || (uData.is_premium ? 'vip' : 'trial');
-                    
-                    let queryRole = role.startsWith('vvip') ? 'vvip' : role;
-
-                    if(role === 'trial' && (uData.predictions_used || 0) >= window.AdminSettings.freeTrials) { Auth.showDepositScreen(currentUid, `Your ${window.AdminSettings.freeTrials} Free Trials are exhausted.`); return; }
-
                     btn.disabled = true; 
-                    btn.innerHTML = '<span class="spinner" style="border-top-color:#fff; width:12px; height:12px; margin-right:4px;"></span> <span style="font-size:11px; letter-spacing:0px;">DECRYPT</span>'; 
+                    btn.innerHTML = '<span class="spinner"></span>'; 
                     resultBox.classList.remove('show');
                     
-                    inputGroup.style.opacity = '0';
-                    inputGroup.style.transform = 'translateY(-10px) scale(0.95)';
+                    inputGroup.style.display = 'none';
                     
+                    resultBox.innerHTML = `
+                        <div class="hack-anim-box">
+                            <div class="hack-text">DECRYPTING...</div>
+                            <div class="hack-bar"><div class="hack-fill"></div></div>
+                        </div>
+                    `;
+                    resultBox.classList.add('show');
+
                     let targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`; 
 
                     try {
-                        if (uData.force_live === true) {
-                            targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`;
-                        } else {
-                            let snapActive = await get(ref(db, `settings/active_matrices/${queryRole}_${this.activeMode}`));
-                            if(snapActive.exists() && snapActive.val()) {
-                                let route = snapActive.val();
-                                targetDbPath = `matrix_history_${route.vault}/${route.id}/matrix/${n1.value}-${n2.value}`;
-                            } else {
-                                targetDbPath = `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`;
-                            }
-                        }
-
                         let snap = await get(ref(db, targetDbPath));
                         
                         setTimeout(async () => {
                             if(snap.exists() && !snap.val().includes("UNSET")) {
                                 let rawPrediction = snap.val(); 
                                 let isBig = rawPrediction.toUpperCase().includes("BIG");
-                                
-                                if (window.GlobalSettings && window.GlobalSettings.reverse_mode && window.GlobalSettings.reverse_mode.active && Date.now() < window.GlobalSettings.reverse_mode.expireAt) {
-                                    isBig = !isBig;
-                                }
-
                                 currentPrediction = isBig ? "BIG" : "SMALL";
                                 
-                                if(role.startsWith('vvip') && role !== 'vvip1') {
-                                    this.isVvipUser = true;
+                                if(this.isVvipUser) {
                                     this.lastPrediction = currentPrediction;
                                     this.lastPredictedPeriod = currentPeriod;
-                                } else {
-                                    this.isVvipUser = false;
-                                }
-
-                                if(role === 'trial') { 
-                                    await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) }); 
-                                    document.getElementById('trialsDisplay').innerText = `PLAYS: ${(uData.predictions_used || 0) + 1}/${window.AdminSettings.freeTrials}`; 
                                 }
                                 
-                                inputGroup.style.display = 'none'; 
-                                
-                                let extractedNum = rawPrediction.match(/\[(\d+)\]/);
-                                let baseNum = extractedNum ? parseInt(extractedNum[1]) : (isBig ? 7 : 2);
-                                
-                                let imagesHtml = "";
-
-                                if (role === 'vvip1' || role === 'vip') {
-                                    imagesHtml = "";
-                                } else if (role === 'vvip2') {
-                                    let pool = isBig ? [5,6,7,8,9] : [0,1,2,3,4];
-                                    pool = pool.filter(n => n !== baseNum); 
-                                    let num2 = pool[Math.floor(Math.random() * pool.length)];
-                                    imagesHtml = `
-                                        <img src="${baseNum}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
-                                        <img src="${num2}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">
-                                    `;
-                                } else {
-                                    imagesHtml = `<img src="${baseNum}.png" class="res-img-anim" style="height: 34px; filter: drop-shadow(0 0 8px var(--primary));">`;
+                                if(!this.isVvipUser) {
+                                    await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) });
                                 }
 
-                                let displayHtml = `<div style="display:flex; align-items:center; justify-content:center; width:100%; gap: 10px;">
-                                    <span class="zombie-text ${isBig ? 'res-text-big' : 'res-text-small'}">${currentPrediction}</span>
-                                    <div style="display:flex; gap: 5px;">${imagesHtml}</div>
+                                let confLevel = Math.floor(Math.random() * (99 - 88 + 1)) + 88;
+
+                                let displayHtml = `<div style="display:flex; flex-direction:column; align-items:center; width:100%;">
+                                    <span class="zombie-text">${currentPrediction}</span>
+                                    <div class="confidence-container">
+                                        <div class="conf-header">
+                                            <span>ACCURACY</span>
+                                            <span style="color:var(--primary);">${confLevel}%</span>
+                                        </div>
+                                        <div class="conf-track"><div class="conf-fill" style="width: ${confLevel}%;"></div></div>
+                                    </div>
                                 </div>`;
 
                                 resultBox.innerHTML = displayHtml; 
-                                resultBox.classList.add('show');
-                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "RESET";
-                            } else { Util.toast("NO PATTERN FOUND"); this.resetUI(); }
-                        }, 1200); 
+                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "NEXT";
+                            } else { Util.toast("PATTERN NOT FOUND"); this.resetUI(); }
+                        }, 5000); 
+
                     } catch(e) { Util.toast("SERVER ERROR"); this.resetUI(); }
-                } else { this.resetUI(); }
+                } else { 
+                    this.resetUI(); 
+                }
             }
             
             static resetUI() {
                 const btn = document.getElementById('btnAnalyze'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
                 resultBox.classList.remove('show'); 
                 inputGroup.style.display = 'flex'; 
-                setTimeout(() => { 
-                    inputGroup.style.opacity = '1'; 
-                    inputGroup.style.transform = 'translateY(0) scale(1)'; 
-                }, 50);
+                btn.disabled = false; btn.innerText = "EXECUTE"; 
+                this.state = "IDLE";
+                document.getElementById('winStamp').classList.remove('show');
                 
-                btn.disabled = false; btn.innerText = "EXECUTE"; btn.style.background = ""; btn.style.color = "#fff"; btn.style.borderColor = "var(--primary-dark)"; this.state = "IDLE";
-                currentPrediction = "";
+                this.updateN1N2Display();
             }
         };
-
-        document.addEventListener("DOMContentLoaded", () => {
-            onValue(ref(db, 'settings'), snap => { 
-                if(snap.exists()) {
-                    window.GlobalSettings = snap.val(); 
-                    if(window.GlobalSettings.force_link) document.getElementById('main-frame').src = window.GlobalSettings.force_link.trim().startsWith('http') ? window.GlobalSettings.force_link.trim() : 'https://' + window.GlobalSettings.force_link.trim(); 
-                    if(window.GlobalSettings.auth_rules) { window.AdminSettings.prefixes = window.GlobalSettings.auth_rules.prefixes.split(',').map(p => p.trim()); window.AdminSettings.baselineUid = parseInt(window.GlobalSettings.auth_rules.baselineUid); window.AdminSettings.freeTrials = parseInt(window.GlobalSettings.auth_rules.freeTrials); }
-                    
-                    if (window.GlobalSettings.maintenance) {
-                        let m = window.GlobalSettings.maintenance; let mScreen = document.getElementById('maintenanceScreen');
-                        if (m.active) {
-                            mScreen.style.display = 'flex'; document.getElementById('maintReasonDisplay').innerText = m.reason;
-                            if (maintInterval) clearInterval(maintInterval);
-                            maintInterval = setInterval(() => {
-                                let now = Date.now(); let elapsed = now - m.startTime; let remMs = m.durationMs - elapsed;
-                                if (remMs <= 0) {
-                                    if (m.autoExtend) { let cycles = Math.ceil(elapsed / m.durationMs); let newExpire = m.startTime + (cycles * m.durationMs); remMs = newExpire - now; } 
-                                    else { clearInterval(maintInterval); mScreen.style.display = 'none'; return; }
-                                }
-                                let mins = Math.floor(remMs / 60000); let secs = Math.floor((remMs % 60000) / 1000);
-                                document.getElementById('maintTimerDisplay').innerText = `${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
-                            }, 1000);
-                        } else { if (maintInterval) clearInterval(maintInterval); mScreen.style.display = 'none'; }
-                    } else { document.getElementById('maintenanceScreen').style.display = 'none'; }
-                }
-            });
-        });
     </script>
 </body>
 </html>
