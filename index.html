@@ -88,7 +88,7 @@
         .win-stamp.show { display: block; }
         @keyframes smashIn { 0% { transform: scale(3) rotate(-30deg); opacity: 0; } 100% { transform: scale(1) rotate(-15deg); opacity: 1; } }
 
-        /* ⚡ NOTIFICATION BELL & MODAL (NEW) ⚡ */
+        /* ⚡ NOTIFICATION BELL & MODAL ⚡ */
         .controls-row { display: flex; align-items: center; gap: 8px; }
         .noti-btn { background: rgba(0,0,0,0.6); border: 1px solid rgba(229,184,105,0.3); border-radius: 6px; padding: 4px 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; position: relative; transition: all 0.2s;}
         .noti-btn:active { transform: scale(0.9); }
@@ -265,7 +265,7 @@
                         <div id="winStamp" class="win-stamp">WIN</div>
                     </div>
                     
-                    <!-- ⚡ NEW CONTROLS ROW (BELL + TABS) ⚡ -->
+                    <!-- ⚡ CONTROLS ROW (BELL + TABS) ⚡ -->
                     <div class="controls-row">
                         <div class="noti-btn" onclick="openNoti()">
                             🔔 <div class="noti-dot" id="notiDot"></div>
@@ -360,12 +360,11 @@
                     let settings = snap.val();
                     if(settings.force_link) document.getElementById('main-frame').src = settings.force_link; 
                     
-                    // Admin Notification Update
                     if(settings.admin_message) {
                         let currentMsg = document.getElementById('notiMessageText').innerText;
                         if(currentMsg !== settings.admin_message) {
                             document.getElementById('notiMessageText').innerText = settings.admin_message;
-                            document.getElementById('notiDot').style.display = 'block'; // Show dot on new message
+                            document.getElementById('notiDot').style.display = 'block'; 
                         }
                     }
                 }
@@ -557,8 +556,14 @@
                     tDisplay.style.color = "#fff"; timerCircle.style.stroke = "var(--primary)";
                 }
                 
-                if(remSec <= 2 && this.state !== "IDLE") { 
-                    let btn = document.getElementById('btnAnalyze'); btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; 
+                // ⚡ BUG FIX: ONLY DISABLE BUTTON IF STATE IS "IDLE" ⚡
+                let btn = document.getElementById('btnAnalyze');
+                if(this.state === "IDLE") {
+                    if(remSec <= 2) { 
+                        btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; 
+                    } else if (btn.disabled) {
+                        btn.disabled = false; btn.innerText = "EXECUTE";
+                    }
                 }
             }
 
