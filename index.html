@@ -522,9 +522,9 @@
                 Engine.userRole = userData.role; 
                 let roleText = "TRIAL ACTIVE";
                 
-                if(userData.role.includes('vvip2')) { roleText = "💎 VVIP-2 ACTIVE"; Engine.isVvipUser = true; } 
-                else if(userData.role.includes('vvip')) { roleText = "👑 VVIP ACTIVE"; Engine.isVvipUser = true; }
-                else if(userData.role.includes('vip')) { roleText = "🌟 VIP ACTIVE"; Engine.isVvipUser = true; }
+                if(userData.role.includes('vvip2')) { roleText = " VVIP2 ACTIVE"; Engine.isVvipUser = true; } 
+                else if(userData.role.includes('vvip')) { roleText = " VVIP ACTIVE"; Engine.isVvipUser = true; }
+                else if(userData.role.includes('vip')) { roleText = "VIP ACTIVE"; Engine.isVvipUser = true; }
                 
                 if(userData.role === 'trial') { roleText = `TRIAL: ${userData.predictions_used || 0}/${window.AdminSettings.freeTrials}`; }
 
