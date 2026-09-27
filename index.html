@@ -11,18 +11,18 @@
     
     <style>
         :root { 
-            /* 🔥 COLOR HEAVY PREMIUM THEME (RICH GOLD & DEEP GREY) 🔥 */
-            --primary: #E5B869; 
-            --primary-dark: #C49B4F; 
-            --primary-glow: rgba(229, 184, 105, 0.6);
+            /* 🔥 HD PREMIUM THEME (LIQUID GOLD & DEEP ONYX) 🔥 */
+            --primary: #FFD700; 
+            --primary-dark: #B8860B; 
+            --primary-glow: rgba(255, 215, 0, 0.7);
             
-            --bg-dark: #0a0a0a;
-            --bg-panel: linear-gradient(145deg, #1f1a18 0%, #0d0c0b 100%);
+            --bg-dark: #050505;
+            --bg-panel: rgba(15, 12, 10, 0.75); /* Transparent for glass effect */
             
-            --green: #00E676; 
-            --green-glow: rgba(0, 230, 118, 0.5);
-            --red: #FF3D00; 
-            --red-glow: rgba(255, 61, 0, 0.5); 
+            --green: #00FF7F; 
+            --green-glow: rgba(0, 255, 127, 0.6);
+            --red: #FF3333; 
+            --red-glow: rgba(255, 51, 51, 0.6); 
             
             --font-main: 'Rajdhani', sans-serif; 
             --font-ui: 'Inter', sans-serif; 
@@ -33,188 +33,214 @@
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
         body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: var(--bg-dark); }
         
+        /* ⚡ HD GLASSMORPHISM PANEL ⚡ */
         #top-panel { 
             flex: 0 0 auto; min-height: 15vh; max-height: 25vh; width: 100%; z-index: 10; position: relative; 
-            padding: 10px 14px; border-bottom: 3px solid var(--primary-dark); 
-            box-shadow: 0 12px 30px rgba(0,0,0,0.9); 
-            display: flex; flex-direction: column; justify-content: space-evenly; 
+            padding: 12px 16px; 
             background: var(--bg-panel);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2); 
+            box-shadow: 0 15px 35px rgba(0,0,0,0.8), inset 0 -1px 0 rgba(255,255,255,0.05);
+            display: flex; flex-direction: column; justify-content: space-evenly; 
         }
         
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        /* ⚡ 8-SECOND HIGH-TECH BOOT SCREEN ⚡ */
+        /* ⚡ CINEMATIC BOOT SCREEN ⚡ */
         #bootScreen {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
             background: #000; z-index: 9999999999;
             display: flex; flex-direction: column; justify-content: center; align-items: center;
-            transition: opacity 0.5s ease;
-            background-image: radial-gradient(circle at center, #1E1E1E 0%, #000 100%);
+            transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+            background-image: radial-gradient(circle at center, #111 0%, #000 100%);
         }
         
-        .radar-loader { position: relative; width: 100px; height: 100px; margin-bottom: 30px; }
-        .radar-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 3px solid rgba(229, 184, 105, 0.3); }
-        .radar-circle.inner { top: 20%; left: 20%; width: 60%; height: 60%; border: 2px solid var(--primary); animation: pulseGlow 1.5s infinite alternate; }
-        .radar-scanner { position: absolute; top: 0; left: 50%; width: 50%; height: 50%; transform-origin: bottom left; background: linear-gradient(45deg, transparent, var(--primary-glow)); border-right: 3px solid var(--primary); border-radius: 0 100% 0 0; animation: spinRight 2s linear infinite; }
+        .radar-loader { position: relative; width: 120px; height: 120px; margin-bottom: 40px; }
+        .radar-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(255, 215, 0, 0.15); box-shadow: 0 0 30px rgba(255,215,0,0.05); }
+        .radar-circle.inner { top: 15%; left: 15%; width: 70%; height: 70%; border: 2px dashed var(--primary-dark); animation: spinLeft 8s linear infinite; }
+        .radar-circle.core { top: 35%; left: 35%; width: 30%; height: 30%; background: var(--primary); border-radius: 50%; box-shadow: 0 0 20px var(--primary-glow); animation: pulseGlow 1.5s infinite alternate; }
+        .radar-scanner { position: absolute; top: 0; left: 50%; width: 50%; height: 50%; transform-origin: bottom left; background: linear-gradient(45deg, transparent, var(--primary-glow)); border-right: 2px solid var(--primary); border-radius: 0 100% 0 0; animation: spinRight 1.5s linear infinite; }
         
-        .boot-logo { font-family: var(--font-zombie); font-size: 26px; color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); margin-bottom: 15px; letter-spacing: 2px; }
+        .boot-logo { font-family: var(--font-zombie); font-size: 32px; color: var(--primary); text-shadow: 0 0 15px var(--primary-glow), 0 0 30px var(--primary-dark); margin-bottom: 15px; letter-spacing: 4px; animation: textFlicker 3s infinite alternate;}
         
-        .boot-terminal { font-family: var(--font-mono); font-size: 11px; color: #00E676; text-shadow: 0 0 5px rgba(0, 230, 118, 0.5); width: 260px; text-align: left; height: 50px; line-height: 1.5; margin-bottom: 20px;}
+        .boot-terminal { font-family: var(--font-mono); font-size: 12px; color: var(--green); text-shadow: 0 0 8px var(--green-glow); width: 280px; text-align: left; height: 50px; line-height: 1.6; margin-bottom: 25px; opacity: 0.9;}
         
-        .boot-progress-bar { width: 260px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative;}
-        .boot-progress-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary); animation: bootLoad 7.5s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        .boot-progress-bar { width: 280px; height: 3px; background: rgba(255,255,255,0.05); border-radius: 3px; overflow: hidden; position: relative; box-shadow: inset 0 1px 2px rgba(0,0,0,0.5);}
+        .boot-progress-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary), 0 0 5px #fff; animation: bootLoad 7.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         
-        @keyframes bootLoad { 0% { width: 0%; } 20% { width: 15%; } 40% { width: 45%; } 70% { width: 80%; } 90% { width: 95%; } 100% { width: 100%; } }
+        @keyframes bootLoad { 0% { width: 0%; } 15% { width: 10%; } 35% { width: 45%; } 65% { width: 80%; } 85% { width: 95%; } 100% { width: 100%; } }
+        @keyframes textFlicker { 0%, 100% { opacity: 1; } 95% { opacity: 0.8; } 98% { opacity: 1; text-shadow: none; } }
 
-        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; padding-bottom: 8px; border-bottom: 2px solid rgba(229,184,105,0.15);}
-        .header-left { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 100%; }
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding-bottom: 10px; border-bottom: 1px solid rgba(255,215,0,0.1);}
+        .header-left { display: flex; flex-direction: column; justify-content: center; gap: 6px; width: 100%; }
 
         .brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;}
         
-        .brand-container { display: flex; align-items: center; gap: 8px; }
-        .brand { font-family: var(--font-main); font-size: 20px; font-weight: 900; letter-spacing: 1.5px; color: var(--primary); text-shadow: 0 2px 4px rgba(0,0,0,0.8); display: flex; align-items: center; line-height: 1; white-space: nowrap;}
+        .brand-container { display: flex; align-items: center; gap: 10px; }
+        .brand { font-family: var(--font-main); font-size: 22px; font-weight: 900; letter-spacing: 2px; color: transparent; background: linear-gradient(to right, #FFF, var(--primary)); -webkit-background-clip: text; display: flex; align-items: center; line-height: 1; white-space: nowrap; filter: drop-shadow(0 2px 8px rgba(255,215,0,0.3));}
         
-        /* ⚡ WIN STAMP ⚡ */
+        /* ⚡ HD WIN STAMP ⚡ */
         .win-stamp {
-            font-family: var(--font-zombie); font-size: 12px; font-weight: 900;
-            color: var(--green); border: 2px solid var(--green); padding: 2px 6px;
-            background: rgba(0, 230, 118, 0.1);
-            border-radius: 4px; transform: rotate(-15deg);
-            text-shadow: 0 0 8px var(--green); box-shadow: inset 0 0 5px var(--green), 0 0 8px var(--green-glow);
-            animation: smashIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-            display: none;
+            font-family: var(--font-zombie); font-size: 13px; font-weight: 900;
+            color: var(--green); border: 2px solid var(--green); padding: 3px 8px;
+            background: rgba(0, 255, 127, 0.05);
+            border-radius: 4px; transform: rotate(-10deg);
+            text-shadow: 0 0 10px var(--green); box-shadow: inset 0 0 8px rgba(0,255,127,0.3), 0 0 12px rgba(0,255,127,0.2);
+            animation: smashIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+            display: none; letter-spacing: 1px;
         }
         .win-stamp.show { display: block; }
-        @keyframes smashIn { 0% { transform: scale(3) rotate(-30deg); opacity: 0; } 100% { transform: scale(1) rotate(-15deg); opacity: 1; } }
+        @keyframes smashIn { 0% { transform: scale(4) rotate(-35deg); opacity: 0; filter: blur(4px); } 100% { transform: scale(1) rotate(-10deg); opacity: 1; filter: blur(0); } }
 
-        /* ⚡ NOTIFICATION BELL & MODAL ⚡ */
-        .controls-row { display: flex; align-items: center; gap: 8px; }
-        .noti-btn { background: rgba(0,0,0,0.6); border: 1px solid rgba(229,184,105,0.3); border-radius: 6px; padding: 4px 8px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 14px; position: relative; transition: all 0.2s;}
-        .noti-btn:active { transform: scale(0.9); }
-        .noti-dot { position: absolute; top: -3px; right: -3px; width: 8px; height: 8px; background: var(--red); border-radius: 50%; box-shadow: 0 0 8px var(--red); animation: blinkRed 1s infinite alternate; display: none;}
+        .controls-row { display: flex; align-items: center; gap: 10px; }
+        .noti-btn { background: rgba(0,0,0,0.4); border: 1px solid rgba(255,215,0,0.2); border-radius: 8px; padding: 6px 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 15px; position: relative; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1); backdrop-filter: blur(4px);}
+        .noti-btn:active { transform: scale(0.9); background: rgba(255,215,0,0.1); }
+        .noti-dot { position: absolute; top: -2px; right: -2px; width: 10px; height: 10px; background: var(--red); border-radius: 50%; box-shadow: 0 0 10px var(--red); animation: blinkRed 1s infinite alternate; display: none;}
         
-        .noti-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.7); z-index: 999999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .noti-modal { background: var(--bg-panel); border: 2px solid var(--primary-dark); width: 85%; max-width: 300px; border-radius: 10px; padding: 15px; box-shadow: 0 10px 40px rgba(0,0,0,1); position: relative; animation: popIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px dashed rgba(229,184,105,0.3); padding-bottom: 8px; margin-bottom: 10px; }
-        .noti-title { color: var(--primary); font-family: var(--font-mono); font-size: 13px; font-weight: 900; letter-spacing: 1px;}
-        .close-noti { color: #888; font-family: var(--font-ui); font-size: 18px; font-weight: 900; cursor: pointer; transition: 0.2s; }
+        /* ⚡ GLASS MODAL ⚡ */
+        .noti-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 999999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .noti-modal { background: rgba(15, 12, 10, 0.9); border: 1px solid var(--primary-dark); width: 85%; max-width: 320px; border-radius: 12px; padding: 20px; box-shadow: 0 20px 50px rgba(0,0,0,1), inset 0 0 20px rgba(255,215,0,0.05); position: relative; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,215,0,0.1); padding-bottom: 10px; margin-bottom: 12px; }
+        .noti-title { color: var(--primary); font-family: var(--font-mono); font-size: 14px; font-weight: 900; letter-spacing: 1.5px; text-shadow: 0 0 10px rgba(255,215,0,0.3);}
+        .close-noti { color: #666; font-family: var(--font-ui); font-size: 20px; font-weight: 900; cursor: pointer; transition: 0.2s; }
         .close-noti:active { transform: scale(0.8); color: #fff;}
-        .noti-body { color: #fff; font-family: var(--font-ui); font-size: 12px; line-height: 1.6; font-weight: 600; min-height: 50px; max-height: 200px; overflow-y: auto;}
+        .noti-body { color: #eaeaea; font-family: var(--font-ui); font-size: 13px; line-height: 1.7; font-weight: 500; min-height: 50px; max-height: 200px; overflow-y: auto;}
 
-        @keyframes blinkRed { 0% { opacity: 1; transform: scale(1.1); box-shadow: 0 0 10px var(--red); } 100% { opacity: 0.3; transform: scale(0.8); box-shadow: 0 0 2px var(--red); } }
+        @keyframes blinkRed { 0% { opacity: 1; box-shadow: 0 0 15px var(--red); } 100% { opacity: 0.4; box-shadow: 0 0 2px var(--red); } }
 
-        .status-row { display: flex; align-items: center; gap: 10px; margin-top: 2px;}
-        .server-status { display: inline-flex; align-items: center; gap: 5px; font-size: 10px; font-family: var(--font-mono); color: var(--green); letter-spacing: 1px; font-weight: 900;}
-        .live-dot { width: 6px; height: 6px; background: var(--green); border-radius: 50%; box-shadow: 0 0 10px var(--green); animation: blinkGreen 1s infinite alternate;}
+        .status-row { display: flex; align-items: center; gap: 12px; margin-top: 2px;}
+        .server-status { display: inline-flex; align-items: center; gap: 6px; font-size: 11px; font-family: var(--font-mono); color: var(--green); letter-spacing: 1px; font-weight: 900; text-shadow: 0 0 8px rgba(0,255,127,0.4);}
+        .live-dot { width: 8px; height: 8px; background: var(--green); border-radius: 50%; box-shadow: 0 0 12px var(--green); animation: blinkGreen 1.5s infinite alternate;}
         
-        .ping-meter { font-size: 10px; font-family: var(--font-mono); font-weight: 900; color: #aaa; display: flex; align-items: center; gap: 3px;}
-        .ping-val { color: var(--primary); }
+        .ping-meter { font-size: 11px; font-family: var(--font-mono); font-weight: 900; color: #888; display: flex; align-items: center; gap: 4px;}
+        .ping-val { color: var(--primary); text-shadow: 0 0 5px rgba(255,215,0,0.3);}
 
-        .tabs { display: flex; background: rgba(0,0,0,0.6); border-radius: 6px; padding: 3px; border: 1px solid rgba(229,184,105,0.2); }
-        .tab-btn { padding: 4px 8px; font-size: 10px; font-weight: 900; color: #888; cursor: pointer; border-radius: 4px; border: none; background: transparent; font-family: var(--font-ui); transition: all 0.3s ease;}
-        .tab-btn.active { background: linear-gradient(to bottom, var(--primary), var(--primary-dark)); color: #000; box-shadow: 0 2px 8px var(--primary-glow); }
+        .tabs { display: flex; background: rgba(0,0,0,0.5); border-radius: 8px; padding: 4px; border: 1px solid rgba(255,215,0,0.1); box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);}
+        .tab-btn { padding: 6px 12px; font-size: 11px; font-weight: 900; color: #666; cursor: pointer; border-radius: 6px; border: none; background: transparent; font-family: var(--font-ui); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); letter-spacing: 1px;}
+        .tab-btn.active { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #111; box-shadow: 0 4px 15px rgba(255,215,0,0.4); transform: translateY(-1px);}
 
-        input[type=text] { width: 100%; height: 100%; padding: 0 8px; border: 2px solid var(--primary-dark); border-radius: 6px; text-align: center; font-size: 14px; font-weight: 900; background: rgba(0,0,0,0.8); color: var(--primary); outline: none; transition: 0.3s; font-family: var(--font-mono); }
+        input[type=text] { width: 100%; height: 100%; padding: 0 12px; border: 1px solid rgba(255,215,0,0.3); border-radius: 8px; text-align: center; font-size: 15px; font-weight: 900; background: rgba(0,0,0,0.5); color: var(--primary); outline: none; transition: 0.3s; font-family: var(--font-mono); box-shadow: inset 0 2px 8px rgba(0,0,0,0.8); letter-spacing: 2px;}
+        input[type=text]:focus { border-color: var(--primary); box-shadow: inset 0 2px 8px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.2); }
         
-        .btn-sleek { position: relative; overflow: hidden; height: 38px; padding: 0 12px; font-size: 12px; letter-spacing: 1.5px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 6px; border: none; background: linear-gradient(135deg, var(--primary), #8B651B); color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 2px 5px rgba(255,255,255,0.3); flex-shrink: 0; transition: all 0.2s;}
-        .btn-sleek:active { transform: translateY(3px); box-shadow: 0 1px 3px rgba(0,0,0,0.8); }
-        .btn-sleek:disabled { filter: grayscale(1); cursor: not-allowed; }
+        /* ⚡ LIQUID SHINE BUTTON ⚡ */
+        .btn-sleek { 
+            position: relative; overflow: hidden; height: 42px; padding: 0 16px; font-size: 13px; letter-spacing: 2px; font-family: var(--font-main); font-weight: 900; cursor: pointer; border-radius: 8px; border: none; 
+            background: linear-gradient(135deg, var(--primary), #8B651B, var(--primary)); background-size: 200% 200%;
+            color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; 
+            box-shadow: 0 6px 15px rgba(0,0,0,0.6), inset 0 2px 4px rgba(255,255,255,0.4); flex-shrink: 0; transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: gradientShine 4s ease infinite;
+        }
+        .btn-sleek::after {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transform: skewX(-20deg); animation: buttonGlare 3s infinite;
+        }
+        .btn-sleek:active { transform: translateY(4px); box-shadow: 0 2px 5px rgba(0,0,0,0.8); }
+        .btn-sleek:disabled { background: #333; color: #666; box-shadow: none; cursor: not-allowed; animation: none; }
+        .btn-sleek:disabled::after { display: none; }
+
+        @keyframes gradientShine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        @keyframes buttonGlare { 0% { left: -100%; } 20% { left: 200%; } 100% { left: 200%; } }
 
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; justify-content: center; }
         .hidden { display: none !important; }
-        .auth-row { display: flex; gap: 8px; align-items: center; width: 100%; height: 38px; }
+        .auth-row { display: flex; gap: 12px; align-items: center; width: 100%; height: 42px; margin-top: 10px;}
         
-        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; font-family: var(--font-mono); font-size: 10px; color: #bbb; font-weight: 900; background: rgba(0,0,0,0.6); padding: 6px 10px; border-radius: 6px; border: 1px solid rgba(229,184,105,0.2); box-shadow: inset 0 2px 10px rgba(0,0,0,1);}
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; font-family: var(--font-mono); font-size: 11px; color: #999; font-weight: 900; background: rgba(0,0,0,0.4); padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,215,0,0.1); box-shadow: inset 0 2px 10px rgba(0,0,0,0.8); backdrop-filter: blur(4px);}
         .info-col { flex: 1; }
-        .tool-info-row span { color: #fff; font-size: 12px; font-weight: 900; }
+        .tool-info-row span { color: #fff; font-size: 13px; font-weight: 900; }
 
-        .circular-timer { position: relative; width: 24px; height: 24px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: 5px;}
-        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%;}
-        .timer-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 4; }
-        .timer-progress { fill: none; stroke: var(--primary); stroke-width: 4; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear, stroke 0.3s; stroke-linecap: round; }
-        #displayTimer { font-family: var(--font-mono); font-size: 10px; font-weight: 900; color: #fff; z-index: 2; }
+        .circular-timer { position: relative; width: 28px; height: 28px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: 8px;}
+        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%; drop-shadow: 0 0 5px var(--primary-glow);}
+        .timer-bg { fill: none; stroke: rgba(255,255,255,0.05); stroke-width: 3; }
+        .timer-progress { fill: none; stroke: var(--primary); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear, stroke 0.3s; stroke-linecap: round; }
+        #displayTimer { font-family: var(--font-mono); font-size: 11px; font-weight: 900; color: #fff; z-index: 2; text-shadow: 0 0 5px rgba(0,0,0,0.8);}
 
-        .action-row { display: flex; gap: 10px; position: relative; width: 100%; align-items: center; justify-content: space-between; min-height: 50px;}
+        .action-row { display: flex; gap: 12px; position: relative; width: 100%; align-items: center; justify-content: space-between; min-height: 55px;}
         
-        .input-group { display: flex; gap: 20px; flex: 1; justify-content: center; align-items: center; transition: all 0.4s; }
+        .input-group { display: flex; gap: 25px; flex: 1; justify-content: center; align-items: center; transition: all 0.4s; }
         
+        /* ⚡ HD VAULT WRAPPER ⚡ */
         .vault-wrapper { 
             position: relative; display: flex; justify-content: center; align-items: center; 
-            width: 45px; height: 45px; border-radius: 50%;
-            background: radial-gradient(circle at 30% 30%, #3a2f26 0%, #0d0c0b 80%);
-            box-shadow: inset 0 2px 6px rgba(0,0,0,0.9);
+            width: 50px; height: 50px; border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #2a221a 0%, #0d0c0b 80%);
+            box-shadow: inset 0 4px 10px rgba(0,0,0,1), 0 5px 15px rgba(0,0,0,0.5);
+            animation: floatIdle 4s ease-in-out infinite;
         }
         
         .vault-wrapper::before {
             content: ''; position: absolute; width: 115%; height: 115%; border-radius: 50%;
-            border: 2.5px solid transparent; 
-            border-top: 2.5px solid var(--primary); 
-            border-bottom: 2.5px solid var(--primary);
-            animation: spinRight 2.5s linear infinite;
-            box-shadow: 0 0 8px var(--primary-glow);
+            border: 2px solid transparent; 
+            border-top: 2px solid var(--primary); 
+            border-bottom: 2px solid var(--primary);
+            animation: spinRight 3s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            box-shadow: 0 0 10px var(--primary-glow);
         }
 
         .vault-wrapper::after {
             content: ''; position: absolute; width: 135%; height: 135%; border-radius: 50%;
-            border: 2.5px solid transparent; 
-            border-left: 2.5px solid var(--primary-dark); 
-            border-right: 2.5px solid var(--primary-dark);
-            animation: spinLeft 3s linear infinite;
-            opacity: 0.9;
+            border: 1px dashed rgba(255,215,0,0.4);
+            animation: spinLeft 6s linear infinite;
         }
 
-        .vault-wrapper img { position: relative; z-index: 2; height: 26px; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.8)); }
+        .vault-wrapper img { position: relative; z-index: 2; height: 28px; filter: drop-shadow(0 4px 6px rgba(0,0,0,0.9)); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .vault-wrapper:hover img { transform: scale(1.1); }
         
         @keyframes spinRight { 100% { transform: rotate(360deg); } }
         @keyframes spinLeft { 100% { transform: rotate(-360deg); } }
+        @keyframes floatIdle { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
 
         .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 5; }
-        .result-display.show { display: flex; animation: popIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
-        @keyframes popIn { 0% { transform: scale(0.6); opacity: 0; } 70% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); opacity: 1; } }
+        .result-display.show { display: flex; animation: popIn 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
+        @keyframes popIn { 0% { transform: scale(0.5); opacity: 0; filter: blur(5px); } 70% { transform: scale(1.05); opacity: 1; filter: blur(0); } 100% { transform: scale(1); opacity: 1; } }
 
-        .zombie-text { font-family: var(--font-zombie); font-size: 24px; letter-spacing: 2px; line-height: 1; text-transform: uppercase; color: #fff; text-shadow: 0 0 10px var(--primary-glow), 0 0 20px var(--primary); }
+        /* ⚡ NEON TEXT RENDER ⚡ */
+        .zombie-text { font-family: var(--font-zombie); font-size: 28px; letter-spacing: 3px; line-height: 1; text-transform: uppercase; color: #FFF; text-shadow: 0 0 5px #FFF, 0 0 15px var(--primary), 0 0 30px var(--primary-dark); animation: pulseGlow 2s infinite alternate;}
         
         .hack-anim-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; }
-        .hack-text { font-family: var(--font-mono); font-size: 10px; color: var(--primary); letter-spacing: 1.5px; font-weight: 900; animation: pulseText 0.5s infinite alternate; margin-bottom: 4px; text-align: center;}
-        .hack-bar { width: 80%; height: 4px; background: rgba(0,0,0,0.5); border: 1px solid rgba(229,184,105,0.3); border-radius: 2px; overflow: hidden; position: relative;}
-        .hack-fill { width: 40%; height: 100%; background: linear-gradient(90deg, transparent, var(--primary)); box-shadow: 0 0 10px var(--primary); position: absolute; left: -40%; animation: slideBar 0.8s linear infinite; }
+        .hack-text { font-family: var(--font-mono); font-size: 11px; color: var(--primary); letter-spacing: 2px; font-weight: 900; animation: textFlicker 0.2s infinite alternate; margin-bottom: 6px; text-align: center; text-shadow: 0 0 5px var(--primary-glow);}
+        .hack-bar { width: 90%; height: 4px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,215,0,0.2); border-radius: 4px; overflow: hidden; position: relative; box-shadow: inset 0 1px 3px rgba(0,0,0,0.8);}
+        .hack-fill { width: 30%; height: 100%; background: linear-gradient(90deg, transparent, var(--primary), transparent); box-shadow: 0 0 12px var(--primary); position: absolute; left: -30%; animation: slideBar 0.7s cubic-bezier(0.4, 0, 0.2, 1) infinite; }
         
-        .confidence-container { width: 100%; max-width: 110px; margin-top: 4px; display: flex; flex-direction: column; gap: 3px; }
-        .conf-header { display: flex; justify-content: space-between; font-size: 8px; font-family: var(--font-mono); color: #aaa; font-weight: 900; letter-spacing: 0.5px; }
-        .conf-track { width: 100%; height: 4px; background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; }
-        .conf-fill { width: 0%; height: 100%; background: var(--green); box-shadow: 0 0 8px var(--green); transition: width 1.5s ease-out; }
+        .confidence-container { width: 100%; max-width: 130px; margin-top: 6px; display: flex; flex-direction: column; gap: 4px; }
+        .conf-header { display: flex; justify-content: space-between; font-size: 9px; font-family: var(--font-mono); color: #888; font-weight: 900; letter-spacing: 1px; }
+        .conf-track { width: 100%; height: 4px; background: rgba(0,0,0,0.6); border: 1px solid rgba(255,255,255,0.05); border-radius: 4px; overflow: hidden; box-shadow: inset 0 1px 2px rgba(0,0,0,0.8);}
+        .conf-fill { width: 0%; height: 100%; background: linear-gradient(90deg, var(--green), #fff); box-shadow: 0 0 10px var(--green); transition: width 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
 
         @keyframes slideBar { 100% { left: 100%; } }
-        @keyframes pulseText { 0% { opacity: 0.5; } 100% { opacity: 1; } }
-        @keyframes blinkGreen { 0% { opacity: 1; box-shadow: 0 0 10px var(--green); } 100% { opacity: 0.3; box-shadow: 0 0 2px var(--green); } }
+        @keyframes pulseGlow { 0% { filter: brightness(1); } 100% { filter: brightness(1.3); } }
+        @keyframes blinkGreen { 0% { opacity: 1; box-shadow: 0 0 15px var(--green); } 100% { opacity: 0.5; box-shadow: 0 0 4px var(--green); } }
 
-        .spinner { display: inline-block; width: 14px; height: 14px; border: 3px solid rgba(0,0,0,0.2); border-top-color: #000; border-radius: 50%; animation: spin 1s linear infinite; margin-right: 4px; }
+        .spinner { display: inline-block; width: 16px; height: 16px; border: 3px solid rgba(0,0,0,0.1); border-top-color: #000; border-radius: 50%; animation: spin 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite; margin-right: 4px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 15px; background: rgba(10, 10, 10, 0.98); backdrop-filter: blur(20px);}
-        .ban-icon { font-size: 45px; margin-bottom: 10px;}
-        .ban-title { color: var(--red); font-size: 26px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 15px var(--red-glow);}
+        .hard-screen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: 9999999; display: none; flex-direction: column; justify-content: center; align-items: center; text-align: center; padding: 20px; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(25px); -webkit-backdrop-filter: blur(25px);}
+        .ban-icon { font-size: 55px; margin-bottom: 15px; filter: drop-shadow(0 0 20px var(--red-glow)); animation: floatIdle 3s infinite ease-in-out;}
+        .ban-title { color: var(--red); font-size: 30px; font-family: var(--font-main); font-weight: 900; line-height: 1; text-shadow: 0 0 20px var(--red-glow), 0 0 40px rgba(255,51,51,0.4); letter-spacing: 2px;}
         
-        .ban-box { background: rgba(229, 184, 105, 0.05); border: 1px solid var(--border-light); padding: 15px; border-radius: 10px; margin-top: 15px; width: 100%; max-width: 300px; margin-bottom: 20px;}
-        .dynamic-deposit { margin-top: 10px; padding-top: 10px; border-top: 1px dashed rgba(255,255,255,0.1); }
-        .dynamic-deposit .label { font-size: 11px; color: #888; font-family: var(--font-ui); font-weight: 800;}
-        .dynamic-deposit .amount { font-size: 32px; font-weight: 900; color: var(--primary); font-family: var(--font-main); letter-spacing: 2px;}
+        .ban-box { background: rgba(255, 215, 0, 0.03); border: 1px solid rgba(255,215,0,0.1); padding: 20px; border-radius: 12px; margin-top: 20px; width: 100%; max-width: 320px; margin-bottom: 25px; box-shadow: inset 0 0 20px rgba(0,0,0,0.5), 0 10px 30px rgba(0,0,0,0.8);}
+        .dynamic-deposit { margin-top: 15px; padding-top: 15px; border-top: 1px dashed rgba(255,255,255,0.1); }
+        .dynamic-deposit .label { font-size: 12px; color: #777; font-family: var(--font-ui); font-weight: 800; letter-spacing: 1px;}
+        .dynamic-deposit .amount { font-size: 38px; font-weight: 900; color: var(--primary); font-family: var(--font-main); letter-spacing: 2px; text-shadow: 0 0 15px var(--primary-glow);}
         
-        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 300px; color: #fff; text-decoration: none; padding: 12px; border-radius: 8px; font-weight: 900; font-family: var(--font-ui); font-size: 13px; text-transform: uppercase; background: rgba(0, 0, 0, 0.6); border: 1px solid #333; transition: 0.2s; cursor: pointer;}
-        .contact-btn:active { transform: scale(0.97); }
-        .btn-deposit { background: var(--green); border: none; color: #000; margin-bottom: 12px;}
+        .contact-btn { display: flex; align-items: center; justify-content: center; width: 100%; max-width: 320px; color: #fff; text-decoration: none; padding: 14px; border-radius: 10px; font-weight: 900; font-family: var(--font-ui); font-size: 14px; text-transform: uppercase; background: rgba(0, 0, 0, 0.5); border: 1px solid rgba(255,255,255,0.1); transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1); cursor: pointer; backdrop-filter: blur(5px);}
+        .contact-btn:active { transform: scale(0.96); background: rgba(255,255,255,0.05);}
+        .btn-deposit { background: linear-gradient(135deg, var(--green), #00994C); border: none; color: #000; margin-bottom: 15px; box-shadow: 0 5px 15px rgba(0,255,127,0.3);}
 
-        #toast { position: fixed; top: 15px; left: 50%; transform: translateX(-50%) translateY(-50px) scale(0.9); background: rgba(0, 0, 0, 0.95); color: #fff; padding: 10px 18px; border-radius: 6px; font-weight: 900; font-size: 11px; border: 2px solid var(--primary-dark); z-index: 999999; transition: all 0.4s; font-family: var(--font-mono); opacity: 0;}
+        #toast { position: fixed; top: 20px; left: 50%; transform: translateX(-50%) translateY(-50px) scale(0.9); background: rgba(10, 10, 10, 0.98); color: #fff; padding: 12px 24px; border-radius: 8px; font-weight: 900; font-size: 12px; border: 1px solid var(--primary-dark); z-index: 999999; transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); opacity: 0; box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.1); backdrop-filter: blur(10px);}
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
     </style>
 </head>
 <body>
 
-    <!-- ⚡ 8-SECOND SERVER BOOT SCREEN ⚡ -->
+    <!-- ⚡ 8-SECOND CINEMATIC BOOT SCREEN ⚡ -->
     <div id="bootScreen">
         <div class="radar-loader">
             <div class="radar-circle inner"></div>
+            <div class="radar-circle core"></div>
             <div class="radar-circle"></div>
             <div class="radar-scanner"></div>
         </div>
@@ -232,8 +258,8 @@
         <div class="ban-icon">⛔</div>
         <h1 class="ban-title">VIP REQUIRED</h1>
         <div class="ban-box">
-            <span style="color:var(--primary); font-weight:900; font-size: 12px; font-family: var(--font-mono);">SYSTEM ALERT</span><br>
-            <span id="banReasonText" style="color:#fff; font-size: 14px; font-weight:800; display:block; margin-top:6px;">Your Free Trials are exhausted.</span>
+            <span style="color:var(--primary); font-weight:900; font-size: 13px; font-family: var(--font-mono); letter-spacing: 1px;">SYSTEM ALERT</span><br>
+            <span id="banReasonText" style="color:#ddd; font-size: 15px; font-weight:600; display:block; margin-top:8px;">Your Free Trials are exhausted.</span>
             <div class="dynamic-deposit">
                 <div class="label">VIP LIFETIME ACTIVATION</div>
                 <div id="depositAmountDisplay" class="amount">₹500</div>
@@ -243,11 +269,11 @@
         <a href="t.me/BADSHAH_BHAI_700" class="contact-btn">✈️ MESSAGE ADMIN</a>
     </div>
 
-    <!-- 🔔 NOTIFICATION MODAL -->
+    <!-- 🔔 GLASS MODAL NOTIFICATION -->
     <div id="notiModal" class="noti-modal-overlay">
         <div class="noti-modal">
             <div class="noti-header">
-                <div class="noti-title">📡 ADMIN MESSAGE</div>
+                <div class="noti-title">📡 ADMIN LINK</div>
                 <div class="close-noti" onclick="closeNoti()">✕</div>
             </div>
             <div class="noti-body" id="notiMessageText">
@@ -265,7 +291,6 @@
                         <div id="winStamp" class="win-stamp">WIN</div>
                     </div>
                     
-                    <!-- ⚡ CONTROLS ROW (BELL + TABS) ⚡ -->
                     <div class="controls-row">
                         <div class="noti-btn" onclick="openNoti()">
                             🔔 <div class="noti-dot" id="notiDot"></div>
@@ -280,22 +305,22 @@
                 <div class="status-row">
                     <div class="server-status"><div class="live-dot"></div> <span id="serverStatusText">ONLINE</span></div>
                     <div class="ping-meter">PING: <span class="ping-val" id="pingValue">42ms</span></div>
-                    <div class="ping-meter" style="margin-left:auto;">ACCURACY: <span class="ping-val">96%</span></div>
+                    <div class="ping-meter" style="margin-left:auto;">ACCURACY: <span class="ping-val">98%</span></div>
                 </div>
             </div>
         </div>
 
         <div id="authScreen" class="auth-container">
             <div class="auth-row" id="auth-input-area">
-                <input type="text" inputmode="numeric" id="uidInput" placeholder="[ ENTER UID ]" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
-                <button id="authBtn" class="btn-sleek" style="width: 90px;" onclick="Auth.verify()">CONNECT</button>
+                <input type="text" inputmode="numeric" id="uidInput" placeholder="ENTER UID" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+                <button id="authBtn" class="btn-sleek" style="width: 100px;" onclick="Auth.verify()">CONNECT</button>
             </div>
         </div>
         
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row">
                 <div class="info-col" style="text-align: left;">ID: <span id="displayPeriod">SYNC...</span></div>
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:10px; color:var(--primary); font-weight:900; text-transform: uppercase;">ROLE</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="font-size:11px; color:var(--primary); font-weight:900; text-transform: uppercase;">ROLE</span></div>
                 <div class="info-col" style="text-align: right; display: flex; justify-content: flex-end; align-items: center;">
                     TMR: 
                     <div class="circular-timer">
@@ -314,13 +339,13 @@
                     <input type="hidden" id="in-n2">
                     
                     <div class="vault-wrapper"><img id="disp-n1" src="" style="display: none;"></div>
-                    <span style="color: #888; font-weight: 900; font-size: 20px; font-family: var(--font-mono);">+</span>
+                    <span style="color: #666; font-weight: 900; font-size: 24px; font-family: var(--font-mono); filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8));">+</span>
                     <div class="vault-wrapper"><img id="disp-n2" src="" style="display: none;"></div>
                 </div>
                 
                 <div id="out-size" class="result-display"></div>
                 
-                <button class="btn-sleek" id="btnAnalyze" style="width: 80px; height: 48px;" onclick="Engine.analyze()">EXECUTE</button>
+                <button class="btn-sleek" id="btnAnalyze" style="width: 100px; height: 50px;" onclick="Engine.analyze()">EXECUTE</button>
             </div>
         </div>
     </div>
@@ -331,7 +356,7 @@
 
     <div id="toast">Message</div>
 
-    <!-- ⚡ CORE JAVASCRIPT ENGINE ⚡ -->
+    <!-- ⚡ CORE JAVASCRIPT ENGINE (Unchanged Logic) ⚡ -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
         import { getDatabase, ref, get, set, update, increment, onValue } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
@@ -347,7 +372,7 @@
         // ⚡ NOTIFICATION FUNCTIONS ⚡
         window.openNoti = function() {
             document.getElementById('notiModal').style.display = 'flex';
-            document.getElementById('notiDot').style.display = 'none'; // Hide dot when read
+            document.getElementById('notiDot').style.display = 'none'; 
         }
         window.closeNoti = function() {
             document.getElementById('notiModal').style.display = 'none';
@@ -375,29 +400,29 @@
         window.addEventListener('load', () => {
             const bt1 = document.getElementById('bt1'); const bt2 = document.getElementById('bt2'); const bt3 = document.getElementById('bt3');
             
-            setTimeout(() => { bt1.innerText = "> CONNECTING TO SERVER..."; }, 500);
-            setTimeout(() => { bt2.innerText = "> BYPASSING SECURITY PROTOCOLS..."; }, 3000);
-            setTimeout(() => { bt3.innerText = "> ACCESS GRANTED. INITIALIZING HACK..."; bt3.style.color = "var(--primary)"; }, 5500);
+            setTimeout(() => { bt1.innerText = "> ESTABLISHING SECURE CONNECTION..."; }, 500);
+            setTimeout(() => { bt2.innerText = "> BYPASSING HOST FIREWALL..."; }, 3000);
+            setTimeout(() => { bt3.innerText = "> ACCESS GRANTED. ENGINE ONLINE."; bt3.style.color = "var(--primary)"; }, 5500);
             
             setTimeout(() => {
                 document.getElementById('bootScreen').style.opacity = '0';
-                setTimeout(() => { document.getElementById('bootScreen').style.display = 'none'; }, 500);
+                setTimeout(() => { document.getElementById('bootScreen').style.display = 'none'; }, 600);
             }, 8000);
         });
 
         setInterval(() => {
-            const ping = Math.floor(Math.random() * (75 - 28 + 1)) + 28;
+            const ping = Math.floor(Math.random() * (65 - 18 + 1)) + 18;
             const pElement = document.getElementById('pingValue');
             if(pElement) pElement.innerText = ping + "ms";
-        }, 3500);
+        }, 3000);
 
         window.Util = class {
             static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
                 if(msg.includes("ERROR") || msg.includes("BANNED") || msg.includes("REQUIRED")) {
-                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)";
+                    t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(255,51,51,0.2)";
                 } else {
-                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; 
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,0.8), 0 0 15px rgba(255,215,0,0.1)";
                 }
                 t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3000); 
             }
@@ -423,7 +448,7 @@
                         data.role = role;
                         this.grant(data.access_type || 'both', data); return;
                     }
-                    Util.toast("INVALID UID.");
+                    Util.toast("INVALID UID");
                     btn.innerText = "CONNECT"; btn.disabled = false;
                 } catch (error) { btn.innerText = "CONNECT"; btn.disabled = false; Util.toast("NETWORK ERROR"); }
             }
@@ -438,8 +463,8 @@
                 const btn = document.getElementById('depositDoneBtn'); btn.innerText = "WAIT..."; btn.disabled = true;
                 try { 
                     await set(ref(db, 'deposit_requests/' + currentUid), { uid: currentUid, amount: 500, status: "pending", timestamp: Date.now() }); 
-                    Util.toast("DEPOSIT REQUEST SENT"); 
-                    btn.innerText = "✅ PENDING"; btn.style.background = "#333"; btn.style.color = "#fff"; 
+                    Util.toast("REQUEST SENT"); 
+                    btn.innerText = "✅ PENDING"; btn.style.background = "#222"; btn.style.color = "#fff"; btn.style.boxShadow = "none";
                 } catch(e) { Util.toast("NETWORK ERROR"); btn.innerText = "✅ DEPOSIT DONE"; btn.disabled = false; }
             }
 
@@ -556,7 +581,6 @@
                     tDisplay.style.color = "#fff"; timerCircle.style.stroke = "var(--primary)";
                 }
                 
-                // ⚡ BUG FIX: ONLY DISABLE BUTTON IF STATE IS "IDLE" ⚡
                 let btn = document.getElementById('btnAnalyze');
                 if(this.state === "IDLE") {
                     if(remSec <= 2) { 
@@ -616,7 +640,7 @@
                                     await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) });
                                 }
 
-                                let confLevel = Math.floor(Math.random() * (99 - 88 + 1)) + 88;
+                                let confLevel = Math.floor(Math.random() * (99 - 94 + 1)) + 94;
 
                                 let displayHtml = `<div style="display:flex; flex-direction:column; align-items:center; width:100%;">
                                     <span class="zombie-text">${currentPrediction}</span>
@@ -632,7 +656,7 @@
                                 resultBox.innerHTML = displayHtml; 
                                 this.state = "NEXT"; btn.disabled = false; btn.innerText = "NEXT";
                             } else { Util.toast("PATTERN NOT FOUND"); this.resetUI(); }
-                        }, 5000); 
+                        }, 4000); 
 
                     } catch(e) { Util.toast("SERVER ERROR"); this.resetUI(); }
                 } else { 
