@@ -29,7 +29,7 @@
         * { box-sizing: border-box; margin: 0; padding: 0; user-select: none; -webkit-tap-highlight-color: transparent;}
         body, html { height: 100vh; height: 100dvh; width: 100vw; font-family: var(--font-ui); color: #f8fafc; overflow: hidden; display: flex; flex-direction: column; background: var(--bg-dark); }
         
-        /* 🔥 COMPACT TOP PANEL (Minimum height removed, padding tightened) */
+        /* 🔥 COMPACT TOP PANEL */
         #top-panel { 
             flex: 0 0 auto; 
             height: auto; 
@@ -74,7 +74,7 @@
         .boot-progress-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary), 0 0 6px #fff; animation: bootLoad 7.5s cubic-bezier(0.77, 0, 0.175, 1) forwards; }
         @keyframes bootLoad { 0% { width: 0%; } 15% { width: 10%; } 35% { width: 45%; } 65% { width: 80%; } 85% { width: 95%; } 100% { width: 100%; } }
 
-        /* 🔥 COMPACT HEADER */
+        /* HEADER */
         .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; padding-bottom: 6px; border-bottom: 1px solid rgba(255,215,0,0.15);}
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 100%; }
         .brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;}
@@ -101,7 +101,7 @@
         .tab-btn { padding: 5px 12px; font-size: 11px; font-weight: 900; color: #888; cursor: pointer; border-radius: 4px; border: none; background: transparent; font-family: var(--font-ui); transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1); letter-spacing: 1px;}
         .tab-btn.active { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #000; box-shadow: 0 4px 12px rgba(255,215,0,0.6); transform: translateY(-1px);}
 
-        /* 🔥 COMPACT INPUTS & BUTTONS */
+        /* INPUTS & BUTTONS */
         input[type=text] { width: 100%; height: 100%; padding: 0 10px; border: 1px solid rgba(255,215,0,0.4); border-radius: 6px; text-align: center; font-size: 14px; font-weight: 900; background: rgba(0,0,0,0.8); color: var(--primary); outline: none; transition: 0.3s cubic-bezier(0.4, 0, 0.2, 1); font-family: var(--font-mono); box-shadow: inset 0 3px 8px rgba(0,0,0,1); letter-spacing: 2px;}
         input[type=text]:focus { border-color: var(--primary); box-shadow: inset 0 3px 8px rgba(0,0,0,1), 0 0 15px rgba(255,215,0,0.4); transform: scale(1.02); }
         
@@ -129,7 +129,7 @@
         .timer-progress { fill: none; stroke: var(--primary); stroke-width: 4; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear, stroke 0.3s; stroke-linecap: round; }
         #displayTimer { font-family: var(--font-mono); font-size: 11px; font-weight: 900; color: #fff; z-index: 2; text-shadow: 0 0 4px rgba(0,0,0,1);}
 
-        /* 🔥 COMPACT VAULTS & ACTION ROW */
+        /* VAULTS & ACTION ROW */
         .action-row { display: flex; gap: 10px; position: relative; width: 100%; align-items: center; justify-content: space-between; min-height: 50px;}
         .input-group { display: flex; gap: 15px; flex: 1; justify-content: center; align-items: center; transition: all 0.4s; }
         
@@ -143,12 +143,12 @@
         @keyframes spinRight { 100% { transform: rotate(360deg); } }
         @keyframes spinLeft { 100% { transform: rotate(-360deg); } }
 
-        /* 🔥 DJ EQUALIZER & RESULT DISPLAY 🔥 */
+        /* RESULT DISPLAY */
         .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 5; margin: 0; }
         .result-display.show { display: flex; animation: resultPop 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes resultPop { 0% { transform: scale(0.2); opacity: 0; filter: blur(20px); } 60% { transform: scale(1.1); opacity: 1; filter: blur(0); } 100% { transform: scale(1); opacity: 1; } }
 
-        /* HD DJ EQUALIZER ANIMATION */
+        /* DJ EQUALIZER */
         .dj-eq-container { display: flex; gap: 4px; align-items: flex-end; justify-content: center; height: 28px; margin-bottom: 8px; }
         .dj-bar { width: 6px; background: var(--primary); border-radius: 3px; box-shadow: 0 0 10px var(--primary); animation: eqBounce 0.6s ease-in-out infinite alternate; }
         
@@ -163,18 +163,17 @@
         
         @keyframes eqBounce { 0% { height: 20%; filter: hue-rotate(0deg); } 100% { height: 100%; filter: hue-rotate(50deg); background: var(--green); box-shadow: 0 0 15px var(--green); } }
 
-        /* 💥 HD SHOCKWAVE BLAST */
+        /* SHOCKWAVE BLAST */
         .shockwave { position: absolute; width: 70px; height: 70px; border: 4px solid var(--primary); border-radius: 50%; top: 50%; left: 50%; transform: translate(-50%, -50%) scale(0); opacity: 0; z-index: 0; box-shadow: 0 0 20px var(--primary), inset 0 0 20px var(--primary); }
         .shockwave.explode { animation: shock 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes shock { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; border-width: 15px; filter: hue-rotate(0deg);} 100% { transform: translate(-50%, -50%) scale(4); opacity: 0; border-width: 0px; filter: hue-rotate(50deg);} }
 
-        /* COMPACT RESULT TEXT */
+        /* ZOMBIE TEXT */
         .zombie-text { position: relative; z-index: 2; font-family: var(--font-zombie); font-size: 32px; line-height: 1; text-transform: uppercase; color: #FFF; text-shadow: 0 0 6px #FFF, 0 0 20px var(--primary), 0 0 40px var(--primary-dark); animation: cinematicReveal 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards, pulseGlow 2s infinite alternate;}
         @keyframes cinematicReveal { 0% { letter-spacing: 25px; filter: blur(15px); opacity: 0; transform: scale(1.4);} 100% { letter-spacing: 3px; filter: blur(0); opacity: 1; transform: scale(1);} }
 
-        /* VVIP NUMBERS */
-        .vvip-numbers { position: relative; z-index: 2; font-family: var(--font-mono); font-size: 11px; font-weight: 900; color: var(--green); margin-top: 8px; text-shadow: 0 0 8px rgba(0, 255, 127, 0.7); background: rgba(0, 255, 127, 0.15); padding: 5px 12px; border-radius: 6px; border: 1px solid rgba(0, 255, 127, 0.5); display: flex; gap: 6px; align-items: center; box-shadow: inset 0 2px 6px rgba(0,0,0,0.9), 0 0 15px rgba(0,255,127,0.3); animation: popIn 0.5s 0.4s both cubic-bezier(0.175, 0.885, 0.32, 1.275);}
-        .vvip-numbers span { color: #fff; font-size: 18px; font-family: var(--font-zombie); text-shadow: 0 0 12px var(--primary-glow); margin: 0 3px;}
+        /* 🔥 VVIP IMAGE BALLS */
+        .vvip-img-ball { height: 35px; filter: drop-shadow(0 0 8px var(--primary-glow)); animation: pulseGlow 1s infinite alternate; }
 
         /* HACK ANIMATION BOX */
         .hack-anim-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; position: relative; z-index: 2;}
@@ -189,7 +188,7 @@
             animation: slideBar 0.8s cubic-bezier(0.4, 0, 0.2, 1) infinite, stripesMove 0.4s linear infinite; 
         }
         
-        .confidence-container { position: relative; z-index: 2; width: 100%; max-width: 130px; margin-top: 8px; display: flex; flex-direction: column; gap: 4px; animation: popIn 0.5s 0.6s both cubic-bezier(0.175, 0.885, 0.32, 1.275);}
+        .confidence-container { position: relative; z-index: 2; width: 100%; max-width: 130px; display: flex; flex-direction: column; gap: 4px; animation: popIn 0.5s 0.6s both cubic-bezier(0.175, 0.885, 0.32, 1.275);}
         .conf-header { display: flex; justify-content: space-between; font-size: 9px; font-family: var(--font-mono); color: #ccc; font-weight: 900; letter-spacing: 1px; }
         .conf-track { width: 100%; height: 4px; background: rgba(0,0,0,0.95); border: 1px solid rgba(255,255,255,0.2); border-radius: 2px; overflow: hidden; box-shadow: inset 0 2px 4px rgba(0,0,0,1);}
         .conf-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #00994C, var(--green), #fff); box-shadow: 0 0 12px var(--green); transition: width 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
@@ -250,8 +249,7 @@
             .vault-wrapper { width: 44px; height: 44px; }
             .vault-wrapper img { height: 22px; }
             .zombie-text { font-size: 28px; }
-            .vvip-numbers { font-size: 10px; padding: 4px 10px; margin-top: 6px;}
-            .vvip-numbers span { font-size: 16px; }
+            .vvip-img-ball { height: 28px; }
             .dj-eq-container { height: 22px; margin-bottom: 6px;}
             .dj-eq-container.small { height: 18px; gap: 3px; }
             .dj-eq-container.small .dj-bar { width: 3px; }
@@ -382,7 +380,7 @@
     </div>
 
     <div id="bottom-panel">
-        <iframe id="main-frame" src="http://sikkimgg.club/#/register?invitationCode=388236805221#/" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
+        <iframe id="main-frame" src="https://www.veergame20.com/#/register?invitationCode=837691516691" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
     </div>
 
     <div id="toast">Message</div>
@@ -553,7 +551,10 @@
                     document.getElementById('in-n1').value = this.latestN1; 
                     document.getElementById('in-n2').value = this.latestN2;
                     let img1 = document.getElementById('disp-n1'); let img2 = document.getElementById('disp-n2');
-                    img1.src = `${this.latestN1}.png`; img2.src = `${this.latestN2}.png`;
+                    
+                    img1.src = `${this.latestN1}.png`; 
+                    img2.src = `${this.latestN2}.png`;
+                    
                     img1.style.display = 'block'; img2.style.display = 'block';
                 }
             }
@@ -663,7 +664,7 @@
                     
                     inputGroup.style.display = 'none';
                     
-                    // 🔥 HD DJ EQUALIZER ANIMATION
+                    // HD DJ EQUALIZER ANIMATION
                     resultBox.innerHTML = `
                         <div class="hack-anim-box">
                             <div class="dj-eq-container">
@@ -695,30 +696,35 @@
                                     await update(ref(db, 'approved_uids/' + currentUid), { predictions_used: increment(1) });
                                 }
 
-                                let vvipNumbersHtml = "";
-                                if(this.userRole.includes('vvip2')) {
-                                    let nums = rawPrediction.match(/\d/g); 
-                                    if(nums && nums.length >= 2) {
-                                        vvipNumbersHtml = `
-                                            <div class="vvip-numbers">
-                                                LUCKY: <span>${nums[0]}</span> & <span>${nums[1]}</span>
-                                            </div>
-                                        `;
+                                // 🔥 DYNAMIC ELEMENTS FOR BIG/SMALL LINE (No duplicate boxes)
+                                let leftDeco = `<div class="dj-eq-container small"><div class="dj-bar"></div><div class="dj-bar"></div><div class="dj-bar"></div></div>`;
+                                let rightDeco = `<div class="dj-eq-container small"><div class="dj-bar"></div><div class="dj-bar"></div><div class="dj-bar"></div></div>`;
+
+                                let numMatch = rawPrediction.match(/\[(\d+)\]/); 
+                                if (numMatch) {
+                                    let primaryNum = parseInt(numMatch[1]);
+                                    if (this.userRole.includes('vvip2')) {
+                                        let secondaryNum = isBig ? (primaryNum === 9 ? 5 : primaryNum + 1) : (primaryNum === 4 ? 0 : primaryNum + 1);
+                                        leftDeco = `<img src="${primaryNum}.png" class="vvip-img-ball">`;
+                                        rightDeco = `<img src="${secondaryNum}.png" class="vvip-img-ball">`;
+                                    } 
+                                    else if (this.userRole.includes('vvip3') || this.userRole === 'vvip') {
+                                        leftDeco = `<img src="${primaryNum}.png" class="vvip-img-ball">`;
+                                        // Right side stays as DJ bars to keep it balanced
                                     }
                                 }
 
                                 let confLevel = Math.floor(Math.random() * (99 - 96 + 1)) + 96;
 
-                                // 🔥 SHOCKWAVE BLAST & RESULT DJ BARS
+                                // 🔥 SINGLE CLEAN DISPLAY BOX (1st N -> TEXT -> 2nd N)
                                 let displayHtml = `<div style="display:flex; flex-direction:column; align-items:center; width:100%; position:relative;">
                                     <div class="shockwave explode"></div>
-                                    <div style="display:flex; align-items:center; gap: 15px; margin-bottom: 2px;">
-                                        <div class="dj-eq-container small"><div class="dj-bar"></div><div class="dj-bar"></div><div class="dj-bar"></div></div>
+                                    <div style="display:flex; align-items:center; gap: 15px; margin-bottom: 2px; justify-content: center; width: 100%;">
+                                        ${leftDeco}
                                         <span class="zombie-text">${currentPrediction}</span>
-                                        <div class="dj-eq-container small"><div class="dj-bar"></div><div class="dj-bar"></div><div class="dj-bar"></div></div>
+                                        ${rightDeco}
                                     </div>
-                                    ${vvipNumbersHtml}
-                                    <div class="confidence-container">
+                                    <div class="confidence-container" style="margin-top: 15px;">
                                         <div class="conf-header">
                                             <span>ACCURACY</span>
                                             <span style="color:var(--primary);">${confLevel}%</span>
