@@ -72,30 +72,57 @@
             100% { transform: scale(1.1); filter: drop-shadow(0 0 15px #ff0055) brightness(1.2); }
         }
 
-        #bootScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 0.6s ease; background-image: radial-gradient(circle at center, #151515 0%, #000 100%); }
-        .radar-loader { position: relative; width: 110px; height: 110px; margin-bottom: 30px; display: flex; border-radius: 50%; overflow: hidden; box-shadow: 0 0 40px rgba(255,215,0,0.2);}
-        .radar-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(255, 215, 0, 0.3); }
-        .radar-circle.inner { top: 15%; left: 15%; width: 70%; height: 70%; border: 2px dashed var(--primary-dark); animation: spinLeft 10s linear infinite; }
-        .radar-circle.core { top: 38%; left: 38%; width: 24%; height: 24%; background: var(--primary); border-radius: 50%; box-shadow: 0 0 35px var(--primary-glow); animation: pulseGlow 1s infinite alternate; }
-        .radar-scanner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(from 0deg, transparent 70%, rgba(255,215,0,0.7) 100%); animation: spinRight 1.5s linear infinite; }
-        .radar-scanner::after { content: ''; position: absolute; top: 0; left: 50%; width: 2px; height: 50%; background: var(--primary); box-shadow: 0 0 15px var(--primary); transform-origin: bottom center; }
+        /* 🔥 HIGH QUALITY HDR BOOT SCREEN 🔥 */
+        #bootScreen { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #000; z-index: 9999999999; display: flex; flex-direction: column; justify-content: center; align-items: center; transition: opacity 1s ease; background-image: radial-gradient(circle at center, #261b02 0%, #030200 60%, #000 100%); overflow: hidden;}
         
-        .boot-logo { position: relative; font-family: var(--font-zombie); font-size: 28px; color: var(--primary); text-shadow: 0 0 20px var(--primary-glow); margin-bottom: 15px; letter-spacing: 3px; text-align: center; }
-        
-        .pdf-upload-box { display: none; position: relative; flex-direction: column; align-items: center; justify-content: center; width: 80%; max-width: 260px; margin-bottom: 25px; background: rgba(255,255,255,0.04); padding: 15px; border-radius: 12px; border: 1px dashed rgba(255,51,51,0.6); box-shadow: inset 0 0 25px rgba(0,0,0,0.9), 0 10px 35px rgba(0,0,0,1); backdrop-filter: blur(10px); animation: popIn 0.4s ease; overflow: hidden;}
-        .pdf-upload-box::before { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 4px; background: rgba(255,51,51,0.9); box-shadow: 0 0 20px var(--red); animation: scanLine 2s linear infinite; z-index: 10;}
-        .pdf-icon { font-size: 36px; margin-bottom: 8px; color: var(--red); font-family: var(--font-main); text-shadow: 0 0 15px var(--red-glow); animation: pulseGlow 1s infinite alternate; display: flex; flex-direction: column; align-items: center;}
-        .pdf-bar-bg { width: 100%; height: 6px; background: rgba(0,0,0,0.9); border-radius: 3px; overflow: hidden; margin-bottom: 8px; border: 1px solid rgba(255,51,51,0.4); }
-        .pdf-bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #800000, var(--red), #ff6666); box-shadow: 0 0 15px var(--red); transition: width 0.2s ease; }
-        .pdf-text { font-family: var(--font-mono); font-size: 10px; color: #fff; font-weight: 900; letter-spacing: 1px;}
-        .pdf-percent { color: var(--red); font-size: 12px; text-shadow: 0 0 10px var(--red-glow);}
-        
-        @keyframes scanLine { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
+        /* Background Grid Animation for HDR effect */
+        .boot-grid { position: absolute; top: 0; left: 0; width: 200%; height: 200%; background: linear-gradient(rgba(255, 215, 0, 0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 215, 0, 0.05) 1px, transparent 1px); background-size: 30px 30px; transform: perspective(500px) rotateX(60deg) translateY(-100px) translateZ(-200px); animation: gridMove 10s linear infinite; z-index: 0; opacity: 0.5;}
+        @keyframes gridMove { 0% { transform: perspective(500px) rotateX(60deg) translateY(0) translateZ(-200px); } 100% { transform: perspective(500px) rotateX(60deg) translateY(30px) translateZ(-200px); } }
 
-        .boot-terminal { font-family: var(--font-mono); font-size: 10px; color: var(--green); text-shadow: 0 0 8px var(--green-glow); width: 80%; max-width: 260px; text-align: left; height: 40px; line-height: 1.5; margin-bottom: 20px; opacity: 0.9;}
-        .boot-progress-bar { width: 80%; max-width: 260px; height: 3px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative; box-shadow: inset 0 1px 3px rgba(0,0,0,0.9);}
-        .boot-progress-fill { width: 0%; height: 100%; background: var(--primary); box-shadow: 0 0 15px var(--primary), 0 0 6px #fff; animation: bootLoad 7.5s ease forwards; }
-        @keyframes bootLoad { 0% { width: 0%; } 15% { width: 10%; } 35% { width: 45%; } 65% { width: 80%; } 85% { width: 95%; } 100% { width: 100%; } }
+        .radar-loader { position: relative; width: 140px; height: 140px; margin-bottom: 40px; display: flex; border-radius: 50%; overflow: hidden; box-shadow: 0 0 60px rgba(255,215,0,0.15), inset 0 0 20px rgba(255,215,0,0.2); z-index: 2;}
+        .radar-circle { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; border: 1px solid rgba(255, 215, 0, 0.4); box-shadow: 0 0 15px rgba(255,215,0,0.3); }
+        .radar-circle.inner { top: 12%; left: 12%; width: 76%; height: 76%; border: 3px dashed var(--primary-dark); animation: spinLeft 8s linear infinite; }
+        .radar-circle.core { top: 35%; left: 35%; width: 30%; height: 30%; background: var(--primary); border-radius: 50%; box-shadow: 0 0 50px var(--primary-glow), inset 0 0 10px #fff; animation: hdrPulse 1.5s infinite alternate; }
+        .radar-scanner { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border-radius: 50%; background: conic-gradient(from 0deg, transparent 60%, rgba(255,215,0,0.9) 100%); animation: spinRight 2s linear infinite; }
+        .radar-scanner::after { content: ''; position: absolute; top: 0; left: 50%; width: 3px; height: 50%; background: #fff; box-shadow: 0 0 25px var(--primary); transform-origin: bottom center; }
+        
+        @keyframes hdrPulse { 0% { filter: brightness(1) drop-shadow(0 0 20px var(--primary)); transform: scale(0.95); } 100% { filter: brightness(1.5) drop-shadow(0 0 60px var(--primary)); transform: scale(1.05); } }
+
+        .boot-logo { position: relative; font-family: var(--font-zombie); font-size: 32px; color: #fff; text-shadow: 0 0 25px var(--primary-glow), 0 0 5px #fff; margin-bottom: 20px; letter-spacing: 4px; text-align: center; animation: logoGlitchHDR 3s infinite; z-index: 2; font-weight: 900;}
+        @keyframes logoGlitchHDR {
+            0%, 100% { transform: translate(0); text-shadow: 0 0 25px var(--primary-glow), 0 0 5px #fff; }
+            5% { transform: translate(-3px, 2px); text-shadow: 3px 0 var(--red), -3px 0 var(--green); filter: hue-rotate(90deg); }
+            10% { transform: translate(3px, -2px); text-shadow: -3px 0 var(--red), 3px 0 var(--green); filter: hue-rotate(-90deg); }
+            15% { transform: translate(0); text-shadow: 0 0 25px var(--primary-glow), 0 0 5px #fff; }
+        }
+        
+        /* HDR PDF Upload Box */
+        .pdf-upload-box { display: none; position: relative; flex-direction: column; align-items: center; justify-content: center; width: 85%; max-width: 280px; margin-bottom: 30px; background: rgba(10,0,0,0.6); padding: 20px; border-radius: 16px; border: 2px solid rgba(255,51,51,0.8); box-shadow: inset 0 0 30px rgba(255,0,0,0.3), 0 15px 50px rgba(0,0,0,1), 0 0 30px rgba(255,51,51,0.2); backdrop-filter: blur(15px); animation: popInHDR 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275); overflow: hidden; z-index: 2;}
+        .pdf-upload-box::before { content: ''; position: absolute; top: -100%; left: 0; width: 100%; height: 5px; background: #fff; box-shadow: 0 0 30px var(--red), 0 0 10px #fff; animation: scanLineHDR 2.5s linear infinite; z-index: 10;}
+        .pdf-icon { font-size: 45px; margin-bottom: 12px; color: var(--red); font-family: var(--font-main); text-shadow: 0 0 25px var(--red-glow); animation: hdrPulse 1s infinite alternate; display: flex; flex-direction: column; align-items: center;}
+        .pdf-bar-bg { width: 100%; height: 8px; background: rgba(0,0,0,0.9); border-radius: 4px; overflow: hidden; margin-bottom: 10px; border: 1px solid rgba(255,51,51,0.6); box-shadow: inset 0 2px 5px rgba(0,0,0,1); }
+        .pdf-bar-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #500000, var(--red), #ff9999); box-shadow: 0 0 20px var(--red); transition: width 0.3s ease-out; }
+        .pdf-text { font-family: var(--font-mono); font-size: 11px; color: #fff; font-weight: 900; letter-spacing: 2px;}
+        .pdf-percent { color: var(--red); font-size: 14px; text-shadow: 0 0 15px var(--red-glow), 0 0 5px #fff;}
+        
+        @keyframes scanLineHDR { 0% { top: -10%; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; opacity: 0; } }
+        @keyframes popInHDR { 0% { transform: scale(0.8) translateY(20px); opacity: 0; } 100% { transform: scale(1) translateY(0); opacity: 1; } }
+
+        .boot-terminal { font-family: var(--font-mono); font-size: 11px; color: var(--green); text-shadow: 0 0 12px var(--green-glow); width: 80%; max-width: 280px; text-align: left; height: 50px; line-height: 1.6; margin-bottom: 25px; opacity: 0.9; z-index: 2; letter-spacing: 0.5px;}
+        
+        /* 20 Second Progress Bar */
+        .boot-progress-bar { width: 85%; max-width: 280px; height: 4px; background: rgba(255,255,255,0.1); border-radius: 2px; overflow: hidden; position: relative; box-shadow: inset 0 1px 3px rgba(0,0,0,0.9); z-index: 2;}
+        .boot-progress-fill { width: 0%; height: 100%; background: linear-gradient(90deg, #B8860B, var(--primary), #FFF); box-shadow: 0 0 20px var(--primary), 0 0 8px #fff; animation: bootLoad20s 19s cubic-bezier(0.4, 0, 0.2, 1) forwards; }
+        
+        @keyframes bootLoad20s { 
+            0% { width: 0%; } 
+            15% { width: 12%; } 
+            35% { width: 35%; } 
+            60% { width: 65%; } 
+            80% { width: 85%; } 
+            95% { width: 98%; }
+            100% { width: 100%; } 
+        }
 
         .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,215,0,0.15);}
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 4px; width: 100%; }
@@ -126,7 +153,6 @@
         .tab-btn.active { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #000; box-shadow: 0 2px 8px rgba(255,215,0,0.6); }
 
         input[type=text] { width: 100%; height: 32px; padding: 0 8px; border: 1px solid rgba(255,215,0,0.4); border-radius: 4px; text-align: center; font-size: 12px; font-weight: 900; background: rgba(0,0,0,0.8); color: var(--primary); outline: none; font-family: var(--font-mono); letter-spacing: 2px; transition: 0.2s ease;}
-        /* 🔥 GLITCH ON INPUT FOCUS 🔥 */
         input[type=text]:focus { border-color: var(--primary); box-shadow: inset 0 2px 5px rgba(0,0,0,1), 0 0 15px rgba(255,215,0,0.6); transform: scale(1.02); animation: inputGlitch 0.2s ease; }
         @keyframes inputGlitch { 0% { transform: translate(2px, -2px) skewX(5deg); } 50% { transform: translate(-2px, 2px) skewX(-5deg); } 100% { transform: translate(0) skewX(0); } }
         
@@ -144,7 +170,6 @@
         .tool-info-row span { color: #fff; font-size: 10px; }
 
         .circular-timer { position: relative; width: 20px; height: 20px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: 6px; transition: all 0.3s;}
-        /* 🔥 DANGER TIMER PULSE 🔥 */
         .timer-danger { animation: dangerBeat 0.5s infinite alternate; }
         @keyframes dangerBeat { 0% { transform: scale(1); filter: drop-shadow(0 0 5px var(--red)); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 20px var(--red)); } }
         
@@ -165,7 +190,6 @@
         @keyframes spinLeft { 100% { transform: rotate(-360deg); } }
 
         .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 5; margin: 0; }
-        /* 🔥 SNAP RESULT POPUP 🔥 */
         .result-display.show { display: flex; animation: resultSnap 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes resultSnap { 0% { transform: scale(0.2) skewX(20deg); opacity: 0; } 100% { transform: scale(1) skewX(0); opacity: 1; } }
 
@@ -193,7 +217,6 @@
         .hack-text { font-family: var(--font-mono); font-size: 9px; color: var(--primary); letter-spacing: 1px; font-weight: 900; animation: textFlicker 0.1s infinite alternate; margin-top: 2px; text-align: center; }
         @keyframes textFlicker { 0% { opacity: 1; } 100% { opacity: 0.7; } }
         @keyframes pulseGlow { 0% { filter: brightness(1); } 100% { filter: brightness(1.3); } }
-        @keyframes popIn { 0% { transform: scale(0.9); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
 
         .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(0,0,0,0.3); border-top-color: #111; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 4px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
@@ -202,7 +225,7 @@
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
         
         .noti-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.8); z-index: 999999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(5px); }
-        .noti-modal { background: rgba(15, 12, 10, 0.98); border: 1px solid var(--primary-dark); width: 80%; max-width: 260px; border-radius: 8px; padding: 12px; box-shadow: 0 15px 30px rgba(0,0,0,1); animation: popIn 0.3s ease forwards; }
+        .noti-modal { background: rgba(15, 12, 10, 0.98); border: 1px solid var(--primary-dark); width: 80%; max-width: 260px; border-radius: 8px; padding: 12px; box-shadow: 0 15px 30px rgba(0,0,0,1); animation: popInHDR 0.3s ease forwards; }
         .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid rgba(255,215,0,0.2); padding-bottom: 6px; margin-bottom: 8px; }
         .noti-title { color: var(--primary); font-family: var(--font-mono); font-size: 11px; font-weight: 900; letter-spacing: 1px;}
         .close-noti { color: #888; font-size: 16px; font-weight: 900; cursor: pointer; }
@@ -220,7 +243,14 @@
 </head>
 <body>
 
+    <!-- 🔥 AUDIO FILES BURNED IN HERE 🔥 -->
+    <audio id="audio-welcome" src="welcome.mp3" preload="auto"></audio>
+    <audio id="audio-rules" src="rules.mp3" preload="auto"></audio>
+
     <div id="bootScreen">
+        <!-- Background HDR grid -->
+        <div class="boot-grid"></div>
+
         <div class="radar-loader" id="radarLoader">
             <div class="radar-circle inner"></div>
             <div class="radar-circle core"></div>
@@ -229,9 +259,9 @@
         </div>
         
         <div class="pdf-upload-box" id="pdfUploadBox">
-            <div class="pdf-icon">📄<span style="font-size:9px; color:#fff; text-shadow:none; margin-top:2px; letter-spacing:1px;">DATA.PDF</span></div>
+            <div class="pdf-icon">📄<span style="font-size:10px; color:#fff; text-shadow:none; margin-top:4px; letter-spacing:1.5px;">DATA.PDF</span></div>
             <div class="pdf-bar-bg"><div class="pdf-bar-fill" id="pdfFill"></div></div>
-            <div class="pdf-text">UPLOADING PDF DATA... <span class="pdf-percent" id="pdfPercent">0%</span></div>
+            <div class="pdf-text">DECRYPTING PDF CORE... <span class="pdf-percent" id="pdfPercent">0%</span></div>
         </div>
 
         <div class="boot-logo">PDF HACK</div>
@@ -377,37 +407,49 @@
         });
 
         window.addEventListener('load', () => {
+            // 🔥 PLAY WELCOME AUDIO ON LOAD 🔥
+            const welcomeAudio = document.getElementById('audio-welcome');
+            let playPromise = welcomeAudio.play();
+            if (playPromise !== undefined) {
+                playPromise.catch(e => console.log("Browser blocked auto-play. Audio will play on first interaction.", e));
+            }
+
             const bt1 = document.getElementById('bt1'), bt2 = document.getElementById('bt2'), bt3 = document.getElementById('bt3');
             const radar = document.getElementById('radarLoader');
             const pdfBox = document.getElementById('pdfUploadBox'), pdfFill = document.getElementById('pdfFill'), pdfPercent = document.getElementById('pdfPercent');
             
-            setTimeout(() => { bt1.innerText = "> INITIALIZING PDF CORE..."; }, 500);
+            // 0s - 3s
+            setTimeout(() => { bt1.innerText = "> INITIALIZING HDR AI CORE..."; }, 1000);
             
+            // 3.5s - 15.5s (Deep scan / PDF upload simulation spanning ~12 seconds)
             setTimeout(() => { 
-                bt2.innerText = "> PARSING SERVER PDF DATA..."; 
+                bt2.innerText = "> PARSING SERVER PDF DATA (DEEP SCAN)..."; 
                 radar.style.display = 'none';
                 pdfBox.style.display = 'flex';
                 
                 let p = 0;
                 let uploadInt = setInterval(() => {
-                    p += Math.floor(Math.random() * 20) + 5;
+                    p += Math.floor(Math.random() * 8) + 2; 
                     if(p >= 100) { p = 100; clearInterval(uploadInt); }
                     pdfPercent.innerText = p + "%";
                     pdfFill.style.width = p + "%";
-                }, 400);
-            }, 2500);
+                }, 600); // 600ms updates to span perfectly across this window
+            }, 3500);
 
+            // 16s - 19s (Finalizing decryption)
             setTimeout(() => { 
                 pdfBox.style.display = 'none';
                 radar.style.display = 'flex';
-                bt3.innerText = "> READY FOR EXTRACTION."; 
+                bt3.innerText = "> DECRYPTION SUCCESS. SYSTEM READY."; 
                 bt3.style.color = "var(--primary)"; 
-            }, 5500);
+                document.querySelector('.radar-circle.core').style.boxShadow = "0 0 100px var(--primary), inset 0 0 20px #fff"; 
+            }, 16000);
             
+            // 19s (Fade out) -> 20s (Remove completely)
             setTimeout(() => {
                 document.getElementById('bootScreen').style.opacity = '0';
-                setTimeout(() => { document.getElementById('bootScreen').style.display = 'none'; }, 600);
-            }, 8000);
+                setTimeout(() => { document.getElementById('bootScreen').style.display = 'none'; }, 1000);
+            }, 19000);
         });
 
         setInterval(() => {
@@ -419,7 +461,7 @@
         window.Util = class {
             static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
-                if(msg.includes("ERROR") || msg.includes("BANNED") || msg.includes("REQUIRED") || msg.includes("NOT FOUND")) {
+                if(msg.includes("ERROR") || msg.includes("BANNED") || msg.includes("REQUIRED") || msg.includes("NOT FOUND") || msg.includes("BOUND")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "var(--red)"; t.style.boxShadow = "0 5px 15px rgba(0,0,0,0.9), 0 0 10px rgba(255,51,51,0.3)";
                 } else {
                     t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.boxShadow = "0 5px 15px rgba(0,0,0,0.9), 0 0 10px rgba(255,215,0,0.2)";
@@ -429,6 +471,16 @@
         };
 
         window.Auth = class {
+            // 🔥 DEVICE BINDING LOGIC HELPER 🔥
+            static getDeviceToken() {
+                let token = localStorage.getItem('device_token');
+                if (!token) {
+                    token = 'mob_' + Math.random().toString(36).substr(2, 9) + Date.now().toString(36);
+                    localStorage.setItem('device_token', token);
+                }
+                return token;
+            }
+
             static async verify() {
                 let uid = document.getElementById('uidInput').value.trim(); let btn = document.getElementById('authBtn'); 
                 if(!uid) return Util.toast("ENTER UID FIRST");
@@ -443,6 +495,20 @@
                     }
 
                     let data = snapshot.val(); currentUid = uid;
+
+                    // 🔥 1 UID = 1 MOBILE VERIFICATION 🔥
+                    let myDeviceToken = this.getDeviceToken();
+                    if (!data.deviceId) {
+                        // First time logging in with this UID, bind it to this mobile
+                        await update(ref(db, 'approved_uids/' + uid), { deviceId: myDeviceToken });
+                        data.deviceId = myDeviceToken;
+                    } else if (data.deviceId !== myDeviceToken) {
+                        // The UID is bound to a different mobile
+                        btn.innerText = "CONNECT"; btn.disabled = false;
+                        Util.toast("UID ALREADY BOUND TO ANOTHER DEVICE"); 
+                        return;
+                    }
+
                     let role = data.role || (data.is_premium ? 'vip' : 'trial');
                     
                     if(role === 'trial' && (data.predictions_used || 0) >= window.AdminSettings.freeTrials) { 
@@ -486,6 +552,7 @@
             static activeMode = '1m'; static state = "IDLE"; static apiPeriod = null; 
             static isVvipUser = false; static userRole = 'trial'; static lastPrediction = null; static lastPredictedPeriod = null;
             static latestN1 = null; static latestN2 = null; 
+            static hasPlayedRules = false; // 🔥 FLAG FOR FIRST EXTRACT AUDIO 🔥
             
             static switchMode(m) { 
                 this.activeMode = m; this.apiPeriod = null; 
@@ -604,6 +671,13 @@
 
                 if(this.state === "IDLE") {
                     if(!n1.value || !n2.value) return Util.toast("WAITING FOR DATA...");
+
+                    // 🔥 PLAY RULES AUDIO ONLY ON THE VERY FIRST TIME 🔥
+                    if (!this.hasPlayedRules) {
+                        const rulesAudio = document.getElementById('audio-rules');
+                        rulesAudio.play().catch(e => console.log("Audio play blocked", e));
+                        this.hasPlayedRules = true; // Make sure it never plays again
+                    }
 
                     let uDataSnap = await get(ref(db, 'approved_uids/' + currentUid));
                     if(uDataSnap.exists()) {
