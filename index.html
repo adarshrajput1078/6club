@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RAXI.WIN | AI CORE ENGINE</title>
+    <title>Khelv WIN | AI CORE ENGINE</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,10 +11,21 @@
     
     <style>
         :root { 
-            --primary: #FF2A2A; --primary-dark: #8B0000; --primary-glow: rgba(255, 42, 42, 0.85); 
-            --silver: #E0E0E0; --silver-glow: rgba(224, 224, 224, 0.7);
+            /* 🔥 KHELV WIN THEME (GOLD & NEON BLUE) 🔥 */
+            --primary: #FFD700; /* Gold */
+            --primary-dark: #B8860B; 
+            --primary-glow: rgba(255, 215, 0, 0.85); 
+            
+            --accent-blue: #00E5FF; /* Cyan/Neon Blue */
+            --accent-blue-dark: #0088CC;
+            --accent-blue-glow: rgba(0, 229, 255, 0.85);
+            
+            --silver: #E0E0E0;
             --gold: #FFD700;
-            --bg-dark: #050202; --bg-panel: rgba(15, 5, 5, 0.95); 
+            
+            --bg-dark: #02050A; /* Deep Dark Blue/Black */
+            --bg-panel: rgba(5, 10, 15, 0.95); 
+            
             --green: #00FF7F; --green-glow: rgba(0, 255, 127, 0.8);
             --red: #FF3333; --red-glow: rgba(255, 51, 51, 0.8); 
             
@@ -30,10 +41,11 @@
         
         body::after { 
             content: ""; position: absolute; top: 0; left: 0; width: 100vw; height: 100vh; 
-            background: linear-gradient(rgba(255, 42, 42, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 42, 42, 0.03) 1px, transparent 1px), radial-gradient(circle, transparent 40%, rgba(0,0,0,0.9) 150%); 
-            background-size: 20px 20px, 20px 20px, 100% 100%; z-index: 99999999; pointer-events: none; opacity: 0.8;
+            background: linear-gradient(rgba(255, 215, 0, 0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.03) 1px, transparent 1px), radial-gradient(circle, transparent 40%, rgba(0,0,0,0.9) 150%); 
+            background-size: 20px 20px, 20px 20px, 100% 100%; z-index: 99999999; pointer-events: none; opacity: 0.7;
         }
 
+        /* 🔥 APP ANIMATIONS 🔥 */
         .app-fade-in { animation: appFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .stagger-1 { animation: slideUpFade 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .stagger-2 { animation: slideUpFade 0.6s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
@@ -46,82 +58,119 @@
         .shake-screen { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); filter: hue-rotate(5deg); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-        #top-panel { flex: 0 0 auto; height: auto; width: 100%; z-index: 10; position: relative; padding: 4px 8px; background: var(--bg-panel); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-bottom: 2px solid rgba(255, 42, 42, 0.4); box-shadow: 0 10px 25px rgba(0,0,0,1), inset 0 -1px 12px rgba(255, 42, 42, 0.2); display: flex; flex-direction: column; }
+        /* 🔥 TOP PANEL 🔥 */
+        #top-panel { flex: 0 0 auto; height: auto; width: 100%; z-index: 10; position: relative; padding: 4px 8px; background: var(--bg-panel); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-bottom: 2px solid rgba(255, 215, 0, 0.4); box-shadow: 0 10px 25px rgba(0,0,0,1), inset 0 -1px 12px rgba(255, 215, 0, 0.2); display: flex; flex-direction: column; }
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
 
-        .badge-247 { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #aa0000, #ff2a2a); color: #fff; font-family: var(--font-zombie); font-size: 7px; font-weight: 900; padding: 1.5px 4px; border-radius: 3px; letter-spacing: 1px; box-shadow: 0 0 8px rgba(255, 42, 42, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.4); animation: pulse247 2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate; border: 1px solid rgba(255, 255, 255, 0.2); margin-left: 4px;}
-        @keyframes pulse247 { 0% { transform: scale(1); filter: drop-shadow(0 0 3px #ff2a2a) brightness(1); } 100% { transform: scale(1.05); filter: drop-shadow(0 0 8px #ff5555) brightness(1.2); } }
+        .badge-247 { display: inline-flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #B8860B, #FFD700); color: #000; font-family: var(--font-zombie); font-size: 7px; font-weight: 900; padding: 1.5px 4px; border-radius: 3px; letter-spacing: 1px; box-shadow: 0 0 8px rgba(255, 215, 0, 0.6), inset 0 0 3px rgba(255, 255, 255, 0.6); animation: pulse247 2s cubic-bezier(0.4, 0, 0.2, 1) infinite alternate; border: 1px solid rgba(255, 255, 255, 0.4); margin-left: 4px;}
+        @keyframes pulse247 { 0% { transform: scale(1); filter: drop-shadow(0 0 3px #FFD700) brightness(1); } 100% { transform: scale(1.05); filter: drop-shadow(0 0 8px #FFD700) brightness(1.2); } }
 
-        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,42,42,0.2);}
+        .top-header { width: 100%; display: flex; justify-content: space-between; align-items: center; margin-bottom: 2px; padding-bottom: 4px; border-bottom: 1px solid rgba(255,215,0,0.15);}
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 2px; width: 100%; }
         .brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;}
         
-        .brand-container { display: flex; align-items: center; gap: 2px; position: relative; transform: skewX(-5deg);}
-        .brand-crown { position: absolute; top: -11px; left: -5px; font-size: 14px; filter: drop-shadow(0 0 5px var(--gold)); transform: rotate(-15deg); z-index: 2;}
-        .brand-raxi { font-family: var(--font-massive); font-size: 20px; font-weight: 400; letter-spacing: 1px; color: transparent; background: linear-gradient(180deg, #ff9999 0%, #ff0000 40%, #660000 80%, #ff3333 100%); -webkit-background-clip: text; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8)) drop-shadow(0 0 8px rgba(255,0,0,0.6)); font-style: italic;}
-        .brand-dot { color: var(--primary); font-family: var(--font-massive); font-size: 20px; filter: drop-shadow(0 0 6px var(--primary)); margin: 0 -1px;}
-        .brand-win { font-family: var(--font-massive); font-size: 20px; font-weight: 400; letter-spacing: 1px; color: transparent; background: linear-gradient(180deg, #ffffff 0%, #cccccc 40%, #555555 80%, #aaaaaa 100%); -webkit-background-clip: text; line-height: 1; filter: drop-shadow(0 2px 2px rgba(0,0,0,0.8)) drop-shadow(0 0 8px rgba(255,255,255,0.3)); font-style: italic;}
+        /* 🔥 KHELV WIN LOGO 🔥[span_0](start_span)[span_0](end_span)*/
+        .brand-container { display: flex; align-items: center; gap: 4px; position: relative; transform: skewX(-5deg);}
+        .brand-crown { position: absolute; top: -11px; left: -8px; font-size: 14px; filter: drop-shadow(0 0 5px var(--gold)); transform: rotate(-20deg); z-index: 2;}
+        
+        .brand-khelv { font-family: var(--font-massive); font-size: 22px; font-weight: 400; letter-spacing: 1px; color: transparent; 
+            background: linear-gradient(180deg, #FFE600 0%, #FFB300 40%, #FF8000 80%, #D2691E 100%); 
+            -webkit-background-clip: text; line-height: 1; 
+            filter: drop-shadow(0 2px 2px rgba(139,0,0,0.8)) drop-shadow(0 0 8px rgba(255,215,0,0.6)); font-style: italic;
+        }
+        
+        .brand-win { font-family: var(--font-massive); font-size: 22px; font-weight: 400; letter-spacing: 1px; color: transparent; 
+            background: linear-gradient(180deg, #E0FFFF 0%, #00E5FF 40%, #0088CC 80%, #00008B 100%); 
+            -webkit-background-clip: text; line-height: 1; 
+            filter: drop-shadow(0 2px 2px rgba(0,0,139,0.8)) drop-shadow(0 0 8px rgba(0,229,255,0.6)); font-style: italic; margin-left: 2px;
+        }
         
         .win-stamp { font-family: var(--font-massive); font-size: 9px; color: var(--green); border: 1.5px solid var(--green); padding: 1px 3px; background: rgba(0, 255, 127, 0.1); border-radius: 3px; transform: rotate(-10deg); text-shadow: 0 0 4px var(--green); display: none; letter-spacing: 1px; box-shadow: 0 0 10px rgba(0,255,127,0.3); margin-left: 6px;}
         .win-stamp.show { display: block; animation: winSmash 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
         @keyframes winSmash { 0% { transform: scale(2.5) rotate(-40deg); opacity: 0; filter: blur(6px); } 100% { transform: scale(1) rotate(-10deg); opacity: 1; filter: blur(0); } }
 
         .controls-row { display: flex; align-items: center; gap: 5px; }
-        .noti-btn { background: rgba(0,0,0,0.8); border: 1px solid rgba(255,42,42,0.4); border-radius: 4px; padding: 2px 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; position: relative; transition: 0.1s; box-shadow: inset 0 0 4px rgba(255,42,42,0.2);}
+        .noti-btn { background: rgba(0,0,0,0.8); border: 1px solid rgba(255,215,0,0.4); border-radius: 4px; padding: 2px 6px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 12px; position: relative; transition: 0.1s; box-shadow: inset 0 0 4px rgba(255,215,0,0.2);}
         .noti-btn:active { transform: scale(0.85); }
-        .noti-dot { position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; background: var(--primary); border-radius: 50%; box-shadow: 0 0 8px var(--primary); animation: blinkRed 1s infinite alternate; display: none;}
-        @keyframes blinkRed { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.6; transform: scale(1.2); } }
+        .noti-dot { position: absolute; top: -2px; right: -2px; width: 7px; height: 7px; background: var(--accent-blue); border-radius: 50%; box-shadow: 0 0 8px var(--accent-blue); animation: blinkBlue 1s infinite alternate; display: none;}
+        @keyframes blinkBlue { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0.6; transform: scale(1.2); } }
         
         .status-row { display: flex; align-items: center; gap: 5px;}
         .server-status { display: inline-flex; align-items: center; gap: 3px; font-size: 8px; font-family: var(--font-mono); color: var(--green); font-weight: 900; text-shadow: 0 0 5px rgba(0,255,127,0.6); letter-spacing: 0.5px;}
         .live-dot { width: 4px; height: 4px; background: var(--green); border-radius: 50%; box-shadow: 0 0 6px var(--green); animation: blinkGreen 1.2s infinite alternate;}
         @keyframes blinkGreen { 0% { opacity: 1; transform: scale(1.3);} 100% { opacity: 0.4; transform: scale(0.7);} }
         .ping-meter { font-size: 8px; font-family: var(--font-mono); font-weight: 900; color: #999; display: flex; align-items: center; gap: 3px; margin-left: auto; letter-spacing: 0.5px;}
-        .ping-val { color: var(--primary); text-shadow: 0 0 8px rgba(255,42,42,0.7);}
+        .ping-val { color: var(--accent-blue); text-shadow: 0 0 8px rgba(0,229,255,0.7);}
 
-        .tabs { display: flex; background: rgba(5,5,5,0.95); border-radius: 4px; padding: 2px; border: 1px solid rgba(255,42,42,0.3); box-shadow: inset 0 2px 4px rgba(0,0,0,1);}
+        .tabs { display: flex; background: rgba(5,10,15,0.95); border-radius: 4px; padding: 2px; border: 1px solid rgba(0,229,255,0.3); box-shadow: inset 0 2px 4px rgba(0,0,0,1);}
         .tab-btn { padding: 2px 8px; font-size: 8px; font-weight: 900; color: #777; cursor: pointer; border-radius: 3px; border: none; background: transparent; font-family: var(--font-ui); transition: 0.3s; letter-spacing: 0.5px;}
-        .tab-btn.active { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #fff; box-shadow: 0 2px 8px rgba(255,42,42,0.6); text-shadow: 0 1px 3px rgba(0,0,0,0.5);}
+        .tab-btn.active { background: linear-gradient(180deg, var(--accent-blue), var(--accent-blue-dark)); color: #fff; box-shadow: 0 2px 8px rgba(0,229,255,0.6); text-shadow: 0 1px 3px rgba(0,0,0,0.5);}
 
-        .btn-sleek { position: relative; overflow: hidden; height: 32px; padding: 0 12px; font-size: 13px; letter-spacing: 1.5px; font-family: var(--font-tall); font-weight: 700; cursor: pointer; border-radius: 4px; border: 1px solid rgba(255,100,100,0.5); background: linear-gradient(135deg, var(--primary), #5A0000, var(--primary)); background-size: 200% 200%; color: #fff; display: flex; align-items: center; justify-content: center; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(255,42,42,0.4); flex-shrink: 0; animation: gradientShine 3s ease infinite, breathBtn 2s infinite alternate; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-shadow: 0 1px 3px rgba(0,0,0,0.8);}
+        /* 🔥 GOLD BUTTON 🔥 */
+        .btn-sleek { position: relative; overflow: hidden; height: 32px; padding: 0 12px; font-size: 13px; letter-spacing: 1.5px; font-family: var(--font-tall); font-weight: 900; cursor: pointer; border-radius: 4px; border: 1px solid rgba(255,215,0,0.5); background: linear-gradient(135deg, var(--primary), #FFF8DC, var(--primary)); background-size: 200% 200%; color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(255,215,0,0.4); flex-shrink: 0; animation: gradientShine 3s ease infinite, breathBtn 2s infinite alternate; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
         .btn-sleek:active { transform: translateY(3px) scale(0.95); box-shadow: 0 1px 3px rgba(0,0,0,1); border-color: transparent;}
         .btn-sleek:disabled { background: #333; color: #777; cursor: not-allowed; animation: none; box-shadow: inset 0 0 10px rgba(0,0,0,1); border-color: #222;}
         @keyframes gradientShine { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
-        @keyframes breathBtn { 0% { box-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(255,42,42,0.3); } 100% { box-shadow: 0 4px 15px rgba(0,0,0,1), 0 0 20px rgba(255,42,42,0.8); border-color: #ff9999;} }
+        @keyframes breathBtn { 0% { box-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(255,215,0,0.3); } 100% { box-shadow: 0 4px 15px rgba(0,0,0,1), 0 0 20px rgba(255,215,0,0.8); border-color: #FFF;} }
 
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; flex: 1; margin-top: 4px;}
         .hidden { display: none !important; }
         
-        .pin-label { text-align:center; font-size:11px; font-family:var(--font-tall); color:var(--primary); letter-spacing:2px; text-shadow: 0 0 8px rgba(255,42,42,0.6); margin-bottom: 4px; font-weight: 700;}
+        /* 🔥 CYAN & GOLD PIN SYSTEM 🔥 */
+        .pin-label { text-align:center; font-size:11px; font-family:var(--font-tall); color:var(--primary); letter-spacing:2px; text-shadow: 0 0 8px rgba(255,215,0,0.6); margin-bottom: 4px; font-weight: 700;}
         .pin-group { display: flex; gap: 6px; justify-content: center; width: 100%; margin: 4px 0 12px 0; perspective: 1000px;}
         
-        .pin-block { width: 34px; height: 44px; border-radius: 5px; border: 1px solid rgba(255, 42, 42, 0.2); border-top: 1px solid rgba(255,255,255,0.1); border-bottom: 3px solid #3a0000; background: linear-gradient(180deg, #1a0505, #0a0000); text-align: center; color: #fff; font-size: 22px; font-weight: 900; font-family: var(--font-zombie); outline: none; transition: all 0.15s ease-out; box-shadow: inset 0 4px 10px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.8); caret-color: transparent; text-shadow: 0 0 10px var(--primary-glow);}
-        .pin-block:focus { border-color: var(--primary); border-bottom: 1px solid var(--primary); border-top: 3px solid var(--primary-dark); box-shadow: inset 0 5px 15px rgba(0,0,0,1), 0 0 15px rgba(255,42,42,0.4); background: linear-gradient(180deg, #3a0505, #1a0000); transform: translateY(2px); color: var(--primary);}
+        .pin-block { 
+            width: 34px; height: 44px; 
+            border-radius: 5px; 
+            border: 1px solid rgba(0, 229, 255, 0.3); 
+            border-top: 1px solid rgba(255,255,255,0.1);
+            border-bottom: 3px solid var(--accent-blue-dark);
+            background: linear-gradient(180deg, #05101A, #02050A); 
+            text-align: center; color: #fff; font-size: 22px; font-weight: 900; font-family: var(--font-zombie); 
+            outline: none; transition: all 0.15s ease-out; 
+            box-shadow: inset 0 4px 10px rgba(0,0,0,1), 0 4px 8px rgba(0,0,0,0.8); 
+            caret-color: transparent; text-shadow: 0 0 10px var(--accent-blue-glow);
+        }
+        
+        .pin-block:focus { 
+            border-color: var(--primary); border-bottom: 1px solid var(--primary); border-top: 3px solid #FFF;
+            box-shadow: inset 0 5px 15px rgba(0,0,0,1), 0 0 15px rgba(255,215,0,0.5); 
+            background: linear-gradient(180deg, #1A1505, #0A0802); 
+            transform: translateY(2px); 
+            color: var(--primary);
+            text-shadow: 0 0 10px var(--primary-glow);
+        }
+        
         .pin-pop { animation: pinMechanic 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards !important; }
-        @keyframes pinMechanic { 0% { transform: translateY(2px); filter: brightness(1); } 50% { transform: translateY(-4px) scale(1.1); filter: brightness(1.6); box-shadow: 0 10px 20px var(--primary), inset 0 0 10px #fff; background: rgba(255,42,42,0.6); color:#fff; border-color:#fff;} 100% { transform: translateY(0px) scale(1); filter: brightness(1); } }
+        @keyframes pinMechanic { 
+            0% { transform: translateY(2px); filter: brightness(1); } 
+            50% { transform: translateY(-4px) scale(1.1); filter: brightness(1.6); box-shadow: 0 10px 20px var(--primary), inset 0 0 10px #fff; background: rgba(255,215,0,0.4); color:#000; border-color:#fff;} 
+            100% { transform: translateY(0px) scale(1); filter: brightness(1); } 
+        }
 
         .contact-admin { margin-top: 12px; text-align: center; display: flex; flex-direction: column; gap: 6px; align-items: center;}
         .contact-admin span { font-size: 9px; color: #888; font-family: var(--font-mono); letter-spacing: 1px; font-weight: 900;}
         .tg-btn { display: flex; align-items: center; gap: 6px; background: linear-gradient(135deg, #0088cc, #005580); color: #fff; padding: 6px 16px; border-radius: 15px; font-family: var(--font-ui); font-size: 10px; font-weight: 900; text-decoration: none; box-shadow: 0 4px 10px rgba(0, 136, 204, 0.5); transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275); border: 1px solid rgba(255,255,255,0.2); letter-spacing: 1px;}
         .tg-btn:active { transform: scale(0.92); box-shadow: 0 2px 4px rgba(0,136,204,0.7); }
 
-        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; margin-top: 2px; font-family: var(--font-mono); font-size: 8px; color: #ccc; font-weight: 900; background: linear-gradient(90deg, rgba(20,5,5,0.95), rgba(5,0,0,1)); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(255,42,42,0.3); box-shadow: inset 0 0 8px rgba(0,0,0,1), 0 2px 4px rgba(0,0,0,0.5); }
+        .tool-info-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 6px; margin-top: 2px; font-family: var(--font-mono); font-size: 8px; color: #ccc; font-weight: 900; background: linear-gradient(90deg, rgba(5,15,25,0.95), rgba(2,5,10,1)); padding: 4px 8px; border-radius: 4px; border: 1px solid rgba(0,229,255,0.3); box-shadow: inset 0 0 8px rgba(0,0,0,1), 0 2px 4px rgba(0,0,0,0.5); }
         .info-col { flex: 1; }
         
         .circular-timer { position: relative; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: 6px; transition: all 0.3s;}
         .timer-danger { animation: dangerBeat 0.4s infinite alternate; }
-        @keyframes dangerBeat { 0% { transform: scale(1); filter: drop-shadow(0 0 4px var(--primary)); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--primary)); } }
-        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%; drop-shadow: 0 0 4px var(--primary-glow);}
+        @keyframes dangerBeat { 0% { transform: scale(1); filter: drop-shadow(0 0 4px var(--red)); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--red)); } }
+        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%; drop-shadow: 0 0 4px var(--accent-blue-glow);}
         .timer-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 3; }
-        .timer-progress { fill: none; stroke: var(--primary); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; stroke-linecap: round; }
+        .timer-progress { fill: none; stroke: var(--accent-blue); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; stroke-linecap: round; }
         #displayTimer { font-family: var(--font-mono); font-size: 8px; font-weight: 900; color: #fff; z-index: 2;}
 
         .action-row { display: flex; gap: 8px; position: relative; width: 100%; align-items: center; justify-content: space-between; min-height: 44px;}
         .input-group { display: flex; gap: 10px; flex: 1; justify-content: center; align-items: center; }
         
-        .vault-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #2a0a0a 0%, #050000 80%); box-shadow: inset 0 2px 6px rgba(0,0,0,1), 0 3px 8px rgba(0,0,0,0.9); animation: floatIdle 3s ease-in-out infinite alternate; }
-        .vault-wrapper::before { content: ''; position: absolute; width: 115%; height: 115%; border-radius: 50%; border: 1.5px solid transparent; border-top: 1.5px solid var(--primary); border-bottom: 1.5px solid var(--primary); animation: spinRight 2.5s infinite linear; box-shadow: 0 0 4px var(--primary-glow);}
+        .vault-wrapper { position: relative; display: flex; justify-content: center; align-items: center; width: 34px; height: 34px; border-radius: 50%; background: radial-gradient(circle at 30% 30%, #0A152A 0%, #02050A 80%); box-shadow: inset 0 2px 6px rgba(0,0,0,1), 0 3px 8px rgba(0,0,0,0.9); animation: floatIdle 3s ease-in-out infinite alternate; }
+        .vault-wrapper::before { content: ''; position: absolute; width: 115%; height: 115%; border-radius: 50%; border: 1.5px solid transparent; border-top: 1.5px solid var(--primary); border-bottom: 1.5px solid var(--accent-blue); animation: spinRight 2.5s infinite linear; box-shadow: 0 0 4px var(--primary-glow);}
         .vault-wrapper img { position: relative; z-index: 2; height: 16px; filter: drop-shadow(0 2px 3px rgba(0,0,0,1)); }
         
         @keyframes floatIdle { 0% { transform: translateY(0); } 100% { transform: translateY(-3px); } }
@@ -131,17 +180,17 @@
         .result-display.show { display: flex; animation: resultSnap 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes resultSnap { 0% { transform: scale(0.2) translateY(15px); opacity: 0; filter: blur(8px); } 60% { transform: scale(1.1) translateY(-5px); opacity: 1; filter: blur(0); } 100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); } }
 
-        .slot-container { width: 100%; max-width: 170px; height: 38px; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center; margin: 0 auto; border-radius: 5px; border: 1px solid rgba(255,42,42,0.4); background: rgba(5,0,0,0.9); box-shadow: inset 0 0 12px rgba(0,0,0,1);}
+        .slot-container { width: 100%; max-width: 150px; height: 38px; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center; margin: 0 auto; border-radius: 5px; border: 1px solid rgba(255,215,0,0.4); background: rgba(5,10,20,0.9); box-shadow: inset 0 0 12px rgba(0,0,0,1);}
         .slot-container::before, .slot-container::after { content: ''; position: absolute; left: 0; width: 100%; height: 8px; z-index: 5; }
         .slot-container::before { top: 0; background: linear-gradient(180deg, var(--bg-panel), transparent); }
         .slot-container::after { bottom: 0; background: linear-gradient(0deg, var(--bg-panel), transparent); }
 
         .slot-scroll { display: flex; flex-direction: column; align-items: center; animation: scrollFast 0.2s linear infinite; }
         .slot-scroll.stop { animation: none; transform: translateY(0); }
-        .slot-item { height: 38px; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-massive); font-size: 20px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.6); white-space: nowrap; }
-        .slot-item img { height: 20px; filter: drop-shadow(0 0 8px rgba(255,255,255,0.8)); margin-left: 2px;}
+        .slot-item { height: 38px; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-massive); font-size: 18px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.6); white-space: nowrap; }
+        .slot-item img { height: 18px; filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); margin-left: 2px;}
         .slot-item .big-text { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); letter-spacing: 1px;}
-        .slot-item .small-text { color: var(--green); text-shadow: 0 0 10px var(--green-glow); letter-spacing: 1px;}
+        .slot-item .small-text { color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-blue-glow); letter-spacing: 1px;}
 
         @keyframes scrollFast { 0% { transform: translateY(0); } 100% { transform: translateY(-266px); } }
 
@@ -154,23 +203,27 @@
         .glitch-text { animation: glitchText 0.3s infinite; }
         @keyframes glitchText { 0% { opacity:1; transform: skewX(0deg); } 20% { opacity:0.8; transform: skewX(-10deg); color:#fff; } 40% { opacity:1; transform: skewX(10deg); } 60% { opacity:0.9; transform: skewX(0deg); color:var(--primary);} 100% { opacity:1;} }
         
-        .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(255,255,255,0.3); border-top-color: #fff; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 4px; }
+        .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(0,0,0,0.5); border-top-color: #000; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 4px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        #toast { position: fixed; top: 10px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.9); background: rgba(15, 5, 5, 0.98); color: #fff; padding: 6px 14px; border-radius: 4px; font-weight: 900; font-size: 10px; border: 1.5px solid var(--primary-dark); z-index: 999999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); opacity: 0; box-shadow: 0 6px 20px rgba(0,0,0,1); backdrop-filter: blur(5px); letter-spacing: 1px; width: max-content; }
+        /* 🔥 MODAL & TOAST 🔥 */
+        #toast { position: fixed; top: 10px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.9); background: rgba(5, 10, 20, 0.98); color: #fff; padding: 6px 14px; border-radius: 4px; font-weight: 900; font-size: 10px; border: 1.5px solid var(--accent-blue); z-index: 999999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); opacity: 0; box-shadow: 0 6px 20px rgba(0,0,0,1); backdrop-filter: blur(5px); letter-spacing: 1px; width: max-content; }
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
         
         .noti-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .noti-modal { background: linear-gradient(180deg, rgba(25,5,5,0.98), rgba(5,0,0,1)); border: 1.5px solid var(--primary-dark); width: 85%; max-width: 280px; border-radius: 8px; padding: 12px; box-shadow: 0 15px 40px rgba(0,0,0,1); }
-        .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(255,42,42,0.2); padding-bottom: 6px; margin-bottom: 8px; }
+        .noti-modal { background: linear-gradient(180deg, rgba(10,20,35,0.98), rgba(2,5,10,1)); border: 1.5px solid var(--primary); width: 85%; max-width: 280px; border-radius: 8px; padding: 12px; box-shadow: 0 15px 40px rgba(0,0,0,1); }
+        .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(0,229,255,0.3); padding-bottom: 6px; margin-bottom: 8px; }
         .noti-title { color: var(--primary); font-family: var(--font-tall); font-size: 16px; font-weight: 700; letter-spacing: 1px;}
         .close-noti { color: #888; font-size: 18px; font-weight: 900; cursor: pointer; line-height: 1;}
         .noti-body { color: #eaeaea; font-family: var(--font-ui); font-size: 11px; line-height: 1.5; font-weight: 600; max-height: 150px; overflow-y: auto;}
 
-        /* 🔥 3D GLASS HISTORY SECTION 🔥 */
-        .history-box { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 10px; background: rgba(0,0,0,0.8); border: 1px solid rgba(255,42,42,0.3); border-radius: 6px; overflow-x: auto; min-height: 38px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);}
-        .history-label { font-family: var(--font-massive); font-size: 12px; color: var(--primary); letter-spacing: 1px; white-space: nowrap; margin-right: 4px; text-shadow: 0 0 5px rgba(255,42,42,0.5);}
-        .hist-badge { width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-massive); font-size: 12px; flex-shrink: 0; animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8); border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(0,0,0,0.8);}
+        /* 🔥 LOG HISTORY SECTION 🔥 */
+        .history-box { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 10px; background: rgba(5,10,15,0.8); border: 1px solid rgba(0,229,255,0.2); border-radius: 6px; overflow-x: auto; min-height: 38px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);}
+        .history-label { font-family: var(--font-massive); font-size: 12px; color: var(--primary); letter-spacing: 1px; white-space: nowrap; margin-right: 4px; text-shadow: 0 0 5px rgba(255,215,0,0.5);}
+        .hist-badge { width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-massive); font-size: 12px; flex-shrink: 0; animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
+            box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8);
+            border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(0,0,0,0.8);
+        }
         .hist-w { background: linear-gradient(135deg, #00FF7F, #006400); color: #fff; text-shadow: 0 1px 2px #000; }
         .hist-l { background: linear-gradient(135deg, #FF3333, #8B0000); color: #fff; text-shadow: 0 1px 2px #000; }
 
@@ -189,8 +242,9 @@
             </div>
             <div class="noti-body" id="notiMessageText">No new messages from Admin.</div>
             
-            <div style="margin-top: 15px; padding-top: 12px; border-top: 1.5px solid rgba(255,42,42,0.3);">
-                <button class="btn-sleek" style="width: 100%; height: 30px; font-size: 11px;" onclick="Engine.exportHistory()">📥 EXPORT SESSION LOG</button>
+            <div style="margin-top: 15px; padding-top: 12px; border-top: 1.5px solid rgba(0,229,255,0.3);">
+                <!-- 🔥 COPY TO CLIPBOARD BUTTON FOR TG MINI APPS 🔥 -->
+                <button class="btn-sleek" style="width: 100%; height: 30px; font-size: 11px;" onclick="Engine.exportHistory()">📋 COPY SESSION LOG</button>
             </div>
         </div>
     </div>
@@ -202,8 +256,7 @@
                 <div class="brand-row">
                     <div class="brand-container">
                         <div class="brand-crown">👑</div>
-                        <div class="brand-raxi">RAXI</div>
-                        <div class="brand-dot">.</div>
+                        <div class="brand-khelv">Khelv</div>
                         <div class="brand-win">WIN</div>
                         <div id="winStamp" class="win-stamp">WIN</div>
                     </div>
@@ -251,7 +304,7 @@
             <div class="tool-info-row stagger-2">
                 <div class="info-col" style="text-align: left; font-family: var(--font-massive); font-size: 11px; font-weight: 400; letter-spacing: 1px;">ID: <span id="displayPeriod" style="font-family: var(--font-mono); font-size: 12px; font-weight: 900; color: #fff;">SYNC...</span></div>
                 
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="color:var(--primary); font-family: var(--font-tall); font-size: 13px; letter-spacing: 1.5px; text-shadow: 0 0 5px var(--primary-glow);">PDF FILE</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="color:var(--primary); font-family: var(--font-tall); font-size: 14px; letter-spacing: 1px; text-shadow: 0 0 5px var(--primary-glow);">PDF FILE</span></div>
                 
                 <div class="info-col" style="text-align: right; display: flex; justify-content: flex-end; align-items: center; font-family: var(--font-massive); font-size: 11px; font-weight: 400; letter-spacing: 1px;">
                     TMR: 
@@ -266,7 +319,7 @@
                 <div class="input-group" id="input-group">
                     <input type="hidden" id="in-n1"><input type="hidden" id="in-n2">
                     <div class="vault-wrapper"><img id="disp-n1" src="" style="display: none;"></div>
-                    <span style="color: var(--primary); font-weight: 900; font-size: 20px; font-family: var(--font-massive); filter: drop-shadow(0 2px 4px rgba(255,42,42,0.8));">+</span>
+                    <span style="color: var(--primary); font-weight: 900; font-size: 20px; font-family: var(--font-massive); filter: drop-shadow(0 2px 4px rgba(255,215,0,0.6));">+</span>
                     <div class="vault-wrapper"><img id="disp-n2" src="" style="display: none;"></div>
                 </div>
                 
@@ -351,10 +404,10 @@
         window.Util = class {
             static toast(msg) { 
                 const t = document.getElementById("toast"); t.innerText = msg; 
-                if(msg.includes("ERROR") || msg.includes("INVALID") || msg.includes("OFFLINE") || msg.includes("WAITING") || msg.includes("MAINTENANCE")) {
+                if(msg.includes("ERROR") || msg.includes("INVALID") || msg.includes("OFFLINE") || msg.includes("WAITING") || msg.includes("MAINTENANCE") || msg.includes("FAILED")) {
                     t.style.borderColor = "var(--red)"; t.style.color = "#fff"; t.style.background = "linear-gradient(135deg, rgba(200,0,0,0.95), rgba(50,0,0,1))"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,1), 0 0 20px rgba(255,51,51,0.6)";
                 } else {
-                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#fff"; t.style.background = "linear-gradient(135deg, #aa0000, #440000)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,1), 0 0 20px rgba(255,42,42,0.5)";
+                    t.style.borderColor = "var(--primary-dark)"; t.style.color = "#000"; t.style.background = "linear-gradient(135deg, #FFD700, #B8860B)"; t.style.boxShadow = "0 10px 30px rgba(0,0,0,1), 0 0 20px rgba(255,215,0,0.4)";
                 }
                 t.classList.add("show"); setTimeout(() => t.classList.remove("show"), 3000); 
             }
@@ -397,7 +450,7 @@
                     
                     document.getElementById('trialsDisplay').innerText = globalPdfDate;
                     let token = getDeviceToken();
-                    set(ref(db, 'active_sessions/' + token), { login_time: Date.now(), last_active: Date.now(), game: 'RAXI.WIN' });
+                    set(ref(db, 'active_sessions/' + token), { login_time: Date.now(), last_active: Date.now(), game: 'KHELV.WIN' });
                     
                     Engine.switchMode('1m'); Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
                 }, 400);
@@ -446,26 +499,48 @@
                 container.scrollLeft = container.scrollWidth;
             }
 
+            // 🔥 TELEGRAM MINI APP COMPATIBLE COPY CLIPBOARD LOGIC 🔥
             static exportHistory() {
                 if(this.detailedLogs.length === 0) return Util.toast("NO HISTORY TO EXPORT");
                 
-                let content = `=== RAXI.WIN PDF AI ENGINE : SESSION LOG ===\r\n`;
-                content += `DATE: ${new Date().toLocaleDateString()}\r\n`;
-                content += `TOTAL WINS: ${this.stats.W} | TOTAL LOSSES: ${this.stats.L}\r\n`;
-                content += `MAX WIN STREAK: ${this.stats.maxStreak} LEVELS\r\n`;
-                content += `--------------------------------------------------------------------------------\r\n`;
-                content += `TIME       | MODE | PERIOD       | PREDICTION | REAL RESULT  | STATUS\r\n`;
-                content += `--------------------------------------------------------------------------------\r\n`;
+                let content = `=== KHELV WIN PDF AI ENGINE : SESSION LOG ===\n`;
+                content += `DATE: ${new Date().toLocaleDateString()}\n`;
+                content += `TOTAL WINS: ${this.stats.W} | TOTAL LOSSES: ${this.stats.L}\n`;
+                content += `MAX WIN STREAK: ${this.stats.maxStreak} LEVELS\n`;
+                content += `--------------------------------------------------------------------------------\n`;
+                content += `TIME       | MODE | PERIOD       | PREDICTION | REAL RESULT  | STATUS\n`;
+                content += `--------------------------------------------------------------------------------\n`;
                 
                 this.detailedLogs.forEach(log => {
-                    content += `${log.time.padEnd(10)} | ${log.mode.toUpperCase().padEnd(4)} | ${log.period.padEnd(12)} | ${log.prediction.padEnd(10)} | ${log.realResult.padEnd(12)} | ${log.status}\r\n`;
+                    content += `${log.time.padEnd(10)} | ${log.mode.toUpperCase().padEnd(4)} | ${log.period.padEnd(12)} | ${log.prediction.padEnd(10)} | ${log.realResult.padEnd(12)} | ${log.status}\n`;
                 });
                 
-                let blob = new Blob([content], { type: 'text/plain' });
-                let url = URL.createObjectURL(blob);
-                let a = document.createElement('a'); a.href = url; a.download = `RAXI_LOG_${Date.now()}.txt`;
-                a.click(); URL.revokeObjectURL(url);
-                Util.toast("LOG EXPORTED!");
+                if (navigator.clipboard && window.isSecureContext) {
+                    navigator.clipboard.writeText(content).then(() => {
+                        Util.toast("📋 LOG COPIED TO CLIPBOARD!");
+                    }).catch(err => {
+                        this.fallbackCopy(content);
+                    });
+                } else {
+                    this.fallbackCopy(content);
+                }
+            }
+
+            static fallbackCopy(text) {
+                let textArea = document.createElement("textarea");
+                textArea.value = text;
+                textArea.style.position = "fixed";
+                textArea.style.left = "-999999px";
+                document.body.appendChild(textArea);
+                textArea.focus();
+                textArea.select();
+                try {
+                    document.execCommand('copy');
+                    Util.toast("📋 LOG COPIED TO CLIPBOARD!");
+                } catch (err) {
+                    Util.toast("❌ COPY FAILED!");
+                }
+                document.body.removeChild(textArea);
             }
 
             static async syncPeriodFromAPI() {
@@ -485,11 +560,8 @@
                                 let num = parseInt(lastNumber);
                                 let realSize = num >= 5 ? "BIG" : "SMALL";
                                 
-                                // Handling for Size Only or Size + Numbers format
                                 let isWin = false;
                                 if(this.pendingPrediction.prediction.includes("[")) {
-                                    // It has numbers, e.g. "BIG [7] & [9]"
-                                    // Primary win condition is still size matching
                                     isWin = (realSize === (this.pendingPrediction.prediction.includes("BIG") ? "BIG" : "SMALL"));
                                 } else {
                                     isWin = (realSize === this.pendingPrediction.prediction);
@@ -544,8 +616,8 @@
                 let timerCircle = document.getElementById('timerCircle'); let timerWrapper = document.getElementById('timerWrapper');
                 timerCircle.style.strokeDashoffset = 100 - ((remSec / (this.activeMode === '1m' ? 60 : 30)) * 100);
 
-                if(remSec <= 5) { document.getElementById('displayTimer').style.color = "var(--primary)"; timerCircle.style.stroke = "var(--primary)"; timerWrapper.classList.add('timer-danger'); } 
-                else { document.getElementById('displayTimer').style.color = "#fff"; timerCircle.style.stroke = "var(--primary)"; timerWrapper.classList.remove('timer-danger'); }
+                if(remSec <= 5) { document.getElementById('displayTimer').style.color = "var(--red)"; timerCircle.style.stroke = "var(--red)"; timerWrapper.classList.add('timer-danger'); } 
+                else { document.getElementById('displayTimer').style.color = "#fff"; timerCircle.style.stroke = "var(--accent-blue)"; timerWrapper.classList.remove('timer-danger'); }
                 
                 let btn = document.getElementById('btnAnalyze');
                 if(this.state === "IDLE") { if(remSec <= 2) { btn.disabled = true; btn.innerHTML = '<span class="spinner"></span>'; btn.style.animation = "none"; } else if (btn.disabled) { btn.disabled = false; btn.innerText = "EXTRACT"; btn.style.animation = "gradientShine 3s ease infinite, breathBtn 2s infinite alternate";} }
@@ -583,16 +655,13 @@
                             if(snap.exists() && !String(snap.val()).includes("UNSET")) {
                                 let rawPrediction = String(snap.val());
                                 
-                                // Handling both "SIZE ONLY" and "SIZE + NUMBERS" formats from Admin Panel
                                 let isBig = rawPrediction.toUpperCase().includes("BIG");
                                 let baseSize = isBig ? "BIG" : "SMALL";
                                 let displayHtml = "";
                                 
-                                // Support for Multiple Numbers e.g. "BIG [7] & [9]" or single number "BIG [7]"
                                 let numMatches = [...rawPrediction.matchAll(/\[(\d+)\]/g)];
                                 
                                 if(numMatches.length > 0) {
-                                    // Create string like "BIG [7] & [9]" for logs
                                     let numsLog = numMatches.map(m => `[${m[1]}]`).join(" & ");
                                     currentPrediction = `${baseSize} ${numsLog}`;
                                     
@@ -601,13 +670,12 @@
                                     
                                     displayHtml = `<span class="${colorClass}">${baseSize}</span> <div style="display:flex; gap:4px; margin-left:6px;">${imgHtml}</div>`;
                                 } else {
-                                    // Size only
                                     currentPrediction = baseSize;
                                     let colorClass = isBig ? 'big-text' : 'small-text';
                                     displayHtml = `<span class="${colorClass}">${baseSize}</span>`;
                                 }
 
-                                this.lastPrediction = baseSize; // Always use base size for W/L checking
+                                this.lastPrediction = baseSize; 
                                 this.lastPredictedPeriod = currentPeriod;
                                 
                                 this.pendingPrediction = { 
