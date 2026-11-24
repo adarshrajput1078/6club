@@ -11,18 +11,19 @@
     
     <style>
         :root { 
-            --primary: #FFD700;
+            /* 🔥 KHELV WIN THEME (GOLD & NEON BLUE) 🔥 */
+            --primary: #FFD700; /* Gold */
             --primary-dark: #B8860B; 
             --primary-glow: rgba(255, 215, 0, 0.85); 
             
-            --accent-blue: #00E5FF;
+            --accent-blue: #00E5FF; /* Cyan/Neon Blue */
             --accent-blue-dark: #0088CC;
             --accent-blue-glow: rgba(0, 229, 255, 0.85);
             
             --silver: #E0E0E0;
             --gold: #FFD700;
             
-            --bg-dark: #02050A;
+            --bg-dark: #02050A; /* Deep Dark Blue/Black */
             --bg-panel: rgba(5, 10, 15, 0.95); 
             
             --green: #00FF7F; --green-glow: rgba(0, 255, 127, 0.8);
@@ -44,6 +45,7 @@
             background-size: 20px 20px, 20px 20px, 100% 100%; z-index: 99999999; pointer-events: none; opacity: 0.7;
         }
 
+        /* 🔥 APP ANIMATIONS 🔥 */
         .app-fade-in { animation: appFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .stagger-1 { animation: slideUpFade 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .stagger-2 { animation: slideUpFade 0.6s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
@@ -56,6 +58,7 @@
         .shake-screen { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); filter: hue-rotate(5deg); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
+        /* 🔥 TOP PANEL 🔥 */
         #top-panel { flex: 0 0 auto; height: auto; width: 100%; z-index: 10; position: relative; padding: 4px 8px; background: var(--bg-panel); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-bottom: 2px solid rgba(255, 215, 0, 0.4); box-shadow: 0 10px 25px rgba(0,0,0,1), inset 0 -1px 12px rgba(255, 215, 0, 0.2); display: flex; flex-direction: column; }
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
@@ -67,6 +70,7 @@
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 2px; width: 100%; }
         .brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;}
         
+        /* 🔥 KHELV WIN LOGO 🔥[span_0](start_span)[span_0](end_span)*/
         .brand-container { display: flex; align-items: center; gap: 4px; position: relative; transform: skewX(-5deg);}
         .brand-crown { position: absolute; top: -11px; left: -8px; font-size: 14px; filter: drop-shadow(0 0 5px var(--gold)); transform: rotate(-20deg); z-index: 2;}
         
@@ -103,6 +107,7 @@
         .tab-btn { padding: 2px 8px; font-size: 8px; font-weight: 900; color: #777; cursor: pointer; border-radius: 3px; border: none; background: transparent; font-family: var(--font-ui); transition: 0.3s; letter-spacing: 0.5px;}
         .tab-btn.active { background: linear-gradient(180deg, var(--accent-blue), var(--accent-blue-dark)); color: #fff; box-shadow: 0 2px 8px rgba(0,229,255,0.6); text-shadow: 0 1px 3px rgba(0,0,0,0.5);}
 
+        /* 🔥 GOLD BUTTON 🔥 */
         .btn-sleek { position: relative; overflow: hidden; height: 32px; padding: 0 12px; font-size: 13px; letter-spacing: 1.5px; font-family: var(--font-tall); font-weight: 900; cursor: pointer; border-radius: 4px; border: 1px solid rgba(255,215,0,0.5); background: linear-gradient(135deg, var(--primary), #FFF8DC, var(--primary)); background-size: 200% 200%; color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(255,215,0,0.4); flex-shrink: 0; animation: gradientShine 3s ease infinite, breathBtn 2s infinite alternate; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
         .btn-sleek:active { transform: translateY(3px) scale(0.95); box-shadow: 0 1px 3px rgba(0,0,0,1); border-color: transparent;}
         .btn-sleek:disabled { background: #333; color: #777; cursor: not-allowed; animation: none; box-shadow: inset 0 0 10px rgba(0,0,0,1); border-color: #222;}
@@ -112,6 +117,7 @@
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; flex: 1; margin-top: 4px;}
         .hidden { display: none !important; }
         
+        /* 🔥 CYAN & GOLD PIN SYSTEM 🔥 */
         .pin-label { text-align:center; font-size:11px; font-family:var(--font-tall); color:var(--primary); letter-spacing:2px; text-shadow: 0 0 8px rgba(255,215,0,0.6); margin-bottom: 4px; font-weight: 700;}
         .pin-group { display: flex; gap: 6px; justify-content: center; width: 100%; margin: 4px 0 12px 0; perspective: 1000px;}
         
@@ -155,7 +161,7 @@
         .circular-timer { position: relative; width: 16px; height: 16px; display: inline-flex; align-items: center; justify-content: center; vertical-align: middle; margin-left: 6px; transition: all 0.3s;}
         .timer-danger { animation: dangerBeat 0.4s infinite alternate; }
         @keyframes dangerBeat { 0% { transform: scale(1); filter: drop-shadow(0 0 4px var(--red)); } 100% { transform: scale(1.2); filter: drop-shadow(0 0 15px var(--red)); } }
-        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%;}
+        .circular-timer svg { position: absolute; top: 0; left: 0; transform: rotate(-90deg); width: 100%; height: 100%; drop-shadow: 0 0 4px var(--accent-blue-glow);}
         .timer-bg { fill: none; stroke: rgba(255,255,255,0.1); stroke-width: 3; }
         .timer-progress { fill: none; stroke: var(--accent-blue); stroke-width: 3; stroke-dasharray: 100; stroke-dashoffset: 0; transition: stroke-dashoffset 1s linear; stroke-linecap: round; }
         #displayTimer { font-family: var(--font-mono); font-size: 8px; font-weight: 900; color: #fff; z-index: 2;}
@@ -170,37 +176,21 @@
         @keyframes floatIdle { 0% { transform: translateY(0); } 100% { transform: translateY(-3px); } }
         @keyframes spinRight { 100% { transform: rotate(360deg); } }
 
-        /* Live preview pill in 1m mode before EXTRACT */
-        .live-preview-pill {
-            display: none;
-            align-items: center;
-            gap: 4px;
-            background: rgba(5, 12, 24, 0.95);
-            border: 1px solid rgba(255, 215, 0, 0.45);
-            border-radius: 5px;
-            padding: 4px 8px;
-            font-family: var(--font-massive);
-            font-size: 13px;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-        }
-        .live-preview-pill.show { display: inline-flex; }
-        .live-preview-pill img { height: 15px; }
-
         .result-display { flex: 1; height: 100%; display: none; align-items: center; justify-content: center; flex-direction: column; z-index: 5; margin: 0; }
         .result-display.show { display: flex; animation: resultSnap 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes resultSnap { 0% { transform: scale(0.2) translateY(15px); opacity: 0; filter: blur(8px); } 60% { transform: scale(1.1) translateY(-5px); opacity: 1; filter: blur(0); } 100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); } }
 
-        .slot-container { width: 100%; max-width: 170px; height: 38px; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center; margin: 0 auto; border-radius: 5px; border: 1px solid rgba(255,215,0,0.4); background: rgba(5,10,20,0.9); box-shadow: inset 0 0 12px rgba(0,0,0,1);}
+        .slot-container { width: 100%; max-width: 150px; height: 38px; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center; margin: 0 auto; border-radius: 5px; border: 1px solid rgba(255,215,0,0.4); background: rgba(5,10,20,0.9); box-shadow: inset 0 0 12px rgba(0,0,0,1);}
         .slot-container::before, .slot-container::after { content: ''; position: absolute; left: 0; width: 100%; height: 8px; z-index: 5; }
         .slot-container::before { top: 0; background: linear-gradient(180deg, var(--bg-panel), transparent); }
         .slot-container::after { bottom: 0; background: linear-gradient(0deg, var(--bg-panel), transparent); }
 
         .slot-scroll { display: flex; flex-direction: column; align-items: center; animation: scrollFast 0.2s linear infinite; }
         .slot-scroll.stop { animation: none; transform: translateY(0); }
-        .slot-item { height: 38px; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-massive); font-size: 16px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.6); white-space: nowrap; }
+        .slot-item { height: 38px; display: flex; align-items: center; justify-content: center; gap: 6px; font-family: var(--font-massive); font-size: 18px; color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.6); white-space: nowrap; }
         .slot-item img { height: 18px; filter: drop-shadow(0 0 6px rgba(255,255,255,0.8)); margin-left: 2px;}
-        .big-text { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); letter-spacing: 1px;}
-        .small-text { color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-blue-glow); letter-spacing: 1px;}
+        .slot-item .big-text { color: var(--primary); text-shadow: 0 0 10px var(--primary-glow); letter-spacing: 1px;}
+        .slot-item .small-text { color: var(--accent-blue); text-shadow: 0 0 10px var(--accent-blue-glow); letter-spacing: 1px;}
 
         @keyframes scrollFast { 0% { transform: translateY(0); } 100% { transform: translateY(-266px); } }
 
@@ -209,13 +199,14 @@
         @keyframes shock { 0% { transform: translate(-50%, -50%) scale(0); opacity: 1; border-width: 10px;} 100% { transform: translate(-50%, -50%) scale(3); opacity: 0; border-width: 0px;} }
 
         .hack-anim-box { display: flex; flex-direction: column; align-items: center; justify-content: center; width: 100%; position: relative; z-index: 2;}
-        .hack-text { font-family: var(--font-mono); font-size: 8px; color: #fff; text-shadow: 0 0 8px var(--primary); letter-spacing: 1px; font-weight: 900; margin-top: 3px; text-align: center; }
+        .hack-text { font-family: var(--font-mono); font-size: 8px; color: #fff; text-shadow: 0 0 8px var(--primary); letter-spacing: 1.5px; font-weight: 900; margin-top: 4px; text-align: center; }
         .glitch-text { animation: glitchText 0.3s infinite; }
         @keyframes glitchText { 0% { opacity:1; transform: skewX(0deg); } 20% { opacity:0.8; transform: skewX(-10deg); color:#fff; } 40% { opacity:1; transform: skewX(10deg); } 60% { opacity:0.9; transform: skewX(0deg); color:var(--primary);} 100% { opacity:1;} }
         
         .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(0,0,0,0.5); border-top-color: #000; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 4px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
+        /* 🔥 MODAL & TOAST 🔥 */
         #toast { position: fixed; top: 10px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.9); background: rgba(5, 10, 20, 0.98); color: #fff; padding: 6px 14px; border-radius: 4px; font-weight: 900; font-size: 10px; border: 1.5px solid var(--accent-blue); z-index: 999999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); opacity: 0; box-shadow: 0 6px 20px rgba(0,0,0,1); backdrop-filter: blur(5px); letter-spacing: 1px; width: max-content; }
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
         
@@ -226,6 +217,7 @@
         .close-noti { color: #888; font-size: 18px; font-weight: 900; cursor: pointer; line-height: 1;}
         .noti-body { color: #eaeaea; font-family: var(--font-ui); font-size: 11px; line-height: 1.5; font-weight: 600; max-height: 150px; overflow-y: auto;}
 
+        /* 🔥 LOG HISTORY SECTION 🔥 */
         .history-box { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 10px; background: rgba(5,10,15,0.8); border: 1px solid rgba(0,229,255,0.2); border-radius: 6px; overflow-x: auto; min-height: 38px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);}
         .history-label { font-family: var(--font-massive); font-size: 12px; color: var(--primary); letter-spacing: 1px; white-space: nowrap; margin-right: 4px; text-shadow: 0 0 5px rgba(255,215,0,0.5);}
         .hist-badge { width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-massive); font-size: 12px; flex-shrink: 0; animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
@@ -251,11 +243,13 @@
             <div class="noti-body" id="notiMessageText">No new messages from Admin.</div>
             
             <div style="margin-top: 15px; padding-top: 12px; border-top: 1.5px solid rgba(0,229,255,0.3);">
+                <!-- 🔥 COPY TO CLIPBOARD BUTTON FOR TG MINI APPS 🔥 -->
                 <button class="btn-sleek" style="width: 100%; height: 30px; font-size: 11px;" onclick="Engine.exportHistory()">📋 COPY SESSION LOG</button>
             </div>
         </div>
     </div>
 
+    <!-- 🔥 STAGGERED LOAD IN TOP PANEL 🔥 -->
     <div id="top-panel">
         <div class="top-header stagger-1">
             <div class="header-left">
@@ -283,6 +277,7 @@
             </div>
         </div>
 
+        <!-- 🔥 PIN SCREEN 🔥 -->
         <div id="authScreen" class="auth-container stagger-2">
             <div class="pin-label">SECURE PIN ACCESS</div>
             <div class="pin-group" id="pin-inputs">
@@ -294,6 +289,7 @@
             </div>
             <button id="authBtn" class="btn-sleek" style="width: 120px; margin: 0 auto; animation: none;" onclick="Auth.verify()">VERIFY PIN</button>
 
+            <!-- TELEGRAM ADMIN LINK -->
             <div class="contact-admin">
                 <span>DON'T HAVE A PIN?</span>
                 <a href="https://t.me/nse_dev" target="_blank" class="tg-btn">
@@ -303,11 +299,12 @@
             </div>
         </div>
         
+        <!-- 🔥 COMPACT MAIN UI 🔥 -->
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row stagger-2">
                 <div class="info-col" style="text-align: left; font-family: var(--font-massive); font-size: 11px; font-weight: 400; letter-spacing: 1px;">ID: <span id="displayPeriod" style="font-family: var(--font-mono); font-size: 12px; font-weight: 900; color: #fff;">SYNC...</span></div>
                 
-                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="color:var(--primary); font-family: var(--font-tall); font-size: 13px; letter-spacing: 1px; text-shadow: 0 0 5px var(--primary-glow);">PDF FILE</span></div>
+                <div class="info-col" style="text-align: center;"><span id="trialsDisplay" style="color:var(--primary); font-family: var(--font-tall); font-size: 14px; letter-spacing: 1px; text-shadow: 0 0 5px var(--primary-glow);">PDF FILE</span></div>
                 
                 <div class="info-col" style="text-align: right; display: flex; justify-content: flex-end; align-items: center; font-family: var(--font-massive); font-size: 11px; font-weight: 400; letter-spacing: 1px;">
                     TMR: 
@@ -322,21 +319,22 @@
                 <div class="input-group" id="input-group">
                     <input type="hidden" id="in-n1"><input type="hidden" id="in-n2">
                     <div class="vault-wrapper"><img id="disp-n1" src="" style="display: none;"></div>
-                    <span style="color: var(--primary); font-weight: 900; font-size: 18px; font-family: var(--font-massive); filter: drop-shadow(0 2px 4px rgba(255,215,0,0.6));">+</span>
+                    <span style="color: var(--primary); font-weight: 900; font-size: 20px; font-family: var(--font-massive); filter: drop-shadow(0 2px 4px rgba(255,215,0,0.6));">+</span>
                     <div class="vault-wrapper"><img id="disp-n2" src="" style="display: none;"></div>
-                    <div id="livePreview1m" class="live-preview-pill"></div>
                 </div>
                 
                 <div id="out-size" class="result-display"></div>
                 <button class="btn-sleek" id="btnAnalyze" style="width: 80px;" onclick="Engine.analyze()">EXTRACT</button>
             </div>
 
+            <!-- LOG HISTORY -->
             <div class="history-box stagger-3" id="history-container">
                 <div class="history-label">LOGS:</div>
             </div>
         </div>
     </div>
 
+    <!-- GAME IFRAME -->
     <div id="bottom-panel">
         <iframe id="main-frame" src="https://www.raxi.info/#/register?invitationCode=88988101446" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
     </div>
@@ -459,179 +457,10 @@
             }
         };
 
-        // ============================================================
-        // 1-MINUTE ONLY EXTRA ENGINE (LOGICS 1-4 + SHADOW TRACKING)
-        // ============================================================
-        const MultiLogicEngine = {
-            lossStreak: 0,
-            logic1Reverse: true,
-            logic1Loss: 0,
-            historyWindow: 6,
-            logicPerf: { L1: [], L2: [], L3: [], L4: [] },
-            lastShadowPreds: null,
-
-            runLogic1(list, nextP) {
-                if (!list || list.length === 0) return "BIG";
-                const weights = [3.5, 2.8, 2.1, 1.6, 1.2, 0.9, 0.6, 0.4, 0.2, 0.1];
-                let total = 0;
-                for (let i = 0; i < Math.min(list.length, 10); i++) {
-                    total += parseInt(list[i].number, 10) * weights[i];
-                }
-                const pDigits = parseInt(String(nextP).slice(-3), 10) || 0;
-                const lastNum = parseInt(list[0].number, 10) || 0;
-                const seed = Math.floor((total * 17.3) + (pDigits * 9.7) + (lastNum * 4.1)) % 100;
-                return this.logic1Reverse
-                    ? (seed % 2 === 0 ? "SMALL" : "BIG")
-                    : (seed % 2 === 0 ? "BIG" : "SMALL");
-            },
-
-            runLogic2(list) {
-                if (!list || list.length === 0) return "BIG";
-                const arr = list.map(x => parseInt(x.number, 10) >= 5 ? "BIG" : "SMALL");
-                let streak = 1;
-                for (let i = 1; i < arr.length; i++) {
-                    if (arr[i] === arr[0]) streak++;
-                    else break;
-                }
-                if (streak >= 3) return arr[0];
-                if (arr.length >= 3 && arr[0] !== arr[1] && arr[1] !== arr[2]) {
-                    return arr[0] === "BIG" ? "SMALL" : "BIG";
-                }
-                const last6 = arr.slice(0, 6);
-                const bigs = last6.filter(x => x === "BIG").length;
-                return bigs > (last6.length - bigs) ? "SMALL" : "BIG";
-            },
-
-            runLogic3(list) {
-                if (!list || list.length === 0) return "BIG";
-                const arr = list.slice(0, 12).map(x => parseInt(x.number, 10) >= 5 ? "BIG" : "SMALL");
-                if (arr.length < 3) return arr[0] === "BIG" ? "SMALL" : "BIG";
-
-                let streak = 1;
-                for (let i = 1; i < arr.length; i++) {
-                    if (arr[i] === arr[0]) streak++;
-                    else break;
-                }
-                if (streak >= 3) return arr[0] === "BIG" ? "SMALL" : "BIG";
-
-                const last7 = arr.slice(0, 7);
-                const bigs = last7.filter(x => x === "BIG").length;
-                const smalls = last7.length - bigs;
-                if (bigs > smalls + 1) return "SMALL";
-                if (smalls > bigs + 1) return "BIG";
-                return arr[0] === "BIG" ? "SMALL" : "BIG";
-            },
-
-            runLogic4(list) {
-                if (!list || list.length === 0) return "BIG";
-                const sizes = list.slice(0, 10).map(x => parseInt(x.number, 10) >= 5 ? "B" : "S").reverse();
-                const getColor = n => [1,3,7,9].includes(n) ? "G" : [2,4,6,8].includes(n) ? "R" : "V";
-                const colors = list.slice(0, 12).map(x => getColor(parseInt(x.number, 10)));
-
-                let side = "BIG";
-                if (sizes.length >= 5) {
-                    const last3 = sizes.slice(-3);
-                    if (last3.every(s => s === "B")) side = "SMALL";
-                    else if (last3.every(s => s === "S")) side = "BIG";
-                    else side = sizes[sizes.length - 1] === "B" ? "BIG" : "SMALL";
-                }
-
-                const c3 = colors.slice(-3);
-                const isDragon = c3.length === 3 && c3[0] === c3[1] && c3[1] === c3[2];
-                const c4 = colors.slice(-4);
-                const isZigzag = c4.length === 4 && c4[0] !== c4[1] && c4[1] !== c4[2] && c4[2] !== c4[3] && c4[0] === c4[2] && c4[1] === c4[3];
-
-                if (isDragon || isZigzag) side = side === "BIG" ? "SMALL" : "BIG";
-                return side;
-            },
-
-            pickBestNumbers(list, finalSize) {
-                const pool = finalSize === "BIG" ? [5, 6, 7, 8, 9] : [0, 1, 2, 3, 4];
-                const recentNums = (list || []).slice(0, 12).map(x => parseInt(x.number, 10)).filter(n => !isNaN(n));
-                const freq = new Map();
-                recentNums.forEach(n => freq.set(n, (freq.get(n) || 0) + 1));
-
-                const hot = [...freq.entries()].sort((a, b) => b[1] - a[1]).map(e => e[0]).filter(n => pool.includes(n));
-                const cold = pool.filter(n => !recentNums.includes(n));
-                const combined = [...new Set([...hot, ...cold, ...pool])];
-                return [combined[0], combined[1]].sort((a, b) => a - b);
-            },
-
-            recordOutcome(actualNum, finalWasWin) {
-                const actualSize = parseInt(actualNum, 10) >= 5 ? "BIG" : "SMALL";
-
-                if (finalWasWin) {
-                    this.lossStreak = 0;
-                } else {
-                    this.lossStreak++;
-                }
-
-                if (this.lastShadowPreds) {
-                    ["L1", "L2", "L3", "L4"].forEach(key => {
-                        const won = this.lastShadowPreds[key] === actualSize ? 1 : 0;
-                        this.logicPerf[key].push(won);
-                        if (this.logicPerf[key].length > this.historyWindow) {
-                            this.logicPerf[key].shift();
-                        }
-                    });
-
-                    if (this.lastShadowPreds.L1 === actualSize) {
-                        this.logic1Loss = 0;
-                    } else {
-                        this.logic1Loss++;
-                        if (this.logic1Loss >= 2) {
-                            this.logic1Reverse = !this.logic1Reverse;
-                            this.logic1Loss = 0;
-                        }
-                    }
-                }
-            },
-
-            getTop2Logics() {
-                const scores = ["L1", "L2", "L3", "L4"].map(key => {
-                    const wins = this.logicPerf[key].reduce((s, v) => s + v, 0);
-                    return { key, wins };
-                });
-                scores.sort((a, b) => b.wins - a.wins);
-                return [scores[0], scores[1]];
-            },
-
-            resolveVote(adminSize, list, nextP) {
-                const preds = {
-                    L1: this.runLogic1(list, nextP),
-                    L2: this.runLogic2(list),
-                    L3: this.runLogic3(list),
-                    L4: this.runLogic4(list)
-                };
-                this.lastShadowPreds = preds;
-
-                let votes = [adminSize];
-                let tag = "ADMIN";
-
-                if (this.lossStreak === 2) {
-                    const [t1, t2] = this.getTop2Logics();
-                    votes.push(preds[t1.key], preds[t2.key]);
-                    tag = `3P:${t1.key}+${t2.key}`;
-                } else if (this.lossStreak >= 3) {
-                    votes.push(preds.L1, preds.L2, preds.L3, preds.L4);
-                    tag = "5P:ALL";
-                }
-
-                const bigCount = votes.filter(v => v === "BIG").length;
-                const smallCount = votes.length - bigCount;
-                const finalSize = bigCount > smallCount ? "BIG" : "SMALL";
-                const [n1, n2] = this.pickBestNumbers(list, finalSize);
-
-                return { size: finalSize, n1, n2, tag };
-            }
-        };
-
         window.Engine = class {
             static activeMode = '1m'; static state = "IDLE"; static apiPeriod = null; 
-            static apiHistoryList = [];
             static lastPrediction = null; static lastPredictedPeriod = null;
             static latestN1 = null; static latestN2 = null; static hasPlayedRules = false; 
-            static liveComputed1m = null; // Final result shown before EXTRACT in 1m mode
             
             static historyBadges = { '1m': [], '30s': [] };
             static detailedLogs = [];
@@ -639,12 +468,11 @@
             static pendingPrediction = null;
             
             static switchMode(m) { 
-                this.activeMode = m; this.apiPeriod = null; this.liveComputed1m = null;
+                this.activeMode = m; this.apiPeriod = null; 
                 document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active')); 
                 document.getElementById('btn-'+m).classList.add('active'); 
                 this.updateTimerUI(); this.syncPeriodFromAPI(); 
                 this.renderHistory();
-                this.renderLivePreview1m();
             }
             
             static startTimer() { this.syncPeriodFromAPI(); setInterval(() => this.updateTimerUI(), 1000); }
@@ -656,61 +484,6 @@
                     img1.src = `${this.latestN1}.png`; img2.src = `${this.latestN2}.png`;
                     img1.style.display = 'block'; img2.style.display = 'block';
                 }
-            }
-
-            static renderLivePreview1m() {
-                const pill = document.getElementById('livePreview1m');
-                if (!pill) return;
-                if (this.activeMode === '1m' && this.state === "IDLE" && this.liveComputed1m) {
-                    const { size, nums, tag } = this.liveComputed1m;
-                    const colorClass = size === "BIG" ? "big-text" : "small-text";
-                    const imgs = nums.map(n => `<img src="${n}.png" onerror="this.style.display='none'">`).join("");
-                    pill.innerHTML = `<span class="${colorClass}">${size}</span>${imgs}<span style="font-family:var(--font-mono);font-size:8px;color:#aaa;margin-left:3px;">[${tag}]</span>`;
-                    pill.classList.add('show');
-                } else {
-                    pill.classList.remove('show');
-                }
-            }
-
-            static async compute1mFinalResult(n1Val, n2Val, targetPeriodStr) {
-                if (this.activeMode !== '1m' || n1Val === null || n2Val === null) {
-                    this.liveComputed1m = null;
-                    this.renderLivePreview1m();
-                    return null;
-                }
-
-                let adminSide = null;
-                let adminNums = [];
-
-                try {
-                    const snap = await get(ref(db, `${DB_PATHS['1m']}/${n1Val}-${n2Val}`));
-                    if (snap.exists() && !String(snap.val()).includes("UNSET")) {
-                        const rawPrediction = String(snap.val());
-                        adminSide = rawPrediction.toUpperCase().includes("BIG") ? "BIG" : "SMALL";
-                        const numMatches = [...rawPrediction.matchAll(/\[(\d+)\]/g)];
-                        if (numMatches.length > 0) {
-                            adminNums = numMatches.map(m => m[1]);
-                        }
-                    }
-                } catch (e) {}
-
-                if (!adminSide && this.apiHistoryList.length > 0) {
-                    adminSide = parseInt(this.apiHistoryList[0].number, 10) >= 5 ? "SMALL" : "BIG";
-                }
-                if (!adminSide) adminSide = "BIG";
-
-                const voted = MultiLogicEngine.resolveVote(adminSide, this.apiHistoryList, targetPeriodStr);
-                const nums = adminNums.length > 0 ? adminNums : [String(voted.n1), String(voted.n2)];
-
-                const computed = {
-                    size: voted.size,
-                    nums,
-                    tag: voted.tag
-                };
-
-                this.liveComputed1m = computed;
-                this.renderLivePreview1m();
-                return computed;
             }
 
             static renderHistory() {
@@ -726,6 +499,7 @@
                 container.scrollLeft = container.scrollWidth;
             }
 
+            // 🔥 TELEGRAM MINI APP COMPATIBLE COPY CLIPBOARD LOGIC 🔥
             static exportHistory() {
                 if(this.detailedLogs.length === 0) return Util.toast("NO HISTORY TO EXPORT");
                 
@@ -770,27 +544,20 @@
             }
 
             static async syncPeriodFromAPI() {
-                let url = this.activeMode === '1m'
-                    ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json?pageSize=15"
-                    : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json?pageSize=15";
+                let url = this.activeMode === '1m' ? "https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json" : "https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json";
                 try {
                     let res = await fetch(url); let json = await res.json();
                     if(json && json.data && json.data.list && json.data.list.length > 1) { 
-                        this.apiHistoryList = json.data.list.map(item => ({
-                            issueNumber: String(item.IssueNumber || item.issueNumber),
-                            number: String(item.Number !== undefined ? item.Number : item.number)
-                        }));
-
-                        let lastIssue = this.apiHistoryList[0].issueNumber;
-                        let lastNumber = this.apiHistoryList[0].number;
+                        let lastIssue = json.data.list[0].IssueNumber || json.data.list[0].issueNumber;
+                        let lastNumber = json.data.list[0].Number || json.data.list[0].number;
                         let newPeriod = (BigInt(lastIssue) + 1n).toString();
                         
-                        this.latestN1 = this.apiHistoryList[0].number;
-                        this.latestN2 = this.apiHistoryList[1].number;
+                        this.latestN1 = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number;
+                        this.latestN2 = json.data.list[1].Number !== undefined ? json.data.list[1].Number : json.data.list[1].number;
                         
                         if (this.apiPeriod !== newPeriod) {
                             if (this.lastPredictedPeriod === String(lastIssue) && this.pendingPrediction) {
-                                let num = parseInt(lastNumber, 10);
+                                let num = parseInt(lastNumber);
                                 let realSize = num >= 5 ? "BIG" : "SMALL";
                                 
                                 let isWin = false;
@@ -799,12 +566,8 @@
                                 } else {
                                     isWin = (realSize === this.pendingPrediction.prediction);
                                 }
+                                
                                 let status = isWin ? 'W' : 'L';
-
-                                // Extra engine only updates on 1m mode
-                                if (this.pendingPrediction.mode === '1m') {
-                                    MultiLogicEngine.recordOutcome(num, isWin);
-                                }
 
                                 this.historyBadges[this.pendingPrediction.mode].push(status);
                                 if(this.historyBadges[this.pendingPrediction.mode].length > 16) { this.historyBadges[this.pendingPrediction.mode].shift(); }
@@ -829,15 +592,7 @@
                                 
                                 this.lastPredictedPeriod = null; this.pendingPrediction = null;
                             }
-                            this.apiPeriod = newPeriod;
-                            if(this.state === "IDLE") {
-                                this.updateN1N2Display();
-                                if (this.activeMode === '1m') {
-                                    this.compute1mFinalResult(this.latestN1, this.latestN2, newPeriod);
-                                }
-                            }
-                        } else if (this.activeMode === '1m' && this.state === "IDLE" && !this.liveComputed1m) {
-                            this.compute1mFinalResult(this.latestN1, this.latestN2, newPeriod);
+                            this.apiPeriod = newPeriod; if(this.state === "IDLE") this.updateN1N2Display();
                         }
                     }
                 } catch(e) {}
@@ -853,12 +608,7 @@
                 
                 currentPeriod = this.apiPeriod ? this.apiPeriod : fallbackPeriod;
                 if (remSec === 58 || remSec === 28) this.syncPeriodFromAPI();
-                if (remSec === 59 || remSec === 29) {
-                    this.apiPeriod = null;
-                    this.liveComputed1m = null;
-                    this.renderLivePreview1m();
-                    document.getElementById('winStamp').classList.remove('show');
-                }
+                if (remSec === 59 || remSec === 29) { this.apiPeriod = null; document.getElementById('winStamp').classList.remove('show'); }
                 
                 document.getElementById('displayPeriod').innerText = currentPeriod.slice(-6); 
                 document.getElementById('displayTimer').innerText = String(remSec).padStart(2,'0');
@@ -901,39 +651,8 @@
 
                     try {
                         let snap = await get(ref(db, `${DB_PATHS[this.activeMode]}/${n1.value}-${n2.value}`));
-                        let pre1m = this.activeMode === '1m'
-                            ? (this.liveComputed1m || await this.compute1mFinalResult(n1.value, n2.value, currentPeriod))
-                            : null;
-
                         setTimeout(async () => {
-                            if (this.activeMode === '1m' && pre1m) {
-                                const finalSize = pre1m.size;
-                                const isBig = finalSize === "BIG";
-                                const colorClass = isBig ? 'big-text' : 'small-text';
-                                const numsLog = pre1m.nums.map(n => `[${n}]`).join(" & ");
-                                currentPrediction = `${finalSize} ${numsLog}`;
-
-                                const imgHtml = pre1m.nums.map(n => `<img src="${n}.png">`).join("");
-                                const displayHtml = `<span class="${colorClass}">${finalSize}</span> <div style="display:flex; gap:4px; margin-left:6px;">${imgHtml}</div>`;
-
-                                this.lastPrediction = finalSize;
-                                this.lastPredictedPeriod = currentPeriod;
-                                this.pendingPrediction = {
-                                    mode: this.activeMode, period: currentPeriod, prediction: currentPrediction,
-                                    time: new Date().toLocaleTimeString('en-US', {hour12:false}),
-                                    realResult: 'PENDING', status: 'PENDING'
-                                };
-
-                                document.getElementById('slotRoller').classList.add('stop');
-                                document.getElementById('slotRoller').innerHTML = `<div style="position: relative; width: 100%; display: flex; justify-content: center; align-items: center;"><div class="shockwave explode"></div><div class="slot-item" style="display: flex; align-items: center; justify-content: center;">${displayHtml}</div></div>`;
-
-                                let scanText = document.getElementById('scanText');
-                                scanText.innerText = `1M ENGINE [${pre1m.tag}] READY!`;
-                                scanText.style.color = "#fff";
-                                scanText.classList.remove('glitch-text');
-
-                                this.state = "NEXT"; btn.disabled = false; btn.innerText = "NEXT";
-                            } else if(snap.exists() && !String(snap.val()).includes("UNSET")) {
+                            if(snap.exists() && !String(snap.val()).includes("UNSET")) {
                                 let rawPrediction = String(snap.val());
                                 
                                 let isBig = rawPrediction.toUpperCase().includes("BIG");
@@ -984,7 +703,6 @@
                 const btn = document.getElementById('btnAnalyze'), inputGroup = document.getElementById('input-group'), resultBox = document.getElementById('out-size');
                 resultBox.classList.remove('show'); inputGroup.style.display = 'flex'; btn.disabled = false; btn.innerText = "EXTRACT"; btn.style.animation = "gradientShine 3s ease infinite, breathBtn 2s infinite alternate"; this.state = "IDLE";
                 document.getElementById('winStamp').classList.remove('show'); this.updateN1N2Display();
-                this.renderLivePreview1m();
             }
         };
     </script>
