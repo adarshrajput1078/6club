@@ -11,24 +11,18 @@
     
     <style>
         :root { 
-            /* 🔥 KHELV WIN THEME (GOLD & NEON BLUE) 🔥 */
-            --primary: #FFD700; /* Gold */
+            --primary: #FFD700; 
             --primary-dark: #B8860B; 
             --primary-glow: rgba(255, 215, 0, 0.85); 
-            
-            --accent-blue: #00E5FF; /* Cyan/Neon Blue */
+            --accent-blue: #00E5FF; 
             --accent-blue-dark: #0088CC;
             --accent-blue-glow: rgba(0, 229, 255, 0.85);
-            
             --silver: #E0E0E0;
             --gold: #FFD700;
-            
-            --bg-dark: #02050A; /* Deep Dark Blue/Black */
+            --bg-dark: #02050A; 
             --bg-panel: rgba(5, 10, 15, 0.95); 
-            
             --green: #00FF7F; --green-glow: rgba(0, 255, 127, 0.8);
             --red: #FF3333; --red-glow: rgba(255, 51, 51, 0.8); 
-            
             --font-massive: 'Black Ops One', system-ui; 
             --font-tall: 'Teko', sans-serif;
             --font-ui: 'Inter', sans-serif; 
@@ -45,7 +39,6 @@
             background-size: 20px 20px, 20px 20px, 100% 100%; z-index: 99999999; pointer-events: none; opacity: 0.7;
         }
 
-        /* 🔥 APP ANIMATIONS 🔥 */
         .app-fade-in { animation: appFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; }
         .stagger-1 { animation: slideUpFade 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
         .stagger-2 { animation: slideUpFade 0.6s 0.15s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0; }
@@ -58,7 +51,6 @@
         .shake-screen { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
         @keyframes shake { 10%, 90% { transform: translate3d(-1px, 0, 0); } 20%, 80% { transform: translate3d(2px, 0, 0); } 30%, 50%, 70% { transform: translate3d(-4px, 0, 0); filter: hue-rotate(5deg); } 40%, 60% { transform: translate3d(4px, 0, 0); } }
 
-        /* 🔥 TOP PANEL 🔥 */
         #top-panel { flex: 0 0 auto; height: auto; width: 100%; z-index: 10; position: relative; padding: 4px 8px; background: var(--bg-panel); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px); border-bottom: 2px solid rgba(255, 215, 0, 0.4); box-shadow: 0 10px 25px rgba(0,0,0,1), inset 0 -1px 12px rgba(255, 215, 0, 0.2); display: flex; flex-direction: column; }
         #bottom-panel { flex: 1; width: 100%; background: #000; position: relative; z-index: 1; }
         iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; display: block; background: #000;}
@@ -70,7 +62,6 @@
         .header-left { display: flex; flex-direction: column; justify-content: center; gap: 2px; width: 100%; }
         .brand-row { display: flex; justify-content: space-between; align-items: center; width: 100%; position: relative;}
         
-        /* 🔥 KHELV WIN LOGO 🔥[span_0](start_span)[span_0](end_span)*/
         .brand-container { display: flex; align-items: center; gap: 4px; position: relative; transform: skewX(-5deg);}
         .brand-crown { position: absolute; top: -11px; left: -8px; font-size: 14px; filter: drop-shadow(0 0 5px var(--gold)); transform: rotate(-20deg); z-index: 2;}
         
@@ -107,7 +98,6 @@
         .tab-btn { padding: 2px 8px; font-size: 8px; font-weight: 900; color: #777; cursor: pointer; border-radius: 3px; border: none; background: transparent; font-family: var(--font-ui); transition: 0.3s; letter-spacing: 0.5px;}
         .tab-btn.active { background: linear-gradient(180deg, var(--accent-blue), var(--accent-blue-dark)); color: #fff; box-shadow: 0 2px 8px rgba(0,229,255,0.6); text-shadow: 0 1px 3px rgba(0,0,0,0.5);}
 
-        /* 🔥 GOLD BUTTON 🔥 */
         .btn-sleek { position: relative; overflow: hidden; height: 32px; padding: 0 12px; font-size: 13px; letter-spacing: 1.5px; font-family: var(--font-tall); font-weight: 900; cursor: pointer; border-radius: 4px; border: 1px solid rgba(255,215,0,0.5); background: linear-gradient(135deg, var(--primary), #FFF8DC, var(--primary)); background-size: 200% 200%; color: #000; display: flex; align-items: center; justify-content: center; text-transform: uppercase; box-shadow: 0 4px 10px rgba(0,0,0,0.9), 0 0 8px rgba(255,215,0,0.4); flex-shrink: 0; animation: gradientShine 3s ease infinite, breathBtn 2s infinite alternate; transition: 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);}
         .btn-sleek:active { transform: translateY(3px) scale(0.95); box-shadow: 0 1px 3px rgba(0,0,0,1); border-color: transparent;}
         .btn-sleek:disabled { background: #333; color: #777; cursor: not-allowed; animation: none; box-shadow: inset 0 0 10px rgba(0,0,0,1); border-color: #222;}
@@ -117,7 +107,6 @@
         .auth-container, .tool-container { width: 100%; display: flex; flex-direction: column; flex: 1; margin-top: 4px;}
         .hidden { display: none !important; }
         
-        /* 🔥 CYAN & GOLD PIN SYSTEM 🔥 */
         .pin-label { text-align:center; font-size:11px; font-family:var(--font-tall); color:var(--primary); letter-spacing:2px; text-shadow: 0 0 8px rgba(255,215,0,0.6); margin-bottom: 4px; font-weight: 700;}
         .pin-group { display: flex; gap: 6px; justify-content: center; width: 100%; margin: 4px 0 12px 0; perspective: 1000px;}
         
@@ -180,7 +169,7 @@
         .result-display.show { display: flex; animation: resultSnap 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards; }
         @keyframes resultSnap { 0% { transform: scale(0.2) translateY(15px); opacity: 0; filter: blur(8px); } 60% { transform: scale(1.1) translateY(-5px); opacity: 1; filter: blur(0); } 100% { transform: scale(1) translateY(0); opacity: 1; filter: blur(0); } }
 
-        .slot-container { width: 100%; max-width: 150px; height: 38px; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center; margin: 0 auto; border-radius: 5px; border: 1px solid rgba(255,215,0,0.4); background: rgba(5,10,20,0.9); box-shadow: inset 0 0 12px rgba(0,0,0,1);}
+        .slot-container { width: 100%; max-width: 170px; height: 38px; overflow: hidden; position: relative; display: flex; justify-content: center; align-items: center; margin: 0 auto; border-radius: 5px; border: 1px solid rgba(255,215,0,0.4); background: rgba(5,10,20,0.9); box-shadow: inset 0 0 12px rgba(0,0,0,1);}
         .slot-container::before, .slot-container::after { content: ''; position: absolute; left: 0; width: 100%; height: 8px; z-index: 5; }
         .slot-container::before { top: 0; background: linear-gradient(180deg, var(--bg-panel), transparent); }
         .slot-container::after { bottom: 0; background: linear-gradient(0deg, var(--bg-panel), transparent); }
@@ -206,33 +195,49 @@
         .spinner { display: inline-block; width: 12px; height: 12px; border: 2px solid rgba(0,0,0,0.5); border-top-color: #000; border-radius: 50%; animation: spin 0.7s linear infinite; margin-right: 4px; }
         @keyframes spin { 100% { transform: rotate(360deg); } }
 
-        /* 🔥 MODAL & TOAST 🔥 */
         #toast { position: fixed; top: 10px; left: 50%; transform: translateX(-50%) translateY(-20px) scale(0.9); background: rgba(5, 10, 20, 0.98); color: #fff; padding: 6px 14px; border-radius: 4px; font-weight: 900; font-size: 10px; border: 1.5px solid var(--accent-blue); z-index: 999999; transition: 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); font-family: var(--font-mono); opacity: 0; box-shadow: 0 6px 20px rgba(0,0,0,1); backdrop-filter: blur(5px); letter-spacing: 1px; width: max-content; }
         #toast.show { transform: translateX(-50%) translateY(0) scale(1); opacity: 1; }
         
         .noti-modal-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.85); z-index: 999999; display: none; justify-content: center; align-items: center; backdrop-filter: blur(8px); }
-        .noti-modal { background: linear-gradient(180deg, rgba(10,20,35,0.98), rgba(2,5,10,1)); border: 1.5px solid var(--primary); width: 85%; max-width: 280px; border-radius: 8px; padding: 12px; box-shadow: 0 15px 40px rgba(0,0,0,1); }
+        .noti-modal { background: linear-gradient(180deg, rgba(10,20,35,0.98), rgba(2,5,10,1)); border: 1.5px solid var(--primary); width: 85%; max-width: 290px; border-radius: 8px; padding: 14px; box-shadow: 0 15px 40px rgba(0,0,0,1); }
         .noti-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1.5px solid rgba(0,229,255,0.3); padding-bottom: 6px; margin-bottom: 8px; }
         .noti-title { color: var(--primary); font-family: var(--font-tall); font-size: 16px; font-weight: 700; letter-spacing: 1px;}
         .close-noti { color: #888; font-size: 18px; font-weight: 900; cursor: pointer; line-height: 1;}
         .noti-body { color: #eaeaea; font-family: var(--font-ui); font-size: 11px; line-height: 1.5; font-weight: 600; max-height: 150px; overflow-y: auto;}
 
-        /* 🔥 LOG HISTORY SECTION 🔥 */
-        .history-box { display: flex; align-items: center; gap: 8px; margin-top: 8px; padding: 6px 10px; background: rgba(5,10,15,0.8); border: 1px solid rgba(0,229,255,0.2); border-radius: 6px; overflow-x: auto; min-height: 38px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);}
+        .req-code-box {
+            margin-top: 10px; padding: 8px; border-radius: 6px;
+            background: rgba(0,0,0,0.7); border: 1px dashed var(--primary);
+            text-align: center; font-family: var(--font-mono); font-size: 10px; color: #ccc;
+            display: none;
+        }
+        .req-code-num {
+            font-size: 18px; font-weight: 900; color: var(--green);
+            letter-spacing: 3px; margin: 4px 0; text-shadow: 0 0 10px var(--green-glow);
+        }
+
+        /* 🔥 LOG HISTORY SECTION (WIN NUMBER IMAGE + L BADGE) 🔥 */
+        .history-box { display: flex; align-items: center; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(5,10,15,0.8); border: 1px solid rgba(0,229,255,0.2); border-radius: 6px; overflow-x: auto; min-height: 38px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);}
         .history-label { font-family: var(--font-massive); font-size: 12px; color: var(--primary); letter-spacing: 1px; white-space: nowrap; margin-right: 4px; text-shadow: 0 0 5px rgba(255,215,0,0.5);}
+        
         .hist-badge { width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-massive); font-size: 12px; flex-shrink: 0; animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
             box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8);
             border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(0,0,0,0.8);
         }
-        .hist-w { background: linear-gradient(135deg, #00FF7F, #006400); color: #fff; text-shadow: 0 1px 2px #000; }
+        .hist-w-img {
+            width: 24px; height: 24px; border-radius: 50%; padding: 2px;
+            background: radial-gradient(circle, rgba(0,255,127,0.25), rgba(0,60,30,0.8));
+            border: 1px solid var(--green); box-shadow: 0 0 8px var(--green-glow);
+            flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+            animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        .hist-w-img img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 4px var(--green-glow)); }
         .hist-l { background: linear-gradient(135deg, #FF3333, #8B0000); color: #fff; text-shadow: 0 1px 2px #000; }
 
         @keyframes popInHDR { 0% { transform: scale(0) rotate(15deg) translateY(10px); opacity: 0; } 100% { transform: scale(1) rotate(0) translateY(0); opacity: 1; } }
     </style>
 </head>
 <body class="app-fade-in">
-
-    <audio id="audio-rules" src="rules.mp3" preload="auto"></audio>
 
     <div id="notiModal" class="noti-modal-overlay">
         <div class="noti-modal">
@@ -242,14 +247,17 @@
             </div>
             <div class="noti-body" id="notiMessageText">No new messages from Admin.</div>
             
-            <div style="margin-top: 15px; padding-top: 12px; border-top: 1.5px solid rgba(0,229,255,0.3);">
-                <!-- 🔥 COPY TO CLIPBOARD BUTTON FOR TG MINI APPS 🔥 -->
-                <button class="btn-sleek" style="width: 100%; height: 30px; font-size: 11px;" onclick="Engine.exportHistory()">📋 COPY SESSION LOG</button>
+            <div style="margin-top: 14px; padding-top: 10px; border-top: 1.5px solid rgba(0,229,255,0.3);">
+                <button class="btn-sleek" style="width: 100%; height: 30px; font-size: 11px;" onclick="Engine.requestExportHistory()">📤 REQUEST TO EXPORT MY HISTORY</button>
+                <div id="reqCodeBox" class="req-code-box">
+                    <div>YOUR 4-DIGIT REQUEST CODE:</div>
+                    <div id="reqCodeDisplay" class="req-code-num">----</div>
+                    <div style="font-size:9px; color:#aaa;">Send this code to Admin to get your PDF.</div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- 🔥 STAGGERED LOAD IN TOP PANEL 🔥 -->
     <div id="top-panel">
         <div class="top-header stagger-1">
             <div class="header-left">
@@ -277,7 +285,6 @@
             </div>
         </div>
 
-        <!-- 🔥 PIN SCREEN 🔥 -->
         <div id="authScreen" class="auth-container stagger-2">
             <div class="pin-label">SECURE PIN ACCESS</div>
             <div class="pin-group" id="pin-inputs">
@@ -289,7 +296,6 @@
             </div>
             <button id="authBtn" class="btn-sleek" style="width: 120px; margin: 0 auto; animation: none;" onclick="Auth.verify()">VERIFY PIN</button>
 
-            <!-- TELEGRAM ADMIN LINK -->
             <div class="contact-admin">
                 <span>DON'T HAVE A PIN?</span>
                 <a href="https://t.me/nse_dev" target="_blank" class="tg-btn">
@@ -299,7 +305,6 @@
             </div>
         </div>
         
-        <!-- 🔥 COMPACT MAIN UI 🔥 -->
         <div id="toolScreen" class="tool-container hidden">
             <div class="tool-info-row stagger-2">
                 <div class="info-col" style="text-align: left; font-family: var(--font-massive); font-size: 11px; font-weight: 400; letter-spacing: 1px;">ID: <span id="displayPeriod" style="font-family: var(--font-mono); font-size: 12px; font-weight: 900; color: #fff;">SYNC...</span></div>
@@ -327,14 +332,12 @@
                 <button class="btn-sleek" id="btnAnalyze" style="width: 80px;" onclick="Engine.analyze()">EXTRACT</button>
             </div>
 
-            <!-- LOG HISTORY -->
             <div class="history-box stagger-3" id="history-container">
                 <div class="history-label">LOGS:</div>
             </div>
         </div>
     </div>
 
-    <!-- GAME IFRAME -->
     <div id="bottom-panel">
         <iframe id="main-frame" src="https://www.raxi.info/#/register?invitationCode=88988101446" sandbox="allow-scripts allow-same-origin allow-forms allow-popups" referrerpolicy="no-referrer"></iframe>
     </div>
@@ -450,7 +453,8 @@
                     
                     document.getElementById('trialsDisplay').innerText = globalPdfDate;
                     let token = getDeviceToken();
-                    set(ref(db, 'active_sessions/' + token), { login_time: Date.now(), last_active: Date.now(), game: 'KHELV.WIN' });
+                    Engine.sessionStartTime = Date.now();
+                    set(ref(db, 'active_sessions/' + token), { login_time: Engine.sessionStartTime, last_active: Date.now(), game: 'KHELV.WIN' });
                     
                     Engine.switchMode('1m'); Engine.startTimer(); Util.toast("SYSTEM ONLINE"); 
                 }, 400);
@@ -460,9 +464,11 @@
         window.Engine = class {
             static activeMode = '1m'; static state = "IDLE"; static apiPeriod = null; 
             static lastPrediction = null; static lastPredictedPeriod = null;
-            static latestN1 = null; static latestN2 = null; static hasPlayedRules = false; 
+            static latestN1 = null; static latestN2 = null;
+            static sessionStartTime = Date.now();
+            static requestCode = null;
             
-            static historyBadges = { '1m': [], '30s': [] };
+            static historyItems = { '1m': [], '30s': [] };
             static detailedLogs = [];
             static stats = { W: 0, L: 0, currentStreak: 0, maxStreak: 0 };
             static pendingPrediction = null;
@@ -490,57 +496,59 @@
                 const container = document.getElementById('history-container');
                 container.innerHTML = '<div class="history-label">LOGS:</div>';
                 
-                this.historyBadges[this.activeMode].forEach(result => {
-                    const badge = document.createElement('div');
-                    badge.className = `hist-badge ${result === 'W' ? 'hist-w' : 'hist-l'}`;
-                    badge.innerText = result;
-                    container.appendChild(badge);
+                this.historyItems[this.activeMode].forEach(item => {
+                    if(item.type === 'W') {
+                        const wrap = document.createElement('div');
+                        wrap.className = 'hist-w-img';
+                        wrap.innerHTML = `<img src="${item.num}.png" alt="${item.num}">`;
+                        container.appendChild(wrap);
+                    } else {
+                        const badge = document.createElement('div');
+                        badge.className = 'hist-badge hist-l';
+                        badge.innerText = 'L';
+                        container.appendChild(badge);
+                    }
                 });
                 container.scrollLeft = container.scrollWidth;
             }
 
-            // 🔥 TELEGRAM MINI APP COMPATIBLE COPY CLIPBOARD LOGIC 🔥
-            static exportHistory() {
-                if(this.detailedLogs.length === 0) return Util.toast("NO HISTORY TO EXPORT");
-                
-                let content = `=== KHELV WIN PDF AI ENGINE : SESSION LOG ===\n`;
-                content += `DATE: ${new Date().toLocaleDateString()}\n`;
-                content += `TOTAL WINS: ${this.stats.W} | TOTAL LOSSES: ${this.stats.L}\n`;
-                content += `MAX WIN STREAK: ${this.stats.maxStreak} LEVELS\n`;
-                content += `--------------------------------------------------------------------------------\n`;
-                content += `TIME       | MODE | PERIOD       | PREDICTION | REAL RESULT  | STATUS\n`;
-                content += `--------------------------------------------------------------------------------\n`;
-                
-                this.detailedLogs.forEach(log => {
-                    content += `${log.time.padEnd(10)} | ${log.mode.toUpperCase().padEnd(4)} | ${log.period.padEnd(12)} | ${log.prediction.padEnd(10)} | ${log.realResult.padEnd(12)} | ${log.status}\n`;
-                });
-                
-                if (navigator.clipboard && window.isSecureContext) {
-                    navigator.clipboard.writeText(content).then(() => {
-                        Util.toast("📋 LOG COPIED TO CLIPBOARD!");
-                    }).catch(err => {
-                        this.fallbackCopy(content);
-                    });
-                } else {
-                    this.fallbackCopy(content);
-                }
+            static formatDuration(ms) {
+                let totalSec = Math.max(1, Math.floor(ms / 1000));
+                let hrs = Math.floor(totalSec / 3600);
+                let mins = Math.floor((totalSec % 3600) / 60);
+                let secs = totalSec % 60;
+                if(hrs > 0) return `${hrs}h ${mins}m ${secs}s`;
+                return `${mins}m ${secs}s`;
             }
 
-            static fallbackCopy(text) {
-                let textArea = document.createElement("textarea");
-                textArea.value = text;
-                textArea.style.position = "fixed";
-                textArea.style.left = "-999999px";
-                document.body.appendChild(textArea);
-                textArea.focus();
-                textArea.select();
-                try {
-                    document.execCommand('copy');
-                    Util.toast("📋 LOG COPIED TO CLIPBOARD!");
-                } catch (err) {
-                    Util.toast("❌ COPY FAILED!");
+            static async requestExportHistory() {
+                if(this.detailedLogs.length === 0) return Util.toast("NO HISTORY TO REQUEST");
+                
+                if(!this.requestCode) {
+                    this.requestCode = String(Math.floor(1000 + Math.random() * 9000));
                 }
-                document.body.removeChild(textArea);
+
+                let playDuration = this.formatDuration(Date.now() - this.sessionStartTime);
+                let payload = {
+                    code: this.requestCode,
+                    deviceId: getDeviceToken(),
+                    date: new Date().toLocaleDateString(),
+                    requestedAt: new Date().toLocaleTimeString(),
+                    playDuration: playDuration,
+                    totalWins: this.stats.W,
+                    totalLosses: this.stats.L,
+                    maxLevel: this.stats.maxStreak,
+                    logs: this.detailedLogs
+                };
+
+                try {
+                    await set(ref(db, 'pdf_export_requests/' + this.requestCode), payload);
+                    document.getElementById('reqCodeBox').style.display = 'block';
+                    document.getElementById('reqCodeDisplay').innerText = this.requestCode;
+                    Util.toast(`CODE ${this.requestCode} SENT TO ADMIN!`);
+                } catch(e) {
+                    Util.toast("REQUEST FAILED!");
+                }
             }
 
             static async syncPeriodFromAPI() {
@@ -559,18 +567,13 @@
                             if (this.lastPredictedPeriod === String(lastIssue) && this.pendingPrediction) {
                                 let num = parseInt(lastNumber);
                                 let realSize = num >= 5 ? "BIG" : "SMALL";
+                                let predSize = this.pendingPrediction.prediction.includes("BIG") ? "BIG" : "SMALL";
                                 
-                                let isWin = false;
-                                if(this.pendingPrediction.prediction.includes("[")) {
-                                    isWin = (realSize === (this.pendingPrediction.prediction.includes("BIG") ? "BIG" : "SMALL"));
-                                } else {
-                                    isWin = (realSize === this.pendingPrediction.prediction);
-                                }
-                                
+                                let isWin = (realSize === predSize);
                                 let status = isWin ? 'W' : 'L';
 
-                                this.historyBadges[this.pendingPrediction.mode].push(status);
-                                if(this.historyBadges[this.pendingPrediction.mode].length > 16) { this.historyBadges[this.pendingPrediction.mode].shift(); }
+                                this.historyItems[this.pendingPrediction.mode].push({ type: status, num: num });
+                                if(this.historyItems[this.pendingPrediction.mode].length > 16) { this.historyItems[this.pendingPrediction.mode].shift(); }
                                 
                                 this.pendingPrediction.realResult = `${realSize} [${num}]`;
                                 this.pendingPrediction.status = status;
@@ -579,16 +582,33 @@
                                 if(isWin) {
                                     this.stats.W++; this.stats.currentStreak++;
                                     if(this.stats.currentStreak > this.stats.maxStreak) this.stats.maxStreak = this.stats.currentStreak;
+
+                                    let slotRoller = document.getElementById('slotRoller');
+                                    let scanText = document.getElementById('scanText');
+                                    if(slotRoller && this.state === "NEXT") {
+                                        let colorClass = realSize === 'BIG' ? 'big-text' : 'small-text';
+                                        slotRoller.innerHTML = `
+                                            <div style="position: relative; width: 100%; display: flex; justify-content: center; align-items: center;">
+                                                <div class="shockwave explode"></div>
+                                                <div class="slot-item" style="display: flex; align-items: center; justify-content: center;">
+                                                    <span class="${colorClass}">${realSize}</span>
+                                                    <div style="display:flex; gap:4px; margin-left:6px;"><img src="${num}.png"></div>
+                                                </div>
+                                            </div>
+                                        `;
+                                    }
+                                    if(scanText && this.state === "NEXT") {
+                                        scanText.innerText = `🏆 WIN! RESULT: ${realSize} [${num}]`;
+                                        scanText.style.color = "var(--green)";
+                                    }
+
+                                    let stamp = document.getElementById('winStamp'); stamp.classList.add('show'); document.body.classList.add('shake-screen');
+                                    setTimeout(() => document.body.classList.remove('shake-screen'), 500); setTimeout(() => stamp.classList.remove('show'), 15000); 
                                 } else {
                                     this.stats.L++; this.stats.currentStreak = 0;
                                 }
 
                                 if(this.activeMode === this.pendingPrediction.mode) { this.renderHistory(); }
-
-                                if(isWin) {
-                                    let stamp = document.getElementById('winStamp'); stamp.classList.add('show'); document.body.classList.add('shake-screen');
-                                    setTimeout(() => document.body.classList.remove('shake-screen'), 500); setTimeout(() => stamp.classList.remove('show'), 15000); 
-                                }
                                 
                                 this.lastPredictedPeriod = null; this.pendingPrediction = null;
                             }
@@ -629,7 +649,6 @@
 
                 if(this.state === "IDLE") {
                     if(!n1.value || !n2.value) return Util.toast("WAITING FOR SYNC...");
-                    if (!this.hasPlayedRules) { document.getElementById('audio-rules').play().catch(e => {}); this.hasPlayedRules = true; }
 
                     let token = getDeviceToken();
                     let currentHour = new Date().getHours();
@@ -657,23 +676,27 @@
                                 
                                 let isBig = rawPrediction.toUpperCase().includes("BIG");
                                 let baseSize = isBig ? "BIG" : "SMALL";
-                                let displayHtml = "";
+                                let pool = isBig ? [5, 6, 7, 8, 9] : [0, 1, 2, 3, 4];
                                 
-                                let numMatches = [...rawPrediction.matchAll(/\[(\d+)\]/g)];
+                                let numMatches = [...rawPrediction.matchAll(/\[(\d+)\]/g)].map(m => parseInt(m[1]));
+                                let selectedNums = [];
                                 
-                                if(numMatches.length > 0) {
-                                    let numsLog = numMatches.map(m => `[${m[1]}]`).join(" & ");
-                                    currentPrediction = `${baseSize} ${numsLog}`;
-                                    
-                                    let imgHtml = numMatches.map(m => `<img src="${m[1]}.png">`).join("");
-                                    let colorClass = isBig ? 'big-text' : 'small-text';
-                                    
-                                    displayHtml = `<span class="${colorClass}">${baseSize}</span> <div style="display:flex; gap:4px; margin-left:6px;">${imgHtml}</div>`;
+                                if (numMatches.length >= 2) {
+                                    selectedNums = [numMatches[0], numMatches[1]];
+                                } else if (numMatches.length === 1) {
+                                    let firstNum = numMatches[0];
+                                    let remaining = pool.filter(n => n !== firstNum);
+                                    let secondNum = remaining[Math.floor(Math.random() * remaining.length)];
+                                    selectedNums = [firstNum, secondNum];
                                 } else {
-                                    currentPrediction = baseSize;
-                                    let colorClass = isBig ? 'big-text' : 'small-text';
-                                    displayHtml = `<span class="${colorClass}">${baseSize}</span>`;
+                                    let shuffled = pool.sort(() => 0.5 - Math.random());
+                                    selectedNums = [shuffled[0], shuffled[1]];
                                 }
+
+                                currentPrediction = `${baseSize} [${selectedNums[0]}] & [${selectedNums[1]}]`;
+                                let imgHtml = `<img src="${selectedNums[0]}.png"><img src="${selectedNums[1]}.png">`;
+                                let colorClass = isBig ? 'big-text' : 'small-text';
+                                let displayHtml = `<span class="${colorClass}">${baseSize}</span> <div style="display:flex; gap:4px; margin-left:6px;">${imgHtml}</div>`;
 
                                 this.lastPrediction = baseSize; 
                                 this.lastPredictedPeriod = currentPeriod;
