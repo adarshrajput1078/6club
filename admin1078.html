@@ -3,186 +3,257 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RAXI CORE | ADMIN PRO</title>
+    <title>DEV PDF KING | ADMIN CONSOLE PRO</title>
     
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Rajdhani:wght@600;700;800&family=Fira+Code:wght@500;700&family=Black+Ops+One&display=swap" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf-autotable/3.5.31/jspdf.plugin.autotable.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <style>
         :root { 
-            --bg-base: #050202; --bg-panel: rgba(15, 5, 5, 0.95); 
-            --accent-primary: #FF2A2A; --accent-dark: #8B0000;
-            --accent-secondary: #ff9999; --accent-success: #00FF7F; --accent-danger: #FF3333; 
+            --bg-base: #02050A; --bg-panel: rgba(5, 10, 15, 0.95); 
+            --accent-primary: #FFD700; --accent-dark: #B8860B;
+            --accent-secondary: #00E5FF; --accent-success: #00FF7F; --accent-danger: #FF3333; 
             --accent-purple: #8b5cf6;
-            --border-color: rgba(255, 42, 42, 0.3); --text-main: #f8fafc; --text-muted: #94a3b8;
+            --border-color: rgba(255, 215, 0, 0.25); --text-main: #f8fafc; --text-muted: #94a3b8;
             --font-ui: 'Inter', sans-serif; --font-display: 'Rajdhani', sans-serif; --font-mono: 'Fira Code', monospace; --font-massive: 'Black Ops One', system-ui;
         }
 
         * { box-sizing: border-box; margin: 0; padding: 0; outline: none; }
-        body { font-family: var(--font-ui); background: var(--bg-base); background-image: radial-gradient(circle at 50% 0%, rgba(255, 42, 42, 0.08) 0%, transparent 50%); color: var(--text-main); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
+        body { font-family: var(--font-ui); background: var(--bg-base); background-image: radial-gradient(circle at 50% 0%, rgba(255, 215, 0, 0.07) 0%, transparent 55%); color: var(--text-main); height: 100vh; overflow: hidden; display: flex; flex-direction: column; }
         ::-webkit-scrollbar { width: 6px; height: 6px; } ::-webkit-scrollbar-track { background: var(--bg-base); } ::-webkit-scrollbar-thumb { background: var(--accent-primary); border-radius: 10px; }
 
-        .mobile-header { display: none; justify-content: space-between; align-items: center; padding: 15px 20px; background: var(--bg-panel); border-bottom: 1px solid var(--border-color); z-index: 100; backdrop-filter: blur(15px);}
-        .mobile-header h2 { font-family: var(--font-massive); font-size: 20px; margin: 0; font-weight: 400; letter-spacing: 1px;}
-        .mobile-header h2 span { color: var(--accent-primary); text-shadow: 0 0 10px rgba(255, 42, 42,0.8);}
-        .menu-btn { background: transparent; border: 1px solid var(--border-color); color: var(--text-main); padding: 6px 12px; border-radius: 6px; cursor: pointer;}
-        
-        .app-container { display: flex; flex: 1; overflow: hidden; position: relative;}
-        .sidebar { width: 260px; background: var(--bg-panel); backdrop-filter: blur(20px); border-right: 1px solid var(--border-color); padding: 20px 0; display: flex; flex-direction: column; z-index: 999; transition: transform 0.3s ease; overflow-y: auto; box-shadow: 5px 0 15px rgba(0,0,0,0.5);}
-        .brand { font-family: var(--font-massive); font-size: 24px; font-weight: 400; color: #fff; text-align: center; margin-bottom: 20px; letter-spacing: 2px;}
-        .brand span.win { color: var(--accent-primary); text-shadow: 0 0 15px rgba(255, 42, 42,0.8);}
-        
-        .nav-category { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; margin: 15px 20px 5px; opacity: 0.8; }
-        .nav-item { padding: 10px 20px; margin: 4px 12px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 600; color: #cbd5e1; display: flex; align-items: center; gap: 10px; transition: all 0.3s; position: relative; overflow: hidden;}
-        .nav-item:hover { background: rgba(255, 255, 255, 0.05); transform: translateX(5px); }
-        .nav-item.active { background: rgba(255, 42, 42, 0.15); color: var(--accent-primary); font-weight: 700; border: 1px solid rgba(255, 42, 42, 0.3); box-shadow: 0 0 15px rgba(255, 42, 42, 0.2);}
-        
-        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 998; display: none;}
-        
-        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; background: transparent;}
-        .top-bar { background: var(--bg-panel); backdrop-filter: blur(15px); border-bottom: 1px solid var(--border-color); padding: 15px 25px; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 5px 15px rgba(0,0,0,0.5);}
-        .top-page-title { font-family: var(--font-massive); font-size: 20px; font-weight: 400; text-transform: uppercase; letter-spacing: 1.5px; color: var(--text-main); text-shadow: 0 0 10px rgba(255,42,42,0.4);}
-        
-        .view-section { padding: 25px; display: none; overflow-y: auto; height: 100%;}
-        .view-section.active { display: block; animation: fadeIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;}
-        @keyframes fadeIn { from { opacity:0; transform: translateY(10px); } to {opacity:1; transform: translateY(0);} }
+        .mobile-header { display: none; justify-content: space-between; align-items: center; padding: 14px 18px; background: var(--bg-panel); border-bottom: 1px solid var(--border-color); z-index: 100; backdrop-filter: blur(15px); }
+        .mobile-header h2 { font-family: var(--font-massive); font-size: 18px; letter-spacing: 1px; }
+        .mobile-header h2 span { color: var(--accent-primary); text-shadow: 0 0 10px rgba(255, 215, 0, 0.5); }
+        .menu-btn { background: transparent; border: 1px solid var(--border-color); color: #fff; padding: 6px 12px; border-radius: 6px; cursor: pointer; font-size: 16px; }
 
-        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 25px;}
-        .stat-card { background: linear-gradient(180deg, rgba(20,5,5,0.9), rgba(5,0,0,0.95)); border: 1px solid var(--border-color); padding: 20px; border-radius: 12px; transition: 0.3s; box-shadow: inset 0 0 10px rgba(0,0,0,1);}
-        .stat-card div:first-child { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; margin-bottom: 8px;}
-        .stat-card div:last-child { font-family: var(--font-massive); font-size: 28px; font-weight: 400; text-shadow: 0 2px 10px rgba(0,0,0,0.8); letter-spacing: 1px;}
+        .app-container { display: flex; flex: 1; overflow: hidden; position: relative; }
+        .sidebar { width: 260px; background: var(--bg-panel); border-right: 1px solid var(--border-color); padding: 18px 0; display: flex; flex-direction: column; z-index: 999; transition: transform 0.3s ease; overflow-y: auto; }
+        .brand { font-family: var(--font-massive); font-size: 20px; color: var(--accent-primary); text-align: center; margin-bottom: 16px; letter-spacing: 1.5px; text-shadow: 0 0 12px rgba(255, 215, 0, 0.4); }
+        
+        .nav-category { font-size: 10px; color: var(--text-muted); text-transform: uppercase; font-weight: 800; letter-spacing: 1.5px; margin: 14px 20px 5px; opacity: 0.8; }
+        .nav-item { padding: 10px 18px; margin: 3px 10px; border-radius: 8px; cursor: pointer; font-size: 12px; font-weight: 700; color: #cbd5e1; transition: all 0.2s; display: flex; align-items: center; gap: 8px; }
+        .nav-item:hover { background: rgba(255, 255, 255, 0.05); transform: translateX(4px); }
+        .nav-item.active { background: rgba(255, 215, 0, 0.15); color: var(--accent-primary); border: 1px solid rgba(255, 215, 0, 0.35); box-shadow: 0 0 12px rgba(255, 215, 0, 0.12); }
+        .sidebar-overlay { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.8); z-index: 998; display: none; }
 
-        .form-group { display: flex; flex-direction: column; gap: 6px; }
-        .form-group label { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase;}
-        .input-group { display: flex; gap: 10px; width: 100%; align-items: stretch; flex-wrap: wrap;}
-        
-        input, select { padding: 10px 14px; background: rgba(0,0,0,0.6); border: 1px solid var(--border-color); color: var(--text-main); border-radius: 8px; width: 100%; font-family: var(--font-mono); font-size: 13px;}
-        input:focus, select:focus { border-color: var(--accent-primary); box-shadow: 0 0 0 2px rgba(255, 42, 42, 0.3), inset 0 2px 5px rgba(0,0,0,0.8); outline: none;}
+        .main-content { flex: 1; display: flex; flex-direction: column; overflow: hidden; }
+        .top-bar { background: var(--bg-panel); border-bottom: 1px solid var(--border-color); padding: 14px 22px; display: flex; justify-content: space-between; align-items: center; }
+        .top-page-title { font-family: var(--font-massive); font-size: 18px; text-transform: uppercase; letter-spacing: 1px; }
 
-        button { font-family: var(--font-ui); cursor: pointer; border: none; padding: 10px 18px; border-radius: 8px; font-weight: 800; font-size: 12px; transition: all 0.2s; text-transform: uppercase;}
-        button:active { transform: scale(0.95); }
-        .btn-primary { background: linear-gradient(135deg, var(--accent-primary), var(--accent-dark)); color: #fff; box-shadow: 0 4px 15px rgba(255, 42, 42, 0.4); border: 1px solid rgba(255,255,255,0.2);} 
-        .btn-success { background: linear-gradient(135deg, var(--accent-success), #006400); color: #fff; box-shadow: 0 4px 15px rgba(0, 255, 127, 0.3); border: 1px solid rgba(255,255,255,0.1);} 
-        .btn-danger { background: rgba(239,68,68,0.1); border: 1px solid var(--accent-danger); color: var(--accent-danger); box-shadow: 0 4px 15px rgba(239,68,68,0.15);}
-        .btn-purple { background: linear-gradient(135deg, var(--accent-purple), #4c1d95); color: #fff; box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3); border: 1px solid rgba(255,255,255,0.1);}
-        .btn-dark { background: rgba(0,0,0,0.8); color: var(--text-main); border: 1px solid var(--border-color); }
-        
-        .msg-box { background: linear-gradient(180deg, rgba(20,5,5,0.9), rgba(5,0,0,0.95)); border: 1px solid var(--border-color); padding: 22px; border-radius: 12px; margin-bottom: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.5), inset 0 0 15px rgba(0,0,0,1);}
-        .msg-box h3 { margin-bottom: 15px; font-family: var(--font-massive); font-size: 16px; letter-spacing: 1px; font-weight: 400;}
-        
-        .table-wrapper { width: 100%; overflow-x: auto; border-radius: 12px; border: 1px solid var(--border-color); background: rgba(0,0,0,0.6);}
+        .view-section { padding: 20px; display: none; overflow-y: auto; height: 100%; }
+        .view-section.active { display: block; animation: fadeIn 0.35s ease forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+
+        .stats-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 15px; margin-bottom: 20px; }
+        .stat-card { background: rgba(10, 18, 28, 0.85); border: 1px solid var(--border-color); padding: 18px; border-radius: 10px; }
+        .stat-card div:first-child { font-size: 10px; color: var(--text-muted); font-weight: 800; text-transform: uppercase; margin-bottom: 6px; letter-spacing: 1px; }
+        .stat-card div:last-child { font-family: var(--font-massive); font-size: 26px; letter-spacing: 1px; }
+
+        .msg-box { background: rgba(10, 18, 28, 0.85); border: 1px solid var(--border-color); padding: 18px; border-radius: 10px; margin-bottom: 18px; }
+        .msg-box h3 { margin-bottom: 12px; font-family: var(--font-massive); font-size: 15px; color: var(--accent-primary); letter-spacing: 0.8px; }
+        .msg-box p { font-size: 12px; color: var(--text-muted); margin-bottom: 12px; }
+
+        .form-group { display: flex; flex-direction: column; gap: 6px; margin-bottom: 12px; }
+        .form-group label { font-size: 11px; color: var(--text-muted); font-weight: 700; text-transform: uppercase; }
+
+        .input-group { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 12px; align-items: center; }
+        input, select { padding: 10px 12px; background: rgba(0, 0, 0, 0.65); border: 1px solid var(--border-color); color: #fff; border-radius: 6px; font-family: var(--font-mono); font-size: 12px; flex: 1; min-width: 150px; }
+        input:focus, select:focus { border-color: var(--accent-secondary); outline: none; }
+
+        button { padding: 9px 14px; border-radius: 6px; border: none; font-weight: 800; font-size: 11px; cursor: pointer; text-transform: uppercase; transition: 0.15s; letter-spacing: 0.6px; }
+        button:active { transform: scale(0.96); }
+        .btn-gold { background: linear-gradient(135deg, #FFD700, #B8860B); color: #000; }
+        .btn-cyan { background: linear-gradient(135deg, #00E5FF, #0088CC); color: #000; }
+        .btn-success { background: linear-gradient(135deg, #00FF7F, #059669); color: #000; }
+        .btn-purple { background: linear-gradient(135deg, #8b5cf6, #5b21b6); color: #fff; }
+        .btn-danger { background: rgba(255, 51, 51, 0.15); border: 1px solid #FF3333; color: #FF3333; }
+        .btn-dark { background: rgba(0, 0, 0, 0.7); border: 1px solid var(--border-color); color: #fff; }
+
+        .toolbar { display: flex; gap: 8px; flex-wrap: wrap; background: rgba(0, 0, 0, 0.5); padding: 12px; border-radius: 8px; border: 1px solid rgba(255, 255, 255, 0.08); margin-bottom: 14px; align-items: center; }
+        .toolbar-title { font-size: 10px; font-weight: 800; color: var(--text-muted); width: 100%; text-transform: uppercase; letter-spacing: 1px; }
+
+        .table-wrapper { width: 100%; overflow-x: auto; border-radius: 8px; border: 1px solid var(--border-color); background: rgba(0, 0, 0, 0.5); }
         table { width: 100%; border-collapse: collapse; font-size: 12px; text-align: left; }
-        th { background: rgba(0,0,0,0.8); padding: 14px 18px; color: var(--text-muted); border-bottom: 1px solid var(--border-color); font-family: var(--font-ui); font-size: 11px; font-weight: 800;}
-        td { padding: 14px 18px; border-bottom: 1px solid rgba(255,255,255,0.05); vertical-align: middle;}
+        th { background: rgba(0, 0, 0, 0.85); padding: 12px; color: var(--text-muted); font-size: 10px; text-transform: uppercase; border-bottom: 1px solid var(--border-color); }
+        td { padding: 12px; border-bottom: 1px solid rgba(255, 255, 255, 0.05); vertical-align: middle; }
 
-        .auto-number { font-size: 45px; font-weight: 900; color: var(--accent-primary); font-family: var(--font-mono); text-align: center; margin: 10px 0; text-shadow: 0 0 15px rgba(255, 42, 42,0.6);}
-        .chart-container { width: 100%; height: 250px; position: relative; margin-top: 10px; }
-        
-        #toast { position:fixed; bottom:20px; right:20px; background: var(--accent-primary); color: #fff; padding:12px 24px; border-radius:8px; font-weight:900; font-size:13px; z-index:99999; transition:0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); transform:translateX(150%); box-shadow: 0 10px 20px rgba(0,0,0,0.8), 0 0 15px rgba(255, 42, 42,0.6);}
-        #toast.show { transform:translateX(0); }
+        .auto-number { font-size: 42px; font-weight: 900; color: var(--accent-primary); font-family: var(--font-mono); text-align: center; margin: 12px 0; text-shadow: 0 0 15px rgba(255, 215, 0, 0.4); }
+        .chart-container { width: 100%; height: 230px; position: relative; margin-top: 8px; }
+        .code-pill { background: rgba(0, 255, 127, 0.15); border: 1px solid #00FF7F; color: #00FF7F; padding: 3px 8px; border-radius: 4px; font-family: var(--font-mono); font-weight: 900; letter-spacing: 1px; }
 
-        .toolbar { display: flex; gap: 8px; flex-wrap: wrap; background: rgba(0,0,0,0.6); padding: 12px; border-radius: 8px; border: 1px solid rgba(255,42,42,0.2); margin-bottom: 15px; align-items: center; box-shadow: inset 0 0 10px rgba(0,0,0,0.8);}
-        .toolbar-title { font-size: 11px; font-weight: 800; color: var(--text-muted); width: 100%; text-transform: uppercase; margin-bottom: 5px; letter-spacing: 1px;}
+        #toast { position: fixed; bottom: 20px; right: 20px; background: #FFD700; color: #000; padding: 10px 18px; border-radius: 6px; font-weight: 900; font-size: 12px; z-index: 99999; transform: translateX(150%); transition: 0.3s; }
+        #toast.show { transform: translateX(0); }
 
-        @media (max-width: 767px) { .mobile-header { display: flex; } .sidebar { position: absolute; height: 100%; transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } .top-bar { display: none;} .input-group { flex-direction: column; } }
+        @media (max-width: 767px) {
+            .mobile-header { display: flex; }
+            .top-bar { display: none; }
+            .sidebar { position: absolute; height: 100%; transform: translateX(-100%); }
+            .sidebar.open { transform: translateX(0); }
+        }
     </style>
 </head>
 <body>
-    <div id="toast">Action Successful!</div>
+    <div id="toast">Done!</div>
 
-    <div class="mobile-header"><h2>RAXI <span>CORE</span></h2><button class="menu-btn" onclick="toggleSidebar()">☰</button></div>
+    <div class="mobile-header">
+        <h2>DEV <span>PDF KING</span></h2>
+        <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+    </div>
 
     <div class="app-container">
         <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
         <div class="sidebar" id="sidebar">
-            <div class="brand">RAXI <span class="win">ADMIN</span></div>
-            
+            <div class="brand">DEV PDF KING</div>
+
             <div class="nav-category">Main Console</div>
             <div class="nav-item active" onclick="switchView('v-dashboard', this, 'Dashboard'); closeMobileSidebar();">📊 Dashboard</div>
-            <div class="nav-item" onclick="switchView('v-pin', this, 'Access PIN & Date'); closeMobileSidebar();">🔑 PIN & PDF Date</div>
-            <div class="nav-item" onclick="switchView('v-live', this, 'Live Player Analytics'); closeMobileSidebar();">📡 Live Devices & Peak</div>
-            
-            <div class="nav-category">Advanced Matrix Core</div>
+            <div class="nav-item" onclick="switchView('v-pdf-req', this, 'PDF Export Requests'); closeMobileSidebar();">📄 PDF Export Requests</div>
+            <div class="nav-item" onclick="switchView('v-pin-date', this, 'PIN & PDF Date'); closeMobileSidebar();">🔑 PIN & PDF Date</div>
+            <div class="nav-item" onclick="switchView('v-live', this, 'Live Devices & Peak'); closeMobileSidebar();">📡 Live Devices & Peak</div>
+
+            <div class="nav-category">Matrix Core</div>
             <div class="nav-item" onclick="switchView('v-neural', this, 'Auto Neural Engine'); closeMobileSidebar();">🧬 Auto Neural Engine</div>
-            <div class="nav-item" onclick="switchView('v-mat-1m', this, '1-Minute Advanced Editor'); closeMobileSidebar();">📝 1-MIN Pro Editor</div>
-            <div class="nav-item" onclick="switchView('v-mat-30s', this, '30-Sec Advanced Editor'); closeMobileSidebar();">📝 30-SEC Pro Editor</div>
+            <div class="nav-item" onclick="switchView('v-mat-1m', this, '1-Minute Matrix Editor'); closeMobileSidebar();">📝 1-MIN Matrix Editor</div>
+            <div class="nav-item" onclick="switchView('v-mat-30s', this, '30-Sec Matrix Editor'); closeMobileSidebar();">📝 30-SEC Matrix Editor</div>
 
             <div class="nav-category">Power Tools</div>
-            <div class="nav-item" onclick="switchView('v-overrides', this, 'Security & Overrides'); closeMobileSidebar();">🛡️ System Overrides</div>
+            <div class="nav-item" onclick="switchView('v-overrides', this, 'System Overrides'); closeMobileSidebar();">🛡️ System Overrides</div>
             <div class="nav-item" onclick="switchView('v-settings', this, 'Global Settings'); closeMobileSidebar();">⚙️ Server Config</div>
         </div>
 
-        <div class="main-content" id="mainContent">
+        <div class="main-content">
             <div class="top-bar"><div class="top-page-title" id="topPageTitle">📊 Dashboard</div></div>
 
             <!-- 1. DASHBOARD -->
             <div id="v-dashboard" class="view-section active">
                 <div class="stats-grid">
-                    <div class="stat-card" style="border-color: var(--accent-primary);"><div>ACTIVE DAILY PIN</div><div id="statPin" style="color: var(--accent-primary); font-family: var(--font-mono);">-----</div></div>
-                    <div class="stat-card" style="border-color: var(--accent-secondary);"><div>ACTIVE PDF DATE</div><div id="statDate" style="color:var(--accent-secondary); font-size: 22px;">DD MMM</div></div>
-                    <div class="stat-card" style="border-color: var(--accent-success);"><div>TRUE LIVE USERS</div><div id="statUsers" style="color:var(--accent-success);">0</div></div>
+                    <div class="stat-card" style="border-color: var(--accent-primary);">
+                        <div>ACTIVE DAILY PIN</div>
+                        <div id="statPin" style="color: var(--accent-primary); font-family: var(--font-mono);">-----</div>
+                    </div>
+                    <div class="stat-card" style="border-color: var(--accent-secondary);">
+                        <div>ACTIVE PDF DATE</div>
+                        <div id="statDate" style="color: var(--accent-secondary); font-size: 22px;">DD MMM</div>
+                    </div>
+                    <div class="stat-card" style="border-color: var(--accent-success);">
+                        <div>TRUE LIVE USERS</div>
+                        <div id="statUsers" style="color: var(--accent-success);">0</div>
+                    </div>
+                    <div class="stat-card" style="border-color: #FFD700;">
+                        <div>PDF REQUESTS</div>
+                        <div id="statPdfReq" style="color: #FFD700;">0</div>
+                    </div>
                 </div>
 
-                <div class="msg-box" style="border-left-color: var(--accent-secondary);">
-                    <h3 style="color:var(--accent-secondary);">📢 GLOBAL NOTIFICATION CENTER</h3>
-                    <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 15px;">Push live alerts to all connected client devices.</p>
+                <div class="msg-box">
+                    <h3>📢 GLOBAL NOTIFICATION CENTER</h3>
+                    <p>Push live alerts to all connected client devices (Bell Icon updates instantly).</p>
                     <div class="input-group">
                         <input type="text" id="adminNotiMsg" placeholder="Enter alert message here...">
-                        <button class="btn-primary" style="background: linear-gradient(135deg, var(--accent-secondary), #0369a1);" onclick="publishNotification()">🔔 PUSH LIVE</button>
+                        <button class="btn-cyan" onclick="publishNotification()">🔔 PUSH LIVE</button>
                         <button class="btn-danger" onclick="clearNotification()">❌ CLEAR</button>
+                    </div>
+                    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--text-muted);">
+                        Current Live Alert: <span id="activeNotiText" style="color: var(--accent-secondary);">No Active Alerts</span>
                     </div>
                 </div>
             </div>
 
-            <!-- 2. DAILY PIN & DATE MANAGER -->
-            <div id="v-pin" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-primary); text-align: center;">
-                    <h3 style="color:var(--accent-primary);">🔑 5-DIGIT PIN & DATE CONFIG</h3>
-                    <div class="stats-grid" style="grid-template-columns: 1fr 1fr; gap: 20px; max-width: 600px; margin: 20px auto;">
-                        <div style="background: rgba(0,0,0,0.6); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-                            <label style="color:var(--text-muted); font-size: 11px; font-weight: 800;">ACTIVE PIN</label>
-                            <div class="auto-number" id="currentActivePinDisplay" style="font-size: 35px;">-----</div>
-                            <input type="text" id="newPinInput" maxlength="5" placeholder="Set 5-Digit PIN" style="text-align: center; font-size: 16px; margin-top: 10px;" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+            <!-- 2. PDF EXPORT REQUESTS BY 4-DIGIT CODE -->
+            <div id="v-pdf-req" class="view-section">
+                <div class="msg-box">
+                    <h3>🔍 SEARCH BY 4-DIGIT REQUEST CODE</h3>
+                    <div class="input-group">
+                        <input type="text" id="searchCodeInput" maxlength="4" placeholder="Enter 4-Digit Code (e.g. 4829)" oninput="this.value=this.value.replace(/[^0-9]/g,''); filterRequests();">
+                        <button class="btn-cyan" onclick="filterRequests()">SEARCH</button>
+                    </div>
+                </div>
+
+                <div class="msg-box">
+                    <h3>📥 USER PDF EXPORT REQUESTS</h3>
+                    <div class="table-wrapper">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>4-DIGIT CODE</th>
+                                    <th>DEVICE</th>
+                                    <th>W / L</th>
+                                    <th>MAX LEVEL</th>
+                                    <th>PLAYED TIME</th>
+                                    <th>ACTION</th>
+                                </tr>
+                            </thead>
+                            <tbody id="pdf-req-list"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 3. PIN & DATE -->
+            <div id="v-pin-date" class="view-section">
+                <div class="msg-box" style="text-align: center;">
+                    <h3>🔑 5-DIGIT PIN & PDF DATE CONFIG</h3>
+                    <div class="stats-grid" style="grid-template-columns: 1fr 1fr; max-width: 600px; margin: 16px auto;">
+                        <div style="background: rgba(0,0,0,0.5); padding: 14px; border-radius: 8px;">
+                            <div style="font-size: 10px; color: var(--text-muted); font-weight: 800;">ACTIVE PIN</div>
+                            <div class="auto-number" id="currentActivePinDisplay" style="font-size: 32px;">-----</div>
+                            <input type="text" id="newPinInput" maxlength="5" placeholder="Set 5-Digit PIN" style="text-align: center; font-size: 15px;" oninput="this.value=this.value.replace(/[^0-9]/g,'');">
                         </div>
-                        <div style="background: rgba(0,0,0,0.6); padding: 15px; border-radius: 8px; border: 1px solid rgba(255,255,255,0.05);">
-                            <label style="color:var(--text-muted); font-size: 11px; font-weight: 800;">PDF FILE DATE</label>
-                            <div class="auto-number" id="currentActiveDateDisplay" style="font-size: 26px; color: var(--accent-secondary);">DD MMM</div>
-                            <input type="text" id="newDateInput" placeholder="e.g. 15 NOV" style="text-align: center; font-size: 16px; margin-top: 10px; text-transform: uppercase;">
+                        <div style="background: rgba(0,0,0,0.5); padding: 14px; border-radius: 8px;">
+                            <div style="font-size: 10px; color: var(--text-muted); font-weight: 800;">PDF FILE DATE</div>
+                            <div class="auto-number" id="currentActiveDateDisplay" style="font-size: 24px; color: var(--accent-secondary);">DD MMM</div>
+                            <input type="text" id="newDateInput" placeholder="e.g. 28 NOV" style="text-align: center; font-size: 15px; text-transform: uppercase;">
                         </div>
                     </div>
                     <div style="max-width: 400px; margin: 0 auto;">
-                        <button class="btn-primary" style="width: 100%;" onclick="publishPinAndDate()">☁️ PUBLISH ALL TO LIVE SERVER</button>
+                        <button class="btn-gold" style="width: 100%;" onclick="publishPinAndDate()">☁️ PUBLISH ALL TO LIVE SERVER</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 3. LIVE PLAYER ANALYTICS -->
+            <!-- 4. LIVE DEVICES & PEAK HOURS -->
             <div id="v-live" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-success);">
-                    <h3 style="color:var(--accent-success);">📡 LIVE CONNECTED DEVICES (LAST 10 MINS)</h3>
-                    <div class="table-wrapper" style="max-height: 350px;">
+                <div class="msg-box">
+                    <h3>📡 LIVE CONNECTED DEVICES (LAST 10 MINS)</h3>
+                    <div class="table-wrapper" style="max-height: 320px;">
                         <table>
-                            <thead><tr><th>DEVICE ID</th><th>LOGIN TIME</th><th>LAST ACTIVITY</th><th>EXTRACTIONS</th></tr></thead>
+                            <thead>
+                                <tr>
+                                    <th>DEVICE ID</th>
+                                    <th>LOGIN TIME</th>
+                                    <th>LAST ACTIVITY</th>
+                                    <th>EXTRACTIONS</th>
+                                </tr>
+                            </thead>
                             <tbody id="live-devices-list"></tbody>
                         </table>
                     </div>
                 </div>
-                <div class="msg-box" style="border-left-color: var(--accent-primary);">
-                    <h3 style="color:var(--accent-primary);">📈 PEAK PLAY HOURS (24H ACTIVITY)</h3>
+
+                <div class="msg-box">
+                    <h3>📈 PEAK PLAY HOURS (24H ACTIVITY)</h3>
                     <div class="chart-container"><canvas id="peakHoursChart"></canvas></div>
                 </div>
             </div>
 
-            <!-- 4. AUTO NEURAL ENGINE -->
+            <!-- 5. AUTO NEURAL ENGINE -->
             <div id="v-neural" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-success);">
-                    <h3 style="color:var(--accent-success);">🧬 AI NEURAL ENGINE</h3>
-                    <div class="input-group" style="justify-content: center; margin-bottom: 10px;">
-                        <select id="neuralTimeframe" onchange="fetchLatestNumber()" style="max-width: 300px;"><option value="1m">TARGET: 1 MINUTE GAME</option><option value="30s">TARGET: 30 SECONDS GAME</option></select>
+                <div class="msg-box">
+                    <h3>🧬 AI NEURAL ENGINE</h3>
+                    <p>Automatically generate 100-pattern matrix data and publish directly to live database.</p>
+                    <div class="input-group">
+                        <select id="neuralTimeframe" onchange="fetchLatestNumber()">
+                            <option value="1m">TARGET: 1 MINUTE GAME</option>
+                            <option value="30s">TARGET: 30 SECONDS GAME</option>
+                        </select>
                         <button class="btn-dark" onclick="fetchLatestNumber()">🔄 SYNC ANCHOR</button>
                     </div>
-                    <div class="auto-number" id="neuralAutoNumber" style="color:var(--accent-success);">--</div>
-                    
+
+                    <div class="auto-number" id="neuralAutoNumber">--</div>
+
                     <div class="form-group">
                         <label>Select Matrix Algorithm Depth</label>
                         <select id="neuralScanDepth">
@@ -195,20 +266,21 @@
                             <option value="loss">💀 LOSING TRAP (REVERSE PATTERN)</option>
                         </select>
                     </div>
-                    
-                    <button class="btn-success" id="btnScanNeural" style="width:100%; margin-top:10px;" onclick="startNeuralScan()">🧬 GENERATE MATRIX</button>
+
+                    <button class="btn-success" id="btnScanNeural" style="width: 100%;" onclick="startNeuralScan()">🧬 GENERATE MATRIX</button>
                 </div>
-                <div class="msg-box" id="neuralPublishCard" style="display:none; border-left-color: var(--accent-primary); background: rgba(245, 158, 11, 0.05);">
-                    <h3 style="color:var(--accent-primary);">✅ NEURAL MATRIX READY</h3>
-                    <button class="btn-primary" style="width: 100%;" onclick="uploadNeuralToDB()">☁️ PUBLISH TO LIVE SERVER</button>
+
+                <div class="msg-box" id="neuralPublishCard" style="display: none;">
+                    <h3>✅ NEURAL MATRIX READY</h3>
+                    <p>Matrix generated in memory. Publish to overwrite live pattern database.</p>
+                    <button class="btn-gold" style="width: 100%;" onclick="uploadNeuralToDB()">☁️ PUBLISH TO LIVE SERVER</button>
                 </div>
             </div>
 
-            <!-- 🔥 5. ADVANCED 1-MIN MATRIX EDITOR 🔥 -->
+            <!-- 6. 1-MIN MATRIX EDITOR -->
             <div id="v-mat-1m" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-success);">
-                    <h3 style="color:var(--accent-success);">📝 1-MINUTE PRO EDITOR</h3>
-                    
+                <div class="msg-box">
+                    <h3>📝 1-MINUTE MATRIX EDITOR</h3>
                     <div class="toolbar">
                         <div class="toolbar-title">⚡ Quick Fill Tools</div>
                         <button class="btn-success" onclick="quickFillMatrix('1m', 'big')">FILL BIG (5-9)</button>
@@ -216,23 +288,25 @@
                         <button class="btn-purple" onclick="quickFillMatrix('1m', 'random')">MIX RANDOM</button>
                         <button class="btn-dark" onclick="clearMatrix('1m')">🧹 CLEAR ALL</button>
                     </div>
-                    
                     <div class="toolbar">
                         <div class="toolbar-title">📤 Matrix Import / Export</div>
-                        <button class="btn-primary" style="background:var(--accent-secondary);" onclick="copyMatrixHash('1m')">📋 COPY HASH</button>
+                        <button class="btn-cyan" onclick="copyMatrixHash('1m')">📋 COPY HASH</button>
                         <button class="btn-dark" onclick="pasteMatrixHash('1m')">📥 PASTE HASH</button>
-                        <button class="btn-primary" style="margin-left: auto;" onclick="saveMatrix('1m')">💾 PUBLISH TO SERVER</button>
+                        <button class="btn-gold" style="margin-left: auto;" onclick="saveMatrix('1m')">💾 PUBLISH TO SERVER</button>
                     </div>
-                    
-                    <div class="table-wrapper" style="height: 500px;"><table><thead><tr><th>VECTOR (N1-N2)</th><th>ACTION (Num 0-9)</th></tr></thead><tbody id="mat-1m-list"></tbody></table></div>
+                    <div class="table-wrapper" style="max-height: 430px; overflow-y: auto;">
+                        <table>
+                            <thead><tr><th>VECTOR (N1-N2)</th><th>ACTION (e.g. BIG [7] or 8)</th></tr></thead>
+                            <tbody id="mat-1m-list"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- 🔥 6. ADVANCED 30-SEC MATRIX EDITOR 🔥 -->
+            <!-- 7. 30-SEC MATRIX EDITOR -->
             <div id="v-mat-30s" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-secondary);">
-                    <h3 style="color:var(--accent-secondary);">📝 30-SEC PRO EDITOR</h3>
-                    
+                <div class="msg-box">
+                    <h3>📝 30-SEC MATRIX EDITOR</h3>
                     <div class="toolbar">
                         <div class="toolbar-title">⚡ Quick Fill Tools</div>
                         <button class="btn-success" onclick="quickFillMatrix('30s', 'big')">FILL BIG (5-9)</button>
@@ -240,93 +314,296 @@
                         <button class="btn-purple" onclick="quickFillMatrix('30s', 'random')">MIX RANDOM</button>
                         <button class="btn-dark" onclick="clearMatrix('30s')">🧹 CLEAR ALL</button>
                     </div>
-
                     <div class="toolbar">
                         <div class="toolbar-title">📤 Matrix Import / Export</div>
-                        <button class="btn-primary" style="background:var(--accent-secondary);" onclick="copyMatrixHash('30s')">📋 COPY HASH</button>
+                        <button class="btn-cyan" onclick="copyMatrixHash('30s')">📋 COPY HASH</button>
                         <button class="btn-dark" onclick="pasteMatrixHash('30s')">📥 PASTE HASH</button>
-                        <button class="btn-primary" style="margin-left: auto;" onclick="saveMatrix('30s')">💾 PUBLISH TO SERVER</button>
+                        <button class="btn-gold" style="margin-left: auto;" onclick="saveMatrix('30s')">💾 PUBLISH TO SERVER</button>
                     </div>
-
-                    <div class="table-wrapper" style="height: 500px;"><table><thead><tr><th>VECTOR (N1-N2)</th><th>ACTION (Num 0-9)</th></tr></thead><tbody id="mat-30s-list"></tbody></table></div>
+                    <div class="table-wrapper" style="max-height: 430px; overflow-y: auto;">
+                        <table>
+                            <thead><tr><th>VECTOR (N1-N2)</th><th>ACTION (e.g. BIG [7] or 8)</th></tr></thead>
+                            <tbody id="mat-30s-list"></tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
 
-            <!-- 🔥 7. SECURITY & OVERRIDES 🔥 -->
+            <!-- 8. SYSTEM OVERRIDES -->
             <div id="v-overrides" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--accent-danger); background: rgba(239, 68, 68, 0.05);">
-                    <h3 style="color:var(--accent-danger);">🛡️ SYSTEM OVERRIDES</h3>
-                    
-                    <div class="form-group" style="margin-bottom: 25px; padding-bottom: 15px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                        <label style="color: #fff; font-size: 14px;">🚧 MAINTENANCE MODE</label>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Enable this to temporarily block all PIN logins. Users will see "SYSTEM OFFLINE".</p>
+                <div class="msg-box" style="border-color: rgba(255, 51, 51, 0.4);">
+                    <h3 style="color: var(--accent-danger);">🛡️ SYSTEM OVERRIDES</h3>
+                    <div class="form-group" style="padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.08);">
+                        <label style="color: #fff; font-size: 13px;">🚧 MAINTENANCE MODE (<span id="maintStatusText">CHECKING...</span>)</label>
+                        <p>Block new PIN logins during maintenance.</p>
                         <div class="input-group">
-                            <button class="btn-danger" id="btnMaintOn" onclick="toggleMaintenance(true)">▶ ACTIVATE LOCKDOWN</button>
-                            <button class="btn-success" id="btnMaintOff" onclick="toggleMaintenance(false)">⏹ LIFT LOCKDOWN</button>
+                            <button class="btn-danger" onclick="toggleMaintenance(true)">▶ ACTIVATE LOCKDOWN</button>
+                            <button class="btn-success" onclick="toggleMaintenance(false)">⏹ LIFT LOCKDOWN</button>
                         </div>
                     </div>
-
                     <div class="form-group">
-                        <label style="color: #fff; font-size: 14px;">🧹 PURGE INACTIVE SESSIONS</label>
-                        <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">Clear all device tracking logs that haven't been active in the last 1 hour. This keeps the Live Player list fast and clean.</p>
+                        <label style="color: #fff; font-size: 13px;">🧹 PURGE INACTIVE SESSIONS</label>
+                        <p>Remove device sessions older than 1 hour.</p>
                         <button class="btn-dark" style="width: max-content; border-color: var(--accent-danger); color: var(--accent-danger);" onclick="purgeSessions()">🗑️ PURGE DEAD SESSIONS</button>
                     </div>
                 </div>
             </div>
 
-            <!-- 8. SETTINGS -->
+            <!-- 9. SERVER CONFIG -->
             <div id="v-settings" class="view-section">
-                <div class="msg-box" style="border-left-color: var(--text-muted);">
-                    <h3 style="color:var(--text-main);">🔗 TARGET LIVE GAME URL</h3>
-                    <div class="input-group"><input type="text" id="adminGameLink" placeholder="e.g., https://www.raxi.info/#/"><button class="btn-primary" onclick="updateGameLink()">⚡ OVERRIDE</button></div>
+                <div class="msg-box">
+                    <h3>🔗 TARGET LIVE GAME URL</h3>
+                    <p>Override the background game frame URL for users.</p>
+                    <div class="input-group">
+                        <input type="text" id="adminGameLink" placeholder="e.g., https://www.raxi.info/#/">
+                        <button class="btn-gold" onclick="updateGameLink()">⚡ OVERRIDE LINK</button>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- 🔥 FIREBASE CONFIGURATION 🔥 -->
     <script type="module">
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js";
-        import { getDatabase, ref, get, set, update, onValue, push, query, limitToLast, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
+        import { getDatabase, ref, get, update, onValue, remove } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-database.js";
 
-        const firebaseConfig = { apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8", authDomain: "sikkimaitool.firebaseapp.com", databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app", projectId: "sikkimaitool" };
-        const app = initializeApp(firebaseConfig); const db = getDatabase(app);
+        const firebaseConfig = {
+            apiKey: "AIzaSyAJk3E5Itcz7DU-op_bqwgqSobmD8rfNq8",
+            authDomain: "sikkimaitool.firebaseapp.com",
+            databaseURL: "https://sikkimaitool-default-rtdb.asia-southeast1.firebasedatabase.app",
+            projectId: "sikkimaitool"
+        };
+        const app = initializeApp(firebaseConfig);
+        const db = getDatabase(app);
 
+        let allRequests = {};
+        let tempNeuralMatrix = {};
         let peakChartObj = null;
 
-        // Utilities
-        window.showToast = (msg, isErr=false) => { let t = document.getElementById('toast'); t.innerHTML = msg; t.style.background = isErr ? "var(--accent-danger)" : "var(--accent-primary)"; t.style.color = "#fff"; t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 3000); };
-        window.switchView = (id, el, title) => { document.querySelectorAll('.view-section').forEach(v => { v.classList.remove('active'); v.style.display = 'none'; }); document.querySelectorAll('.nav-item').forEach(v => v.classList.remove('active')); let tv = document.getElementById(id); tv.style.display = 'block'; void tv.offsetWidth; tv.classList.add('active'); el.classList.add('active'); if(document.getElementById('topPageTitle')) document.getElementById('topPageTitle').innerHTML = title; };
-        window.toggleSidebar = () => { document.getElementById('sidebar').classList.toggle('open'); let overlay = document.getElementById('sidebarOverlay'); overlay.style.display = overlay.style.display === 'block' ? 'none' : 'block'; };
-        window.closeMobileSidebar = () => { if(window.innerWidth < 768) { document.getElementById('sidebar').classList.remove('open'); document.getElementById('sidebarOverlay').style.display='none'; }};
-        
-        window.publishNotification = async () => { let msg = document.getElementById('adminNotiMsg').value.trim(); if(!msg) return showToast("Enter a message!", true); await update(ref(db, 'settings'), { admin_message: msg }); showToast("🔔 NOTIFICATION PUSHED LIVE!"); document.getElementById('adminNotiMsg').value = ''; };
-        window.clearNotification = async () => { await update(ref(db, 'settings'), { admin_message: null }); showToast("❌ CLEARED!"); };
-        window.updateGameLink = async () => { let l = document.getElementById('adminGameLink').value.trim(); if(l) { if(!l.startsWith('http')) l = 'https://' + l; await update(ref(db, 'settings'), { force_link: l }); showToast("LINK ENFORCED!"); }};
-
-        // PIN & DATE SYSTEM
-        window.publishPinAndDate = async () => {
-            let pin = document.getElementById('newPinInput').value; let date = document.getElementById('newDateInput').value.trim().toUpperCase();
-            let updates = {};
-            if(pin && pin.length === 5) updates['daily_pin'] = pin;
-            if(date) updates['pdf_date'] = date;
-            if(Object.keys(updates).length > 0) { await update(ref(db, 'settings'), updates); showToast("✅ PIN & DATE UPDATED!"); document.getElementById('newPinInput').value = ''; document.getElementById('newDateInput').value = ''; } else { showToast("Enter PIN or Date first", true); }
+        window.showToast = (msg) => {
+            const t = document.getElementById('toast');
+            t.innerText = msg;
+            t.classList.add('show');
+            setTimeout(() => t.classList.remove('show'), 2600);
         };
 
-        // 🔥 ADVANCED MATRIX TOOLS (COPY, PASTE, FILL) 🔥
-        function buildMatrixUI(mode) {
-            let html = ""; 
-            for(let i=0; i<=9; i++) { 
-                for(let j=0; j<=9; j++) { 
-                    let k = `${i}-${j}`; html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono); font-weight:800;">${k}</td><td><input type="text" id="mat-${mode}-${k}" style="min-width:100px; text-align:center;" placeholder="#"></td></tr>`; 
+        window.switchView = (id, el, title) => {
+            document.querySelectorAll('.view-section').forEach(v => v.classList.remove('active'));
+            document.querySelectorAll('.nav-item').forEach(n => n.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            if(el) el.classList.add('active');
+            document.getElementById('topPageTitle').innerText = title;
+        };
+
+        window.toggleSidebar = () => {
+            document.getElementById('sidebar').classList.toggle('open');
+            let ov = document.getElementById('sidebarOverlay');
+            ov.style.display = ov.style.display === 'block' ? 'none' : 'block';
+        };
+        window.closeMobileSidebar = () => {
+            if(window.innerWidth < 768) {
+                document.getElementById('sidebar').classList.remove('open');
+                document.getElementById('sidebarOverlay').style.display = 'none';
+            }
+        };
+
+        // Notification & Link
+        window.publishNotification = async () => {
+            const msg = document.getElementById('adminNotiMsg').value.trim();
+            if(!msg) return showToast("ENTER A MESSAGE");
+            await update(ref(db, 'settings'), { admin_message: msg });
+            document.getElementById('adminNotiMsg').value = '';
+            showToast("🔔 NOTIFICATION PUSHED LIVE");
+        };
+        window.clearNotification = async () => {
+            await update(ref(db, 'settings'), { admin_message: null });
+            showToast("❌ NOTIFICATION CLEARED");
+        };
+        window.updateGameLink = async () => {
+            let l = document.getElementById('adminGameLink').value.trim();
+            if(!l) return showToast("ENTER GAME URL");
+            if(!l.startsWith('http')) l = 'https://' + l;
+            await update(ref(db, 'settings'), { force_link: l });
+            showToast("⚡ GAME LINK UPDATED");
+        };
+
+        // PIN & Date
+        window.publishPinAndDate = async () => {
+            const pin = document.getElementById('newPinInput').value.trim();
+            const date = document.getElementById('newDateInput').value.trim().toUpperCase();
+            const updates = {};
+            if(pin && pin.length === 5) updates.daily_pin = pin;
+            if(date) updates.pdf_date = date;
+            if(!Object.keys(updates).length) return showToast("ENTER 5-DIGIT PIN OR DATE");
+            await update(ref(db, 'settings'), updates);
+            document.getElementById('newPinInput').value = '';
+            document.getElementById('newDateInput').value = '';
+            showToast("✅ PIN & DATE PUBLISHED");
+        };
+
+        // PDF Requests & Export
+        window.filterRequests = () => {
+            const q = document.getElementById('searchCodeInput').value.trim();
+            const tbody = document.getElementById('pdf-req-list');
+            const keys = Object.keys(allRequests);
+            document.getElementById('statPdfReq').innerText = keys.length;
+
+            let html = "";
+            keys.sort((a,b) => b.localeCompare(a)).forEach(code => {
+                if(q && !code.includes(q)) return;
+                const item = allRequests[code];
+                html += `
+                    <tr>
+                        <td><span class="code-pill">${code}</span></td>
+                        <td style="font-family:var(--font-mono); font-size:11px;">${item.deviceId || '-'}</td>
+                        <td><b style="color:#00FF7F;">W: ${item.totalWins || 0}</b> / <b style="color:#FF3333;">L: ${item.totalLosses || 0}</b></td>
+                        <td><b style="color:#FFD700;">LVL ${item.maxLevel || 0}</b></td>
+                        <td>${item.playDuration || '0m 0s'}</td>
+                        <td style="display:flex; gap:6px; flex-wrap:wrap;">
+                            <button class="btn-gold" onclick="exportUserPDF('${code}')">📄 EXPORT PDF</button>
+                            <button class="btn-danger" onclick="deleteRequest('${code}')">DEL</button>
+                        </td>
+                    </tr>
+                `;
+            });
+            tbody.innerHTML = html || `<tr><td colspan="6" style="text-align:center; padding:24px; color:#94a3b8;">No PDF export requests found.</td></tr>`;
+        };
+
+        window.deleteRequest = async (code) => {
+            await remove(ref(db, 'pdf_export_requests/' + code));
+            showToast("REQUEST DELETED");
+        };
+
+        window.exportUserPDF = (code) => {
+            const data = allRequests[code];
+            if(!data) return showToast("DATA NOT FOUND");
+
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF();
+
+            doc.setFillColor(10, 15, 25);
+            doc.rect(0, 0, 210, 32, 'F');
+            doc.setTextColor(255, 215, 0);
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(20);
+            doc.text("DEV PDF KING", 14, 15);
+
+            doc.setTextColor(220, 220, 220);
+            doc.setFontSize(10);
+            doc.text("OFFICIAL SESSION PERFORMANCE & TRADE REPORT", 14, 24);
+
+            doc.setTextColor(20, 20, 20);
+            doc.setFontSize(10);
+            let y = 42;
+            doc.text(`Request Code : ${code}`, 14, y);
+            doc.text(`Device ID    : ${data.deviceId || 'N/A'}`, 110, y);
+            y += 7;
+            doc.text(`Date         : ${data.date || new Date().toLocaleDateString()}`, 14, y);
+            doc.text(`Request Time : ${data.requestedAt || '-'}`, 110, y);
+            y += 7;
+            doc.text(`Total Wins   : ${data.totalWins || 0}`, 14, y);
+            doc.text(`Total Losses : ${data.totalLosses || 0}`, 65, y);
+            doc.text(`Max Win Level: ${data.maxLevel || 0}`, 115, y);
+            doc.text(`Played Time  : ${data.playDuration || '0m 0s'}`, 155, y);
+
+            const tableRows = (data.logs || []).map((row, idx) => [
+                idx + 1,
+                row.time || '-',
+                (row.mode || '-').toUpperCase(),
+                row.period || '-',
+                row.prediction || '-',
+                row.realResult || '-',
+                row.status || '-'
+            ]);
+
+            doc.autoTable({
+                startY: y + 8,
+                head: [['#', 'Time', 'Mode', 'Period', 'Prediction', 'Real Result', 'W/L']],
+                body: tableRows.length ? tableRows : [['-', '-', '-', '-', 'No trade rows', '-', '-']],
+                theme: 'grid',
+                headStyles: { fillColor: [20, 30, 48], textColor: [255, 215, 0] },
+                styles: { fontSize: 8.5, cellPadding: 2.5 }
+            });
+
+            doc.save(`DEV_PDF_KING_${code}.pdf`);
+            showToast(`📄 PDF EXPORTED (${code})`);
+        };
+
+        // Neural Engine
+        window.fetchLatestNumber = async () => {
+            const tf = document.getElementById('neuralTimeframe').value;
+            const el = document.getElementById('neuralAutoNumber');
+            el.innerText = '...';
+            const url = tf === '1m'
+                ? 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json'
+                : 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json';
+            try {
+                const res = await fetch(url);
+                const json = await res.json();
+                const list = json && json.data && json.data.list ? json.data.list : [];
+                el.innerText = list.length ? (list[0].Number ?? list[0].number) : Math.floor(Math.random() * 10);
+            } catch(e) {
+                el.innerText = Math.floor(Math.random() * 10);
+            }
+        };
+
+        window.startNeuralScan = async () => {
+            const btn = document.getElementById('btnScanNeural');
+            const depthVal = document.getElementById('neuralScanDepth').value;
+            const isLosing = depthVal === 'loss';
+            btn.disabled = true;
+            btn.innerText = "🧬 SCANNING...";
+            document.getElementById('neuralPublishCard').style.display = "none";
+
+            const delayMs = isLosing ? 1500 : Math.min(4000, Math.max(600, parseInt(depthVal) * 80));
+            await new Promise(r => setTimeout(r, delayMs));
+
+            tempNeuralMatrix = {};
+            for(let i=0; i<=9; i++) {
+                for(let j=0; j<=9; j++) {
+                    let isBig = Math.random() > 0.5;
+                    if(isLosing) isBig = ((i + j) % 2 !== 0);
+                    const pool = isBig ? [5,6,7,8,9] : [0,1,2,3,4];
+                    const n1 = pool[Math.floor(Math.random() * pool.length)];
+                    const rem = pool.filter(x => x !== n1);
+                    const n2 = rem[Math.floor(Math.random() * rem.length)];
+                    tempNeuralMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${n1}] & [${n2}]`;
                 }
-            } 
+            }
+
+            btn.disabled = false;
+            btn.innerText = "🧬 GENERATE MATRIX";
+            document.getElementById('neuralPublishCard').style.display = "block";
+            showToast("✅ MATRIX GENERATED IN MEMORY");
+        };
+
+        window.uploadNeuralToDB = async () => {
+            if(!Object.keys(tempNeuralMatrix).length) return showToast("GENERATE MATRIX FIRST");
+            const tf = document.getElementById('neuralTimeframe').value;
+            const path = tf === '1m' ? 'patterns' : 'patterns_30s';
+            const updates = {};
+            Object.keys(tempNeuralMatrix).forEach(k => { updates[`${path}/${k}`] = tempNeuralMatrix[k]; });
+            await update(ref(db), updates);
+            document.getElementById('neuralPublishCard').style.display = "none";
+            loadExistingMatrix(tf);
+            showToast(`☁️ PUBLISHED TO ${tf.toUpperCase()}`);
+        };
+
+        // Matrix Editors
+        function buildMatrixUI(mode) {
+            let html = "";
+            for(let i=0; i<=9; i++) {
+                for(let j=0; j<=9; j++) {
+                    const k = `${i}-${j}`;
+                    html += `<tr><td style="font-family:var(--font-mono); color:#FFD700; font-weight:800;">${k}</td><td><input type="text" id="mat-${mode}-${k}" placeholder="e.g. BIG [7] or 8"></td></tr>`;
+                }
+            }
             document.getElementById(`mat-${mode}-list`).innerHTML = html;
         }
 
         window.quickFillMatrix = (mode, type) => {
-            for(let i=0; i<=9; i++) { 
-                for(let j=0; j<=9; j++) { 
+            for(let i=0; i<=9; i++) {
+                for(let j=0; j<=9; j++) {
                     let val = "";
                     if(type === 'big') val = Math.floor(Math.random() * 5) + 5;
                     if(type === 'small') val = Math.floor(Math.random() * 5);
@@ -334,156 +611,172 @@
                     document.getElementById(`mat-${mode}-${i}-${j}`).value = val;
                 }
             }
-            showToast(`⚡ ${type.toUpperCase()} FILL APPLIED!`);
+            showToast(`⚡ ${type.toUpperCase()} FILL APPLIED`);
         };
 
         window.copyMatrixHash = (mode) => {
-            let matrix = {};
+            const matrix = {};
             for(let i=0; i<=9; i++) {
                 for(let j=0; j<=9; j++) {
-                    let val = document.getElementById(`mat-${mode}-${i}-${j}`).value;
-                    if(val !== "") matrix[`${i}-${j}`] = val;
+                    const v = document.getElementById(`mat-${mode}-${i}-${j}`).value.trim();
+                    if(v !== "") matrix[`${i}-${j}`] = v;
                 }
             }
-            if(Object.keys(matrix).length === 0) return showToast("Grid is empty!", true);
-            let hash = btoa(JSON.stringify(matrix));
-            navigator.clipboard.writeText(hash);
-            showToast("📋 HASH COPIED TO CLIPBOARD!");
+            if(!Object.keys(matrix).length) return showToast("GRID IS EMPTY");
+            navigator.clipboard.writeText(btoa(JSON.stringify(matrix)));
+            showToast("📋 MATRIX HASH COPIED");
         };
 
         window.pasteMatrixHash = (mode) => {
-            let hash = prompt("Paste Matrix Hash here:");
+            const hash = prompt("Paste Matrix Hash here:");
             if(!hash) return;
             try {
-                let matrix = JSON.parse(atob(hash));
-                for(let key in matrix) {
-                    let el = document.getElementById(`mat-${mode}-${key}`);
-                    if(el) el.value = matrix[key];
-                }
-                showToast("📥 HASH IMPORTED SUCCESSFULLY!");
-            } catch(e) { showToast("❌ INVALID HASH!", true); }
+                const matrix = JSON.parse(atob(hash.trim()));
+                Object.keys(matrix).forEach(k => {
+                    const el = document.getElementById(`mat-${mode}-${k}`);
+                    if(el) el.value = matrix[k];
+                });
+                showToast("📥 HASH IMPORTED");
+            } catch(e) {
+                showToast("❌ INVALID HASH");
+            }
         };
 
         window.saveMatrix = async (mode) => {
-            let dbPath = mode === '1m' ? 'patterns' : 'patterns_30s';
-            let updates = {}; let count = 0;
-            for(let i=0; i<=9; i++) { 
-                for(let j=0; j<=9; j++) { 
-                    let k = `${i}-${j}`; let v = document.getElementById(`mat-${mode}-${k}`).value.trim();
-                    if(v !== "") { 
-                        // Logic for Size ONLY or Size + Numbers (e.g., if user inputs "7", it auto assigns "BIG [7]")
-                        if(!v.includes("BIG") && !v.includes("SMALL")) {
-                            let size = parseInt(v) >= 5 ? "BIG" : "SMALL";
-                            updates[`${dbPath}/${k}`] = `${size} [${v}]`; 
+            const path = mode === '1m' ? 'patterns' : 'patterns_30s';
+            const updates = {};
+            for(let i=0; i<=9; i++) {
+                for(let j=0; j<=9; j++) {
+                    const k = `${i}-${j}`;
+                    const v = document.getElementById(`mat-${mode}-${k}`).value.trim();
+                    if(v !== "") {
+                        if(!v.includes("BIG") && !v.includes("SMALL") && !isNaN(parseInt(v))) {
+                            const num = parseInt(v);
+                            updates[`${path}/${k}`] = `${num >= 5 ? "BIG" : "SMALL"} [${num}]`;
                         } else {
-                            // If they paste custom like "BIG [7] & [9]"
-                            updates[`${dbPath}/${k}`] = v;
+                            updates[`${path}/${k}`] = v;
                         }
-                        count++; 
-                    } 
-                    else { updates[`${dbPath}/${k}`] = "UNSET"; }
-                }
-            }
-            try { await update(ref(db), updates); showToast(`✅ Saved ${count} patterns!`); } catch(e) { showToast("Failed to save", true); }
-        };
-
-        window.clearMatrix = (mode) => {
-            if(confirm("Clear all inputs in this grid?")) {
-                for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { document.getElementById(`mat-${mode}-${i}-${j}`).value = ""; } }
-            }
-        };
-
-        async function loadExistingMatrix(mode) {
-            let snap = await get(ref(db, mode === '1m' ? 'patterns' : 'patterns_30s'));
-            if(snap.exists()){
-                let data = snap.val();
-                for(let key in data) {
-                    // Extract just the numbers to show in the clean grid if it follows the "BIG [X]" format
-                    if (data[key] === "UNSET") continue;
-                    let valStr = String(data[key]);
-                    let valMatch = valStr.match(/\[(\d+)\]/);
-                    let targetInput = document.getElementById(`mat-${mode}-${key}`);
-                    if(targetInput) {
-                        if(valMatch && valStr.split('[').length === 2) {
-                            targetInput.value = valMatch[1];
-                        } else {
-                            // In case of multiple numbers "BIG [7] & [9]", show full string
-                            targetInput.value = valStr;
-                        }
+                    } else {
+                        updates[`${path}/${k}`] = "UNSET";
                     }
                 }
             }
+            await update(ref(db), updates);
+            showToast(`💾 ${mode.toUpperCase()} MATRIX PUBLISHED`);
+        };
+
+        window.clearMatrix = (mode) => {
+            for(let i=0; i<=9; i++) for(let j=0; j<=9; j++) document.getElementById(`mat-${mode}-${i}-${j}`).value = "";
+            showToast("🧹 GRID CLEARED");
+        };
+
+        async function loadExistingMatrix(mode) {
+            const path = mode === '1m' ? 'patterns' : 'patterns_30s';
+            const snap = await get(ref(db, path));
+            if(snap.exists()) {
+                const data = snap.val();
+                Object.keys(data).forEach(k => {
+                    if(data[k] === "UNSET") return;
+                    const el = document.getElementById(`mat-${mode}-${k}`);
+                    if(el) el.value = data[k];
+                });
+            }
         }
 
-        // 🔥 SECURITY & OVERRIDES 🔥
-        window.toggleMaintenance = async (isActive) => {
-            await update(ref(db, 'settings'), { maintenance_mode: isActive });
-            showToast(isActive ? "🚧 LOCKDOWN ACTIVATED" : "✅ LOCKDOWN LIFTED");
+        // Overrides
+        window.toggleMaintenance = async (active) => {
+            await update(ref(db, 'settings'), { maintenance_mode: active });
+            showToast(active ? "🚧 LOCKDOWN ACTIVATED" : "✅ LOCKDOWN LIFTED");
         };
 
         window.purgeSessions = async () => {
-            if(!confirm("Delete all inactive tracking sessions?")) return;
-            let snap = await get(ref(db, 'active_sessions'));
-            if(snap.exists()) {
-                let updates = {}; let now = Date.now(); let count = 0;
-                snap.forEach(child => {
-                    if(now - child.val().last_active > 3600000) { updates[child.key] = null; count++; }
-                });
-                if(count > 0) {
-                    await update(ref(db, 'active_sessions'), updates);
-                    showToast(`🗑️ Purged ${count} dead sessions!`);
-                } else { showToast("No dead sessions found."); }
+            const snap = await get(ref(db, 'active_sessions'));
+            if(!snap.exists()) return showToast("NO SESSIONS");
+            const updates = {};
+            const now = Date.now();
+            let count = 0;
+            snap.forEach(c => {
+                if(now - (c.val().last_active || 0) > 3600000) {
+                    updates[c.key] = null;
+                    count++;
+                }
+            });
+            if(count > 0) {
+                await update(ref(db, 'active_sessions'), updates);
+                showToast(`🗑️ PURGED ${count} SESSIONS`);
+            } else {
+                showToast("NO DEAD SESSIONS FOUND");
             }
         };
 
-        // Auto Neural Methods
-        let tempNeuralMatrix = {};
-        window.fetchLatestNumber = async function() { let tf = document.getElementById(`neuralTimeframe`).value; let el = document.getElementById(`neuralAutoNumber`); el.innerText = '...'; try { let res = await fetch(tf === '1m' ? 'https://draw.ar-lottery01.com/WinGo/WinGo_1M/GetHistoryIssuePage.json' : 'https://draw.ar-lottery01.com/WinGo/WinGo_30S/GetHistoryIssuePage.json'); let json = await res.json(); el.innerText = json.data.list[0].Number !== undefined ? json.data.list[0].Number : json.data.list[0].number; } catch(e) { el.innerText = Math.floor(Math.random()*10); } };
-        window.startNeuralScan = async function() { const btn = document.getElementById(`btnScanNeural`); const depthVal = document.getElementById(`neuralScanDepth`).value; const isLosing = depthVal === 'loss'; btn.disabled = true; btn.innerText = "🧬 PROCESSING..."; document.getElementById(`neuralPublishCard`).style.display = "none"; try { let delayMs = isLosing ? 1500 : parseInt(depthVal) * 100; await new Promise(r => setTimeout(r, delayMs)); tempNeuralMatrix = {}; for(let i=0; i<=9; i++) { for(let j=0; j<=9; j++) { let isBig = Math.random() > 0.5; if(isLosing) isBig = ((i+j)%2!==0); tempNeuralMatrix[`${i}-${j}`] = `${isBig ? "BIG" : "SMALL"} [${isBig ? Math.floor(Math.random()*5)+5 : Math.floor(Math.random()*5)}]`; } } btn.innerText = `🧬 RE-RUN`; btn.disabled = false; document.getElementById(`neuralPublishCard`).style.display = "block"; } catch(e) { btn.innerText = "🔄 RETRY"; btn.disabled = false; } };
-        window.uploadNeuralToDB = async function() { let tf = document.getElementById(`neuralTimeframe`).value; let dbPath = tf === '1m' ? 'patterns' : 'patterns_30s'; let updates = {}; for(let k in tempNeuralMatrix) updates[`${dbPath}/${k}`] = tempNeuralMatrix[k]; await update(ref(db), updates); showToast(`✅ Matrix Published!`); document.getElementById(`neuralPublishCard`).style.display = "none"; loadExistingMatrix(tf); };
-
-        function initChart() {
-            Chart.defaults.color = '#94a3b8'; Chart.defaults.font.family = "'Inter', sans-serif"; Chart.defaults.borderColor = 'rgba(255,255,255,0.05)';
+        function initPeakChart() {
+            Chart.defaults.color = '#94a3b8';
             const ctx = document.getElementById('peakHoursChart').getContext('2d');
-            peakChartObj = new Chart(ctx, { type: 'bar', data: { labels: Array.from({length:24}, (_,i) => i+":00"), datasets: [{ label: 'Extractions', data: Array(24).fill(0), backgroundColor: '#FF2A2A', borderRadius: 4 }] }, options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } }, scales: { x: { grid: { display: false } } } } });
+            peakChartObj = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: Array.from({ length: 24 }, (_, i) => `${i}:00`),
+                    datasets: [{ label: 'Extractions', data: Array(24).fill(0), backgroundColor: '#00E5FF', borderRadius: 4 }]
+                },
+                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false } } }
+            });
         }
 
-        // Initialize Everything
         function initSystem() {
-            buildMatrixUI('1m'); buildMatrixUI('30s'); initChart();
-            setTimeout(() => { loadExistingMatrix('1m'); loadExistingMatrix('30s'); fetchLatestNumber(); }, 1000);
+            buildMatrixUI('1m');
+            buildMatrixUI('30s');
+            initPeakChart();
+            setTimeout(() => { loadExistingMatrix('1m'); loadExistingMatrix('30s'); fetchLatestNumber(); }, 600);
 
             onValue(ref(db, 'settings'), snap => {
-                if(snap.exists()) {
-                    let d = snap.val();
-                    if(d.force_link) document.getElementById('adminGameLink').value = d.force_link;
-                    document.getElementById('currentActivePinDisplay').innerText = d.daily_pin || "NOT SET";
-                    document.getElementById('statPin').innerText = d.daily_pin || "NOT SET";
-                    document.getElementById('currentActiveDateDisplay').innerText = d.pdf_date || "DD MMM";
-                    document.getElementById('statDate').innerText = d.pdf_date || "DD MMM";
+                const d = snap.exists() ? snap.val() : {};
+                document.getElementById('statPin').innerText = d.daily_pin || "NOT SET";
+                document.getElementById('currentActivePinDisplay').innerText = d.daily_pin || "NOT SET";
+                document.getElementById('statDate').innerText = d.pdf_date || "DD MMM";
+                document.getElementById('currentActiveDateDisplay').innerText = d.pdf_date || "DD MMM";
+                document.getElementById('activeNotiText').innerText = d.admin_message || "No Active Alerts";
+                document.getElementById('maintStatusText').innerText = d.maintenance_mode ? "LOCKED" : "OPEN";
+                if(d.force_link && document.activeElement !== document.getElementById('adminGameLink')) {
+                    document.getElementById('adminGameLink').value = d.force_link;
                 }
             });
 
+            onValue(ref(db, 'pdf_export_requests'), snap => {
+                allRequests = snap.exists() ? snap.val() : {};
+                filterRequests();
+            });
+
             onValue(ref(db, 'active_sessions'), snap => {
-                let html = ""; let activeCount = 0; let now = Date.now();
+                let html = "";
+                let activeCount = 0;
+                const now = Date.now();
                 if(snap.exists()) {
-                    snap.forEach(child => {
-                        let data = child.val(); let token = child.key;
-                        if(now - data.last_active < 600000) {
+                    snap.forEach(c => {
+                        const v = c.val();
+                        if(now - (v.last_active || 0) < 600000) {
                             activeCount++;
-                            html += `<tr><td style="color:var(--accent-primary); font-family:var(--font-mono);">${token}</td><td>${new Date(data.login_time).toLocaleTimeString()}</td><td style="color:var(--accent-success);">${new Date(data.last_active).toLocaleTimeString()}</td><td><span style="background:rgba(255,42,42,0.2); border: 1px solid rgba(255,42,42,0.5); padding:2px 8px; border-radius:4px; font-weight:bold; color: #fff;">${data.extractions || 0}</span></td></tr>`;
+                            html += `
+                                <tr>
+                                    <td style="font-family:var(--font-mono); color:#FFD700;">${c.key}</td>
+                                    <td>${v.login_time ? new Date(v.login_time).toLocaleTimeString() : '-'}</td>
+                                    <td style="color:#00FF7F;">${v.last_active ? new Date(v.last_active).toLocaleTimeString() : '-'}</td>
+                                    <td><b>${v.extractions || 0}</b></td>
+                                </tr>
+                            `;
                         }
                     });
                 }
-                document.getElementById('live-devices-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:20px; color:var(--text-muted);">No active devices.</td></tr>`;
+                document.getElementById('live-devices-list').innerHTML = html || `<tr><td colspan="4" style="text-align:center; padding:20px; color:#94a3b8;">No active devices right now.</td></tr>`;
                 document.getElementById('statUsers').innerText = activeCount;
             });
 
             onValue(ref(db, 'analytics/hourly_activity'), snap => {
                 if(snap.exists() && peakChartObj) {
-                    let data = snap.val(); let chartData = Array(24).fill(0);
-                    for(let hour in data) { chartData[hour] = data[hour]; }
-                    peakChartObj.data.datasets[0].data = chartData; peakChartObj.update();
+                    const d = snap.val();
+                    const arr = Array(24).fill(0);
+                    Object.keys(d).forEach(h => { if(arr[h] !== undefined) arr[h] = d[h]; });
+                    peakChartObj.data.datasets[0].data = arr;
+                    peakChartObj.update();
                 }
             });
         }
