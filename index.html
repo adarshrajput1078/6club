@@ -14,15 +14,20 @@
             --primary: #FFD700; 
             --primary-dark: #B8860B; 
             --primary-glow: rgba(255, 215, 0, 0.85); 
+            
             --accent-blue: #00E5FF; 
             --accent-blue-dark: #0088CC;
             --accent-blue-glow: rgba(0, 229, 255, 0.85);
+            
             --silver: #E0E0E0;
             --gold: #FFD700;
+            
             --bg-dark: #02050A; 
             --bg-panel: rgba(5, 10, 15, 0.95); 
+            
             --green: #00FF7F; --green-glow: rgba(0, 255, 127, 0.8);
-            --red: #FF3333; --red-glow: rgba(255, 51, 51, 0.8); 
+            --red: #FF3333; --red-glow: rgba(255, 51, 51, 0.85); 
+            
             --font-massive: 'Black Ops One', system-ui; 
             --font-tall: 'Teko', sans-serif;
             --font-ui: 'Inter', sans-serif; 
@@ -216,23 +221,28 @@
             letter-spacing: 3px; margin: 4px 0; text-shadow: 0 0 10px var(--green-glow);
         }
 
-        /* 🔥 LOG HISTORY SECTION (WIN NUMBER IMAGE + L BADGE) 🔥 */
+        /* 🔥 LOG HISTORY SECTION: WIN = GREEN NUMBER, LOSS = RED NUMBER 🔥 */
         .history-box { display: flex; align-items: center; gap: 6px; margin-top: 8px; padding: 6px 10px; background: rgba(5,10,15,0.8); border: 1px solid rgba(0,229,255,0.2); border-radius: 6px; overflow-x: auto; min-height: 38px; box-shadow: inset 0 0 10px rgba(0,0,0,0.9);}
         .history-label { font-family: var(--font-massive); font-size: 12px; color: var(--primary); letter-spacing: 1px; white-space: nowrap; margin-right: 4px; text-shadow: 0 0 5px rgba(255,215,0,0.5);}
         
-        .hist-badge { width: 22px; height: 22px; border-radius: 4px; display: flex; align-items: center; justify-content: center; font-family: var(--font-massive); font-size: 12px; flex-shrink: 0; animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); 
-            box-shadow: inset 0 2px 4px rgba(255,255,255,0.4), inset 0 -2px 4px rgba(0,0,0,0.6), 0 2px 5px rgba(0,0,0,0.8);
-            border-top: 1px solid rgba(255,255,255,0.5); border-bottom: 1px solid rgba(0,0,0,0.8);
-        }
-        .hist-w-img {
+        .hist-num-img {
             width: 24px; height: 24px; border-radius: 50%; padding: 2px;
-            background: radial-gradient(circle, rgba(0,255,127,0.25), rgba(0,60,30,0.8));
-            border: 1px solid var(--green); box-shadow: 0 0 8px var(--green-glow);
             flex-shrink: 0; display: flex; align-items: center; justify-content: center;
             animation: popInHDR 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
-        .hist-w-img img { width: 100%; height: 100%; object-fit: contain; filter: drop-shadow(0 0 4px var(--green-glow)); }
-        .hist-l { background: linear-gradient(135deg, #FF3333, #8B0000); color: #fff; text-shadow: 0 1px 2px #000; }
+        .hist-num-img img { width: 100%; height: 100%; object-fit: contain; }
+
+        .hist-w-img {
+            background: radial-gradient(circle, rgba(0,255,127,0.28), rgba(0,60,30,0.85));
+            border: 1px solid var(--green); box-shadow: 0 0 8px var(--green-glow);
+        }
+        .hist-w-img img { filter: drop-shadow(0 0 4px var(--green-glow)); }
+
+        .hist-l-img {
+            background: radial-gradient(circle, rgba(255,51,51,0.32), rgba(90,0,0,0.9));
+            border: 1px solid var(--red); box-shadow: 0 0 8px var(--red-glow);
+        }
+        .hist-l-img img { filter: drop-shadow(0 0 4px var(--red-glow)) hue-rotate(-10deg) saturate(1.4); }
 
         @keyframes popInHDR { 0% { transform: scale(0) rotate(15deg) translateY(10px); opacity: 0; } 100% { transform: scale(1) rotate(0) translateY(0); opacity: 1; } }
     </style>
@@ -497,17 +507,10 @@
                 container.innerHTML = '<div class="history-label">LOGS:</div>';
                 
                 this.historyItems[this.activeMode].forEach(item => {
-                    if(item.type === 'W') {
-                        const wrap = document.createElement('div');
-                        wrap.className = 'hist-w-img';
-                        wrap.innerHTML = `<img src="${item.num}.png" alt="${item.num}">`;
-                        container.appendChild(wrap);
-                    } else {
-                        const badge = document.createElement('div');
-                        badge.className = 'hist-badge hist-l';
-                        badge.innerText = 'L';
-                        container.appendChild(badge);
-                    }
+                    const wrap = document.createElement('div');
+                    wrap.className = `hist-num-img ${item.type === 'W' ? 'hist-w-img' : 'hist-l-img'}`;
+                    wrap.innerHTML = `<img src="${item.num}.png" alt="${item.num}">`;
+                    container.appendChild(wrap);
                 });
                 container.scrollLeft = container.scrollWidth;
             }
